@@ -1,0 +1,58 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateExamsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('exams', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+            $table->date('date');
+            $table->boolean('aspectoExtraoralNormal');
+            $table->boolean('cancerOral');
+            $table->boolean('anomaliasLabios');
+            $table->string('otros');
+            $table->enum('patologiaMucosa',['Tumor maligno','leucoplasia','Liquen plano']);
+            $table->enum('fluorosis',['Normal','Discutible','Muy ligera','Ligera',
+                'Moderada','Intensa','Excluida','No registrada']);
+            $table->enum('claseAngle', ['calse I', 'calse II', 'calse III']);
+            $table->enum('lateralAngle', ['Unilateral', 'Bilateral']);
+            $table->enum('tipoDentición', ['Temporal', 'Mixta']);
+            $table->boolean('apiñamientoIncisivoInferior');
+            $table->boolean('apiñamientoIncisivoSuperior');
+            $table->boolean('perdidaEspacioAnterior');
+            $table->boolean('perdidaEspacioPosterior');
+            $table->boolean('mordidaCruzadaAnterior');
+            $table->boolean('mordidaCruzadaPosterior');
+            $table->boolean('desviacionLineaMedia');
+            $table->boolean('mordidaAbierta');
+            $table->boolean('habitos');
+            $table->unsignedBigInteger('patient_id');
+
+            $table->foreign('patient_id')->references('id')->on('patients');
+
+
+
+
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('exams');
+    }
+}
