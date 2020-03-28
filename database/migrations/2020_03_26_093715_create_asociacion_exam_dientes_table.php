@@ -16,6 +16,15 @@ class CreateAsociacionExamDientesTable extends Migration
         Schema::create('asociacion_exam_dientes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->enum('denticionRaiz', ['Sano','Cariado','Obturado, sin caries','Obturado, con caries',
+                'Pérdida otro motivo', 'Fisura Obturada','Pilar puente/corona','Diente no erupcionado','Fractura']);
+            $table->enum('denticionCorona', ['Sano','Cariado','Obturado, sin caries','Obturado, con caries',
+                'Pérdida otro motivo', 'Fisura Obturada','Pilar puente/corona','Diente no erupcionado','Fractura']);
+            $table->enum('tratamiento',['Ninguno','Preventivo','Obturación de fisuras','Obt. 1 o mas superficies',
+                'Obt 2 o mas superficies','Corona','Carilla estética','Tratamiento pulgar','Exodoncia','No registrado']);
+            $table->enum('opacidad', ['Ningún estado anormal','Opacidad delimitada','OpacidadDifusa','Hipoplasia',
+                'Otros defectos','Opacidad elimitada y difusa','Opacidad delimitada e hipoplasia','Opacidad difusa e ipoplasia',
+                'Las tres alteraciones']);
             $table->unsignedBigInteger('exam_id');
             $table->unsignedBigInteger('diente_id');
 

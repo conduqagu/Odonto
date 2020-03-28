@@ -24,6 +24,12 @@ class CreateExamsTable extends Migration
             $table->enum('patologiaMucosa',['Tumor maligno','leucoplasia','Liquen plano']);
             $table->enum('fluorosis',['Normal','Discutible','Muy ligera','Ligera',
                 'Moderada','Intensa','Excluida','No registrada']);
+            $table->enum('estadoS1',['sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido']);
+            $table->enum('estadoS2',['sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido']);
+            $table->enum('estadoS3',['sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido']);
+            $table->enum('estadoS4',['sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido']);
+            $table->enum('estadoS5',['sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido']);
+            $table->enum('estadoS6',['sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido']);
             $table->enum('claseAngle', ['calse I', 'calse II', 'calse III']);
             $table->enum('lateralAngle', ['Unilateral', 'Bilateral']);
             $table->enum('tipoDentición', ['Temporal', 'Mixta']);
