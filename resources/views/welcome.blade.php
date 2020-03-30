@@ -12,8 +12,8 @@
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #17202A;
-                color: #F7DC6F;
+                background-color: #F6F7EC;
+                color: #001067 ;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -50,7 +50,7 @@
             }
 
             .links > a {
-                color: #F1C40F;
+                color: #1B2B57;
                 padding: 0 25px;
                 font-size: 13px;
                 font-weight: 600;
@@ -71,10 +71,10 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
+                        <a href="{{ route('login') }}">Iniciar sesión</a>
 
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
+                            <a href="{{ route('register') }}">Registrarse</a>
                         @endif
                     @endauth
                 </div>
@@ -87,7 +87,7 @@
 
                 <div class="links">
                     <a href="https://github.com/conduqagu/Odonto">GitHub</a>
-                    <a href="http://odonto.test/objetivos">Objetivos</a>
+                    <a href="http://odonto.test/información">Información</a>
 
                 </div>
 
