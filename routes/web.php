@@ -19,6 +19,8 @@ Route::get('/', function () {
 Route::get('/información', function () {
     return view('objetivos');
 });
+Route::get('/diente', 'DienteController')->name('diente');
+Route::get('/paciente', 'PatientController')->name('paciente');
 
 
 Auth::routes();

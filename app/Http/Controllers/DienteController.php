@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class DienteController extends Controller
 {
+    public function index()
+    {
+        $dientes=diente::all();
+        return view('dientes.index',['dientes'=>$dientes]);
+    }
     /**
      * Create a new controller instance.
      *
@@ -49,5 +54,9 @@ class DienteController extends Controller
             'cuadrante'=>$data['cuadrante'],
             'sextante' => $data['sextante'],
         ]);
+    }
+    public function show($id)
+    {
+        return view('diente.profile', ['diente' => Diente::findOrFail($id)]);
     }
 }

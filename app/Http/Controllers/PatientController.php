@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PatientController extends Controller
 {
+    public function index()
+    {
+        $patients=Patient::where('user_id', Auth::user()->id)->get();
+        return view('patients.index',['patients'=>$patients]);
+    }
 
     /**
      * Create a new controller instance.
