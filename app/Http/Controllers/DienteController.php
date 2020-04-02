@@ -2,24 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Diente;
 use Illuminate\Http\Request;
 
 class DienteController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     */
+    /**
+    * Handle the incoming request.
+    *
+    * @param  \Illuminate\Http\Request  $request
+    * @return \Illuminate\Http\Response
+    */
+    public function __invoke(Request $request)
+    {
+        //
+    }
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         $dientes=diente::all();
         return view('dientes.index',['dientes'=>$dientes]);
-    }
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
     }
 
     /**
@@ -39,14 +47,13 @@ class DienteController extends Controller
 
         ]);
     }
-
     /**
      * Create a new diente instance after a valid registration.
      *
      * @param  array  $data
      * @return \App\Diente
      */
-    protected function create(array $data)
+    public function create(array $data)
     {
         return Diente::create([
             'name' => $data['name'],
@@ -55,8 +62,60 @@ class DienteController extends Controller
             'sextante' => $data['sextante'],
         ]);
     }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         return view('diente.profile', ['diente' => Diente::findOrFail($id)]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class PatientController extends Controller
+class ExamController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -23,49 +23,17 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients=Patient::where('user_id', Auth::user()->id)->get();
-        return view('patients.index',['patients'=>$patients]);
-    }
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'],
-            'dni' => ['required', 'string','min:9', 'unique:dni', 'unique:patients'],
-            'email' => ['string', 'email', 'max:255', 'unique:patients'],
-            'telefono' => ['string', 'min:8'],
-            'fechaNacimiento'=> ['required','date'],
-            'riesgoASA' => ['required', 'riesgoASA', 'in: I,II,III,IV,V,VI'],
-            'observaciones' => ['string', 'max:255'],
-
-        ]);
+        //
     }
 
-
     /**
-     * Create a new patient instance after a valid registration.
+     * Show the form for creating a new resource.
      *
-     * @param  array  $data
-     * @return \App\Patient
+     * @return \Illuminate\Http\Response
      */
-    protected function create(array $data)
+    public function create()
     {
-        return Patient::create([
-            'name' => $data['name'],
-            'surname' => $data['surname'],
-            'dni'=>$data['dni'],
-            'email' => $data['email'],
-            'telefono' => $data['telefono'],
-            'fechaNacimiento'=>$data['fechaNacimiento'],
-            'riesgoASA'=>$data['riesgoASA'],
-            'observaciones'=>$data['riesgoASA']
-        ]);
+        //
     }
 
     /**
