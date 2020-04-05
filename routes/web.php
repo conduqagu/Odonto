@@ -20,6 +20,12 @@ Route::get('/información', function () {
     return view('objetivos');
 });
 
+Route::resource('patients','PatientController');
+Route::resource('dientes','DienteController');
+
+
+
+
 
 Auth::routes();
 

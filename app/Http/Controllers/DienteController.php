@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Diente;
 use Illuminate\Http\Request;
 
 class DienteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Create a new controller instance.
      */
@@ -26,7 +31,7 @@ class DienteController extends Controller
      */
     public function index()
     {
-        $dientes=diente::all();
+        $dientes=Diente::all();
         return view('dientes.index',['dientes'=>$dientes]);
     }
 
@@ -71,7 +76,13 @@ class DienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this ->validator($request);
+        $diente = new Diente($this->all());
+        $diente->save();
+
+        flash('Diente creado correctamente');
+
+        return redirect()->route('dientes.index');
     }
 
     /**
