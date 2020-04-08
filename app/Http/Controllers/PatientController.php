@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Patient;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -80,7 +81,13 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this ->validator($request);
+        $patient = new Diente($request->all());
+        $patient->save();
+
+        flash('Paciente creado correctamente');
+
+        return redirect()->route('patients.index');
     }
 
     /**
@@ -102,7 +109,9 @@ class PatientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $patient = Patient::find($id);
+
+        return View::make('patient.edit')->with('patient', $patient);
     }
 
     /**
@@ -114,7 +123,16 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validator($request);
+
+        $patient = Patient::find($id);
+        $patient->fill($request->all());
+
+        $patient->save();
+
+        flash('Paciente modificado correctamente');
+
+        return redirect()->route('patients.index');
     }
 
     /**
@@ -125,6 +143,10 @@ class PatientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $patient = Diente::find($id);
+        $patient->delete();
+        flash('Paciente borrado correctamente');
+
+        return redirect()->route('patients.index');
     }
 }

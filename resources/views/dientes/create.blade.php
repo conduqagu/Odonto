@@ -20,11 +20,11 @@
                             {!! Form::text('number',null,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('cuadrante', 'Número del diente') !!}
+                            {!! Form::label('cuadrante', 'Cuadrante') !!}
                             {!! Form::text('cuadreante',null,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('sextante', 'Número del diente') !!}
+                            {!! Form::label('sextante', 'Sextante') !!}
                             {!! Form::text('sextante',null,['class'=>'form-control', 'required']) !!}
                         </div>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
