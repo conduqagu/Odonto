@@ -55,7 +55,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a href="{{ url('/dientes') }}">
+                                    <a class="dropdown-item" href="{{ url('/dientes') }}">
                                         Dientes
                                     </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"

@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 
 class DienteController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
-    /**
-     * Create a new controller instance.
-     */
+
     /**
     * Handle the incoming request.
     *
@@ -43,7 +44,7 @@ class DienteController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        return Validator::make($data-> all(), [
             'name' => ['required', 'string', 'max:255'],
             'number' => ['required', 'integer', 'max:100'],
             'cuadrante' => ['required', 'integer','max:4' ],
@@ -74,10 +75,10 @@ class DienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(array $request)
     {
         $this ->validator($request);
-        $diente = new Diente($this->all());
+        $diente = new Diente($request->all());
         $diente->save();
 
         flash('Diente creado correctamente');
@@ -93,7 +94,7 @@ class DienteController extends Controller
      */
     public function show($id)
     {
-        return view('diente.profile', ['diente' => Diente::findOrFail($id)]);
+        //
     }
 
     /**
@@ -104,7 +105,9 @@ class DienteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $diente = Diente::find($id);
+
+        return View::make('diente.edit')->with('diente', $diente);
     }
 
     /**
@@ -116,7 +119,16 @@ class DienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validator($request);
+
+        $diente = Diente::find($id);
+        $diente->fill($request->all());
+
+        $diente->save();
+
+        flash('Diente modificado correctamente');
+
+        return redirect()->route('dientes.index');
     }
 
     /**
@@ -127,6 +139,10 @@ class DienteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $diente = Diente::find($id);
+        $diente->delete();
+        flash('Diente borrado correctamente');
+
+        return redirect()->route('dientes.index');
     }
 }
