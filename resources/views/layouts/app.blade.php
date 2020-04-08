@@ -58,6 +58,12 @@
                                     <a class="dropdown-item" href="{{ url('/dientes') }}">
                                         Dientes
                                     </a>
+                                    <a class="dropdown-item" href="{{ url('/patients') }}">
+                                        Pacientes
+                                    </a>
+                                    <a class="dropdown-item" href="{{ url('/exams') }}">
+                                        Exámenes
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
