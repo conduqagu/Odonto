@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class AsociacionPatientStudent extends Model
 {
-    public function students()
+    public function student()
     {
         return $this->belongsTo('App\User');
     }
-    public function patients()
+    public function patient()
     {
         return $this->belongsTo('App\Patient');
     }

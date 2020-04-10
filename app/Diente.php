@@ -9,7 +9,7 @@ class Diente extends Model
     protected $fillable = [
         'name','number', 'cuadrante', 'sextante'
     ];
-    public function Patinets()
+    public function Patinet()
     {
         return $this->belongsTo('App\AsociacionPatientStudent');
     }

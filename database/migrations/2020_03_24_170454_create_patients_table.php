@@ -18,11 +18,11 @@ class CreatePatientsTable extends Migration
             $table->string('name');
             $table->string('surname');
             $table->string('dni');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('telefono');
             $table->date('fechaNacimiento');
             $table->enum('riesgoASA', ['I','II','III','IV','V','VI']);
-            $table->string('observaciones');
+            $table->string('observaciones')->nullable();
             $table->timestamps();
 
         });

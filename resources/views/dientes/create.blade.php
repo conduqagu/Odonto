@@ -10,22 +10,27 @@
                     <div class="panel-body">
                         @include('flash::message')
 
-                        {!! Form::open(['route' => 'diente.store']) !!}
+                        {!! Form::open(['route' => 'dientes.store']) !!}
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre común del diente') !!}
                             {!! Form::text('name',null,['class'=>'form-control', 'required', 'autofocus']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('number', 'Número del diente') !!}
-                            {!! Form::text('number',null,['class'=>'form-control', 'required']) !!}
+                            {!! Form::number('number',null,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('cuadrante', 'Cuadrante') !!}
-                            {!! Form::text('cuadreante',null,['class'=>'form-control', 'required']) !!}
+                            {!! Form::number('cuadreante',null,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('sextante', 'Sextante') !!}
-                            {!! Form::text('sextante',null,['class'=>'form-control', 'required']) !!}
+                            {!! Form::number('sextante',null,['class'=>'form-control', 'required']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!!Form::label('patient_id', 'Paciente') !!}
+                            <br>
+                            {!! Form::select('patient_id', $patients, ['class' => 'form-control', 'required']) !!}
                         </div>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 

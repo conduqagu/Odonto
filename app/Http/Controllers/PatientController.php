@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AsociacionPatientStudent;
 use App\Patient;
 use Illuminate\Http\Request;
 
@@ -28,30 +29,11 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients=Patient::where('user_id', Auth::user()->id)->get();
+        //$patients=Patient::where('user_id', Auth::user()->id)->get();
+        //return view('patients.index',['patients'=>$patients]);
+        $patients=Patient::all();
         return view('patients.index',['patients'=>$patients]);
     }
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'],
-            'dni' => ['required', 'string','min:9', 'unique:dni', 'unique:patients'],
-            'email' => ['string', 'email', 'max:255', 'unique:patients'],
-            'telefono' => ['string', 'min:8'],
-            'fechaNacimiento'=> ['required','date'],
-            'riesgoASA' => ['required', 'riesgoASA', 'in: I,II,III,IV,V,VI'],
-            'observaciones' => ['string', 'max:255'],
-
-        ]);
-    }
-
 
     /**
      * Create a new patient instance after a valid registration.
@@ -59,18 +41,9 @@ class PatientController extends Controller
      * @param  array  $data
      * @return \App\Patient
      */
-    protected function create(array $data)
+    protected function create()
     {
-        return Patient::create([
-            'name' => $data['name'],
-            'surname' => $data['surname'],
-            'dni'=>$data['dni'],
-            'email' => $data['email'],
-            'telefono' => $data['telefono'],
-            'fechaNacimiento'=>$data['fechaNacimiento'],
-            'riesgoASA'=>$data['riesgoASA'],
-            'observaciones'=>$data['riesgoASA']
-        ]);
+        return view('patients.create');
     }
 
     /**
@@ -81,9 +54,24 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        $this ->validator($request);
-        $patient = new Diente($request->all());
+        $this ->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
+            'dni' => ['required', 'string','min:9'], //, 'unique:dni', 'unique:patients'
+            'email' => ['string', 'email', 'max:255'],
+            'telefono' => ['required','string', 'min:8'],
+            'fechaNacimiento'=> ['required','date'],
+            'riesgoASA' => ['required','in:I,II,III,IV,V,VI'],
+            'observaciones' => ['string', 'max:255'],
+
+        ]);
+        $patient = new Patient($request->all());
         $patient->save();
+
+//        $asociacion_patient_student=new AsociacionPatientStudent();
+//        $asociacion_patient_student->student_id= Auth::user()->id;
+//        $asociacion_patient_student->patient_id=$patient->id;
+//        $asociacion_patient_student->save();
 
         flash('Paciente creado correctamente');
 
@@ -123,8 +111,16 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validator($request);
-
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
+            'dni' => ['required', 'string','min:9', 'unique:dni', 'unique:patients'],
+            'email' => ['string', 'email', 'max:255', 'unique:patients'],
+            'telefono' => ['required','string', 'min:8'],
+            'fechaNacimiento'=> ['required','date'],
+            'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
+            'observaciones' => ['string', 'max:255']
+        ]);
         $patient = Patient::find($id);
         $patient->fill($request->all());
 

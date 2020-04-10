@@ -3,28 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Diente;
+use App\Patient;
 use Illuminate\Http\Request;
 
 class DienteController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    /**
-    * Handle the incoming request.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
-    public function __invoke(Request $request)
-    {
-        //
-    }
     /**
      * Display a listing of the resource.
      *
@@ -37,36 +20,15 @@ class DienteController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data-> all(), [
-            'name' => ['required', 'string', 'max:255'],
-            'number' => ['required', 'integer', 'max:100'],
-            'cuadrante' => ['required', 'integer','max:4' ],
-            'sextante' => ['required', 'integer','max:6' ],
-
-
-        ]);
-    }
-    /**
      * Create a new diente instance after a valid registration.
      *
      * @param  array  $data
      * @return \App\Diente
      */
-    public function create(array $data)
+    public function create()
     {
-        return Diente::create([
-            'name' => $data['name'],
-            'number' => $data['number'],
-            'cuadrante'=>$data['cuadrante'],
-            'sextante' => $data['sextante'],
-        ]);
+        $patients = Patient::all()->pluck('name','id');
+        return view('dientes.create',['patients'=>$patients]);
     }
 
     /**
@@ -75,10 +37,17 @@ class DienteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(array $request)
+    public function store(Request $request)
     {
-        $this ->validator($request);
-        $diente = new Diente($request->all());
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'number' => ['required', 'integer', 'max:100'],
+            'cuadrante' => ['required', 'integer','max:4' ],
+            'sextante' => ['required', 'integer','max:6' ],
+            'patient_id'=>['required','exists:patients,id']
+            ]);
+
+        $diente=new Diente($request->all());
         $diente->save();
 
         flash('Diente creado correctamente');
@@ -107,7 +76,9 @@ class DienteController extends Controller
     {
         $diente = Diente::find($id);
 
-        return View::make('diente.edit')->with('diente', $diente);
+        $patients = Patient::all()->pluck('name','id');
+
+        return view('dientes.edit',['diente'=> $diente, 'patients'=>$patients ]);
     }
 
     /**
@@ -119,7 +90,13 @@ class DienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validator($request);
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'number' => ['required', 'integer', 'max:100'],
+            'cuadrante' => ['required', 'integer','max:4' ],
+            'sextante' => ['required', 'integer','max:6' ],
+            'patient_id'=>['required','exists:patients,id']
+        ]);
 
         $diente = Diente::find($id);
         $diente->fill($request->all());
