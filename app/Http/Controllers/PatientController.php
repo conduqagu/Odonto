@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AsociacionPatientStudent;
 use App\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PatientController extends Controller
 {
@@ -29,11 +30,14 @@ class PatientController extends Controller
      */
     public function index()
     {
-        //$patients=Patient::where('user_id', Auth::user()->id)->get();
-        //return view('patients.index',['patients'=>$patients]);
-        $patients=Patient::all();
+        $patients = DB::table('asociacion_patient_students')
+            ->where('student_id','=','Auth::user()->id')
+            ->join('patients', 'patients.id', '=', 'asociacion_patient_students.patient_id')
+            ->select('patients.*')
+            ->get();
         return view('patients.index',['patients'=>$patients]);
     }
+    //todo: crear index para alumnos y profesores, los alumnos solo pueden ver sus pacientes, los profes pueden verlos todos
 
     /**
      * Create a new patient instance after a valid registration.
@@ -68,10 +72,10 @@ class PatientController extends Controller
         $patient = new Patient($request->all());
         $patient->save();
 
-//        $asociacion_patient_student=new AsociacionPatientStudent();
-//        $asociacion_patient_student->student_id= Auth::user()->id;
-//        $asociacion_patient_student->patient_id=$patient->id;
-//        $asociacion_patient_student->save();
+        $asociacion_patient_student=new AsociacionPatientStudent();
+        $asociacion_patient_student->student_id= Auth::user()->id;
+        $asociacion_patient_student->patient_id=$patient->id;
+        $asociacion_patient_student->save();
 
         flash('Paciente creado correctamente');
 

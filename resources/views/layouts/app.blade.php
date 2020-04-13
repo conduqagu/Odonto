@@ -55,20 +55,28 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('/dientes') }}">
-                                        Dientes
-                                    </a>
                                     <a class="dropdown-item" href="{{ url('/patients') }}">
                                         Pacientes
+                                    </a>
+                                    <a class="dropdown-item" href="{{ url('/dientes') }}">
+                                        Dientes
                                     </a>
                                     <a class="dropdown-item" href="{{ url('/exams') }}">
                                         Exámenes
                                     </a>
+                                    @if(Auth::user()->userType =='teacher')
+                                    <a class="dropdown-item" href="{{ url('/indexstudents') }}">
+                                        Estudiantes
+                                    </a>
+                                    @endif
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Cerrar sesión') }}
                                     </a>
+
+
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf

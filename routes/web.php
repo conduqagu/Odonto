@@ -23,8 +23,11 @@ Route::get('/información', function () {
 Route::resource('patients','PatientController');
 Route::resource('dientes','DienteController');
 
-
-
+Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function()
+{
+    Route::get('/indexstudents','UserController@indexstudents')->name('indexstudents');
+    Route::get('/asignaralumno/{id}','UserController@asignaralumno')->name('asignaralumno');
+});
 
 
 Auth::routes();
