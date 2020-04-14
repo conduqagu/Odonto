@@ -10,23 +10,14 @@
                     <div class="panel-body">
                         @include('flash::message')
 
-                        {!! Form::open(['route' => 'exam.store']) !!}
+                        {!! Form::open(['route' => 'exams.store']) !!}
                         <div class="form-group">
-                            {!! Form::label('name', 'Nombre común del diente') !!}
-                            {!! Form::text('name',null,['class'=>'form-control', 'required', 'autofocus']) !!}
+                            {!! Form::label('date', 'Fecha') !!}
+                            {!! Form::date('date',null,['class'=>'form-control', 'required']) !!}
                         </div>
-                        <div class="form-group">
-                            {!! Form::label('number', 'Número del diente') !!}
-                            {!! Form::text('number',null,['class'=>'form-control', 'required']) !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('cuadrante', 'Número del diente') !!}
-                            {!! Form::text('cuadreante',null,['class'=>'form-control', 'required']) !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('sextante', 'Número del diente') !!}
-                            {!! Form::text('sextante',null,['class'=>'form-control', 'required']) !!}
-                        </div>
+                        {!!  Form::label('Aspecto Extraoral Normal' , 'Riesgo ASA') !!}
+                        {!! Form::select('aspectoExtraoralNormal',null, array('si'=>'True','No'=>'False')) !!}
+                    </div>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 
                         {!! Form::close() !!}

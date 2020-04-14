@@ -22,6 +22,8 @@ Route::get('/información', function () {
 
 Route::resource('patients','PatientController');
 Route::resource('dientes','DienteController');
+Route::resource('exams','ExamController');
+
 
 Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function()
 {

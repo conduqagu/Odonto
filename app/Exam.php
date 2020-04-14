@@ -12,7 +12,7 @@ class Exam extends Model
         'apiñamientoIncisivoInferior','apiñamientoIncisivoSuperior','perdidaEspacioAnterior','perdidaEspacioPosterior',
         'mordidaCruzadaAnterior','mordidaCruzadaPosterior','desviacionLineaMedia','mordidaAbierta','habitos'
     ];
-    public function Patinets()
+    public function Patinet()
     {
         return $this->belongsTo('App\AsociacionPatientStudent');
     }
