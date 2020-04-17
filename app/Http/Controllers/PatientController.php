@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AsociacionPatientStudent;
 use App\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class PatientController extends Controller
@@ -31,7 +32,7 @@ class PatientController extends Controller
     public function index()
     {
         $patients = DB::table('asociacion_patient_students')
-            ->where('student_id','=','Auth::user()->id')
+            ->where('student_id','=',Auth::user()->id)
             ->join('patients', 'patients.id', '=', 'asociacion_patient_students.patient_id')
             ->select('patients.*')
             ->get();
@@ -103,7 +104,8 @@ class PatientController extends Controller
     {
         $patient = Patient::find($id);
 
-        return View::make('patient.edit')->with('patient', $patient);
+        return view('patients.edit',['patient'=>$patient ]);
+
     }
 
     /**
@@ -118,8 +120,8 @@ class PatientController extends Controller
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'dni' => ['required', 'string','min:9', 'unique:dni', 'unique:patients'],
-            'email' => ['string', 'email', 'max:255', 'unique:patients'],
+            'dni' => ['required', 'string','min:9'],
+            'email' => ['string', 'email', 'max:255'],
             'telefono' => ['required','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],

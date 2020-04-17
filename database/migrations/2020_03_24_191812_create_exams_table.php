@@ -21,7 +21,7 @@ class CreateExamsTable extends Migration
             $table->boolean('cancerOral');
             $table->boolean('anomaliasLabios');
             $table->string('otros')->nullable();
-            $table->enum('patologiaMucosa',['Tumor maligno','leucoplasia','Liquen plano'])->nullable();
+            $table->enum('patologiaMucosa',['Ninguna','Tumor maligno','leucoplasia','Liquen plano'])->nullable();
             $table->enum('fluorosis',['Normal','Discutible','Muy ligera','Ligera',
                 'Moderada','Intensa','Excluida','No registrada']);
             $table->enum('estadoS1',['sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido']);
@@ -30,7 +30,7 @@ class CreateExamsTable extends Migration
             $table->enum('estadoS4',['sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido']);
             $table->enum('estadoS5',['sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido']);
             $table->enum('estadoS6',['sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido']);
-            $table->enum('claseAngle', ['calse I', 'calse II', 'calse III']);
+            $table->enum('claseAngle', ['clase I', 'clase II', 'clase III']);
             $table->enum('lateralAngle', ['Unilateral', 'Bilateral']);
             $table->enum('tipoDentición', ['Temporal', 'Mixta']);
             $table->boolean('apiñamientoIncisivoInferior');
@@ -45,8 +45,6 @@ class CreateExamsTable extends Migration
             $table->unsignedBigInteger('patient_id');
 
             $table->foreign('patient_id')->references('id')->on('patients');
-
-
 
 
         });

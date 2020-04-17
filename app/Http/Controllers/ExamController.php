@@ -50,7 +50,7 @@ class ExamController extends Controller
             'cancerOral' => ['required', 'boolean'],
             'anomaliasLabios' => ['required', 'boolean' ],
             'otros' => ['string', 'max:1000'],
-            'patologiaMucosa'=> ['string','in:Tumor maligno,leucoplasia,Liquen plano'],
+            'patologiaMucosa'=> ['string','in:Ninguna,Tumor maligno,leucoplasia,Liquen plano'],
             'fluorosis'=> ['required', 'string','in:Normal,Discutible,Muy ligera,Ligera,
                 Moderada,Intensa,Excluida,No registrada'],
             'estadoS1'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
@@ -59,7 +59,7 @@ class ExamController extends Controller
             'estadoS4'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
             'estadoS5'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
             'estadoS6'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'claseAngle'=> ['required', 'string','in:calse I,calse II,calse III'],
+            'claseAngle'=> ['required', 'string','in:clase I,clase II,clase III'],
             'lateralAngle'=> ['required', 'string','in:Unilateral,Bilateral'],
             'tipoDentición'=> ['required', 'string','in:Temporal,Mixta'],
             'apiñamientoIncisivoInferior' => ['required', 'boolean'],
@@ -91,7 +91,9 @@ class ExamController extends Controller
      */
     public function show($id)
     {
-        //
+        $exam = Exam::find($id);
+
+        return view('exams/show',['exam'=> $exam]);
     }
 
     /**
@@ -123,7 +125,7 @@ class ExamController extends Controller
             'cancerOral' => ['required', 'boolean'],
             'anomaliasLabios' => ['required', 'boolean' ],
             'otros' => ['string', 'max:1000'],
-            'patologiaMucosa'=> ['string','in:Tumor maligno,leucoplasia,Liquen plano'],
+            'patologiaMucosa'=> ['string','in:Ninguna,Tumor maligno,leucoplasia,Liquen plano'],
             'fluorosis'=> ['required', 'string','in:Normal,Discutible,Muy ligera,Ligera,
                 Moderada,Intensa,Excluida,No registrada'],
             'estadoS1'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
@@ -132,7 +134,7 @@ class ExamController extends Controller
             'estadoS4'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
             'estadoS5'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
             'estadoS6'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'claseAngle'=> ['required', 'string','in:calse I,calse II,calse III'],
+            'claseAngle'=> ['required', 'string','in:clase I,clase II,clase III'],
             'lateralAngle'=> ['required', 'string','in:Unilateral,Bilateral'],
             'tipoDentición'=> ['required', 'string','in:Temporal,Mixta'],
             'apiñamientoIncisivoInferior' => ['required', 'boolean'],

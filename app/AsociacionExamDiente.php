@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class AsociacionExamDiente extends Model
 {
     protected $fillable = [
-        'denticionRaiz','denticionCorona', 'tratamiento ', 'opacidad'
+        'denticionRaiz','denticionCorona', 'tratamiento ', 'opacidad','exam_id','diente_id'
     ];
-    public function exams()
+    public function exam()
     {
         return $this->belongsTo('App\Exam');
     }
-    public function dientes()
+    public function diente()
     {
         return $this->belongsTo('App\Diente');
     }
