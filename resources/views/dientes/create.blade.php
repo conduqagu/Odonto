@@ -21,7 +21,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('cuadrante', 'Cuadrante') !!}
-                            {!! Form::number('cuadreante',null,['class'=>'form-control', 'required']) !!}
+                            {!! Form::number('cuadrante',null,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('sextante', 'Sextante') !!}

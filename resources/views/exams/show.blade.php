@@ -32,6 +32,8 @@
                                 <th>Apiñamiento Incisivo Superior</th>
                                 <th>Perdida Espacio Anterior</th>
                                 <th>Perdida Espacio Posterior</th>
+                                <th>Mordida Cruzada Anterior</th>
+                                <th>Mordida Cruzada Posterior</th>
                                 <th>Desviación Línea Media</th>
                                 <th>Mordida Abierta</th>
                                 <th>Hábitos</th>

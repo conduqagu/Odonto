@@ -28,7 +28,7 @@
                             {!! Form::label('sextante', 'Número del diente') !!}
                             {!! Form::text('sextante',null,['class'=>'form-control', 'required']) !!}
                         </div>
-                        {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
+                        {!! Form::submit('Actualizar',['class'=>'btn-primary btn']) !!}
 
                         {!! Form::close() !!}
                     </div>

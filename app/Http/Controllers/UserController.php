@@ -14,13 +14,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $students = DB::table('users')->where('userType','=','student')->get();
-        return view('.index',['students'=>$students]);
-
-    }
-    public function indexstudents()
+    public function indexstudents() //Lista de estudiantes para profesores
     {
         $students = DB::table('users')->where('userType','=','student')->get();
         return view('indexstudents',['students'=>$students]);
@@ -33,6 +27,8 @@ class UserController extends Controller
         $asociacion_teacher_student->teacher_id= Auth::user()->id;
         $asociacion_teacher_student->student_id=$id;
         $asociacion_teacher_student->save();
+
+        flash('Alumno asignado correctamente');
 
         return redirect()->route('indexstudents');
     }

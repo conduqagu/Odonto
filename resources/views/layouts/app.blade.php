@@ -55,9 +55,11 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ url('/patients') }}">
-                                        Pacientes
-                                    </a>
+                                    @if(Auth::user()->userType =='student')
+                                        <a class="dropdown-item" href="{{ url('/patients/index') }}">
+                                            Pacientes
+                                        </a>
+                                    @endif
                                     <a class="dropdown-item" href="{{ url('/dientes') }}">
                                         Dientes
                                     </a>
@@ -65,9 +67,13 @@
                                         Exámenes
                                     </a>
                                     @if(Auth::user()->userType =='teacher')
-                                    <a class="dropdown-item" href="{{ url('/indexstudents') }}">
+                                        <a class="dropdown-item" href="{{ url('/patients/indexteacher') }}">
+                                            Pacientes
+                                        </a>
+                                        <a class="dropdown-item" href="{{ url('/indexstudents') }}">
                                         Estudiantes
-                                    </a>
+                                        </a>
+
                                     @endif
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

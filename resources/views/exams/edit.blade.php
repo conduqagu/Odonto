@@ -10,7 +10,7 @@
                     <div class="panel-body">
                         @include('flash::message')
 
-                        {!! Form::model($diente, [ 'route' => ['dientes.update',$diente->id], 'method'=>'PUT']) !!}
+                        {!! Form::model($exam, [ 'route' => ['exams.update',$exam->id], 'method'=>'PUT']) !!}
                         <div class="form-group">
                             {!! Form::label('date', 'Fecha') !!}
                             {!! Form::date('date',\Carbon\Carbon::now(),['class'=>'form-control', 'required']) !!}
@@ -117,7 +117,7 @@
                             <br>
                             {!! Form::select('patient', $patients, ['class' => 'form-control', 'required']) !!}
                         </div>
-                        {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
+                        {!! Form::submit('Actualizar',['class'=>'btn-primary btn']) !!}
 
                         {!! Form::close() !!}
                     </div>

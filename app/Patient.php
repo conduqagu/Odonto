@@ -9,7 +9,7 @@ class Patient extends Model
     protected $fillable = [
         'name','surname', 'dni','email', 'telefono','fechaNacimiento','riesgoASA','observaciones'
     ];
-    public function AsociacionPatientStudents()
+    public function asociacionPatientStudents()
     {
         return $this->hasMany('App\AsociacionPatientStudent');
     }

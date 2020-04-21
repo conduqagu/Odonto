@@ -20,7 +20,7 @@ class CreateAsociacionPatientStudentsTable extends Migration
             $table->unsignedBigInteger('patient_id');
 
             $table->foreign('student_id')->references('id')->on('users');
-            $table->foreign('patient_id')->references('id')->on('patients');
+            $table->foreign('patient_id')->references('id')->on('patients')->cascadeOnDelete();
 
         });
     }

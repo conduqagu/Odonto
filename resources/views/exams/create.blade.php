@@ -33,48 +33,47 @@
                         </div>
                         <div>
                             {!!  Form::label('patologiaMucosa' , 'Patologías en mucosas') !!}
-                            {!! Form::select('patologiaMucosa', array('Ninguna','Tumor maligno','leucoplasia','Liquen plano'),'Ninguna',['class' => 'form-control']) !!}
+                            {!! Form::select('patologiaMucosa', array('Ninguna'=>'Ninguna','Tumor maligno'=>'Tumor maligno','leucoplasia'=>'leucoplasia','Liquen plano'=>'Liquen plano'),'Ninguna',['class' => 'form-control']) !!}
                         </div>
                         <div>
                             {!!  Form::label('fluorosis' , 'Fluorosis') !!}
-                            {!! Form::select('fluorosis', array('Normal','Discutible','Muy ligera','Ligera',
-                                  'Moderada','Intensa','Excluida','No registrada'),'Normal',['class' => 'form-control']) !!}
+                            {!! Form::select('fluorosis', array('Normal'=>'Normal','Discutible'=>'Discutible','Muy ligera'=>'Muy ligera','Ligera'=>'Ligera','Moderada'=>'Moderada','Intensa'=>'Intensa','Excluida'=>'Excluida','No registrada'=>'No registrada'),'Normal',['class' => 'form-control']) !!}
                         </div>
                         <div>
                             {!!  Form::label('estadoS1' , 'Estado primer sextante') !!}
-                            {!! Form::select('estadoS1', array('sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido'),'sano',['class' => 'form-control']) !!}
+                            {!! Form::select('estadoS1', array('sano'=>'sano','hemorragia'=>'hemorragia','tártaro'=>'tártaro','bolsa 4-5 mm'=>'bolsa 4-5 mm', 'Bolsa de 6 mm o más'=>'Bolsa de 6 mm o más','excluido'=>'excluido'),'sano',['class' => 'form-control']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('estadoS1' , 'Estado segundo sextante') !!}
-                            {!! Form::select('estadoS1', array('sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido'),'sano',['class' => 'form-control']) !!}
+                            {!!  Form::label('estadoS2' , 'Estado segundo sextante') !!}
+                            {!! Form::select('estadoS2', array('sano'=>'sano','hemorragia'=>'hemorragia','tártaro'=>'tártaro','bolsa 4-5 mm'=>'bolsa 4-5 mm', 'Bolsa de 6 mm o más'=>'Bolsa de 6 mm o más','excluido'=>'excluido'),'sano',['class' => 'form-control']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('estadoS1' , 'Estado tercer sextante') !!}
-                            {!! Form::select('estadoS1', array('sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido'),'sano',['class' => 'form-control']) !!}
+                            {!!  Form::label('estadoS3' , 'Estado tercer sextante') !!}
+                            {!! Form::select('estadoS3', array('sano'=>'sano','hemorragia'=>'hemorragia','tártaro'=>'tártaro','bolsa 4-5 mm'=>'bolsa 4-5 mm', 'Bolsa de 6 mm o más'=>'Bolsa de 6 mm o más','excluido'=>'excluido'),'sano',['class' => 'form-control']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('estadoS1' , 'Estado cuarto sextante') !!}
-                            {!! Form::select('estadoS1', array('sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido'),'sano',['class' => 'form-control']) !!}
+                            {!!  Form::label('estadoS4' , 'Estado cuarto sextante') !!}
+                            {!! Form::select('estadoS4', array('sano'=>'sano','hemorragia'=>'hemorragia','tártaro'=>'tártaro','bolsa 4-5 mm'=>'bolsa 4-5 mm', 'Bolsa de 6 mm o más'=>'Bolsa de 6 mm o más','excluido'=>'excluido'),'sano',['class' => 'form-control']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('estadoS1' , 'Estado quinto sextante') !!}
-                            {!! Form::select('estadoS1', array('sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido'),'sano',['class' => 'form-control']) !!}
+                            {!!  Form::label('estadoS5' , 'Estado quinto sextante') !!}
+                            {!! Form::select('estadoS5', array('sano'=>'sano','hemorragia'=>'hemorragia','tártaro'=>'tártaro','bolsa 4-5 mm'=>'bolsa 4-5 mm', 'Bolsa de 6 mm o más'=>'Bolsa de 6 mm o más','excluido'=>'excluido'),'sano',['class' => 'form-control']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('estadoS1' , 'Estado sexto sextante') !!}
-                            {!! Form::select('estadoS1', array('sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido'),'sano',['class' => 'form-control']) !!}
+                            {!!  Form::label('estadoS6' , 'Estado sexto sextante') !!}
+                            {!! Form::select('estadoS6', array('sano'=>'sano','hemorragia'=>'hemorragia','tártaro'=>'tártaro','bolsa 4-5 mm'=>'bolsa 4-5 mm', 'Bolsa de 6 mm o más'=>'Bolsa de 6 mm o más','excluido'=>'excluido'),'sano',['class' => 'form-control']) !!}
                         </div>
                         <div>
                             {!!  Form::label('claseAngle' , 'Angle') !!}
-                            {!! Form::select('claseAngle', array('clase I', 'clase II', 'clase III'),'clase I',['class' => 'form-control']) !!}
+                            {!! Form::select('claseAngle', array('clase I'=>'clase I','clase II'=>'clase II','clase III'=>'clase III'),'clase I',['class' => 'form-control']) !!}
                         </div>
                         <div>
                             {!!  Form::label('lateralAngle' , 'Lateral Angle') !!}
-                            {!! Form::select('lateralAngle', array('Unilateral', 'Bilateral'),'Unilateral',['class' => 'form-control']) !!}
+                            {!! Form::select('lateralAngle', array('Unilateral'=>'Unilateral','Bilateral'=>'Bilateral'),'Unilateral',['class' => 'form-control']) !!}
                         </div>
                         <div>
                             {!!  Form::label('tipoDentición' , 'Tipo Dentición') !!}
-                            {!! Form::select('tipoDentición', array('Temporal', 'Mixta'),'Temporal',['class' => 'form-control']) !!}
+                            {!! Form::select('tipoDentición', array('Temporal'=>'Temporal','Mixta'=>'Mixta'),'Temporal',['class' => 'form-control']) !!}
                         </div>
                         <div>
                             {!!  Form::label('apiñamientoIncisivoInferior' , 'Apiñamiento Incisivo Inferior') !!}
@@ -93,7 +92,7 @@
                             {!! Form::select('perdidaEspacioPosterior', array('1'=>'Si','0'=>'No'),'0',['class' => 'form-control', 'required']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('mordidaCruzadaAnterior' , 'Mordida Cruzada Anterio') !!}
+                            {!!  Form::label('mordidaCruzadaAnterior' , 'Mordida Cruzada Anterior') !!}
                             {!! Form::select('mordidaCruzadaAnterior', array('1'=>'Si','0'=>'No'),'0',['class' => 'form-control', 'required']) !!}
                         </div>
                         <div>
@@ -115,7 +114,7 @@
                         <div class="form-group">
                             {!!Form::label('patient_id', 'Paciente') !!}
                             <br>
-                            {!! Form::select('patient', $patients, ['class' => 'form-control', 'required']) !!}
+                            {!! Form::select('patient_id', $patients, ['class' => 'form-control', 'required']) !!}
                         </div>
 
 

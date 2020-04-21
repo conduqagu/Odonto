@@ -32,21 +32,22 @@
                             @foreach ($exams as $exam)
                                 <tr>
 
-                                    <td>{{ $exam->patient->name }}</td>
+                                    <td>{{ $exam->patient->name}}</td>
                                     <td>{{ $exam->date }}</td>
-                                    <td>{{ $exam->aspectoExtraoralNormal }}</td>
-                                    <td>{{ $exam->patologiaMucosa }}</td>
-                                    <td>{{ $exam->claseAngle }}</td>
-                                    <td>{{ $exam->lateralAngle }}</td>
-                                    <td>{{ $exam->tipoDentición }}</td>
-                                    <td>{{ $exam->desviacionLineaMedia }}</td>
+                                    <td>{{ $exam->aspectoExtraoralNormal}}</td>
+                                    <td>{{ $exam->patologiaMucosa}}</td>
+                                    <td>{{ $exam->claseAngle}}</td>
+                                    <td>{{ $exam->lateralAngle}}</td>
+                                    <td>{{ $exam->tipoDentición}}</td>
+                                    <td>{{ $exam->desviacionLineaMedia}}</td>
 
 
                                     <td>
                                         {!! Form::open(['route' => ['exams.edit',$exam->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}
-
+                                    </td>
+                                    <td>
                                         {!! Form::open(['route' => ['exams.show',$exam->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Ver detalle', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}

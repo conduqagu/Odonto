@@ -44,15 +44,15 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         $this->validate($request, [
             'date'=>['required','date'],
             'aspectoExtraoralNormal' => ['required', 'boolean'],
             'cancerOral' => ['required', 'boolean'],
-            'anomaliasLabios' => ['required', 'boolean' ],
-            'otros' => ['string', 'max:1000'],
+            'anomaliasLabios' => ['required', 'boolean'],
+            'otros' => ['string', 'max:255'],
             'patologiaMucosa'=> ['string','in:Ninguna,Tumor maligno,leucoplasia,Liquen plano'],
-            'fluorosis'=> ['required', 'string','in:Normal,Discutible,Muy ligera,Ligera,
-                Moderada,Intensa,Excluida,No registrada'],
+            'fluorosis'=> ['required', 'string','in:Normal,Discutible,Muy ligera,Ligera,Moderada,Intensa,Excluida,No registrada'],
             'estadoS1'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
             'estadoS2'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
             'estadoS3'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AsociacionPatientStudent;
 use App\Patient;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -38,7 +39,18 @@ class PatientController extends Controller
             ->get();
         return view('patients.index',['patients'=>$patients]);
     }
-    //todo: crear index para alumnos y profesores, los alumnos solo pueden ver sus pacientes, los profes pueden verlos todos
+    public function indexteacher()
+    {
+        //$patients = DB::table('patients')
+        //    ->join('patients','patients.id','=','asociacion_patient_students.patient_id')
+        //    ->join('asociacion_patient_students', 'students.id', '=', 'user.id')
+        //    ->join('users','users.id','=','asociacion_teacher_students.student_id')
+        //    ->where('asociacion_teacher_students.teacher_id','=',Auth::user()->id())
+        //    ->select('patients.*')
+        //    ->get();
+        $patients=Patient::all();
+        return view('/patients/indexteacher',['patients'=>$patients]);
+    }
 
     /**
      * Create a new patient instance after a valid registration.
@@ -50,6 +62,12 @@ class PatientController extends Controller
     {
         return view('patients.create');
     }
+    protected function createteacher()
+    {
+        $students = User::all()->where('userType', '=', 'student')->pluck('name', 'id');
+        return view('patients.createteacher',['students'=>$students]);
+    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -83,6 +101,32 @@ class PatientController extends Controller
         return redirect()->route('patients.index');
     }
 
+
+    public function storeteacher(Request $request)
+    {
+        $this ->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
+            'dni' => ['required', 'string','min:9'], //, 'unique:dni', 'unique:patients'
+            'email' => ['string', 'email', 'max:255'],
+            'telefono' => ['required','string', 'min:8'],
+            'fechaNacimiento'=> ['required','date'],
+            'riesgoASA' => ['required','in:I,II,III,IV,V,VI'],
+            'observaciones' => ['string', 'max:255'],
+
+        ]);
+        $patient = new Patient($request->all());
+        $patient->save();
+
+        $asociacion_patient_student=new AsociacionPatientStudent();
+        $asociacion_patient_student->student_id= $request->get('student_id');
+        $asociacion_patient_student->patient_id=$patient->id;
+        $asociacion_patient_student->save();
+
+        flash('Paciente creado correctamente');
+
+        return redirect()->route('indexteacher');
+    }
     /**
      * Display the specified resource.
      *
@@ -145,10 +189,10 @@ class PatientController extends Controller
      */
     public function destroy($id)
     {
-        $patient = Diente::find($id);
+        $patient = Patient::find($id);
         $patient->delete();
         flash('Paciente borrado correctamente');
 
-        return redirect()->route('patients.index');
+        return redirect()->route('indexteacher');
     }
 }
