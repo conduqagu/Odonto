@@ -151,6 +151,13 @@ class PatientController extends Controller
         return view('patients.edit',['patient'=>$patient ]);
 
     }
+    public function editteacher($id)
+    {
+        $patient = Patient::find($id);
+        $students = User::all()->where('userType', '=', 'student')->pluck('name', 'id');
+        return view('patients.editteacher',['patient'=>$patient,'students'=>$students ]);
+
+    }
 
     /**
      * Update the specified resource in storage.
@@ -180,7 +187,49 @@ class PatientController extends Controller
 
         return redirect()->route('patients.index');
     }
+    public function updateteacher(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'surname' => ['required', 'string', 'max:255'],
+            'dni' => ['required', 'string','min:9'],
+            'email' => ['string', 'email', 'max:255'],
+            'telefono' => ['required','string', 'min:8'],
+            'fechaNacimiento'=> ['required','date'],
+            'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
+            'observaciones' => ['string', 'max:255']
+        ]);
+        $patient = Patient::find($id);
+        $patient->fill($request->all());
+        $patient->save();
 
+        flash('Paciente modificado correctamente');
+
+        return redirect()->route('indexteacher');
+    }
+    public function añadirAlumno($id)
+        {
+//        $alumdepat = DB::table('users')
+//            ->where('userType','=','student')
+//            ->join('users', 'users.id', '=', 'asociacion_patient_students.student_id')
+//            ->select('users.*')
+//            ->get();
+//        $students = DB::table('users')->whereNotIn('id',$alumdepat)->get();
+
+        $students = User::all()->where('userType', '=', 'student')->pluck('name', 'id');
+        $patient = Patient::find($id);
+        return view('patients.añadirAlumno',['patient'=>$patient,'students'=>$students ]);
+    }
+
+    public function storeAlumno(Request $request,$id){
+        $asociacion_patient_student=new AsociacionPatientStudent();
+        $asociacion_patient_student->student_id= $request->get('student_id');
+        $asociacion_patient_student->patient_id=$id;
+        $asociacion_patient_student->save();
+
+        return redirect()->route('indexteacher');
+
+    }
     /**
      * Remove the specified resource from storage.
      *
@@ -191,7 +240,34 @@ class PatientController extends Controller
     {
         $patient = Patient::find($id);
         $patient->delete();
+
         flash('Paciente borrado correctamente');
+
+        return redirect()->route('indexteacher');
+    }
+    public function destroyStudent($id)
+    {
+        $patient = Patient::find($id);
+//        $students = DB::table('asociacion_patient_students')
+//            ->join('asociacion_patient_students','asociacion_patient_students.patient_id','=',$patient->id)
+//            ->join('users','users.id','=','asociacion_patient_students.student_id')
+//            ->select('users.*')
+//            ->get();
+
+        $students = User::all()->where('userType', '=', 'student')->pluck('name', 'id');
+        return view('patients.destroyStudent',['patient'=>$patient,'students'=>$students ]);
+    }
+    public function deleteStudent(Request $request,$id)
+    {
+        $asociacion_patient_student = DB::table('asociacion_patient_students')
+            ->where('student_id','=',$request->get('student_id'))
+            ->where('patient_id','=',$id)
+            ->select('asociacion_patient_students.*')
+            ->get();
+
+        $asociacion_patient_student->delete();
+
+        flash('Alumno borrado correctamente');
 
         return redirect()->route('indexteacher');
     }

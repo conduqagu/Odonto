@@ -5,12 +5,13 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Crear paciente</div>
+                    <div class="panel-heading">Editar paciente</div>
 
                     <div class="panel-body">
                         @include('flash::message')
 
-                        {!! Form::open(['route' => 'patients.storeAlumno']) !!}
+                        {!! Form::model($patient, [ 'route' => ['updateteacher',$patient->id], 'method'=>'PUT']) !!}
+
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre') !!}
                             {!! Form::text('name',null,['class'=>'form-control', 'required','autofocus']) !!}
@@ -43,16 +44,11 @@
                             {!! Form::label('observaciones', 'Observaciones') !!}
                             {!! Form::text('observaciones',null,['class'=>'form-control']) !!}
                         </div>
-                        <div>
-                            {!!Form::label('student_id', 'Estudiante a asignar') !!}
-                            <br>
-                            {!! Form::select('student_id', $students, ['class' => 'form-control', 'required']) !!}
-                        </div>
 
-                        {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
+
+                        {!! Form::submit('Actualizar',['class'=>'btn-primary btn']) !!}
 
                         {!! Form::close() !!}
-
                     </div>
                 </div>
             </div>

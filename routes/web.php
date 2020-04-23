@@ -28,18 +28,28 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
     Route::get('/patients/indexteacher','PatientController@indexteacher')->name('indexteacher');
     Route::get('/patients/createteacher','PatientController@createteacher')->name('createteacher');
     Route::post('/patients/storeteacher','PatientController@storeteacher')->name('storeteacher');
-    Route::delete('/patients/destroy','PatientController@destroy')->name('destroy');
+    Route::get('/patients/editteacher/{id}','PatientController@editteacher')->name('editteacher');
+    Route::put('/patients/updateteacher/{id}','PatientController@updateteacher')->name('updateteacher');
+    Route::delete('/patients/{id}','PatientController@destroy')->name('patientdestroy');
+    Route::get('/patients/añadirAlumno/{id}','PatientController@añadirAlumno')->name('añadirAlumno');
+    Route::get('/patients/storeAlumno/{id}','PatientController@storeAlumno')->name('storeAlumno');
+    Route::get('/patients/destroyStudent/{id}','PatientController@destroyStudent')->name('destroyStudent');
+    Route::delete('/patients/deleteStudent/{id}','PatientController@deleteStudent')->name('deleteStudent');
+
 
 
 });
 
 Route::group(['middleware'=> 'App\Http\Middleware\StudentMiddleware'], function()
 {
-    Route::get('/patients/index','PatientController@index')->name('index');
-    Route::get('/patients/create','PatientController@create')->name('create');
+    Route::get('/patients/index','PatientController@index')->name('patients.index');
+    Route::get('/patients/create','PatientController@create')->name('patients.create');
+    Route::post('/patients/store','PatientController@store')->name('patients.store');
+    Route::get('/patients/edit/{id}','PatientController@edit')->name('patients.edit');
+    Route::put('/patients/update/{id}','PatientController@update')->name('patients.update');
+
 
 });
-Route::resource('patients','PatientController');
 Route::resource('dientes','DienteController');
 Route::resource('exams','ExamController');
 

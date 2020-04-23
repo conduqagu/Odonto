@@ -25,7 +25,7 @@
                                 <th>Riesgo ASA</th>
                                 <th>Observaciones</th>
                                 <th>Alumno</th>
-                                <th colspan="2">Acciones</th>
+                                <th colspan="3">Acciones</th>
                             </tr>
 
                             @foreach ($patients as $patient)
@@ -44,10 +44,23 @@
                                     @endforeach
                                     </td>
 
-
                                     <td>
-                                        {!! Form::open(['route' => ['patients.edit',$patient->id], 'method' => 'get']) !!}
+                                        {!! Form::open(['route' => ['añadirAlumno',$patient->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Añadir Alumno', ['class'=> 'btn btn-primary'])!!}
+                                        {!! Form::close() !!}
+                                        <br>
+                                        {!! Form::open(['route' => ['destroyStudent',$patient->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Eliminar Alumno', ['class'=> 'btn btn-primary'])!!}
+                                        {!! Form::close() !!}
+                                    </td>
+                                    <td>
+                                        {!! Form::open(['route' => ['editteacher',$patient->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                        {!! Form::close() !!}
+                                    </td>
+                                    <td>
+                                        {!! Form::open(['route' => ['patientdestroy',$patient->id], 'method' => 'destroy']) !!}
+                                        {!!   Form::submit('Eliminar paciente', ['class'=> 'btn btn-danger'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                 </tr>
