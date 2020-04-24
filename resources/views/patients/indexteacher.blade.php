@@ -19,7 +19,7 @@
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
                                 <th>DNI</th>
-                                <th>E-Mail</th>
+                                <th>Correo electrónico</th>
                                 <th>Teléfono</th>
                                 <th>Fecha de nacimiento</th>
                                 <th>Riesgo ASA</th>

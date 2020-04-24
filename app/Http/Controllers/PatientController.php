@@ -208,13 +208,14 @@ class PatientController extends Controller
         return redirect()->route('indexteacher');
     }
     public function añadirAlumno($id)
-        {
-//        $alumdepat = DB::table('users')
-//            ->where('userType','=','student')
-//            ->join('users', 'users.id', '=', 'asociacion_patient_students.student_id')
-//            ->select('users.*')
-//            ->get();
-//        $students = DB::table('users')->whereNotIn('id',$alumdepat)->get();
+    {
+//      $students = DB::table('users')
+//           ->where('userType','=','student')
+//           ->join('asociacion_patient_students', 'asociacion_patient_students.student_id', '=', 'users.id')
+//           ->where('asociacion_patient_students.patient_id','=',$id)
+//           ->select('users.*')
+//           ->get();
+//      $students = DB::table('users')->whereNotIn('id',$alumdepat)->get();
 
         $students = User::all()->where('userType', '=', 'student')->pluck('name', 'id');
         $patient = Patient::find($id);

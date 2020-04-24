@@ -15,6 +15,7 @@
                             <th>Apellidos</th>
                             <th>Email</th>
                             <th>DNI</th>
+                            <th>Profesores</th>
                             <th colspan="2">Acciones</th>
                         </tr>
 
@@ -24,10 +25,15 @@
                             <td>{{ $student->surname }}</td>
                             <td>{{ $student->email }}</td>
                             <td>{{ $student->dni }}</td>
+                            <td>
+                            @foreach ($student->asociacionTeacherStudents as $asociacionTeacherStudent)
+                                {{$asociacionTeacherStudent->teacher->name.", " }}
+                            @endforeach
+                            </td>
 
                             <td>
                                 {!! Form::open(['route' => ['asignaralumno',$student->id], 'method' => 'get']) !!}
-                                {!!   Form::submit('Asignar')!!}
+                                {!!   Form::submit('Asignar', ['class'=> 'btn btn-primary'])!!}
                                 {!! Form::close() !!}
                             </td>
                         </tr>
