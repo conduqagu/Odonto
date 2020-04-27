@@ -5,14 +5,9 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Estudiantes</div>
-
+                <div class="panel-heading">Mis alumnos</div>
                 <div class="panel-body">
                     @include('flash::message')
-                    {!! Form::open(['route' => 'listsmystudent', 'method' => 'get']) !!}
-                    {!!   Form::submit('Mis alumnos', ['class'=> 'btn btn-primary'])!!}
-                    {!! Form::close() !!}
-
                     <table class="table table-striped table-bordered">
                         <tr>
                             <th>Nombre</th>
@@ -20,6 +15,7 @@
                             <th>Email</th>
                             <th>DNI</th>
                             <th colspan="2">Acciones</th>
+
                         </tr>
 
                         @foreach ($students as $student)
@@ -28,14 +24,19 @@
                             <td>{{ $student->surname }}</td>
                             <td>{{ $student->email }}</td>
                             <td>{{ $student->dni }}</td>
-
                             <td>
-                                {!! Form::open(['route' => ['asignaralumno',$student->id], 'method' => 'get']) !!}
-                                {!!   Form::submit('Asignar', ['class'=> 'btn btn-primary'])!!}
+                                {!! Form::open(['route' => ['destroyasociacion',$student->id], 'method' => 'GET']) !!}
+                                {!!   Form::submit('Eliminar asignación', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                 {!! Form::close() !!}
                             </td>
                         </tr>
                         @endforeach
+                        <td>
+                            {!! Form::open(['route' => 'indexstudents', 'method' => 'get']) !!}
+                            {!!   Form::submit('Todos los alumnos', ['class'=> 'btn btn-warning'])!!}
+                            {!! Form::close() !!}
+                        </td>
+
                     </table>
                 </div>
             </div>

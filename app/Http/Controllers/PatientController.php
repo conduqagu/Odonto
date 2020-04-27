@@ -209,15 +209,13 @@ class PatientController extends Controller
     }
     public function añadirAlumno($id)
     {
-//      $students = DB::table('users')
-//           ->where('userType','=','student')
-//           ->join('asociacion_patient_students', 'asociacion_patient_students.student_id', '=', 'users.id')
-//           ->where('asociacion_patient_students.patient_id','=',$id)
-//           ->select('users.*')
-//           ->get();
-//      $students = DB::table('users')->whereNotIn('id',$alumdepat)->get();
+        $users = DB::table('asociacion_patient_students')
+            ->where('patient_id','=',$id)
+            ->join('users','users.id','!=','asociacion_patient_students.student_id')
+            ->select('users.*')
+            ->get();
+        $students= $users->where('userType','=','student')->pluck('name', 'id');
 
-        $students = User::all()->where('userType', '=', 'student')->pluck('name', 'id');
         $patient = Patient::find($id);
         return view('patients.añadirAlumno',['patient'=>$patient,'students'=>$students ]);
     }
@@ -229,7 +227,6 @@ class PatientController extends Controller
         $asociacion_patient_student->save();
 
         return redirect()->route('indexteacher');
-
     }
     /**
      * Remove the specified resource from storage.
@@ -248,23 +245,24 @@ class PatientController extends Controller
     }
     public function destroyStudent($id)
     {
+        $users = DB::table('asociacion_patient_students')
+            ->where('patient_id','=',$id)
+            ->join('users','users.id','=','asociacion_patient_students.student_id')
+            ->select('users.*')
+            ->get();
+        $students= $users->where('userType','=','student')->pluck('name', 'id');
         $patient = Patient::find($id);
-//        $students = DB::table('asociacion_patient_students')
-//            ->join('asociacion_patient_students','asociacion_patient_students.patient_id','=',$patient->id)
-//            ->join('users','users.id','=','asociacion_patient_students.student_id')
-//            ->select('users.*')
-//            ->get();
 
-        $students = User::all()->where('userType', '=', 'student')->pluck('name', 'id');
         return view('patients.destroyStudent',['patient'=>$patient,'students'=>$students ]);
     }
     public function deleteStudent(Request $request,$id)
     {
-        $asociacion_patient_student = DB::table('asociacion_patient_students')
+        $students = DB::table('asociacion_patient_students')
             ->where('student_id','=',$request->get('student_id'))
             ->where('patient_id','=',$id)
             ->select('asociacion_patient_students.*')
             ->get();
+        $asociacion_patient_student=AsociacionPatientStudent::find($students[0]->id);
 
         $asociacion_patient_student->delete();
 

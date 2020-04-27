@@ -18,7 +18,15 @@ class UserController extends Controller
     {
         $students = DB::table('users')->where('userType','=','student')->get();
         return view('indexstudents',['students'=>$students]);
-
+    }
+    public function listsmystudent() //Lista de estudiantes para profesores
+    {
+        $students = DB::table('asociacion_teacher_students')
+            ->where('teacher_id','=',Auth::user()->id)
+            ->join('users', 'users.id', '=', 'asociacion_teacher_students.student_id')
+            ->select('users.*')
+            ->get();
+        return view('listsmystudent',['students'=>$students]);
     }
 
     public function asignaralumno($id)
@@ -33,6 +41,21 @@ class UserController extends Controller
         return redirect()->route('indexstudents');
     }
 
+    public function destroyasociacion($id)
+    {
+        $students = DB::table('asociacion_teacher_students')
+            ->where('teacher_id','=',Auth::user()->id)
+            ->where('student_id','=',$id)
+            ->select('asociacion_teacher_students.id')
+            ->get();
+        $asociacion_teacher_student=AsociacionTeacherStudent::find($students[0]->id);
+
+        $asociacion_teacher_student->delete();
+
+        flash('Alumno quitado correctamente');
+
+        return redirect()->route('listsmystudent');
+    }
     /**
      * Show the form for creating a new resource.
      *

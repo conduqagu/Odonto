@@ -38,6 +38,7 @@
                                 <th>Mordida Abierta</th>
                                 <th>Hábitos</th>
                                 <th>Paciente</th>
+                                <th colspan="2">Acciones</th>
 
                             </tr>
 
@@ -70,6 +71,11 @@
                                     <td>{{ $exam->habitos }}</td>
                                     <td>{{ $exam->patient->name }}</td>
 
+                                    <td>
+                                        {!! Form::open(['route' => 'exams.index', 'method' => 'get']) !!}
+                                        {!!   Form::submit('Volver a exámenes', ['class'=> 'btn btn-warning'])!!}
+                                        {!! Form::close() !!}
+                                    </td>
                                 </tr>
                         </table>
                     </div>

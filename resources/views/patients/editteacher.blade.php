@@ -45,7 +45,6 @@
                             {!! Form::text('observaciones',null,['class'=>'form-control']) !!}
                         </div>
 
-
                         {!! Form::submit('Actualizar',['class'=>'btn-primary btn']) !!}
 
                         {!! Form::close() !!}

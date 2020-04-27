@@ -24,6 +24,8 @@ Route::get('/información', function () {
 Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function()
 {
     Route::get('/indexstudents','UserController@indexstudents')->name('indexstudents');
+    Route::get('/destroyasociación/{id}','UserController@destroyasociacion')->name('destroyasociacion');
+    Route::get('/listsmystudent','UserController@listsmystudent')->name('listsmystudent');
     Route::get('/asignaralumno/{id}','UserController@asignaralumno')->name('asignaralumno');
     Route::get('/patients/indexteacher','PatientController@indexteacher')->name('indexteacher');
     Route::get('/patients/createteacher','PatientController@createteacher')->name('createteacher');
@@ -35,8 +37,6 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
     Route::get('/patients/storeAlumno/{id}','PatientController@storeAlumno')->name('storeAlumno');
     Route::get('/patients/destroyStudent/{id}','PatientController@destroyStudent')->name('destroyStudent');
     Route::delete('/patients/deleteStudent/{id}','PatientController@deleteStudent')->name('deleteStudent');
-
-
 
 });
 

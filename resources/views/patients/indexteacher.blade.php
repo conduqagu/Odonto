@@ -50,7 +50,7 @@
                                         {!! Form::close() !!}
                                         <br>
                                         {!! Form::open(['route' => ['destroyStudent',$patient->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Eliminar Alumno', ['class'=> 'btn btn-primary'])!!}
+                                        {!!   Form::submit('Eliminar alumno', ['class'=> 'btn btn-danger' ])!!}
                                         {!! Form::close() !!}
                                     </td>
                                     <td>
@@ -60,7 +60,7 @@
                                     </td>
                                     <td>
                                         {!! Form::open(['route' => ['patientdestroy',$patient->id], 'method' => 'destroy']) !!}
-                                        {!!   Form::submit('Eliminar paciente', ['class'=> 'btn btn-danger'])!!}
+                                        {!!   Form::submit('Eliminar paciente', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                 </tr>
