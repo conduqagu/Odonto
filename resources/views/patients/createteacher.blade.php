@@ -10,7 +10,7 @@
                     <div class="panel-body">
                         @include('flash::message')
 
-                        {!! Form::open(['route' => 'patients.storeAlumno']) !!}
+                        {!! Form::open(['route' => 'storeteacher']) !!}
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre') !!}
                             {!! Form::text('name',null,['class'=>'form-control', 'required','autofocus']) !!}

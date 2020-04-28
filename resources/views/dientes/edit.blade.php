@@ -28,6 +28,10 @@
                             {!! Form::label('sextante', 'Número del diente') !!}
                             {!! Form::text('sextante',null,['class'=>'form-control', 'required']) !!}
                         </div>
+                        <div class="form-group">
+                            {!! Form::label('ausente', 'Ausente') !!}
+                            {!! Form::select('ausente',array('1'=>'Si','0'=>'No'),'0',['class' => 'form-control', 'required']) !!}
+                        </div>
                         {!! Form::submit('Actualizar',['class'=>'btn-primary btn']) !!}
 
                         {!! Form::close() !!}

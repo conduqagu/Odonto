@@ -77,17 +77,18 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
+
         $this ->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
             'dni' => ['required', 'string','min:9'], //, 'unique:dni', 'unique:patients'
-            'email' => ['string', 'email', 'max:255'],
+            'email' => ['nullable','string', 'email', 'max:255'],
             'telefono' => ['required','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required','in:I,II,III,IV,V,VI'],
-            'observaciones' => ['string', 'max:255'],
-
+            'observaciones' => ['nullable','string', 'max:255'],
         ]);
+
         $patient = new Patient($request->all());
         $patient->save();
 
@@ -108,11 +109,11 @@ class PatientController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
             'dni' => ['required', 'string','min:9'], //, 'unique:dni', 'unique:patients'
-            'email' => ['string', 'email', 'max:255'],
+            'email' => ['nullable','string', 'email', 'max:255'],
             'telefono' => ['required','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required','in:I,II,III,IV,V,VI'],
-            'observaciones' => ['string', 'max:255'],
+            'observaciones' => ['nullable','string', 'max:255'],
 
         ]);
         $patient = new Patient($request->all());
@@ -172,11 +173,11 @@ class PatientController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
             'dni' => ['required', 'string','min:9'],
-            'email' => ['string', 'email', 'max:255'],
+            'email' => ['nullable','string', 'email', 'max:255'],
             'telefono' => ['required','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
-            'observaciones' => ['string', 'max:255']
+            'observaciones' => ['nullable','string', 'max:255']
         ]);
         $patient = Patient::find($id);
         $patient->fill($request->all());
@@ -193,11 +194,11 @@ class PatientController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
             'dni' => ['required', 'string','min:9'],
-            'email' => ['string', 'email', 'max:255'],
+            'email' => ['nullable','string', 'email', 'max:255'],
             'telefono' => ['required','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
-            'observaciones' => ['string', 'max:255']
+            'observaciones' => ['nullable','string', 'max:255']
         ]);
         $patient = Patient::find($id);
         $patient->fill($request->all());

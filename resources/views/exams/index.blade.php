@@ -25,7 +25,7 @@
                                 <th>Dentición</th>
                                 <th>Desviación Línea Media</th>
 
-                                <th colspan="2">Acciones</th>
+                                <th colspan="3">Acciones</th>
                             </tr>
 
 
@@ -41,15 +41,19 @@
                                     <td>{{ $exam->tipoDentición}}</td>
                                     <td>{{ $exam->desviacionLineaMedia}}</td>
 
-
+                                    <td>
+                                        {!! Form::open(['route' => ['exams.show',$exam->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Ver detalle', ['class'=> 'btn btn-warning'])!!}
+                                        {!! Form::close() !!}
+                                    </td>
                                     <td>
                                         {!! Form::open(['route' => ['exams.edit',$exam->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                     <td>
-                                        {!! Form::open(['route' => ['exams.show',$exam->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Ver detalle', ['class'=> 'btn btn-warning'])!!}
+                                        {!! Form::open(['route' => ['exams.destroy',$exam->id], 'method' => 'delete']) !!}
+                                        {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                 </tr>

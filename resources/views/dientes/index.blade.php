@@ -20,6 +20,7 @@
                                 <th>Número</th>
                                 <th>Cuadrante</th>
                                 <th>Sextante</th>
+                                <th>Ausente</th>
                                 <th colspan="2">Acciones</th>
                             </tr>
 
@@ -28,6 +29,7 @@
                                     <td>{{ $diente->name }}</td>
                                     <td>{{ $diente->number }}</td>
                                     <td>{{ $diente->cuadrante }}</td>
+                                    <td>{{$diente->ausente}}</td>
                                     <td>{{ $diente->sextante }}</td>
 
                                     <td>

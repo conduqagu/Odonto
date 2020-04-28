@@ -28,7 +28,7 @@ class CreateAsociacionExamDientesTable extends Migration
             $table->unsignedBigInteger('exam_id');
             $table->unsignedBigInteger('diente_id');
 
-            $table->foreign('exam_id')->references('id')->on('exams');
+            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
             $table->foreign('diente_id')->references('id')->on('dientes');
 
         });

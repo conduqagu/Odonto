@@ -44,6 +44,7 @@ class DienteController extends Controller
             'number' => ['required', 'integer', 'max:100'],
             'cuadrante' => ['required', 'integer','max:4' ],
             'sextante' => ['required', 'integer','max:6' ],
+            'ausente' => ['required', 'boolean'],
             'patient_id'=>['required','exists:patients,id']
             ]);
 
@@ -95,6 +96,7 @@ class DienteController extends Controller
             'number' => ['required', 'integer', 'max:100'],
             'cuadrante' => ['required', 'integer','max:4' ],
             'sextante' => ['required', 'integer','max:6' ],
+            'ausente' => ['required', 'boolean'],
             'patient_id'=>['required','exists:patients,id']
         ]);
 

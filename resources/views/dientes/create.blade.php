@@ -28,6 +28,10 @@
                             {!! Form::number('sextante',null,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
+                            {!! Form::label('ausente', 'Ausente') !!}
+                            {!! Form::select('ausente',array('1'=>'Si','0'=>'No'),'0',['class' => 'form-control', 'required']) !!}
+                        </div>
+                        <div class="form-group">
                             {!!Form::label('patient_id', 'Paciente') !!}
                             <br>
                             {!! Form::select('patient_id', $patients, ['class' => 'form-control', 'required']) !!}

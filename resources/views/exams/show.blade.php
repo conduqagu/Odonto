@@ -70,14 +70,13 @@
                                     <td>{{ $exam->mordidaAbierta }}</td>
                                     <td>{{ $exam->habitos }}</td>
                                     <td>{{ $exam->patient->name }}</td>
-
-                                    <td>
-                                        {!! Form::open(['route' => 'exams.index', 'method' => 'get']) !!}
-                                        {!!   Form::submit('Volver a exámenes', ['class'=> 'btn btn-warning'])!!}
-                                        {!! Form::close() !!}
-                                    </td>
                                 </tr>
                         </table>
+                        <td>
+                            {!! Form::open(['route' => 'exams.index', 'method' => 'get']) !!}
+                            {!!   Form::submit('Volver a exámenes', ['class'=> 'btn btn-warning'])!!}
+                            {!! Form::close() !!}
+                        </td>
                     </div>
                 </div>
             </div>

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Diente extends Model
 {
     protected $fillable = [
-        'name','number', 'cuadrante', 'sextante','patient_id'
+        'name','number', 'cuadrante', 'sextante','ausente','patient_id'
     ];
     public function Patinet()
     {

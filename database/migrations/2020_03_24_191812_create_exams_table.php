@@ -43,7 +43,7 @@ class CreateExamsTable extends Migration
             $table->boolean('habitos');
             $table->unsignedBigInteger('patient_id');
 
-            $table->foreign('patient_id')->references('id')->on('patients');
+            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
 
 
         });

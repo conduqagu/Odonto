@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+
         <title>ODONTO</title>
 
         <!-- Fonts -->
@@ -13,7 +14,7 @@
         <style>
             html, body {
                 background-color: #F6F7EC;
-                color: #001067 ;
+                color: #6E6E6E ;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
                 height: 100vh;
@@ -82,6 +83,8 @@
 
             <div class="content">
                 <div class="title m-b-md">
+                    <a href="{{ route('login') }}"><img src={{ asset('/logo.png') }} height="230px" title="ODONTO" alt="Logo Odonto"></a>
+                    <br>
                     ODONTO
                 </div>
 

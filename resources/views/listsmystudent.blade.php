@@ -31,13 +31,14 @@
                             </td>
                         </tr>
                         @endforeach
-                        <td>
-                            {!! Form::open(['route' => 'indexstudents', 'method' => 'get']) !!}
-                            {!!   Form::submit('Todos los alumnos', ['class'=> 'btn btn-warning'])!!}
-                            {!! Form::close() !!}
-                        </td>
+
 
                     </table>
+                    <td>
+                        {!! Form::open(['route' => 'indexstudents', 'method' => 'get']) !!}
+                        {!!   Form::submit('Todos los alumnos', ['class'=> 'btn btn-warning'])!!}
+                        {!! Form::close() !!}
+                    </td>
                 </div>
             </div>
         </div>

@@ -59,7 +59,7 @@
                                         {!! Form::close() !!}
                                     </td>
                                     <td>
-                                        {!! Form::open(['route' => ['patientdestroy',$patient->id], 'method' => 'destroy']) !!}
+                                        {!! Form::open(['route' => ['patientdestroy',$patient->id], 'method' => 'delete']) !!}
                                         {!!   Form::submit('Eliminar paciente', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                         {!! Form::close() !!}
                                     </td>
