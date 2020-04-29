@@ -29,8 +29,8 @@
                                     <td>{{ $diente->name }}</td>
                                     <td>{{ $diente->number }}</td>
                                     <td>{{ $diente->cuadrante }}</td>
-                                    <td>{{$diente->ausente}}</td>
                                     <td>{{ $diente->sextante }}</td>
+                                    <td>{{$diente->ausente}}</td>
 
                                     <td>
                                         {!! Form::open(['route' => ['dientes.edit',$diente->id], 'method' => 'get']) !!}

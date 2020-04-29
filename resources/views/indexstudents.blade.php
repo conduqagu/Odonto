@@ -6,13 +6,13 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Estudiantes</div>
-
+                <br>
                 <div class="panel-body">
                     @include('flash::message')
                     {!! Form::open(['route' => 'listsmystudent', 'method' => 'get']) !!}
                     {!!   Form::submit('Mis alumnos', ['class'=> 'btn btn-primary'])!!}
                     {!! Form::close() !!}
-
+                    <br>
                     <table class="table table-striped table-bordered">
                         <tr>
                             <th>Nombre</th>

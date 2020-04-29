@@ -14,23 +14,23 @@
 
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre común del diente') !!}
-                            {!! Form::text('name',null,['class'=>'form-control', 'required', 'autofocus']) !!}
+                            {!! Form::text('name',$diente->name,['class'=>'form-control', 'required', 'autofocus']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('number', 'Número del diente') !!}
-                            {!! Form::text('number',null,['class'=>'form-control', 'required']) !!}
+                            {!! Form::text('number',$diente->number,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('cuadrante', 'Número del diente') !!}
-                            {!! Form::text('cuadrante',null,['class'=>'form-control', 'required']) !!}
+                            {!! Form::label('cuadrante', 'Cuadrante') !!}
+                            {!! Form::text('cuadrante',$diente->cuadrante,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('sextante', 'Número del diente') !!}
-                            {!! Form::text('sextante',null,['class'=>'form-control', 'required']) !!}
+                            {!! Form::label('sextante', 'Sextante') !!}
+                            {!! Form::text('sextante',$diente->sextante,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('ausente', 'Ausente') !!}
-                            {!! Form::select('ausente',array('1'=>'Si','0'=>'No'),'0',['class' => 'form-control', 'required']) !!}
+                            {!! Form::select('ausente',array('1'=>'Si','0'=>'No'),$diente->ausente,['class' => 'form-control', 'required']) !!}
                         </div>
                         {!! Form::submit('Actualizar',['class'=>'btn-primary btn']) !!}
 

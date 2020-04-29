@@ -42,7 +42,6 @@
 
                             </tr>
 
-
                                 <tr>
                                     <td>{{ $exam->date }}</td>
                                     <td>{{ $exam->aspectoExtraoralNormal }}</td>
@@ -70,6 +69,11 @@
                                     <td>{{ $exam->mordidaAbierta }}</td>
                                     <td>{{ $exam->habitos }}</td>
                                     <td>{{ $exam->patient->name }}</td>
+                                    <td>
+                                        {!! Form::open(['route' => ['index_asociacionED',$exam->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Mirar dientes', ['class'=> 'btn btn-warning'])!!}
+                                        {!! Form::close() !!}
+                                    </td>
                                 </tr>
                         </table>
                         <td>

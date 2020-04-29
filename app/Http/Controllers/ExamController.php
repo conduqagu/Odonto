@@ -74,13 +74,12 @@ class ExamController extends Controller
             'patient_id' => ['required', 'exists:patients,id']
         ]);
 
-
         $exam = new Exam($request->all());
         $exam->save();
 
-        flash('Exam creado correctamente');
+        flash('Examen creado correctamente');
 
-        return redirect()->route('exams.index');
+        return redirect()->route('create_asociacionED',[$exam->id]);
     }
 
     /**
@@ -119,6 +118,7 @@ class ExamController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $this->validate($request, [
             'date'=>['required','date'],
             'aspectoExtraoralNormal' => ['required', 'boolean'],
@@ -149,7 +149,6 @@ class ExamController extends Controller
             'habitos' => ['required', 'boolean'],
             'patient_id' => ['required', 'exists:patients,id']
         ]);
-
         $exam = Exam::find($id);
         $exam->fill($request->all());
 

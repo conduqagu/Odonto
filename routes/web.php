@@ -51,6 +51,14 @@ Route::group(['middleware'=> 'App\Http\Middleware\StudentMiddleware'], function(
 
 });
 Route::resource('dientes','DienteController');
+Route::get('/exams/index_asociacionED/{id}','AsociacionExamDienteController@index')->name('index_asociacionED');
+Route::get('/exams/create_asociacionED/{id}','AsociacionExamDienteController@create_asociacionED')->name('create_asociacionED');
+Route::post('/exams/store_asociacionED/{id}','AsociacionExamDienteController@store_asociacionED')->name('store_asociacionED');
+Route::get('/exams/edit_asociacionED/{id}','AsociacionExamDienteController@edit')->name('edit_asociacionED');
+Route::put('/exams/update_asociacionED/{id}','AsociacionExamDienteController@update')->name('update_asociacionED');
+
+
+
 Route::resource('exams','ExamController');
 
 

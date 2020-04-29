@@ -97,7 +97,7 @@ class DienteController extends Controller
             'cuadrante' => ['required', 'integer','max:4' ],
             'sextante' => ['required', 'integer','max:6' ],
             'ausente' => ['required', 'boolean'],
-            'patient_id'=>['required','exists:patients,id']
+            //'patient_id'=>['required','exists:patients,id']
         ]);
 
         $diente = Diente::find($id);
