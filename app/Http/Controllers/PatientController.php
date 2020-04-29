@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AsociacionPatientStudent;
+use App\Diente;
 use App\Patient;
 use App\User;
 use Illuminate\Http\Request;
@@ -96,6 +97,15 @@ class PatientController extends Controller
         $asociacion_patient_student->student_id= Auth::user()->id;
         $asociacion_patient_student->patient_id=$patient->id;
         $asociacion_patient_student->save();
+
+        $diente=new Diente();
+        $diente->name='Primer premolar';
+        $diente->number='14';
+        $diente->cuadrante='1';
+        $diente->sextante='1';
+        $diente->ausente='0';
+        $diente->patient_id=$patient->id;
+        $diente->save();
 
         flash('Paciente creado correctamente');
 

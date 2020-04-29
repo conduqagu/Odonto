@@ -29,11 +29,13 @@ class AsociacionExamDienteController extends Controller
     public function create_asociacionED($exam_id)
     {
         $diente = DB::table('asociacion_exam_dientes')
-          //  ->where('exam_id','=',$exam_id)
+            ->where('exam_id','=',$exam_id)
             ->join('dientes','dientes.id','!=','asociacion_exam_dientes.diente_id')
             ->select('dientes.*')
             ->get();
+        dd($diente->all());
         $dientes=$diente->pluck('name', 'id');
+
 
         return view('exams.create_asociacion_exam_diente',['exam_id'=>$exam_id,'dientes'=>$dientes]);
     }
@@ -67,6 +69,7 @@ class AsociacionExamDienteController extends Controller
         $asociacion_exam_diente->diente_id= $request->get('diente_id');
         $asociacion_exam_diente->exam_id=$exam_id;
         $asociacion_exam_diente->save();
+        
 
         flash('Asociación creada correctamente');
 
