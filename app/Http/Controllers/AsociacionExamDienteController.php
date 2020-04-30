@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\AsociacionExamDiente;
 use App\Diente;
+use App\Exam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use phpDocumentor\Reflection\Types\Void_;
 
 class AsociacionExamDienteController extends Controller
 {
@@ -28,15 +30,22 @@ class AsociacionExamDienteController extends Controller
      */
     public function create_asociacionED($exam_id)
     {
+        $exam=Exam::find($exam_id);
+        $patient_id=$exam->patient_id;
+
         $diente = DB::table('asociacion_exam_dientes')
             ->where('exam_id','=',$exam_id)
             ->join('dientes','dientes.id','!=','asociacion_exam_dientes.diente_id')
             ->select('dientes.*')
             ->get();
-        dd($diente->all());
-        $dientes=$diente->pluck('name', 'id');
 
-
+        if(count($diente)==0){
+            $dientes=Diente::all()
+                ->where('patient_id','=',$patient_id)
+                ->pluck('number', 'id');
+        }else{
+            $dientes=$diente->where('patient_id','=',$patient_id)->pluck('number', 'id');
+        }
         return view('exams.create_asociacion_exam_diente',['exam_id'=>$exam_id,'dientes'=>$dientes]);
     }
 
@@ -69,7 +78,7 @@ class AsociacionExamDienteController extends Controller
         $asociacion_exam_diente->diente_id= $request->get('diente_id');
         $asociacion_exam_diente->exam_id=$exam_id;
         $asociacion_exam_diente->save();
-        
+
 
         flash('Asociación creada correctamente');
 

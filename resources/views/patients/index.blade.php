@@ -38,12 +38,18 @@
                                     <td>{{ $patient->riesgoASA }}</td>
                                     <td>{{ $patient->observaciones }}</td>
 
+                                    <td>
+                                        {!! Form::open(['route' => ['dientesPatient',$patient->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Dientes', ['class'=> 'btn btn-outline-dark'])!!}
+                                        {!! Form::close() !!}
+                                    </td>
 
                                     <td>
                                         {!! Form::open(['route' => ['patients.edit',$patient->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}
                                     </td>
+
                                 </tr>
                             @endforeach
                         </table>

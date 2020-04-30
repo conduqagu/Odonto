@@ -50,7 +50,13 @@ Route::group(['middleware'=> 'App\Http\Middleware\StudentMiddleware'], function(
 
 
 });
+
+
+Route::get('/patients/dientesPatient/{id}','DienteController@indexPatient')->name('dientesPatient');
+Route::get('/patients/createDientesPac/{id}','DienteController@createDientesPac')->name('createDientesPac');
 Route::resource('dientes','DienteController');
+
+
 Route::get('/exams/index_asociacionED/{id}','AsociacionExamDienteController@index')->name('index_asociacionED');
 Route::get('/exams/create_asociacionED/{id}','AsociacionExamDienteController@create_asociacionED')->name('create_asociacionED');
 Route::post('/exams/store_asociacionED/{id}','AsociacionExamDienteController@store_asociacionED')->name('store_asociacionED');

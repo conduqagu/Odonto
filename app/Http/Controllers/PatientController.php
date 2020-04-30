@@ -98,20 +98,12 @@ class PatientController extends Controller
         $asociacion_patient_student->patient_id=$patient->id;
         $asociacion_patient_student->save();
 
-        $diente=new Diente();
-        $diente->name='Primer premolar';
-        $diente->number='14';
-        $diente->cuadrante='1';
-        $diente->sextante='1';
-        $diente->ausente='0';
-        $diente->patient_id=$patient->id;
-        $diente->save();
 
         flash('Paciente creado correctamente');
 
-        return redirect()->route('patients.index');
-    }
 
+        return redirect()->route('createDientesPac', [$patient->id]);
+    }
 
     public function storeteacher(Request $request)
     {
@@ -136,7 +128,7 @@ class PatientController extends Controller
 
         flash('Paciente creado correctamente');
 
-        return redirect()->route('indexteacher');
+        return redirect()->route('createDientesPac', [$patient->id]);
     }
     /**
      * Display the specified resource.

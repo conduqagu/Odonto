@@ -2,12 +2,17 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Examen dental</div>
+        <div class="row justify-content-center">
+            <div class="title m-b-md">
+                <a href="https://www.ilerna.es/blog/aprende-con-ilerna-online/sanidad/codigo-internacional-dientes-fdi">
+                    <img src={{ asset('/asociacionED.png') }} height="450" title="Dentadura permanente-temporal" alt="Dentadura permanente-temporal"></a>
+                </a>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Examen dental</div>
 
-                    <div class="panel-body">
+                    <div class="card-body">
                         @include('flash::message')
 
                         {!! Form::model($asociacion_exam_diente, ['route'=>['update_asociacionED',$asociacion_exam_diente],'method'=>'put']) !!}

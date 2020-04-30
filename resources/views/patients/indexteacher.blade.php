@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Pacientes</div>
+                    <div class="panel-heading">Pacientes </div>
 
                     <div class="panel-body">
                         @include('flash::message')
@@ -25,7 +25,7 @@
                                 <th>Riesgo ASA</th>
                                 <th>Observaciones</th>
                                 <th>Alumno</th>
-                                <th colspan="3">Acciones</th>
+                                <th colspan="4">Acciones</th>
                             </tr>
 
                             @foreach ($patients as $patient)
@@ -45,22 +45,26 @@
                                     </td>
 
                                     <td>
+                                        {!! Form::open(['route' => ['dientesPatient',$patient->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Dientes', ['class'=> 'btn btn-outline-dark'])!!}
+                                        {!! Form::close() !!}
+                                    </td>
+                                    <td>
                                         {!! Form::open(['route' => ['añadirAlumno',$patient->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Añadir Alumno', ['class'=> 'btn btn-primary'])!!}
+                                        {!!   Form::submit('Añadir Alumno', ['class'=> 'btn btn-outline-primary'])!!}
                                         {!! Form::close() !!}
                                         <br>
                                         {!! Form::open(['route' => ['destroyStudent',$patient->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Eliminar alumno', ['class'=> 'btn btn-danger' ])!!}
+                                        {!!   Form::submit('Eliminar alumno', ['class'=> 'btn btn-outline-danger' ])!!}
                                         {!! Form::close() !!}
                                     </td>
                                     <td>
                                         {!! Form::open(['route' => ['editteacher',$patient->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}
-                                    </td>
-                                    <td>
+                                    <br>
                                         {!! Form::open(['route' => ['patientdestroy',$patient->id], 'method' => 'delete']) !!}
-                                        {!!   Form::submit('Eliminar paciente', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
+                                        {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                 </tr>

@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Estudio dientes</div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Estudio diente </div>
 
-                    <div class="panel-body">
+                    <div class="card-body">
 
                         <br><br>
                         <table class="table table-striped table-bordered">

@@ -91,7 +91,6 @@
                 <div class="links">
                     <a href="https://github.com/conduqagu/Odonto">GitHub</a>
                     <a href="http://odonto.test/información" target="_blank">Información</a>
-
                 </div>
 
 
