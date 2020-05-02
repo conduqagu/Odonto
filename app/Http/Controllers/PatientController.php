@@ -88,6 +88,8 @@ class PatientController extends Controller
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required','in:I,II,III,IV,V,VI'],
             'observaciones' => ['nullable','string', 'max:255'],
+            'child'=>['required','boolean']
+
         ]);
 
         $patient = new Patient($request->all());
@@ -100,9 +102,12 @@ class PatientController extends Controller
 
 
         flash('Paciente creado correctamente');
+        if($patient->child=0){
+            return redirect()->route('createDientesPac', [$patient->id]);
+        }elseif($patient->child=1){
+            return redirect()->route('createDientesPacChild', [$patient->id]);
+        }
 
-
-        return redirect()->route('createDientesPac', [$patient->id]);
     }
 
     public function storeteacher(Request $request)
@@ -116,6 +121,7 @@ class PatientController extends Controller
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required','in:I,II,III,IV,V,VI'],
             'observaciones' => ['nullable','string', 'max:255'],
+            'child'=>['required','boolean']
 
         ]);
         $patient = new Patient($request->all());
@@ -179,7 +185,9 @@ class PatientController extends Controller
             'telefono' => ['required','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
-            'observaciones' => ['nullable','string', 'max:255']
+            'observaciones' => ['nullable','string', 'max:255'],
+            'child'=>['required','boolean']
+
         ]);
         $patient = Patient::find($id);
         $patient->fill($request->all());
@@ -200,7 +208,9 @@ class PatientController extends Controller
             'telefono' => ['required','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
-            'observaciones' => ['nullable','string', 'max:255']
+            'observaciones' => ['nullable','string', 'max:255'],
+            'child'=>['required','boolean']
+
         ]);
         $patient = Patient::find($id);
         $patient->fill($request->all());

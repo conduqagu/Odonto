@@ -47,7 +47,7 @@ class DienteController extends Controller
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'number' => ['required', 'integer', 'max:100'],
-            'cuadrante' => ['required', 'integer','max:4' ],
+            'cuadrante' => ['required', 'integer','max:8' ],
             'sextante' => ['required', 'integer','max:6' ],
             'ausente' => ['required', 'boolean'],
             'patient_id'=>['required','exists:patients,id']
@@ -101,7 +101,7 @@ class DienteController extends Controller
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'number' => ['required', 'integer', 'max:100'],
-            'cuadrante' => ['required', 'integer','max:4' ],
+            'cuadrante' => ['required', 'integer','max:8' ],
             'sextante' => ['required', 'integer','max:6' ],
             'ausente' => ['required', 'boolean'],
             //'patient_id'=>['required','exists:patients,id']
@@ -431,6 +431,196 @@ class DienteController extends Controller
             return redirect()->route('indexteacher');
         }
     }
+
+    public function createDientesPacChild($patient_id){
+        $diente=new Diente();
+        $diente->name='Incisivo central';
+        $diente->number='51';
+        $diente->cuadrante='5';
+        $diente->sextante='2';
+        $diente->ausente='0';
+        $diente->patient_id=$patient_id;
+        $diente->save();
+
+        $diente1=new Diente();
+        $diente1->name='Incisivo lateral';
+        $diente1->number='52';
+        $diente1->cuadrante='5';
+        $diente1->sextante='2';
+        $diente1->ausente='0';
+        $diente1->patient_id=$patient_id;
+        $diente1->save();
+
+        $diente2=new Diente();
+        $diente2->name='Canino';
+        $diente2->number='53';
+        $diente2->cuadrante='5';
+        $diente2->sextante='2';
+        $diente2->ausente='0';
+        $diente2->patient_id=$patient_id;
+        $diente2->save();
+
+        $diente5=new Diente();
+        $diente5->name='Primer molar';
+        $diente5->number='54';
+        $diente5->cuadrante='1';
+        $diente5->sextante='1';
+        $diente5->ausente='0';
+        $diente5->patient_id=$patient_id;
+        $diente5->save();
+
+        $diente6=new Diente();
+        $diente6->name='Segundo molar';
+        $diente6->number='55';
+        $diente6->cuadrante='5';
+        $diente6->sextante='1';
+        $diente6->ausente='0';
+        $diente6->patient_id=$patient_id;
+        $diente6->save();
+
+        $diente21=new Diente();
+        $diente21->name='Incisivo central';
+        $diente21->number='61';
+        $diente21->cuadrante='6';
+        $diente21->sextante='2';
+        $diente21->ausente='0';
+        $diente21->patient_id=$patient_id;
+        $diente21->save();
+
+        $diente22=new Diente();
+        $diente22->name='Incisivo lateral';
+        $diente22->number='62';
+        $diente22->cuadrante='6';
+        $diente22->sextante='2';
+        $diente22->ausente='0';
+        $diente22->patient_id=$patient_id;
+        $diente22->save();
+
+        $diente23=new Diente();
+        $diente23->name='Canino';
+        $diente23->number='63';
+        $diente23->cuadrante='6';
+        $diente23->sextante='2';
+        $diente23->ausente='0';
+        $diente23->patient_id=$patient_id;
+        $diente23->save();
+
+        $diente26=new Diente();
+        $diente26->name='Primer molar';
+        $diente26->number='64';
+        $diente26->cuadrante='6';
+        $diente26->sextante='3';
+        $diente26->ausente='0';
+        $diente26->patient_id=$patient_id;
+        $diente26->save();
+
+        $diente27=new Diente();
+        $diente27->name='Segundo molar';
+        $diente27->number='65';
+        $diente27->cuadrante='6';
+        $diente27->sextante='3';
+        $diente27->ausente='0';
+        $diente27->patient_id=$patient_id;
+        $diente27->save();
+
+        $diente31=new Diente();
+        $diente31->name='Incisivo central';
+        $diente31->number='71';
+        $diente31->cuadrante='7';
+        $diente31->sextante='5';
+        $diente31->ausente='0';
+        $diente31->patient_id=$patient_id;
+        $diente31->save();
+
+        $diente32=new Diente();
+        $diente32->name='Incisivo lateral';
+        $diente32->number='72';
+        $diente32->cuadrante='7';
+        $diente32->sextante='5';
+        $diente32->ausente='0';
+        $diente32->patient_id=$patient_id;
+        $diente32->save();
+
+        $diente33=new Diente();
+        $diente33->name='Canino';
+        $diente33->number='33';
+        $diente33->cuadrante='3';
+        $diente33->sextante='5';
+        $diente33->ausente='0';
+        $diente33->patient_id=$patient_id;
+        $diente33->save();
+
+        $diente36=new Diente();
+        $diente36->name='Primer molar';
+        $diente36->number='74';
+        $diente36->cuadrante='7';
+        $diente36->sextante='4';
+        $diente36->ausente='0';
+        $diente36->patient_id=$patient_id;
+        $diente36->save();
+
+        $diente37=new Diente();
+        $diente37->name='Segundo molar';
+        $diente37->number='75';
+        $diente37->cuadrante='7';
+        $diente37->sextante='4';
+        $diente37->ausente='0';
+        $diente37->patient_id=$patient_id;
+        $diente37->save();
+
+        $diente41=new Diente();
+        $diente41->name='Incisivo central';
+        $diente41->number='81';
+        $diente41->cuadrante='8';
+        $diente41->sextante='5';
+        $diente41->ausente='0';
+        $diente41->patient_id=$patient_id;
+        $diente41->save();
+
+        $diente42=new Diente();
+        $diente42->name='Incisivo lateral';
+        $diente42->number='82';
+        $diente42->cuadrante='8';
+        $diente42->sextante='5';
+        $diente42->ausente='0';
+        $diente42->patient_id=$patient_id;
+        $diente42->save();
+
+        $diente43=new Diente();
+        $diente43->name='Canino';
+        $diente43->number='83';
+        $diente43->cuadrante='8';
+        $diente43->sextante='5';
+        $diente43->ausente='0';
+        $diente43->patient_id=$patient_id;
+        $diente43->save();
+
+        $diente46=new Diente();
+        $diente46->name='Primer molar';
+        $diente46->number='84';
+        $diente46->cuadrante='8';
+        $diente46->sextante='6';
+        $diente46->ausente='0';
+        $diente46->patient_id=$patient_id;
+        $diente46->save();
+
+        $diente47=new Diente();
+        $diente47->name='Segundo molar';
+        $diente47->number='85';
+        $diente47->cuadrante='8';
+        $diente47->sextante='6';
+        $diente47->ausente='0';
+        $diente47->patient_id=$patient_id;
+        $diente47->save();
+
+        if(Auth::user()->userType =='student') {
+            return redirect()->route('patients.index');
+        }
+        if(Auth::user()->userType =='teacher') {
+            return redirect()->route('indexteacher');
+        }
+    }
+
 
 
 }

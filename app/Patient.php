@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Patient extends Model
 {
     protected $fillable = [
-        'name','surname', 'dni','email', 'telefono','fechaNacimiento','riesgoASA','observaciones'
+        'name','surname', 'dni','email', 'telefono','fechaNacimiento','riesgoASA','observaciones','child'
     ];
     public function asociacionPatientStudents()
     {

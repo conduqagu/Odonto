@@ -23,6 +23,7 @@ class CreatePatientsTable extends Migration
             $table->date('fechaNacimiento');
             $table->enum('riesgoASA', ['I','II','III','IV','V','VI']);
             $table->string('observaciones')->nullable();
+            $table->boolean('child');
             $table->timestamps();
 
         });

@@ -24,6 +24,7 @@
                                 <th>Fecha de nacimiento</th>
                                 <th>Riesgo ASA</th>
                                 <th>Observaciones</th>
+                                <th>Infantil</th>
                                 <th>Alumno</th>
                                 <th colspan="4">Acciones</th>
                             </tr>
@@ -38,6 +39,7 @@
                                     <td>{{ $patient->fechaNacimiento }}</td>
                                     <td>{{ $patient->riesgoASA }}</td>
                                     <td>{{ $patient->observaciones }}</td>
+                                    <td>{{ $patient->child }}</td>
                                     <td>
                                      @foreach ($patient->asociacionPatientStudents as $asociacionPatientStudent)
                                      {{$asociacionPatientStudent->student->name.", " }}

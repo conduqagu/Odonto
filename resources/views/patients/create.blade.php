@@ -37,13 +37,17 @@
                         </div>
                         <div class="form-group">
                             {!!  Form::label('riesgoASA' , 'Riesgo ASA') !!}
-                            {!! Form::select('riesgoASA', array('I' => 'I', 'II' => 'II','III'=>'III')) !!}
+                            {!! Form::select('riesgoASA', array('I' => 'I', 'II' => 'II','III'=>'III'),'I',['class'=>'form-control']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('observaciones', 'Observaciones') !!}
                             {!! Form::text('observaciones',null,['class'=>'form-control']) !!}
                         </div>
-
+                        <div class="form-group">
+                            {!!  Form::label('child' , 'Infantil') !!}
+                            {!! Form::select('child', array('1'=>'Si','0'=>'No'),'0',['class' => 'form-control', 'required']) !!}
+                        </div>
+                        <br>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 
                         {!! Form::close() !!}

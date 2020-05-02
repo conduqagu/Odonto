@@ -44,6 +44,10 @@
                             {!! Form::label('observaciones', 'Observaciones') !!}
                             {!! Form::text('observaciones',null,['class'=>'form-control']) !!}
                         </div>
+                        <div>
+                            {!!  Form::label('child' , 'Infantil') !!}
+                            {!! Form::select('child', array('1'=>'Si','0'=>'No'),$patient->child,['class' => 'form-control', 'required']) !!}
+                        </div>
 
                         {!! Form::submit('Actualizar',['class'=>'btn-primary btn']) !!}
 

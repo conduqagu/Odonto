@@ -24,6 +24,7 @@
                                 <th>Fecha de nacimiento</th>
                                 <th>Riesgo ASA</th>
                                 <th>Observaciones</th>
+                                <th>Infantil</th>
                                 <th colspan="2">Acciones</th>
                             </tr>
 
@@ -37,6 +38,7 @@
                                     <td>{{ $patient->fechaNacimiento }}</td>
                                     <td>{{ $patient->riesgoASA }}</td>
                                     <td>{{ $patient->observaciones }}</td>
+                                    <td>{{ $patient->child }}</td>
 
                                     <td>
                                         {!! Form::open(['route' => ['dientesPatient',$patient->id], 'method' => 'get']) !!}

@@ -54,6 +54,7 @@ Route::group(['middleware'=> 'App\Http\Middleware\StudentMiddleware'], function(
 
 Route::get('/patients/dientesPatient/{id}','DienteController@indexPatient')->name('dientesPatient');
 Route::get('/patients/createDientesPac/{id}','DienteController@createDientesPac')->name('createDientesPac');
+Route::get('/patients/createDientesPacChild/{id}','DienteController@createDientesPacChild')->name('createDientesPacChild');
 Route::resource('dientes','DienteController');
 
 
