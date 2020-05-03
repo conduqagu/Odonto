@@ -42,13 +42,6 @@ class PatientController extends Controller
     }
     public function indexteacher()
     {
-        //$patients = DB::table('patients')
-        //    ->join('patients','patients.id','=','asociacion_patient_students.patient_id')
-        //    ->join('asociacion_patient_students', 'students.id', '=', 'user.id')
-        //    ->join('users','users.id','=','asociacion_teacher_students.student_id')
-        //    ->where('asociacion_teacher_students.teacher_id','=',Auth::user()->id())
-        //    ->select('patients.*')
-        //    ->get();
         $patients=Patient::all();
         return view('/patients/indexteacher',['patients'=>$patients]);
     }
@@ -190,13 +183,23 @@ class PatientController extends Controller
 
         ]);
         $patient = Patient::find($id);
-        $patient->fill($request->all());
+        if($patient->child==$request->child){
+            $patient->fill($request->all());
+            $patient->save();
+            flash('Paciente modificado correctamente0');
+            return redirect()->route('patients.index');
+        }elseif($request->child==0){
+            $patient->fill($request->all());
+            $patient->save();
+            flash('Paciente modificado correctamente1');
+            return redirect()->route('createDientesPac', [$patient->id]);
+        }elseif($patient->child=1){
+            $patient->fill($request->all());
+            $patient->save();
+            flash('Paciente modificado correctamente2');
+            return redirect()->route('createDientesPacChild', [$patient->id]);
+        }
 
-        $patient->save();
-
-        flash('Paciente modificado correctamente');
-
-        return redirect()->route('patients.index');
     }
     public function updateteacher(Request $request, $id)
     {
@@ -213,12 +216,17 @@ class PatientController extends Controller
 
         ]);
         $patient = Patient::find($id);
-        $patient->fill($request->all());
-        $patient->save();
-
-        flash('Paciente modificado correctamente');
-
-        return redirect()->route('indexteacher');
+        if($patient->child!=$request->child and $request->child==0){
+            $patient->fill($request->all());
+            $patient->save();
+            flash('Paciente modificado correctamente');
+            return redirect()->route('createDientesPac', [$patient->id]);
+        }else{
+            $patient->fill($request->all());
+            $patient->save();
+            flash('Paciente modificado correctamente');
+            return redirect()->route('patients.index');
+        }
     }
     public function añadirAlumno($id)
     {

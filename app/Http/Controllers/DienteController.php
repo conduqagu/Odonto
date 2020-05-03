@@ -21,7 +21,13 @@ class DienteController extends Controller
     }
     public function indexPatient($id)
     {
-        $dientes=Diente::all()->where('patient_id','=',$id);
+        $patient=Patient::find($id);
+        $child=$patient->child;
+        if($child==1){
+            $dientes=Diente::all()->where('patient_id','=',$id)->where('number','>','50');
+        }elseif($child==0){
+        $dientes=Diente::all()->where('patient_id','=',$id)->where('number','<','50');
+        }
         return view('dientes.index',['dientes'=>$dientes]);
     }
     /**
@@ -104,7 +110,6 @@ class DienteController extends Controller
             'cuadrante' => ['required', 'integer','max:8' ],
             'sextante' => ['required', 'integer','max:6' ],
             'ausente' => ['required', 'boolean'],
-            //'patient_id'=>['required','exists:patients,id']
         ]);
 
         $diente = Diente::find($id);
@@ -114,7 +119,7 @@ class DienteController extends Controller
 
         flash('Diente modificado correctamente');
 
-        return redirect()->route('dientes.index');
+        return redirect()->route('dientesPatient',[$diente->patient_id]);
     }
 
     /**
@@ -543,8 +548,8 @@ class DienteController extends Controller
 
         $diente33=new Diente();
         $diente33->name='Canino';
-        $diente33->number='33';
-        $diente33->cuadrante='3';
+        $diente33->number='73';
+        $diente33->cuadrante='7';
         $diente33->sextante='5';
         $diente33->ausente='0';
         $diente33->patient_id=$patient_id;
