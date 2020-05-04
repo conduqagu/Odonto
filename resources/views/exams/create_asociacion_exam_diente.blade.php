@@ -50,16 +50,12 @@
                         </div>
 
                         <br>
-                        {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
+                        {!! Form::submit( 'Guardar', ['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}
+                        {!! Form::submit( 'Terminar', ['class' => 'btn btn-warning', 'name' => 'submitbutton', 'value' => 'finish'])!!}
 
                         {!! Form::close() !!}
                         <br>
 
-                        <td>
-                            {!! Form::open(['route' => 'exams.index', 'method' => 'get']) !!}
-                            {!!   Form::submit('Terminar', ['class'=> 'btn btn-warning'])!!}
-                            {!! Form::close() !!}
-                        </td>
                     </div>
                 </div>
             </div>

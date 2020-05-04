@@ -36,7 +36,7 @@
                     </table>
                     <td>
                         {!! Form::open(['route' => 'indexstudents', 'method' => 'get']) !!}
-                        {!!   Form::submit('Todos los alumnos', ['class'=> 'btn btn-warning'])!!}
+                        {!!   Form::submit('Todos los alumnos', ['class'=> 'btn btn-outline-dark'])!!}
                         {!! Form::close() !!}
                     </td>
                 </div>

@@ -30,7 +30,11 @@
                                     <td>{{ $diente->number }}</td>
                                     <td>{{ $diente->cuadrante }}</td>
                                     <td>{{ $diente->sextante }}</td>
-                                    <td>{{$diente->ausente}}</td>
+                                    @if($diente->ausente==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
 
                                     <td>
                                         {!! Form::open(['route' => ['dientes.edit',$diente->id], 'method' => 'get']) !!}

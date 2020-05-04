@@ -186,18 +186,20 @@ class PatientController extends Controller
         if($patient->child==$request->child){
             $patient->fill($request->all());
             $patient->save();
-            flash('Paciente modificado correctamente0');
+            flash('Paciente modificado correctamente');
             return redirect()->route('patients.index');
-        }elseif($request->child==0){
+        }elseif($patient->child!=$request->child and $request->child==1){
+            $request->child='0';
+            $patient->fill($request->all());
+            $patient->child='0';
+            $patient->save();
+            flash('Un adulto no puede modificarse a infantil, el resto de los datos se han actualizado correctamente');
+            return redirect()->route('patients.index');
+        }else{
             $patient->fill($request->all());
             $patient->save();
-            flash('Paciente modificado correctamente1');
-            return redirect()->route('createDientesPac', [$patient->id]);
-        }elseif($patient->child=1){
-            $patient->fill($request->all());
-            $patient->save();
-            flash('Paciente modificado correctamente2');
-            return redirect()->route('createDientesPacChild', [$patient->id]);
+            flash('Paciente modificado correctamente');
+            return redirect()->route('patients.index');
         }
 
     }
@@ -221,11 +223,17 @@ class PatientController extends Controller
             $patient->save();
             flash('Paciente modificado correctamente');
             return redirect()->route('createDientesPac', [$patient->id]);
+        }elseif($patient->child!=$request->child and $request->child==1){
+            $patient->fill($request->all());
+            $patient->child='0';
+            $patient->save();
+            flash('Un adulto no puede modificarse a infantil, el resto de los datos se han actualizado correctamente');
+            return redirect()->route('indexteacher');
         }else{
             $patient->fill($request->all());
             $patient->save();
             flash('Paciente modificado correctamente');
-            return redirect()->route('patients.index');
+            return redirect()->route('indexteacher');
         }
     }
     public function añadirAlumno($id)

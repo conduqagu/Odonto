@@ -44,9 +44,21 @@
 
                                 <tr>
                                     <td>{{ $exam->date }}</td>
-                                    <td>{{ $exam->aspectoExtraoralNormal }}</td>
-                                    <td>{{ $exam->cancerOral }}</td>
-                                    <td>{{ $exam->anomaliasLabios }}</td>
+                                    @if($exam->aspectoExtraoralNormal==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
+                                    @if($exam->cancerOral==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
+                                    @if($exam->anomaliasLabios==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
                                     <td>{{ $exam->otros }}</td>
                                     <td>{{ $exam->patologiaMucosa }}</td>
                                     <td>{{ $exam->fluorosis }}</td>
@@ -59,26 +71,67 @@
                                     <td>{{ $exam->claseAngle }}</td>
                                     <td>{{ $exam->lateralAngle }}</td>
                                     <td>{{ $exam->tipoDentición }}</td>
-                                    <td>{{ $exam->apiñamientoIncisivoInferior }}</td>
-                                    <td>{{ $exam->apiñamientoIncisivoSuperior }}</td>
-                                    <td>{{ $exam->perdidaEspacioAnterior }}</td>
-                                    <td>{{ $exam->perdidaEspacioPosterior }}</td>
-                                    <td>{{ $exam->mordidaCruzadaAnterior }}</td>
-                                    <td>{{ $exam->mordidaCruzadaPosterior }}</td>
-                                    <td>{{ $exam->desviacionLineaMedia }}</td>
-                                    <td>{{ $exam->mordidaAbierta }}</td>
-                                    <td>{{ $exam->habitos }}</td>
+                                    @if($exam->apiñamientoIncisivoInferior==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
+                                    @if($exam->apiñamientoIncisivoSuperior==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
+                                    @if($exam->perdidaEspacioAnterior==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
+                                    @if($exam->perdidaEspacioPosterior==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
+                                    @if($exam->mordidaCruzadaAnterior==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
+                                    @if($exam->mordidaCruzadaPosterior==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
+                                    @if($exam->desviacionLineaMedia==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
+                                    @if($exam->mordidaAbierta==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
+                                    @if($exam->habitos==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
                                     <td>{{ $exam->patient->name }}</td>
                                     <td>
                                         {!! Form::open(['route' => ['index_asociacionED',$exam->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Mirar dientes', ['class'=> 'btn btn-warning'])!!}
+                                        {!!   Form::submit('Mirar dientes', ['class'=> 'btn btn-outline-dark'])!!}
+                                        {!! Form::close() !!}
+                                    </td>
+                                    <td>
+                                        {!! Form::open(['route' => ['exams.edit',$exam->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                 </tr>
                         </table>
                         <td>
                             {!! Form::open(['route' => 'exams.index', 'method' => 'get']) !!}
-                            {!!   Form::submit('Volver a exámenes', ['class'=> 'btn btn-warning'])!!}
+                            {!!   Form::submit('Volver a exámenes', ['class'=> 'btn btn-outline-dark'])!!}
                             {!! Form::close() !!}
                         </td>
                     </div>

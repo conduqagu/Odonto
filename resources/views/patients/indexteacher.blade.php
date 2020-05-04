@@ -39,7 +39,11 @@
                                     <td>{{ $patient->fechaNacimiento }}</td>
                                     <td>{{ $patient->riesgoASA }}</td>
                                     <td>{{ $patient->observaciones }}</td>
-                                    <td>{{ $patient->child }}</td>
+                                    @if($patient->child==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
                                     <td>
                                      @foreach ($patient->asociacionPatientStudents as $asociacionPatientStudent)
                                      {{$asociacionPatientStudent->student->name.", " }}

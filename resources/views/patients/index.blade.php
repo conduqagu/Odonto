@@ -38,7 +38,11 @@
                                     <td>{{ $patient->fechaNacimiento }}</td>
                                     <td>{{ $patient->riesgoASA }}</td>
                                     <td>{{ $patient->observaciones }}</td>
-                                    <td>{{ $patient->child }}</td>
+                                    @if($patient->child==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
 
                                     <td>
                                         {!! Form::open(['route' => ['dientesPatient',$patient->id], 'method' => 'get']) !!}

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AsociacionExamDiente;
 use App\Diente;
 use App\Exam;
+use App\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\Void_;
@@ -32,20 +33,49 @@ class AsociacionExamDienteController extends Controller
     {
         $exam=Exam::find($exam_id);
         $patient_id=$exam->patient_id;
+        $patient=Patient::find($patient_id);
+        $child=$patient->child;
+        if($child==1){
+            $diente = DB::table('dientes')
+                ->join('asociacion_exam_dientes','asociacion_exam_dientes.diente_id','=','dientes.id')
+                ->where('asociacion_exam_dientes.exam_id','=',$exam_id)
+                ->where('dientes.patient_id','=',$patient_id)
+                ->select('dientes.id')
+                ->get();
 
-        $diente = DB::table('asociacion_exam_dientes')
-            ->where('exam_id','=',$exam_id)
-            ->join('dientes','dientes.id','!=','asociacion_exam_dientes.diente_id')
-            ->select('dientes.*')
-            ->get();
+            if(count($diente)==0){
+                $dientes=Diente::all()
+                    ->where('patient_id','=',$patient_id)
+                    ->where('number','>','50')
+                    ->pluck('number', 'id');
 
-        if(count($diente)==0){
-            $dientes=Diente::all()
-                ->where('patient_id','=',$patient_id)
-                ->pluck('number', 'id');
-        }else{
-            $dientes=$diente->where('patient_id','=',$patient_id)->pluck('number', 'id');
+            }else{
+                $dientes=Diente::all()
+                    ->where('patient_id','=',$patient_id)
+                    ->where('number','>','50')
+                    ->whereNotIn('dientes.id',$diente)
+                    ->pluck('number', 'id');
+
+            }
+
+        }elseif($child==0){
+            $diente = DB::table('asociacion_exam_dientes')
+                ->where('exam_id','=',$exam_id)
+                ->join('dientes','dientes.id','!=','asociacion_exam_dientes.diente_id')
+                ->select('dientes.*')
+                ->get();
+            if(count($diente)==0){
+                $dientes=Diente::all()
+                    ->where('patient_id','=',$patient_id)
+                    ->pluck('number', 'id');
+            }else{
+                $dientes=$diente->where('patient_id','=',$patient_id)
+                    ->where('number','<','50')
+                    ->pluck('number', 'id');
+            }
         }
+
+
         return view('exams.create_asociacion_exam_diente',['exam_id'=>$exam_id,'dientes'=>$dientes]);
     }
 
@@ -82,7 +112,14 @@ class AsociacionExamDienteController extends Controller
 
         flash('Asociación creada correctamente');
 
-        return redirect()->route('create_asociacionED',[$exam_id]);
+        switch($request->submitbutton) {
+            case 'Guardar':
+                return redirect()->route('create_asociacionED',[$exam_id]);
+                break;
+            case 'Terminar':
+                return redirect()->route('exams.index');
+                break;
+        }
     }
 
     /**

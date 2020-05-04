@@ -60,9 +60,10 @@
                                             Pacientes
                                         </a>
                                     @endif
+                                    <!--
                                     <a class="dropdown-item" href="{{ url('/dientes') }}">
                                         Dientes
-                                    </a>
+                                    </a>-->
                                     <a class="dropdown-item" href="{{ url('/exams') }}">
                                         Exámenes
                                     </a>

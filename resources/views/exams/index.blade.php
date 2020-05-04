@@ -34,16 +34,24 @@
 
                                     <td>{{ $exam->patient->name}}</td>
                                     <td>{{ $exam->date }}</td>
-                                    <td>{{ $exam->aspectoExtraoralNormal}}</td>
+                                    @if($exam->aspectoExtraoralNormal==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
                                     <td>{{ $exam->patologiaMucosa}}</td>
                                     <td>{{ $exam->claseAngle}}</td>
                                     <td>{{ $exam->lateralAngle}}</td>
                                     <td>{{ $exam->tipoDentición}}</td>
-                                    <td>{{ $exam->desviacionLineaMedia}}</td>
+                                    @if($exam->desviacionLineaMedia==1)
+                                        <td>Si</td>
+                                    @else
+                                        <td>No</td>
+                                    @endif
 
                                     <td>
                                         {!! Form::open(['route' => ['exams.show',$exam->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Ver detalle', ['class'=> 'btn btn-warning'])!!}
+                                        {!!   Form::submit('Ver detalle', ['class'=> 'btn btn-outline-dark'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                     <td>
