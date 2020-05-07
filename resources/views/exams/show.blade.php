@@ -2,140 +2,189 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Detalle de examen</div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">Detalles del examen</div>
 
-                    <div class="panel-body">
+                    <div class="card-body">
+                        <div >
+                            {!! Form::label('date', 'Fecha:') !!}
+                            {!! Form::label($exam->date) !!}
+                        </div>
+                        <div class="form-group">
+                            {!!Form::label('patient_id', 'Paciente: ') !!}
+                            {!! Form::label( $exam->patient_id) !!}
+                        </div>
 
-                        <br><br>
-                        <table class="table table-striped table-bordered">
-                            <tr>
-                                <th>Fecha del examen</th>
-                                <th>Aspecto Extraoral Normal</th>
-                                <th>Presencia de cáncer oral</th>
-                                <th>Anomalías en labios</th>
-                                <th>Otros</th>
-                                <th>Patología mucosa</th>
-                                <th>Fluorosis</th>
-                                <th>Estado sextante 1</th>
-                                <th>Estado sextante 2</th>
-                                <th>Estado sextante 3</th>
-                                <th>Estado sextante 4</th>
-                                <th>Estado sextante 5</th>
-                                <th>Estado sextante 6</th>
-                                <th>Angle</th>
-                                <th>Lateral</th>
-                                <th>Dentición</th>
-                                <th>Apiñamiento Incisivo Inferior</th>
-                                <th>Apiñamiento Incisivo Superior</th>
-                                <th>Perdida Espacio Anterior</th>
-                                <th>Perdida Espacio Posterior</th>
-                                <th>Mordida Cruzada Anterior</th>
-                                <th>Mordida Cruzada Posterior</th>
-                                <th>Desviación Línea Media</th>
-                                <th>Mordida Abierta</th>
-                                <th>Hábitos</th>
-                                <th>Paciente</th>
-                                <th colspan="2">Acciones</th>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-header">Mucosas</div>
+                        <div >
+                            {!!  Form::label('aspectoExtraoralNormal' , 'Aspecto Extraoral Normal: ') !!}
+                            @if($exam->aspectoExtraoralNormal==1)
+                                {!! Form::label('Si') !!}
+                            @else
+                                {!! Form::label('No') !!}
+                            @endif
+                        </div>
+                        <div>
+                            {!!  Form::label('cancerOral' , 'Cancer Oral: ') !!}
+                            @if($exam->cancerOral==1)
+                                {!! Form::label('Si') !!}
+                            @else
+                                {!! Form::label('No') !!}
+                            @endif
+                        </div>
+                        <div>
+                            {!!  Form::label('anomaliasLabios' , 'Anomalias en labios: ') !!}
+                            @if($exam->anomaliasLabios==1)
+                                {!! Form::label('Si') !!}
+                            @else
+                                {!! Form::label('No') !!}
+                            @endif
+                        </div>
+                        <div>
+                            {!!  Form::label('otros' , 'Otros: ') !!}
+                            {!! Form::label( $exam->otros) !!}
+                        </div>
+                        <div>
+                            {!!  Form::label('patologiaMucosa' , 'Patologías en mucosas: ') !!}
+                            {!! Form::label($exam->patologiaMucosa) !!}
+                        </div>
+                        <div>
+                            {!!  Form::label('fluorosis' , 'Fluorosis: ') !!}
+                            {!! Form::label($exam->fluorosis) !!}
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-header">Índice Periodontitis comunitario(IPC)</div>
+                        <div>
+                            {!!  Form::label('estadoS1' , 'Estado primer sextante: ') !!}
+                            {!! Form::label($exam->estadoS1) !!}
+                        </div>
+                        <div>
+                            {!!  Form::label('estadoS2' , 'Estado segundo sextante: ') !!}
+                            {!! Form::label($exam->estadoS2) !!}
+                        </div>
+                        <div>
+                            {!!  Form::label('estadoS3' , 'Estado tercer sextante: ') !!}
+                            {!! Form::label( $exam->estadoS3) !!}
+                        </div>
+                        <div>
+                            {!!  Form::label('estadoS4' , 'Estado cuarto sextante: ') !!}
+                            {!! Form::label($exam->estadoS4) !!}
+                        </div>
+                        <div>
+                            {!!  Form::label('estadoS5' , 'Estado quinto sextante: ') !!}
+                            {!! Form::label($exam->estadoS5) !!}
+                        </div>
+                        <div>
+                            {!!  Form::label('estadoS6' , 'Estado sexto sextante: ') !!}
+                            {!! Form::label($exam->estadoS6) !!}
+                        </div>
+                    </div>
+                </div>
+                    <br>
+                <div class="card">
+                    <div class="card-body">
+                    <div class="card-header">Anomalías dentofaciales</div>
+                        <div>
+                            {!!  Form::label('claseAngle' , 'Angle: ') !!}
+                            {!! Form::label($exam->claseAngle) !!}
+                        </div>
+                        <div>
+                            {!!  Form::label('lateralAngle' , 'Lateral Angle: ') !!}
+                            {!! Form::label($exam->lateralAngle) !!}
+                        </div>
+                        <div>
+                            {!!  Form::label('tipoDentición' , 'Tipo Dentición: ') !!}
+                            {!! Form::label($exam->tipoDentición) !!}
+                        </div>
+                        <div>
+                            {!!  Form::label('apiñamientoIncisivoInferior' , 'Apiñamiento Incisivo Inferior: ') !!}
+                            @if($exam->apiñamientoIncisivoInferior==1)
+                                {!! Form::label('Si') !!}
+                            @else
+                                {!! Form::label('No') !!}
+                            @endif
+                        </div>
+                        <div>
+                            {!!  Form::label('apiñamientoIncisivoSuperior' , 'Apiñamiento Incisivo Superior: ') !!}
+                            @if($exam->apiñamientoIncisivoSuperior==1)
+                                {!! Form::label('Si') !!}
+                            @else
+                                {!! Form::label('No') !!}
+                            @endif
+                        </div>
+                        <div>
+                            {!!  Form::label('perdidaEspacioAnterior' , 'Perdida Espacio Anterior: ') !!}
+                            @if($exam->perdidaEspacioAnterior==1)
+                                {!! Form::label('Si') !!}
+                            @else
+                                {!! Form::label('No') !!}
+                            @endif
+                        </div>
+                        <div>
+                            {!!  Form::label('perdidaEspacioPosterior' , 'Perdida Espacio Posterior: ') !!}
+                            @if($exam->perdidaEspacioPosterior==1)
+                                {!! Form::label('Si') !!}
+                            @else
+                                {!! Form::label('No') !!}
+                            @endif
+                        </div>
+                        <div>
+                            {!!  Form::label('mordidaCruzadaAnterior' , 'Mordida Cruzada Anterior: ') !!}
+                            @if($exam->mordidaCruzadaAnterior==1)
+                                {!! Form::label('Si') !!}
+                            @else
+                                {!! Form::label('No') !!}
+                            @endif
+                        </div>
+                        <div>
+                            {!!  Form::label('mordidaCruzadaPosterior' , 'Mordida Cruzada Posterior: ') !!}
+                            @if($exam->mordidaCruzadaPosterior==1)
+                                {!! Form::label('Si') !!}
+                            @else
+                                {!! Form::label('No') !!}
+                            @endif
+                        </div>
+                        <div>
+                            {!!  Form::label('desviacionLineaMedia' , 'Desviacion Linea Media: ') !!}
+                            @if($exam->desviacionLineaMedia==1)
+                                {!! Form::label('Si') !!}
+                            @else
+                                {!! Form::label('No') !!}
+                            @endif
+                        </div>
+                        <div>
+                            {!!  Form::label('mordidaAbierta' , 'Mordida Abierta: ') !!}
+                            @if($exam->mordidaAbierta==1)
+                                {!! Form::label('Si') !!}
+                            @else
+                                {!! Form::label('No') !!}
+                            @endif
+                        </div>
+                        <div>
+                            {!!  Form::label('habitos' , 'Hábitos: ') !!}
+                            @if($exam->habitos==1)
+                                {!! Form::label('Si') !!}
+                            @else
+                                {!! Form::label('No') !!}
+                            @endif
+                        </div>
 
-                            </tr>
+                        </div>
 
-                                <tr>
-                                    <td>{{ $exam->date }}</td>
-                                    @if($exam->aspectoExtraoralNormal==1)
-                                        <td>Si</td>
-                                    @else
-                                        <td>No</td>
-                                    @endif
-                                    @if($exam->cancerOral==1)
-                                        <td>Si</td>
-                                    @else
-                                        <td>No</td>
-                                    @endif
-                                    @if($exam->anomaliasLabios==1)
-                                        <td>Si</td>
-                                    @else
-                                        <td>No</td>
-                                    @endif
-                                    <td>{{ $exam->otros }}</td>
-                                    <td>{{ $exam->patologiaMucosa }}</td>
-                                    <td>{{ $exam->fluorosis }}</td>
-                                    <td>{{ $exam->estadoS1 }}</td>
-                                    <td>{{ $exam->estadoS2 }}</td>
-                                    <td>{{ $exam->estadoS3 }}</td>
-                                    <td>{{ $exam->estadoS4 }}</td>
-                                    <td>{{ $exam->estadoS5 }}</td>
-                                    <td>{{ $exam->estadoS6 }}</td>
-                                    <td>{{ $exam->claseAngle }}</td>
-                                    <td>{{ $exam->lateralAngle }}</td>
-                                    <td>{{ $exam->tipoDentición }}</td>
-                                    @if($exam->apiñamientoIncisivoInferior==1)
-                                        <td>Si</td>
-                                    @else
-                                        <td>No</td>
-                                    @endif
-                                    @if($exam->apiñamientoIncisivoSuperior==1)
-                                        <td>Si</td>
-                                    @else
-                                        <td>No</td>
-                                    @endif
-                                    @if($exam->perdidaEspacioAnterior==1)
-                                        <td>Si</td>
-                                    @else
-                                        <td>No</td>
-                                    @endif
-                                    @if($exam->perdidaEspacioPosterior==1)
-                                        <td>Si</td>
-                                    @else
-                                        <td>No</td>
-                                    @endif
-                                    @if($exam->mordidaCruzadaAnterior==1)
-                                        <td>Si</td>
-                                    @else
-                                        <td>No</td>
-                                    @endif
-                                    @if($exam->mordidaCruzadaPosterior==1)
-                                        <td>Si</td>
-                                    @else
-                                        <td>No</td>
-                                    @endif
-                                    @if($exam->desviacionLineaMedia==1)
-                                        <td>Si</td>
-                                    @else
-                                        <td>No</td>
-                                    @endif
-                                    @if($exam->mordidaAbierta==1)
-                                        <td>Si</td>
-                                    @else
-                                        <td>No</td>
-                                    @endif
-                                    @if($exam->habitos==1)
-                                        <td>Si</td>
-                                    @else
-                                        <td>No</td>
-                                    @endif
-                                    <td>{{ $exam->patient->name }}</td>
-                                    <td>
-                                        {!! Form::open(['route' => ['index_asociacionED',$exam->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Mirar dientes', ['class'=> 'btn btn-outline-dark'])!!}
-                                        {!! Form::close() !!}
-                                    </td>
-                                    <td>
-                                        {!! Form::open(['route' => ['exams.edit',$exam->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
-                                        {!! Form::close() !!}
-                                    </td>
-                                </tr>
-                        </table>
-                        <td>
-                            {!! Form::open(['route' => 'exams.index', 'method' => 'get']) !!}
-                            {!!   Form::submit('Volver a exámenes', ['class'=> 'btn btn-outline-dark'])!!}
-                            {!! Form::close() !!}
-                        </td>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 @endsection
