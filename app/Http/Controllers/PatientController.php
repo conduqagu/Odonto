@@ -31,18 +31,29 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $patients = DB::table('asociacion_patient_students')
             ->where('student_id','=',Auth::user()->id)
             ->join('patients', 'patients.id', '=', 'asociacion_patient_students.patient_id')
+            ->where('patients.dni','LIKE','%'.$request->get("query")."%")
+            ->orWhere('patients.name','LIKE','%'.$request->get("query")."%")
+            ->orWhere('patients.surname','LIKE','%'.$request->get("query")."%")
             ->select('patients.*')
             ->get();
         return view('patients.index',['patients'=>$patients]);
     }
-    public function indexteacher()
+    public function indexteacher(Request $request)
     {
         $patients=Patient::all();
+/**
+        $patients = DB::table("patients")
+            ->where('patients.dni','LIKE','%'.$request->get("query")."%")
+            ->orWhere('patients.name','LIKE','%'.$request->get("query")."%")
+            ->orWhere('patients.surname','LIKE','%'.$request->get("query")."%")
+            ->select('patients.*')
+            ->get();
+ */
         return view('/patients/indexteacher',['patients'=>$patients]);
     }
 

@@ -9,6 +9,14 @@
 
                     <div class="panel-body">
                         @include('flash::message')
+                        <div class="form-group" >
+                            {!! Form::open(['route' => ['indexteacher'], 'method' => 'get']) !!}
+                            {!! Form::text('query',null,['class'=>'col-md-4', 'autofocus', 'placeholder'=>'término a buscar']) !!}
+                            {!! Form::submit('Buscar', ['class'=> 'btn btn-success col-md-2'])!!}
+                            {!! Form::close() !!}
+
+                        </div>
+
                         {!! Form::open(['route' => 'createteacher', 'method' => 'get']) !!}
                         {!!   Form::submit('Crear paciente', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
@@ -45,7 +53,7 @@
                                         <td>No</td>
                                     @endif
                                     <td>
-                                     @foreach ($patient->asociacionPatientStudents as $asociacionPatientStudent)
+                                    @foreach ($patient->asociacionPatientStudents as $asociacionPatientStudent)
                                      {{$asociacionPatientStudent->student->name.", " }}
                                     @endforeach
                                     </td>
