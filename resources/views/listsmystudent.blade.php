@@ -32,7 +32,6 @@
                         </tr>
                         @endforeach
 
-
                     </table>
                     <td>
                         {!! Form::open(['route' => 'indexstudents', 'method' => 'get']) !!}

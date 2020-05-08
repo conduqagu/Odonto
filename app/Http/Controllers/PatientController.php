@@ -45,15 +45,13 @@ class PatientController extends Controller
     }
     public function indexteacher(Request $request)
     {
-        $patients=Patient::all();
-/**
-        $patients = DB::table("patients")
-            ->where('patients.dni','LIKE','%'.$request->get("query")."%")
+       // $patients=Patient::all();
+
+        $patients = Patient::where('patients.dni','LIKE','%'.$request->get("query")."%")
             ->orWhere('patients.name','LIKE','%'.$request->get("query")."%")
             ->orWhere('patients.surname','LIKE','%'.$request->get("query")."%")
-            ->select('patients.*')
             ->get();
- */
+
         return view('/patients/indexteacher',['patients'=>$patients]);
     }
 
@@ -138,7 +136,11 @@ class PatientController extends Controller
 
         flash('Paciente creado correctamente');
 
-        return redirect()->route('createDientesPac', [$patient->id]);
+        if($patient->child=0){
+            return redirect()->route('createDientesPac', [$patient->id]);
+        }elseif($patient->child=1){
+            return redirect()->route('createDientesPacChild', [$patient->id]);
+        }
     }
     /**
      * Display the specified resource.
@@ -194,13 +196,12 @@ class PatientController extends Controller
 
         ]);
         $patient = Patient::find($id);
-        if($patient->child==$request->child){
+        if($patient->child!=$request->child and $request->child==0){
             $patient->fill($request->all());
             $patient->save();
             flash('Paciente modificado correctamente');
-            return redirect()->route('patients.index');
+            return redirect()->route('createDientesPac', [$patient->id]);
         }elseif($patient->child!=$request->child and $request->child==1){
-            $request->child='0';
             $patient->fill($request->all());
             $patient->child='0';
             $patient->save();

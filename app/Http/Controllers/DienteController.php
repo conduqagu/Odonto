@@ -26,7 +26,7 @@ class DienteController extends Controller
         if($child==1){
             $dientes=Diente::all()->where('patient_id','=',$id)->where('number','>','50');
         }elseif($child==0){
-        $dientes=Diente::all()->where('patient_id','=',$id)->where('number','<','50');
+            $dientes=Diente::all()->where('patient_id','=',$id)->where('number','<','50');
         }
         return view('dientes.index',['dientes'=>$dientes]);
     }
