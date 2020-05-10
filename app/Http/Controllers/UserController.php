@@ -16,6 +16,14 @@ class UserController extends Controller
      */
     public function indexstudents() //Lista de estudiantes para profesores
     {
+        /**
+        $users = DB::table('asociacion_teacher_students')
+            ->where('teacher_id','=',Auth::user()->id)
+            ->join('users','users.id','!=','asociacion_teacher_students.student_id')
+            ->select('users.*')
+            ->get();
+        $students= $users->where('userType','=','student');
+*/
         $students = DB::table('users')->where('userType','=','student')->get();
         return view('indexstudents',['students'=>$students]);
     }

@@ -9,7 +9,7 @@
 
                     <div class="card-body">
                         @include('flash::message')
-                        {!! Form::open(['route' => ['storeAlumno',$patient->id], 'method' => 'get']) !!}
+                        {!! Form::open(['route' => ['storeAlumno',$patient_id], 'method' => 'get']) !!}
                         <div>
                             {!!Form::label('student_id', 'Estudiante a asignar') !!}
                             <br>
