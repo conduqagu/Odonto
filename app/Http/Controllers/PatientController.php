@@ -250,32 +250,11 @@ class PatientController extends Controller
     }
     public function añadirAlumno($id)
     {
-        $users = AsociacionPatientStudent::where('asociacion_patient_students.patient_id','=',$id)
-            ->join('users', function($join) {
-                $join->on('users.id','=','asociacion_patient_students.student_id');
-            })->get('users.id');
-        /**
-        for ($i = 0; $i < $users->count(); $i++) {
-            array_push($ids,$user[$i]);
-        }
-
-         */
-        /**
-        $users=AsociacionPatientStudent::where('asociacion_patient_students.patient_id','=',$id)
-            ->join('users','users.id','=','asociacion_patient_students.student_id')
-            ->select('users.id')
-            ->get();
-         */
-        /**
-        $user = DB::table('asociacion_patient_students')
-            ->where('asociacion_patient_students.patient_id','=',$id)
-            ->join('users','users.id','=','asociacion_patient_students.student_id')
-            ->select('users.id')
-            ->get();
-         * */
-        $students=User::all()->whereNotIn('users.id',$users)->where('userType','=','student')->pluck('name', 'id');
-
-        //$students= $users->where('userType','=','student')->pluck('name', 'id');
+        $students=DB::table('users')
+            ->whereNotIn('users.id', AsociacionPatientStudent::where('asociacion_patient_students.patient_id','=',$id)
+                ->join('users', function($join) {
+                    $join->on('users.id','=','asociacion_patient_students.student_id');
+                })->pluck('users.id')->values())->where('userType','=','student')->pluck('name', 'id');
 
         return view('patients.añadirAlumno',['patient_id'=>$id,'students'=>$students]);
     }
