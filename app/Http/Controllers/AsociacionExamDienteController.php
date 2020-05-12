@@ -9,6 +9,7 @@ use App\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use phpDocumentor\Reflection\Types\Void_;
+use function foo\func;
 
 class AsociacionExamDienteController extends Controller
 {
@@ -35,63 +36,28 @@ class AsociacionExamDienteController extends Controller
         $patient_id=$exam->patient_id;
         $patient=Patient::find($patient_id);
         $child=$patient->child;
+
         if($child==1){
-           /**
-            DB::raw('select * from laravel.dientes
-                where laravel.dientes.patient_id=1 and
-                laravel.dientes.id not in (SELECT laravel.dientes.id FROM laravel.dientes
-                LEFT JOIN laravel.asociacion_exam_dientes
-                ON (laravel.dientes.id=laravel.asociacion_exam_dientes.diente_id)
-                WHERE laravel.asociacion_exam_dientes.exam_id=1 and laravel.dientes.patient_id=1) ');
-            */
-
-            $diente = DB::table('dientes')
-                ->join('asociacion_exam_dientes','asociacion_exam_dientes.diente_id','=','dientes.id')
-                ->where('asociacion_exam_dientes.exam_id','=',$exam_id)
-                ->where('dientes.patient_id','=',$patient_id)
-                ->select('dientes.id')
-                ->get();
-
-            if(count($diente)==0){
-                $dientes=Diente::all()
-                    ->where('patient_id','=',$patient_id)
-                    ->where('number','>','50')
-                    ->pluck('number', 'id');
-
-            }else{
-                $dientes=Diente::all()
-                    ->where('patient_id','=',$patient_id)
-                    ->where('number','>','50')
-                    ->whereNotIn('dientes.id',$diente)
-                    ->pluck('number', 'id');
-            }
+            $dientes=Diente::where('dientes.patient_id','=',$patient_id)
+                ->where('number','>','50')
+                ->whereNotIn('dientes.id', Diente::where('asociacion_exam_dientes.exam_id','=',$exam_id)
+                    ->where('dientes.patient_id','=',$patient_id)
+                    ->join('asociacion_exam_dientes',function ($join){
+                        $join->on('asociacion_exam_dientes.diente_id','=','dientes.id');
+                    })->pluck('dientes.id')->values())
+                ->pluck('number', 'id');
 
         }elseif($child==0){
-            /**$diente = DB::table('asociacion_exam_dientes')
-                ->where('exam_id','=',$exam_id)
-                ->join('dientes','dientes.id','!=','asociacion_exam_dientes.diente_id')
-                ->select('dientes.*')
-                ->get();
-             */
-            $diente = DB::table('dientes')
-                ->join('asociacion_exam_dientes','asociacion_exam_dientes.diente_id','=','dientes.id')
-                ->where('asociacion_exam_dientes.exam_id','=',$exam_id)
-                ->where('dientes.patient_id','=',$patient_id)
-                ->select('dientes.id')
-                ->get();
-            if(count($diente)==0){
-                $dientes=Diente::all()
-                    ->where('number','<','50')
-                    ->where('patient_id','=',$patient_id)
-                    ->pluck('number', 'id');
-            }else{
-                $dientes=$diente
-                    ->where('patient_id','=',$patient_id)
-                    ->where('number','<','50')
-                    ->pluck('number', 'id');
-            }
-        }
+            $dientes=Diente::where('dientes.patient_id','=',$patient_id)
+                ->where('number','<','50')
+                ->whereNotIn('dientes.id', Diente::where('asociacion_exam_dientes.exam_id','=',$exam_id)
+                    ->where('dientes.patient_id','=',$patient_id)
+                    ->join('asociacion_exam_dientes',function ($join){
+                        $join->on('asociacion_exam_dientes.diente_id','=','dientes.id');
+                    })->pluck('dientes.id')->values())
+                ->pluck('number', 'id');
 
+        }
 
         return view('exams.create_asociacion_exam_diente',['exam_id'=>$exam_id,'dientes'=>$dientes]);
     }
