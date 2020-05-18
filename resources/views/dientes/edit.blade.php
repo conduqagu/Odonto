@@ -32,6 +32,10 @@
                             {!! Form::label('ausente', 'Ausente') !!}
                             {!! Form::select('ausente',array('1'=>'Si','0'=>'No'),$diente->ausente,['class' => 'form-control', 'required']) !!}
                         </div>
+                        <div class="form-group">
+                            {!! Form::label('pin', 'Pin del profesor') !!}
+                            <input id="pin" type="password" class="awesome" name="pin" required>
+                        </div>
                         {!! Form::submit('Actualizar',['class'=>'btn-primary btn']) !!}
 
                         {!! Form::close() !!}

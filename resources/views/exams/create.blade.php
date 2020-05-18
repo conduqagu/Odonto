@@ -116,7 +116,10 @@
                             <br>
                             {!! Form::select('patient_id', $patients, ['class' => 'form-control', 'required']) !!}
                         </div>
-
+                        <div class="form-group">
+                            {!! Form::label('pin', 'Pin del profesor') !!}
+                            <input id="pin" type="password" class="awesome" name="pin" required>
+                        </div>
 
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 

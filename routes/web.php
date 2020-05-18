@@ -37,6 +37,8 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
     Route::get('/patients/storeAlumno/{id}','PatientController@storeAlumno')->name('storeAlumno');
     Route::get('/patients/destroyStudent/{id}','PatientController@destroyStudent')->name('destroyStudent');
     Route::delete('/patients/deleteStudent/{id}','PatientController@deleteStudent')->name('deleteStudent');
+    Route::get('/createpin','UserController@createpin')->name('createpin');
+    Route::post('/createpin/store','UserController@storepin')->name('storepin');
 
 });
 

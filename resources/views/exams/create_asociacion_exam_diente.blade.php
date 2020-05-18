@@ -48,7 +48,10 @@
                             'Opacidad elimitada y difusa'=>'Opacidad elimitada y difusa','Opacidad delimitada e hipoplasia'=>'Opacidad delimitada e hipoplasia',
                             'Opacidad difusa e hipoplasia'=>'Opacidad difusa e hipoplasia'),'Temporal',['class' => 'form-control']) !!}
                         </div>
-
+                        <div class="form-group">
+                            {!! Form::label('pin', 'Pin del profesor') !!}
+                            <input id="pin" type="password" class="awesome" name="pin" required>
+                        </div>
                         <br>
                         {!! Form::submit( 'Guardar', ['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}
                         {!! Form::submit( 'Terminar', ['class' => 'btn btn-warning', 'name' => 'submitbutton', 'value' => 'finish'])!!}

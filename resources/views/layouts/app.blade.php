@@ -74,7 +74,9 @@
                                         <a class="dropdown-item" href="{{ url('/indexstudents') }}">
                                         Estudiantes
                                         </a>
-
+                                        <a class="dropdown-item" href="{{ url('/createpin') }}">
+                                            Crear pin
+                                        </a>
                                     @endif
 
                                     <a class="dropdown-item" href="{{ route('logout') }}"

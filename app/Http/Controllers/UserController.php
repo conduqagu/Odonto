@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -73,7 +74,21 @@ class UserController extends Controller
     {
         //
     }
+    public function createpin()
+    {
+        return view('pins/create');
+    }
+    public function storepin(Request $request){
+        $this->validate($request, [
+            'pin' => ['required', 'string', 'max:255'],
+        ]);
+        $user=Auth::user();
+        $user->pin=$request->get('pin');
+        $user->save();
 
+        return view('home');
+
+    }
     /**
      * Store a newly created resource in storage.
      *

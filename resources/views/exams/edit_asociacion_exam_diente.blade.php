@@ -54,7 +54,10 @@
 
                         {!! Form::close() !!}
                         <br>
-
+                        <div class="form-group">
+                            {!! Form::label('pin', 'Pin del profesor') !!}
+                            <input id="pin" type="password" class="awesome" name="pin" required>
+                        </div>
                         <td>
                             {!! Form::open(['route' => 'exams.index', 'method' => 'get']) !!}
                             {!!   Form::submit('Terminar', ['class'=> 'btn btn-warning'])!!}

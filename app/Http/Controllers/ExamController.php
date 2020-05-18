@@ -6,6 +6,8 @@ use App\AsociacionExamDiente;
 use App\Exam;
 use App\Patient;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ExamController extends Controller
 {
@@ -71,8 +73,19 @@ class ExamController extends Controller
             'desviacionLineaMedia' => ['required', 'boolean'],
             'mordidaAbierta' => ['required', 'boolean'],
             'habitos' => ['required', 'boolean'],
-            'patient_id' => ['required', 'exists:patients,id']
+            'patient_id' => ['required', 'exists:patients,id'],
+            'pin'=>['required','string','max:255']
         ]);
+
+        $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
+        LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
+        LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)
+        WHERE laravel.users.id ='.Auth::user()->id.' AND teachers.pin='.$request->get('pin').';'));
+
+        if(count($profesor)==0) {
+            flash('Pin incorrecto');
+            return redirect()->route('exams.create');
+        }
 
         $exam = new Exam($request->all());
         $exam->save();
@@ -147,8 +160,19 @@ class ExamController extends Controller
             'desviacionLineaMedia' => ['required', 'boolean'],
             'mordidaAbierta' => ['required', 'boolean'],
             'habitos' => ['required', 'boolean'],
-            'patient_id' => ['required', 'exists:patients,id']
+            'patient_id' => ['required', 'exists:patients,id'],
+            'pin'=>['required','string','max:255']
         ]);
+
+        $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
+        LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
+        LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)
+        WHERE laravel.users.id ='.Auth::user()->id.' AND teachers.pin='.$request->get('pin').';'));
+
+    if(count($profesor)==0){
+        flash('Pin incorrecto');
+        return redirect()->route('exams.edit',$id);
+    }
         $exam = Exam::find($id);
         $exam->fill($request->all());
 

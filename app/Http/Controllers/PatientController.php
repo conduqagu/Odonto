@@ -37,8 +37,8 @@ class PatientController extends Controller
             ->where('student_id','=',Auth::user()->id)
             ->join('patients', 'patients.id', '=', 'asociacion_patient_students.patient_id')
             ->where('patients.dni','LIKE','%'.$request->get("query")."%")
-            ->orWhere('patients.name','LIKE','%'.$request->get("query")."%")
-            ->orWhere('patients.surname','LIKE','%'.$request->get("query")."%")
+            ->where('patients.name','LIKE','%'.$request->get("query")."%")
+            ->where('patients.surname','LIKE','%'.$request->get("query")."%")
             ->select('patients.*')
             ->get();
         return view('patients.index',['patients'=>$patients]);
@@ -90,10 +90,19 @@ class PatientController extends Controller
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required','in:I,II,III,IV,V,VI'],
             'observaciones' => ['nullable','string', 'max:255'],
-            'child'=>['required','boolean']
-
+            'child'=>['required','boolean'],
+            'pin'=>['required','string','max:255']
         ]);
 
+        $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
+        LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
+        LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)
+        WHERE laravel.users.id ='.Auth::user()->id.' AND teachers.pin='.$request->get('pin').';'));
+
+    if(count($profesor)==0){
+        flash('Pin incorrecto');
+        return redirect()->route('patients.create');
+    }
         $patient = new Patient($request->all());
         $patient->save();
 
@@ -123,9 +132,9 @@ class PatientController extends Controller
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required','in:I,II,III,IV,V,VI'],
             'observaciones' => ['nullable','string', 'max:255'],
-            'child'=>['required','boolean']
-
+            'child'=>['required','boolean'],
         ]);
+
         $patient = new Patient($request->all());
         $patient->save();
 
@@ -192,9 +201,18 @@ class PatientController extends Controller
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
             'observaciones' => ['nullable','string', 'max:255'],
-            'child'=>['required','boolean']
-
+            'child'=>['required','boolean'],
+            'pin'=>['required','string','max:255']
         ]);
+        $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
+        LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
+        LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)
+        WHERE laravel.users.id ='.Auth::user()->id.' AND teachers.pin='.$request->get('pin').';'));
+
+    if(count($profesor)==0){
+        flash('Pin incorrecto');
+        return redirect()->route('patients.edit',$id);
+    }
         $patient = Patient::find($id);
         if($patient->child!=$request->child and $request->child==0){
             $patient->fill($request->all());
