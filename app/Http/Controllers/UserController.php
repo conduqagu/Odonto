@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\AsociacionTeacherStudent;
+use Laracasts\Flash\Flash;
 
 class UserController extends Controller
 {
@@ -88,6 +89,64 @@ class UserController extends Controller
 
         return view('home');
 
+    }
+
+    public function perfilstudent(){
+        $user=Auth::user();
+        $teachers = DB::table('asociacion_teacher_students')
+            ->where('student_id','=',Auth::user()->id)
+            ->join('users', 'users.id', '=', 'asociacion_teacher_students.teacher_id')
+            ->select('users.*')
+            ->get();
+        return view('perfiles/perfilstudent',['user'=>$user,'teachers'=>$teachers]);
+    }
+    public function updateperfilstudent(Request $request, $id){
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'surname'=>['required','string','max:255'],
+            'email'=>['required','string','max:255'],
+            'dni'=>['required','string','max:255']
+        ]);
+
+        $user=\App\User::find($id);
+        $user->name=$request->get('name');
+        $user->surname=$request->get('surname');
+        $user->email=$request->get('email');
+        $user->dni=$request->get('dni');
+
+        $user->save();
+
+        flash('Datos actualizados correctamente');
+        return redirect()->route('perfilstudent');
+    }
+    public function perfilteacher(){
+        $user=Auth::user();
+        return view('perfiles/perfilteacher',['user'=>$user]);
+    }
+    public function updateperfilteacher(Request $request, $id){
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'surname'=>['required','string','max:255'],
+            'email'=>['required','string','max:255'],
+            'dni'=>['required','string','max:255'],
+            'pin'=>['nullable','string','max:255'],
+            'newpin'=>['required','string','max:255']
+        ]);
+
+        $user=\App\User::find($id);
+        $user->name=$request->get('name');
+        $user->surname=$request->get('surname');
+        $user->email=$request->get('email');
+        $user->dni=$request->get('dni');
+        if ($user->pin==$request->get('pin') or $user->pin==null){
+            $user->pin=$request->get('newpin');
+            flash('Datos actualizados correctamente');
+        }else{
+            flash('El pin es incorrecto, el resto de datos se han actualizado correctamente');
+        }
+        $user->save();
+
+        return redirect()->route('perfilteacher');
     }
     /**
      * Store a newly created resource in storage.

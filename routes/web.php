@@ -39,6 +39,8 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
     Route::delete('/patients/deleteStudent/{id}','PatientController@deleteStudent')->name('deleteStudent');
     Route::get('/createpin','UserController@createpin')->name('createpin');
     Route::post('/createpin/store','UserController@storepin')->name('storepin');
+    Route::get('/perfiles/perfilteacher','UserController@perfilteacher')->name('perfilteacher');
+    Route::put('/perfiles/updateperfilteacher/{id}','UserController@updateperfilteacher')->name('updateperfilteacher');
 
 });
 
@@ -49,7 +51,8 @@ Route::group(['middleware'=> 'App\Http\Middleware\StudentMiddleware'], function(
     Route::post('/patients/store','PatientController@store')->name('patients.store');
     Route::get('/patients/edit/{id}','PatientController@edit')->name('patients.edit');
     Route::put('/patients/update/{id}','PatientController@update')->name('patients.update');
-
+    Route::get('/perfiles/perfilstudent','UserController@perfilstudent')->name('perfilstudent');
+    Route::put('/perfiles/updateperfilstudent/{id}','UserController@updateperfilstudent')->name('updateperfilstudent');
 
 });
 

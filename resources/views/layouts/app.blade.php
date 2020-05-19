@@ -59,6 +59,9 @@
                                         <a class="dropdown-item" href="{{ url('/patients/index') }}">
                                             Pacientes
                                         </a>
+                                        <a class="dropdown-item" href="{{ url('/perfiles/perfilstudent') }}">
+                                            Mi perfil
+                                        </a>
                                     @endif
                                     <!--
                                     <a class="dropdown-item" href="{{ url('/dientes') }}">
@@ -76,6 +79,9 @@
                                         </a>
                                         <a class="dropdown-item" href="{{ url('/createpin') }}">
                                             Crear pin
+                                        </a>
+                                        <a class="dropdown-item" href="{{ url('/perfiles/perfilteacher') }}">
+                                            Mi perfil
                                         </a>
                                     @endif
 
