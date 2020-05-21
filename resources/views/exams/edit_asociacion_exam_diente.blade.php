@@ -48,21 +48,18 @@
                             'Opacidad elimitada y difusa'=>'Opacidad elimitada y difusa','Opacidad delimitada e hipoplasia'=>'Opacidad delimitada e hipoplasia',
                             'Opacidad difusa e hipoplasia'=>'Opacidad difusa e hipoplasia'),$asociacion_exam_diente->opacidad,['class' => 'form-control']) !!}
                         </div>
-
-                        <br>
-                        {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
-
-                        {!! Form::close() !!}
                         <br>
                         <div class="form-group">
                             {!! Form::label('pin', 'Pin del profesor') !!}
                             <input id="pin" type="password" class="awesome" name="pin" required>
                         </div>
-                        <td>
-                            {!! Form::open(['route' => 'exams.index', 'method' => 'get']) !!}
-                            {!!   Form::submit('Terminar', ['class'=> 'btn btn-warning'])!!}
-                            {!! Form::close() !!}
-                        </td>
+
+                        {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
+
+                        {!! Form::close() !!}
+
+
+
                     </div>
                 </div>
             </div>

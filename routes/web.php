@@ -39,6 +39,15 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
     Route::delete('/patients/deleteStudent/{id}','PatientController@deleteStudent')->name('deleteStudent');
     Route::get('/perfiles/perfilteacher','UserController@perfilteacher')->name('perfilteacher');
     Route::put('/perfiles/updateperfilteacher/{id}','UserController@updateperfilteacher')->name('updateperfilteacher');
+    Route::get('/examsIndexTeacher','ExamController@examsIndexTeacher')->name('examsIndexTeacher');
+    Route::delete('/exams/delete/{id}','ExamController@examsdeleteTeacher')->name('examsdeleteTeacher');
+    Route::get('/exams/createteacher','ExamController@examsCreateTeacher')->name('examsCreateTeacher');
+    Route::post('/exams/storeteacher','ExamController@examsStoreTeacher')->name('examsStoreTeacher');
+    Route::get('/exams/editteacher/{id}','ExamController@examsEditTeacher')->name('examsEditTeacher');
+    Route::put('/exams/updateteacher/{id}','ExamController@examsUpdateTeacher')->name('examsUpdateTeacher');
+    Route::get('/exams/indexasociacionEDTeacher/{id}','AsociacionExamDienteController@indexasociacionEDTeacher')->name('indexasociacionEDTeacher');
+    Route::get('/exams/editasociacionEDTeacher/{id}','AsociacionExamDienteController@editasociacionEDTeacher')->name('editasociacionEDTeacher');
+    Route::put('/exams/updateasociacionEDTeacher/{id}','AsociacionExamDienteController@updateasociacionEDTeacher')->name('updateasociacionEDTeacher');
 
 });
 
@@ -51,6 +60,16 @@ Route::group(['middleware'=> 'App\Http\Middleware\StudentMiddleware'], function(
     Route::put('/patients/update/{id}','PatientController@update')->name('patients.update');
     Route::get('/perfiles/perfilstudent','UserController@perfilstudent')->name('perfilstudent');
     Route::put('/perfiles/updateperfilstudent/{id}','UserController@updateperfilstudent')->name('updateperfilstudent');
+    Route::get('/exams/destroyStudent/{id}','ExamController@examsdestroyStudent')->name('examsdestroyStudent');
+    Route::delete('/exams/deleteStudent/{id}','ExamController@examsdeleteStudent')->name('examsdeleteStudent');
+    Route::get('/exams','ExamController@index')->name('exams.index');
+    Route::get('/exams/create','ExamController@create')->name('exams.create');
+    Route::post('/exams/store','ExamController@store')->name('exams.store');
+    Route::get('/exams/edit/{id}','ExamController@edit')->name('exams.edit');
+    Route::put('/exams/update/{id}','ExamController@update')->name('exams.update');
+    Route::get('/exams/index_asociacionED/{id}','AsociacionExamDienteController@index')->name('index_asociacionED');
+    Route::get('/exams/edit_asociacionED/{id}','AsociacionExamDienteController@edit')->name('edit_asociacionED');
+    Route::put('/exams/update_asociacionED/{id}','AsociacionExamDienteController@update')->name('update_asociacionED');
 
 });
 
@@ -60,16 +79,13 @@ Route::get('/patients/createDientesPac/{id}','DienteController@createDientesPac'
 Route::get('/patients/createDientesPacChild/{id}','DienteController@createDientesPacChild')->name('createDientesPacChild');
 Route::resource('dientes','DienteController');
 
-
-Route::get('/exams/index_asociacionED/{id}','AsociacionExamDienteController@index')->name('index_asociacionED');
+Route::get('/exams/show/{id}','ExamController@show')->name('exams.show');
 Route::get('/exams/create_asociacionED/{id}','AsociacionExamDienteController@create_asociacionED')->name('create_asociacionED');
 Route::post('/exams/store_asociacionED/{id}','AsociacionExamDienteController@store_asociacionED')->name('store_asociacionED');
-Route::get('/exams/edit_asociacionED/{id}','AsociacionExamDienteController@edit')->name('edit_asociacionED');
-Route::put('/exams/update_asociacionED/{id}','AsociacionExamDienteController@update')->name('update_asociacionED');
+
+//Route::resource('exams','ExamController');
 
 
-
-Route::resource('exams','ExamController');
 
 
 

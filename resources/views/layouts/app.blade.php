@@ -62,14 +62,15 @@
                                         <a class="dropdown-item" href="{{ url('/perfiles/perfilstudent') }}">
                                             Mi perfil
                                         </a>
+                                        <a class="dropdown-item" href="{{ url('/exams') }}">
+                                            Exámenes
+                                        </a>
                                     @endif
                                     <!--
                                     <a class="dropdown-item" href="{{ url('/dientes') }}">
                                         Dientes
                                     </a>-->
-                                    <a class="dropdown-item" href="{{ url('/exams') }}">
-                                        Exámenes
-                                    </a>
+
                                     @if(Auth::user()->userType =='teacher')
                                         <a class="dropdown-item" href="{{ url('/patients/indexteacher') }}">
                                             Pacientes
@@ -79,6 +80,9 @@
                                         </a>
                                         <a class="dropdown-item" href="{{ url('/perfiles/perfilteacher') }}">
                                             Mi perfil
+                                        </a>
+                                        <a class="dropdown-item" href="{{ url('/examsIndexTeacher') }}">
+                                            Exámenes
                                         </a>
                                     @endif
 

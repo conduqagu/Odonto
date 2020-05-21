@@ -28,7 +28,7 @@
                                     <td>{{ $asociacion_exam_diente->tratamiento }}</td>
                                     <td>{{ $asociacion_exam_diente->opacidad }}</td>
                                     <td>
-                                        {!! Form::open(['route' => ['edit_asociacionED',$asociacion_exam_diente->id], 'method' => 'get']) !!}
+                                        {!! Form::open(['route' => ['editasociacionEDTeacher',$asociacion_exam_diente->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}
                                     </td>

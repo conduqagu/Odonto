@@ -9,7 +9,7 @@
 
                     <div class="panel-body">
                         @include('flash::message')
-                        {!! Form::open(['route' => 'exams.create', 'method' => 'get']) !!}
+                        {!! Form::open(['route' => 'examsCreateTeacher', 'method' => 'get']) !!}
                         {!!   Form::submit('Realizar examen', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
 
@@ -50,20 +50,21 @@
                                     @endif
 
                                     <td>
-                                        {!! Form::open(['route' => ['examsshow',$exam->id], 'method' => 'get']) !!}
+                                        {!! Form::open(['route' => ['exams.show',$exam->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Ver detalle', ['class'=> 'btn btn-primary'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                     <td>
-                                        {!! Form::open(['route' => ['exams.edit',$exam->id], 'method' => 'get']) !!}
+                                        {!! Form::open(['route' => ['examsEditTeacher',$exam->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                     <td>
-                                        {!! Form::open(['route' => ['examsdestroyStudent',$exam->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ])!!}
+                                        {!! Form::open(['route' => ['examsdeleteTeacher',$exam->id], 'method' => 'delete']) !!}
+                                        {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                         {!! Form::close() !!}
                                     </td>
+
 
                                 </tr>
                             @endforeach

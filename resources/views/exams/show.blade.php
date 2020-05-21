@@ -190,13 +190,28 @@
                     {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                     {!! Form::close() !!}
                <br>
-                    {!! Form::open(['route' => ['index_asociacionED',$exam->id], 'method' => 'get']) !!}
-                    {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary'])!!}
-                    {!! Form::close() !!}
+                    @if(Auth::user()->userType =='teacher')
+                        {!! Form::open(['route' => ['indexasociacionEDTeacher',$exam->id], 'method' => 'get']) !!}
+                        {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary'])!!}
+                        {!! Form::close() !!}
+                    @endif
+                    @if(Auth::user()->userType =='student')
+                        {!! Form::open(['route' => ['index_asociacionED',$exam->id], 'method' => 'get']) !!}
+                        {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary'])!!}
+                        {!! Form::close() !!}
+                    @endif
                 <br>
-                    {!! Form::open(['route' => ['exams.index'], 'method' => 'get']) !!}
-                    {!!   Form::submit('Todos los exámenes', ['class'=> 'btn btn-outline-dark'])!!}
-                    {!! Form::close() !!}
+                    @if(Auth::user()->userType =='teacher')
+                        {!! Form::open(['route' => ['examsIndexTeacher'], 'method' => 'get']) !!}
+                        {!!   Form::submit('Todos los exámenes', ['class'=> 'btn btn-outline-dark'])!!}
+                        {!! Form::close() !!}
+                    @endif
+                    @if(Auth::user()->userType =='student')
+                        {!! Form::open(['route' => ['exams.index'], 'method' => 'get']) !!}
+                        {!!   Form::submit('Todos los exámenes', ['class'=> 'btn btn-outline-dark'])!!}
+                        {!! Form::close() !!}
+                    @endif
+
                 </div>
                 </div>
             </div>

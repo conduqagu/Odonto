@@ -10,7 +10,7 @@
                     <div class="card-body">
                         @include('flash::message')
 
-                        {!! Form::model($exam, [ 'route' => ['exams.update',$exam->id], 'method'=>'PUT']) !!}
+                        {!! Form::model($exam, [ 'route' => ['examsUpdateTeacher',$exam->id], 'method'=>'PUT']) !!}
                         <div class="form-group">
                             {!! Form::label('date', 'Fecha') !!}
                             {!! Form::date('date',$exam->date,['class'=>'form-control', 'required']) !!}
@@ -115,10 +115,6 @@
                             {!!Form::label('patient_id', 'Paciente') !!}
                             <br>
                             {!! Form::select('patient_id', $patients,$exam->patient_id, ['class' => 'form-control', 'required']) !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('pin', 'Pin del profesor') !!}
-                            <input id="pin" type="password" class="awesome" name="pin" required>
                         </div>
 
                         {!! Form::submit('Actualizar',['class'=>'btn-primary btn']) !!}

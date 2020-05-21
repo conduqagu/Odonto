@@ -23,7 +23,13 @@ class AsociacionExamDienteController extends Controller
     {
         $asociacion_exam_dientes=AsociacionExamDiente::all()->where('exam_id','=',$exam_id);
 
-        return view('exams.asociacion_exam_diente',['asociacion_exam_dientes'=>$asociacion_exam_dientes]);
+        return view('exams.asociacion_exam_diente',['asociacion_exam_dientes'=>$asociacion_exam_dientes,'exam_id'=>$exam_id]);
+    }
+    public function indexasociacionEDTeacher($exam_id)
+    {
+        $asociacion_exam_dientes=AsociacionExamDiente::all()->where('exam_id','=',$exam_id);
+
+        return view('exams.asociacion_exam_dienteTeacher',['asociacion_exam_dientes'=>$asociacion_exam_dientes,'exam_id'=>$exam_id]);
     }
 
     /**
@@ -81,19 +87,7 @@ class AsociacionExamDienteController extends Controller
             'opacidad' => 'required|String|in:Ningún estado anormal,Opacidad delimitada,OpacidadDifusa,Hipoplasia,
                 Otros defectos,Opacidad elimitada y difusa,Opacidad delimitada e hipoplasia,Opacidad difusa e hipoplasia',
             'diente_id' => 'required|exists:dientes,id',
-            'pin'=>['required','string','max:255']
         ]);
-
-        $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
-        LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
-        LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)
-        WHERE laravel.users.id ='.Auth::user()->id.' AND teachers.pin='.$request->get('pin').';'));
-
-        if(count($profesor)==0){
-            flash('Pin incorrecto');
-            return redirect()->route('create_asociacionED');
-        }
-
 
         $asociacion_exam_diente=new AsociacionExamDiente();
         $asociacion_exam_diente->denticionRaiz= $request->get('denticionRaiz');
@@ -112,7 +106,11 @@ class AsociacionExamDienteController extends Controller
                 return redirect()->route('create_asociacionED',[$exam_id]);
                 break;
             case 'Terminar':
-                return redirect()->route('exams.index');
+                if (Auth::user()->userType =='student'){
+                    return redirect()->route('exams.index');
+                }else{
+                    return redirect()->route('examsIndexTeacher');
+                }
                 break;
         }
     }
@@ -147,7 +145,18 @@ class AsociacionExamDienteController extends Controller
 
         return view('exams.edit_asociacion_exam_diente',['asociacion_exam_diente'=> $asociacion_exam_diente,'dientes'=>$dientes ]);
     }
+    public function editasociacionEDTeacher($id)
+    {
+        $asociacion_exam_diente = AsociacionExamDiente::find($id);
 
+        $diente = DB::table('asociacion_exam_dientes')
+            ->join('dientes','dientes.id','!=','asociacion_exam_dientes.diente_id')
+            ->select('dientes.*')
+            ->get();
+        $dientes=$diente->pluck('name', 'id');
+
+        return view('exams/edit_asociacion_exam_dienteTeacher',['asociacion_exam_diente'=> $asociacion_exam_diente,'dientes'=>$dientes ]);
+    }
     /**
      * Update the specified resource in storage.
      *
@@ -187,6 +196,29 @@ class AsociacionExamDienteController extends Controller
         flash('Asociación editada correctamente');
 
         return redirect()->route('index_asociacionED',[$asociacion_exam_diente->exam_id]);
+
+    }
+    public function updateasociacionEDTeacher(Request $request, $id)
+    {
+        $this->validate($request, [
+            'denticionRaiz' => 'required|String|in:Sano,Cariado,Obturado sin caries,Obturado con caries,Pérdida otro motivo,
+                Fisura Obturada,Pilar puente/corona,Diente no erupcionado,Fractura',
+            'denticionCorona' => 'required|String|in:Sano,Cariado,Obturado sin caries,Obturado con caries,Pérdida otro motivo,
+                Fisura Obturada,Pilar puente/corona,Diente no erupcionado,Fractura',
+            'tratamiento' => 'required|String|in:Ninguno,Preventivo,Obturación de fisuras,Obt. 1 o mas superficies,Obt 2 o mas superficies,
+                Corona,Carilla estética,Tratamiento pulgar,Exodoncia,No registrado',
+            'opacidad' => 'required|String|in:Ningún estado anormal,Opacidad delimitada,OpacidadDifusa,Hipoplasia,
+                Otros defectos,Opacidad elimitada y difusa,Opacidad delimitada e hipoplasia,Opacidad difusa e hipoplasia',
+            'diente_id' => 'required|exists:dientes,id',
+        ]);
+
+        $asociacion_exam_diente = AsociacionExamDiente::find($id);
+        $asociacion_exam_diente->fill($request->all());
+        $asociacion_exam_diente->save();
+
+        flash('Asociación editada correctamente');
+
+        return redirect()->route('indexasociacionEDTeacher',[$asociacion_exam_diente->exam_id]);
 
     }
 
