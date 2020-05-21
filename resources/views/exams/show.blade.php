@@ -180,9 +180,24 @@
                             @endif
                         </div>
 
-                        </div>
+
 
                     </div>
+
+                    </div>
+                <div class="card-body">
+                    {!! Form::open(['route' => ['exams.edit',$exam->id], 'method' => 'get']) !!}
+                    {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                    {!! Form::close() !!}
+               <br>
+                    {!! Form::open(['route' => ['index_asociacionED',$exam->id], 'method' => 'get']) !!}
+                    {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary'])!!}
+                    {!! Form::close() !!}
+                <br>
+                    {!! Form::open(['route' => ['exams.index'], 'method' => 'get']) !!}
+                    {!!   Form::submit('Todos los exámenes', ['class'=> 'btn btn-outline-dark'])!!}
+                    {!! Form::close() !!}
+                </div>
                 </div>
             </div>
         </div>

@@ -75,21 +75,6 @@ class UserController extends Controller
     {
         //
     }
-    public function createpin()
-    {
-        return view('pins/create');
-    }
-    public function storepin(Request $request){
-        $this->validate($request, [
-            'pin' => ['required', 'string', 'max:255'],
-        ]);
-        $user=Auth::user();
-        $user->pin=$request->get('pin');
-        $user->save();
-
-        return view('home');
-
-    }
 
     public function perfilstudent(){
         $user=Auth::user();

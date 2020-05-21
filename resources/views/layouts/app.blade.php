@@ -77,9 +77,6 @@
                                         <a class="dropdown-item" href="{{ url('/indexstudents') }}">
                                         Estudiantes
                                         </a>
-                                        <a class="dropdown-item" href="{{ url('/createpin') }}">
-                                            Crear pin
-                                        </a>
                                         <a class="dropdown-item" href="{{ url('/perfiles/perfilteacher') }}">
                                             Mi perfil
                                         </a>

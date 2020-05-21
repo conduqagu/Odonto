@@ -51,7 +51,7 @@
 
                                     <td>
                                         {!! Form::open(['route' => ['exams.show',$exam->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Ver detalle', ['class'=> 'btn btn-outline-dark'])!!}
+                                        {!!   Form::submit('Ver detalle', ['class'=> 'btn btn-primary'])!!}
                                         {!! Form::close() !!}
                                     </td>
                                     <td>
