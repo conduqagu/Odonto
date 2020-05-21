@@ -14,7 +14,7 @@
                         </div>
                         <div class="form-group">
                             {!!Form::label('patient_id', 'Paciente: ') !!}
-                            {!! Form::label( $exam->patient_id) !!}
+                            {!! Form::label( $exam->patient->name)." ".Form::label( $exam->patient->surname) !!}
                         </div>
 
                     </div>

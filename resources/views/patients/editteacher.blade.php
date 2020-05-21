@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Editar paciente</div>
+                    <div class="card-header">Editar datos de {{\App\Patient::find($patient->id)->name}} {{\App\Patient::find($patient->id)->surname}}</div>
 
                     <div class="card-body">
                         @include('flash::message')

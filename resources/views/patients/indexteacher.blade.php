@@ -32,7 +32,6 @@
                                 <th>Fecha de nacimiento</th>
                                 <th>Riesgo ASA</th>
                                 <th>Observaciones</th>
-                                <th>Infantil</th>
                                 <th>Alumno</th>
                                 <th colspan="4">Acciones</th>
                             </tr>
@@ -44,14 +43,14 @@
                                     <td>{{ $patient->dni }}</td>
                                     <td>{{ $patient->email }}</td>
                                     <td>{{ $patient->telefono }}</td>
-                                    <td>{{ $patient->fechaNacimiento }}</td>
+                                    @if($patient->child==1)
+                                        <td>{{ $patient->fechaNacimiento." (Infantil)" }}</td>
+                                    @else
+                                        <td>{{ $patient->fechaNacimiento}}</td>
+                                    @endif
                                     <td>{{ $patient->riesgoASA }}</td>
                                     <td>{{ $patient->observaciones }}</td>
-                                    @if($patient->child==1)
-                                        <td>Si</td>
-                                    @else
-                                        <td>No</td>
-                                    @endif
+
                                     <td>
                                     @foreach ($patient->asociacionPatientStudents as $asociacionPatientStudent)
                                      {{$asociacionPatientStudent->student->name.", " }}
