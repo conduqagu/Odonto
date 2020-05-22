@@ -50,7 +50,7 @@
                                     @endif
 
                                     <td>
-                                        {!! Form::open(['route' => ['examsshow',$exam->id], 'method' => 'get']) !!}
+                                        {!! Form::open(['route' => ['exams.show',$exam->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Ver detalle', ['class'=> 'btn btn-primary'])!!}
                                         {!! Form::close() !!}
                                     </td>

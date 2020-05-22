@@ -16,16 +16,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexstudents() //Lista de estudiantes para profesores
+    public function indexstudents(Request $request) //Lista de estudiantes para profesores
     {
 
-        $students= DB::table('users')
-            ->whereNotIn('users.id',
-                DB::table('asociacion_teacher_students')
-                    ->where('teacher_id','=',Auth::user()->id)
+        $students= \App\User::whereNotIn('users.id',
+                AsociacionTeacherStudent::where('teacher_id','=',Auth::user()->id)
                     ->join('users','users.id','=','asociacion_teacher_students.student_id')
                     ->pluck('users.id')->values()
-                )->where('userType','=','student')->get();
+                )
+            ->where('users.name','LIKE','%'.$request->get("query")."%")
+            ->where('userType','=','student')
+            ->get();
 
         return view('indexstudents',['students'=>$students]);
     }

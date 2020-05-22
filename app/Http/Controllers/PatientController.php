@@ -36,9 +36,7 @@ class PatientController extends Controller
         $patients = DB::table('asociacion_patient_students')
             ->where('student_id','=',Auth::user()->id)
             ->join('patients', 'patients.id', '=', 'asociacion_patient_students.patient_id')
-            ->where('patients.dni','LIKE','%'.$request->get("query")."%")
             ->where('patients.name','LIKE','%'.$request->get("query")."%")
-            ->where('patients.surname','LIKE','%'.$request->get("query")."%")
             ->select('patients.*')
             ->get();
         return view('patients.index',['patients'=>$patients]);
@@ -113,9 +111,9 @@ class PatientController extends Controller
 
 
         flash('Paciente creado correctamente');
-        if($patient->child=0){
+        if($patient->child==0){
             return redirect()->route('createDientesPac', [$patient->id]);
-        }elseif($patient->child=1){
+        }elseif($patient->child==1){
             return redirect()->route('createDientesPacChild', [$patient->id]);
         }
 
@@ -145,9 +143,9 @@ class PatientController extends Controller
 
         flash('Paciente creado correctamente');
 
-        if($patient->child=0){
+        if($patient->child==0){
             return redirect()->route('createDientesPac', [$patient->id]);
-        }elseif($patient->child=1){
+        }elseif($patient->child==1){
             return redirect()->route('createDientesPacChild', [$patient->id]);
         }
     }
@@ -195,7 +193,7 @@ class PatientController extends Controller
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'dni' => ['required', 'unique:patients','string','min:9'],
+            'dni' => ['required','string','min:9'],
             'email' => ['nullable','string', 'email', 'max:255'],
             'telefono' => ['nullable','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
@@ -204,15 +202,16 @@ class PatientController extends Controller
             'child'=>['required','boolean'],
             'pin'=>['required','string','max:255']
         ]);
+
         $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
         LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
         LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)
         WHERE laravel.users.id ='.Auth::user()->id.' AND teachers.pin='.$request->get('pin').';'));
 
-    if(count($profesor)==0){
-        flash('Pin incorrecto');
-        return redirect()->route('patients.edit',$id);
-    }
+        if(count($profesor)==0){
+            flash('Pin incorrecto');
+            return redirect()->route('patients.edit',$id);
+        }
         $patient = Patient::find($id);
         if($patient->child!=$request->child and $request->child==0){
             $patient->fill($request->all());
@@ -238,7 +237,7 @@ class PatientController extends Controller
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'dni' => ['required', 'unique:patients','unique:users','string','min:9'],
+            'dni' => ['required','string','min:9'],
             'email' => ['nullable','string', 'email', 'max:255'],
             'telefono' => ['nullable','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],

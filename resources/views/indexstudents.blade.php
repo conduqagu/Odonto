@@ -9,6 +9,14 @@
                 <br>
                 <div class="panel-body">
                     @include('flash::message')
+                    <div class="form-group" >
+                        {!! Form::open(['route' => ['indexstudents'], 'method' => 'get']) !!}
+                        {!! Form::text('query',null,['class'=>'col-md-4', 'autofocus', 'placeholder'=>'término a buscar']) !!}
+                        {!! Form::submit('Buscar', ['class'=> 'btn btn-success col-md-2'])!!}
+                        {!! Form::close() !!}
+
+                    </div>
+
                     {!! Form::open(['route' => 'listsmystudent', 'method' => 'get']) !!}
                     {!!   Form::submit('Mis alumnos', ['class'=> 'btn btn-primary'])!!}
                     {!! Form::close() !!}
