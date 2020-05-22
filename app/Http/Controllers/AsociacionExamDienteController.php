@@ -141,7 +141,7 @@ class AsociacionExamDienteController extends Controller
             ->join('dientes','dientes.id','!=','asociacion_exam_dientes.diente_id')
             ->select('dientes.*')
             ->get();
-        $dientes=$diente->pluck('name', 'id');
+        $dientes=$diente->pluck('number', 'id');
 
         return view('exams.edit_asociacion_exam_diente',['asociacion_exam_diente'=> $asociacion_exam_diente,'dientes'=>$dientes ]);
     }
@@ -153,7 +153,7 @@ class AsociacionExamDienteController extends Controller
             ->join('dientes','dientes.id','!=','asociacion_exam_dientes.diente_id')
             ->select('dientes.*')
             ->get();
-        $dientes=$diente->pluck('name', 'id');
+        $dientes=$diente->pluck('number', 'id');
 
         return view('exams/edit_asociacion_exam_dienteTeacher',['asociacion_exam_diente'=> $asociacion_exam_diente,'dientes'=>$dientes ]);
     }

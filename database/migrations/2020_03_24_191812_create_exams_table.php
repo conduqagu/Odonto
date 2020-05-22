@@ -21,7 +21,7 @@ class CreateExamsTable extends Migration
             $table->boolean('cancerOral');
             $table->boolean('anomaliasLabios');
             $table->string('otros')->nullable();
-            $table->enum('patologiaMucosa',['Ninguna','Tumor maligno','leucoplasia','Liquen plano'])->nullable();
+            $table->enum('patologiaMucosa',['Ninguna','Tumor maligno','leucoplasia','Liquen plano']);
             $table->enum('fluorosis',['Normal','Discutible','Muy ligera','Ligera','Moderada','Intensa','Excluida','No registrada']);
             $table->enum('estadoS1',['sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido']);
             $table->enum('estadoS2',['sano','hemorragia','tártaro','bolsa 4-5 mm', 'Bolsa de 6 mm o más','excluido']);

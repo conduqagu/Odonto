@@ -84,9 +84,9 @@ class PatientController extends Controller
         $this ->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'dni' => ['required', 'string','min:9'], //, 'unique:dni', 'unique:patients'
+            'dni' => ['required', 'unique:patients','string','min:9'],
             'email' => ['nullable','string', 'email', 'max:255'],
-            'telefono' => ['required','string', 'min:8'],
+            'telefono' => ['nullable','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required','in:I,II,III,IV,V,VI'],
             'observaciones' => ['nullable','string', 'max:255'],
@@ -126,9 +126,9 @@ class PatientController extends Controller
         $this ->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'dni' => ['required', 'string','min:9'], //, 'unique:dni', 'unique:patients'
+            'dni' => ['required','unique:patients', 'string','min:9'],
             'email' => ['nullable','string', 'email', 'max:255'],
-            'telefono' => ['required','string', 'min:8'],
+            'telefono' => ['nullable','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required','in:I,II,III,IV,V,VI'],
             'observaciones' => ['nullable','string', 'max:255'],
@@ -195,9 +195,9 @@ class PatientController extends Controller
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'dni' => ['required', 'string','min:9'],
+            'dni' => ['required', 'unique:patients','string','min:9'],
             'email' => ['nullable','string', 'email', 'max:255'],
-            'telefono' => ['required','string', 'min:8'],
+            'telefono' => ['nullable','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
             'observaciones' => ['nullable','string', 'max:255'],
@@ -238,9 +238,9 @@ class PatientController extends Controller
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'dni' => ['required', 'string','min:9'],
+            'dni' => ['required', 'unique:patients','unique:users','string','min:9'],
             'email' => ['nullable','string', 'email', 'max:255'],
-            'telefono' => ['required','string', 'min:8'],
+            'telefono' => ['nullable','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
             'observaciones' => ['nullable','string', 'max:255'],

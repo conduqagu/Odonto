@@ -29,7 +29,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('telefono', 'Télefono') !!}
-                            {!! Form::text('telefono',null,['class'=>'form-control', 'required']) !!}
+                            {!! Form::text('telefono',null,['class'=>'form-control']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('fechaNacimiento', 'Fecha de nacimiento') !!}

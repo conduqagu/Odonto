@@ -17,9 +17,9 @@ class CreatePatientsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('surname');
-            $table->string('dni');
+            $table->string('dni')->unique();
             $table->string('email')->nullable();
-            $table->string('telefono');
+            $table->string('telefono')->nullable();
             $table->date('fechaNacimiento');
             $table->enum('riesgoASA', ['I','II','III','IV','V','VI']);
             $table->string('observaciones')->nullable();
