@@ -6,7 +6,7 @@
 <body bgcolor=#F6F7EC>
 
 <h1 align="center"><font color=#001067 >Objetivos</font></h1>
-<p align="justify"><font color=#1B2B57 size="5px">El objetivo principal de este proyecto es la creación de una aplicación web denominada Odonto, para poder acceder a ella desde cualquier red, no solo desde la LAN de la facultad de odontología. Esta aplicación estará enfocada a un fácil uso, incorporando valores por defecto en los campos que sea posible, consiguiendo una mayor rapidez en la incorporación de datos a las historias clínicas de los pacientes, además para facilidad de profesores y alumnos se creará un manual enfocado a ellos en el que se especifique el uso de la aplicación.
+<p align="justify"><font color=#1B2B57 size="5px">El objetivo principal de este proyecto es la creación de una aplicación web denominada Odonto, para poder acceder a ella desde cualquier red, no solo desde la LAN de la facultad de odontología. Esta aplicación estará enfocada a un fácil uso, incorporando valores por defecto en los campos que sea posible, consiguiendo una mayor rapidez en la incorporación de datos a las historias clínicas de los pacientes, además para facilidad de profesores y alumnos sería deseable crear un manual enfocado a ellos en el que se especifique el uso de la aplicación.
         Debido a lo amplia que es la aplicación actual, en este proyecto se va a replicar y mejorar únicamente el módulo de recepción de un paciente en su historia clínica, el cual consta de:<br>
         -Datos de usuarios: profesores y alumnos.<br>
         -Datos de los pacientes.<br>
