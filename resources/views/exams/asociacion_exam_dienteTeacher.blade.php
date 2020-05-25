@@ -5,11 +5,14 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Estudio diente </div>
-
+                    <div class="card-header">Estudio diente</div>
                     <div class="card-body">
-
-                        <br><br>
+                        <div class="title m-b-md">
+                            <a href="https://www.ilerna.es/blog/aprende-con-ilerna-online/sanidad/codigo-internacional-dientes-fdi">
+                                <img src={{ asset('/asociacionED.png') }} height="450" title="Dentadura permanente-temporal" alt="Dentadura permanente-temporal"></a>
+                            </a>
+                        </div>
+                        <br>
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Diente</th>

@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Eliminar examen de {{\App\Exam::find($id)->patient->name}} {{\App\Exam::find($id)->patient->surname}}</div>
+                    <div class="card-header">Eliminar examen de {{\App\Exam::find($id)->patient->name}} {{\App\Exam::find($id)->patient->surname}} del {{\App\Exam::find($id)->date}}</div>
 
                     <div class="card-body">
                         @include('flash::message')
@@ -16,8 +16,11 @@
                                 <input id="pin" type="password" class="awesome" name="pin" required>
                             </div>
 
-                        {!! Form::submit('Eliminar',['class'=>'btn-primary btn']) !!}
-
+                        {!! Form::submit('Eliminar',['class'=>'btn btn-danger']) !!}
+                        {!! Form::close() !!}
+                        <br>
+                        {!! Form::open(['route' => ['exams.index'], 'method' => 'get']) !!}
+                        {!!   Form::submit('Cancelar', ['class'=> 'btn-primary btn'])!!}
                         {!! Form::close() !!}
 
                     </div>

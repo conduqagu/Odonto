@@ -8,9 +8,15 @@
                     <div class="card-header">Estudio diente </div>
 
                     <div class="card-body">
-
-                        <br><br>
+                        <div class="title m-b-md">
+                            <a href="https://www.ilerna.es/blog/aprende-con-ilerna-online/sanidad/codigo-internacional-dientes-fdi">
+                                <img src={{ asset('/asociacionED.png') }} height="450" title="Dentadura permanente-temporal" alt="Dentadura permanente-temporal"></a>
+                            </a>
+                        </div>
+                        <br>
                         <table class="table table-striped table-bordered">
+
+
                             <tr>
                                 <th>Diente</th>
                                 <th>Dentición raíz</th>
@@ -22,7 +28,8 @@
                             </tr>
                             @foreach ($asociacion_exam_dientes as $asociacion_exam_diente)
                                 <tr>
-                                    <td>{{ $asociacion_exam_diente->diente->name}}</td>
+                                    <td>{{ $asociacion_exam_diente->diente->number}} -
+                                        {{ $asociacion_exam_diente->diente->name}}</td>
                                     <td>{{ $asociacion_exam_diente->denticionRaiz }}</td>
                                     <td>{{ $asociacion_exam_diente->denticionCorona }}</td>
                                     <td>{{ $asociacion_exam_diente->tratamiento }}</td>
