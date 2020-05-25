@@ -25,8 +25,8 @@
                             </tr>
                             @foreach ($asociacion_exam_dientes as $asociacion_exam_diente)
                                 <tr>
-                                    <td>{{ $asociacion_exam_diente->diente->name}}</td>
-                                    <td>{{ $asociacion_exam_diente->denticionRaiz }}</td>
+                                    <td>{{ $asociacion_exam_diente->diente->number}} -
+                                        {{ $asociacion_exam_diente->diente->name}}</td>                                    <td>{{ $asociacion_exam_diente->denticionRaiz }}</td>
                                     <td>{{ $asociacion_exam_diente->denticionCorona }}</td>
                                     <td>{{ $asociacion_exam_diente->tratamiento }}</td>
                                     <td>{{ $asociacion_exam_diente->opacidad }}</td>

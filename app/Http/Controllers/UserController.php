@@ -116,7 +116,8 @@ class UserController extends Controller
             'email'=>['required','string','max:255'],
             'dni'=>['required','string','max:255'],
             'pin'=>['nullable','string','max:255'],
-            'newpin'=>['required','string','max:255']
+            'newpin'=>['required','string','max:255'],
+            'confirmpin'=>['required','string','max:255']
         ]);
 
         $user=\App\User::find($id);
@@ -125,8 +126,12 @@ class UserController extends Controller
         $user->email=$request->get('email');
         $user->dni=$request->get('dni');
         if ($user->pin==$request->get('pin') or $user->pin==null){
-            $user->pin=$request->get('newpin');
-            flash('Datos actualizados correctamente');
+            if($request->get('newpin')==$request->get('confirmpin')){
+                $user->pin=$request->get('newpin');
+                flash('Datos actualizados correctamente');
+            }else{
+                flash('¡ERROR! Nuevo pin y confirmación de pin no coinciden');
+            }
         }else{
             flash('El pin es incorrecto, el resto de datos se han actualizado correctamente');
         }
