@@ -11,7 +11,7 @@
                     @include('flash::message')
                     <div class="form-group" >
                         {!! Form::open(['route' => ['indexstudents'], 'method' => 'get']) !!}
-                        {!! Form::text('query',null,['class'=>'col-md-4', 'autofocus', 'placeholder'=>'término a buscar']) !!}
+                        {!! Form::text('query',null,['class'=>'col-md-4', 'autofocus', 'placeholder'=>'Nombre del alumno']) !!}
                         {!! Form::submit('Buscar', ['class'=> 'btn btn-success col-md-2'])!!}
                         {!! Form::close() !!}
 

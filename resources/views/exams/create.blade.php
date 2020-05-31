@@ -12,6 +12,11 @@
 
                         {!! Form::open(['route' => 'exams.store']) !!}
                         <div class="form-group">
+                            {!!Form::label('patient_id', 'Paciente') !!}
+                            <br>
+                            {!! Form::select('patient_id', $patients, ['class' => 'form-control', 'required']) !!}
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('date', 'Fecha') !!}
                             {!! Form::date('date',\Carbon\Carbon::now(),['class'=>'form-control', 'required']) !!}
                         </div>
@@ -111,14 +116,10 @@
                             {!!  Form::label('habitos' , 'Hábitos') !!}
                             {!! Form::select('habitos', array('1'=>'Si','0'=>'No'),'0',['class' => 'form-control', 'required']) !!}
                         </div>
-                        <div class="form-group">
-                            {!!Form::label('patient_id', 'Paciente') !!}
-                            <br>
-                            {!! Form::select('patient_id', $patients, ['class' => 'form-control', 'required']) !!}
-                        </div>
+
                         <div class="form-group">
                             {!! Form::label('pin', 'Pin del profesor') !!}
-                            <input id="pin" type="password" class="awesome" name="pin" required>
+                            <input id="pin" type="password" class="form-control" name="pin" required>
                         </div>
 
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
