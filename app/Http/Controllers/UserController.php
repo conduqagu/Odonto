@@ -115,9 +115,9 @@ class UserController extends Controller
             'surname'=>['required','string','max:255'],
             'email'=>['required','string','max:255'],
             'dni'=>['required','string','max:255'],
-            'pin'=>['nullable','string','max:255'],
-            'newpin'=>['nullable','string','max:255'],
-            'confirmpin'=>['nullable','string','max:255']
+            'pin'=>['nullable','integer'],
+            'newpin'=>['nullable','integer'],
+            'confirmpin'=>['nullable','integer']
         ]);
 
         $user=\App\User::find($id);

@@ -82,7 +82,7 @@ class ExamController extends Controller
             'mordidaAbierta' => ['required', 'boolean'],
             'habitos' => ['required', 'boolean'],
             'patient_id' => ['required', 'exists:patients,id'],
-            'pin'=>['required','string','max:255']
+            'pin'=>['required','integer']
         ]);
 
         $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
@@ -214,7 +214,7 @@ class ExamController extends Controller
             'mordidaAbierta' => ['required', 'boolean'],
             'habitos' => ['required', 'boolean'],
             'patient_id' => ['required', 'exists:patients,id'],
-            'pin'=>['required','string','max:255']
+            'pin'=>['required','integer']
         ]);
 
         $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
@@ -293,7 +293,7 @@ class ExamController extends Controller
     public function examsdeleteStudent(Request $request,$id){
 
         $this->validate($request, [
-            'pin'=>['required','string','max:255']
+            'pin'=>['required','integer']
         ]);
 
         $profesor=DB::select(DB::raw('SELECT * FROM laravel.users

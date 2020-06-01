@@ -86,11 +86,12 @@ class PatientController extends Controller
             'email' => ['nullable','string', 'email', 'max:255'],
             'telefono' => ['nullable','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
-            'riesgoASA' => ['required','in:I,II,III,IV,V,VI'],
+            'riesgoASA' => ['required','in:I,II,III'],
             'observaciones' => ['nullable','string', 'max:255'],
             'child'=>['required','boolean'],
-            'pin'=>['required','string','max:255']
+            'pin'=>['required','integer']
         ]);
+
 
         $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
         LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
@@ -101,11 +102,12 @@ class PatientController extends Controller
         flash('Pin incorrecto');
         return redirect()->route('patients.create');
     }
+
         $patient = new Patient($request->all());
         $patient->save();
 
         $asociacion_patient_student=new AsociacionPatientStudent();
-        $asociacion_patient_student->student_id= Auth::user()->id;
+        $asociacion_patient_student->student_id=Auth::user()->id;
         $asociacion_patient_student->patient_id=$patient->id;
         $asociacion_patient_student->save();
 
@@ -200,7 +202,7 @@ class PatientController extends Controller
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
             'observaciones' => ['nullable','string', 'max:255'],
             'child'=>['required','boolean'],
-            'pin'=>['required','string','max:255']
+            'pin'=>['required','integer']
         ]);
 
         $profesor=DB::select(DB::raw('SELECT * FROM laravel.users

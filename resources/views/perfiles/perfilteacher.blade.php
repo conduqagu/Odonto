@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-group">
                             {!!  Form::label('newpin','Nuevo PIN:') !!}
-                            <input id="newpin" type="password" class="form-control" name="newpin">
+                            <input id="newpin" type="password" class="form-control" name="newpin" placeholder="Introduzca un nuevo pin numérico">
                         </div>
                         <div class="form-group">
                             {!!  Form::label('confirmpin','Corfirmar nuevo PIN:') !!}

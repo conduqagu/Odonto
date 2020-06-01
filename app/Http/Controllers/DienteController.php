@@ -58,7 +58,7 @@ class DienteController extends Controller
             'sextante' => ['required', 'integer','max:6' ],
             'ausente' => ['required', 'boolean'],
             'patient_id'=>['required','exists:patients,id'],
-            'pin'=>['required','string','max:255']
+            'pin'=>['required','integer']
         ]);
 
         $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
@@ -121,7 +121,7 @@ class DienteController extends Controller
             'cuadrante' => ['required', 'integer','max:8' ],
             'sextante' => ['required', 'integer','max:6' ],
             'ausente' => ['required', 'boolean'],
-            'pin'=>['required','string','max:255']
+            'pin'=>['required','integer']
         ]);
 
         $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
