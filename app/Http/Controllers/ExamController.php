@@ -22,12 +22,12 @@ class ExamController extends Controller
      */
     public function index()
     {
-        $exams=Exam::all();
+        $exams=Exam::all(); //->where('exams.patient_id','=',$id);
         return view('exams.index',['exams'=>$exams]);
     }
-    public function examsIndexTeacher()
+    public function examsIndexTeacher($id)
     {
-        $exams=Exam::all();
+        $exams=Exam::all()->where('exams.patient_id','=',$id);
         return view('exams/examsIndexTeacher',['exams'=>$exams]);
     }
     /**

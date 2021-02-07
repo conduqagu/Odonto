@@ -39,7 +39,8 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
     Route::delete('/patients/deleteStudent/{id}','PatientController@deleteStudent')->name('deleteStudent');
     Route::get('/perfiles/perfilteacher','UserController@perfilteacher')->name('perfilteacher');
     Route::put('/perfiles/updateperfilteacher/{id}','UserController@updateperfilteacher')->name('updateperfilteacher');
-    Route::get('/examsIndexTeacher','ExamController@examsIndexTeacher')->name('examsIndexTeacher');
+    Route::get('/exams/indexStudent/{id}','ExamController@indexStudent')->name('examsIndexStudent');
+    Route::get('/examsIndexTeacher/{id}','ExamController@examsIndexTeacher')->name('examsIndexTeacher');
     Route::delete('/exams/delete/{id}','ExamController@examsdeleteTeacher')->name('examsdeleteTeacher');
     Route::get('/exams/createteacher','ExamController@examsCreateTeacher')->name('examsCreateTeacher');
     Route::post('/exams/storeteacher','ExamController@examsStoreTeacher')->name('examsStoreTeacher');

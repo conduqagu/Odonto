@@ -41,6 +41,11 @@ class PatientController extends Controller
             ->get();
         return view('patients.index',['patients'=>$patients]);
     }
+    /**
+     * Lista de pacientes asignados a un profesor (usuario)
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function indexteacher(Request $request)
     {
        // $patients=Patient::all();
@@ -63,12 +68,17 @@ class PatientController extends Controller
     {
         return view('patients.create');
     }
+    //TODO: revisar funcionalidad:
+    /**
+     * Crear un paciente desde usuario profesor
+     *
+     * @return \App\Patient
+     */
     protected function createteacher()
     {
         $students = User::all()->where('userType', '=', 'student')->pluck('name', 'id');
         return view('patients.createteacher',['students'=>$students]);
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -92,16 +102,16 @@ class PatientController extends Controller
             'pin'=>['required','integer']
         ]);
 
-
+        //TODO: Poner codigo recogido del pin del profesor asignado a paciente en PHP no SQL
         $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
         LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
         LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)
         WHERE laravel.users.id ='.Auth::user()->id.' AND teachers.pin='.$request->get('pin').';'));
 
-    if(count($profesor)==0){
-        flash('Pin incorrecto');
-        return redirect()->route('patients.create');
-    }
+        if(count($profesor)==0){
+            flash('Pin incorrecto');
+            return redirect()->route('patients.create');
+        }
 
         $patient = new Patient($request->all());
         $patient->save();
@@ -121,6 +131,12 @@ class PatientController extends Controller
 
     }
 
+    /**
+     * Guardar un paciente en la BD desde usuario profesor
+     *
+     * @param  array  $data
+     * @return \App\Patient
+     */
     public function storeteacher(Request $request)
     {
         $this ->validate($request, [
@@ -175,6 +191,12 @@ class PatientController extends Controller
         return view('patients.edit',['patient'=>$patient ]);
 
     }
+    /**
+     * Editar un paciente desde un usuario profesor
+     *
+     * @param  array  $data
+     * @return \App\Patient
+     */
     public function editteacher($id)
     {
         $patient = Patient::find($id);
@@ -205,6 +227,7 @@ class PatientController extends Controller
             'pin'=>['required','integer']
         ]);
 
+        //TODO: poner codigo en PHP
         $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
         LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
         LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)
@@ -234,6 +257,12 @@ class PatientController extends Controller
         }
 
     }
+    /**
+     * Editar un paciente desde un usario profesor
+     *
+     * @param  array  $data
+     * @return \App\Patient
+     */
     public function updateteacher(Request $request, $id)
     {
         $this->validate($request, [
@@ -267,6 +296,12 @@ class PatientController extends Controller
             return redirect()->route('indexteacher');
         }
     }
+    /**
+     * Asignar a un paciente un alumno.
+     *
+     * @param  array  $data
+     * @return \App\Patient
+     */
     public function añadirAlumno($id)
     {
         $students=DB::table('users')
@@ -301,6 +336,12 @@ class PatientController extends Controller
 
         return redirect()->route('indexteacher');
     }
+    /**
+     * Lista de estudiantes que se pueden eliminar de un paciente.
+     *
+     * @param  $id_paciente
+     * @return \App\Patient
+     */
     public function destroyStudent($id)
     {
         $users = DB::table('asociacion_patient_students')
@@ -313,6 +354,11 @@ class PatientController extends Controller
 
         return view('patients.destroyStudent',['patient'=>$patient,'students'=>$students ]);
     }
+    /**
+     * Eliminar un alumno asignado a un paciente
+     *
+     * @return \App\Patient
+     */
     public function deleteStudent(Request $request,$id)
     {
         $students = DB::table('asociacion_patient_students')

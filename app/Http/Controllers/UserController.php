@@ -12,7 +12,7 @@ use Laracasts\Flash\Flash;
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Lista de estudiantes no asignados al profesor (usuario)
      *
      * @return \Illuminate\Http\Response
      */
@@ -30,6 +30,11 @@ class UserController extends Controller
 
         return view('indexstudents',['students'=>$students]);
     }
+    /**
+     * Lista de estudiantes asociada a un profesor (usuario)
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function listsmystudent() //Lista de estudiantes para profesores
     {
         $students = DB::table('asociacion_teacher_students')
@@ -39,7 +44,12 @@ class UserController extends Controller
             ->get();
         return view('listsmystudent',['students'=>$students]);
     }
-
+    /**
+     * Asignar un alumno al profesor (usuario)
+     *
+     * @param id_alumno
+     * @return \Illuminate\Http\Response
+     */
     public function asignaralumno($id)
     {
         $asociacion_teacher_student=new AsociacionTeacherStudent();
@@ -52,6 +62,12 @@ class UserController extends Controller
         return redirect()->route('indexstudents');
     }
 
+    /**
+     * Quitar asignacion de un alumno al profesor (usuario)
+     *
+     * @param id_alumno
+     * @return \Illuminate\Http\Response
+     */
     public function destroyasociacion($id)
     {
         $students = DB::table('asociacion_teacher_students')
@@ -77,6 +93,11 @@ class UserController extends Controller
         //
     }
 
+    /**
+     * Listado de profesores asignados a un alumno (usuario)
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function perfilstudent(){
         $user=Auth::user();
         $teachers = DB::table('asociacion_teacher_students')
@@ -86,6 +107,12 @@ class UserController extends Controller
             ->get();
         return view('perfiles/perfilstudent',['user'=>$user,'teachers'=>$teachers]);
     }
+    /**
+     * Editar datos del alumno (usuario)
+     *
+     * @param id_alumno
+     * @return \Illuminate\Http\Response
+     */
     public function updateperfilstudent(Request $request, $id){
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
@@ -105,10 +132,21 @@ class UserController extends Controller
         flash('Datos actualizados correctamente');
         return redirect()->route('perfilstudent');
     }
+    /**
+     * Mostar datos del profesor (usuario)
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function perfilteacher(){
         $user=Auth::user();
         return view('perfiles/perfilteacher',['user'=>$user]);
     }
+    /**
+     * Editar datos del profesor (usuario)
+     *
+     * @param id_profesor
+     * @return \Illuminate\Http\Response
+     */
     public function updateperfilteacher(Request $request, $id){
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],

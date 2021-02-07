@@ -56,6 +56,10 @@
                                         {!! Form::open(['route' => ['dientesPatient',$patient->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Dientes', ['class'=> 'btn btn-outline-dark'])!!}
                                         {!! Form::close() !!}
+                                        <br>
+                                        {!! Form::open(['route' => ['exams.index'], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Examenes', ['class'=> 'btn btn-outline-dark'])!!}
+                                        {!! Form::close() !!}
                                     </td>
 
                                     <td>
