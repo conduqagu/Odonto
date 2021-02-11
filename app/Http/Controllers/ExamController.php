@@ -20,15 +20,15 @@ class ExamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        $exams=Exam::all(); //->where('exams.patient_id','=',$id);
-        return view('exams.index',['exams'=>$exams]);
+        $exams=Exam::where('exams.patient_id','=',$id)->get();
+        return view('exams.index',['exams'=>$exams,'id'=>$id]);
     }
     public function examsIndexTeacher($id)
     {
-        $exams=Exam::all()->where('exams.patient_id','=',$id);
-        return view('exams/examsIndexTeacher',['exams'=>$exams]);
+        $exams=Exam::where('exams.patient_id','=',$id)->get();
+        return view('exams/examsIndexTeacher',['exams'=>$exams,'id'=>$id]);
     }
     /**
      * Show the form for creating a new resource.
@@ -41,10 +41,10 @@ class ExamController extends Controller
         return view('exams.create',['patients'=>$patients]);
     }
 
-    public function examsCreateTeacher()
+    public function examsCreateTeacher($id)
     {
         $patients = Patient::all()->pluck('name','id');
-        return view('exams/examsCreateTeacher',['patients'=>$patients]);
+        return view('exams/examsCreateTeacher',['patients'=>$patients,'id'=>$id]);
     }
     /**
      * Store a newly created resource in storage.

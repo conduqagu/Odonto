@@ -9,6 +9,7 @@ use App\Patient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use phpDocumentor\Reflection\Types\Void_;
 use function foo\func;
 
@@ -107,9 +108,14 @@ class AsociacionExamDienteController extends Controller
                 break;
             case 'Terminar':
                 if (Auth::user()->userType =='student'){
+                    //TODO: Poner id_paciente para exams.index
                     return redirect()->route('exams.index');
                 }else{
-                    return redirect()->route('examsIndexTeacher');
+                    //TODO: Fallo al encontrar el examen
+                    $id_pac = Exam::find($exam_id)->get('patient_id');
+                    //Log::debug("Error patient:  ".$exam);
+                    //dd($id_pac);
+                    return redirect()->route('examsIndexTeacher',$id_pac);
                 }
                 break;
         }

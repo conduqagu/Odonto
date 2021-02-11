@@ -42,7 +42,7 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
     Route::get('/exams/indexStudent/{id}','ExamController@indexStudent')->name('examsIndexStudent');
     Route::get('/examsIndexTeacher/{id}','ExamController@examsIndexTeacher')->name('examsIndexTeacher');
     Route::delete('/exams/delete/{id}','ExamController@examsdeleteTeacher')->name('examsdeleteTeacher');
-    Route::get('/exams/createteacher','ExamController@examsCreateTeacher')->name('examsCreateTeacher');
+    Route::get('/exams/createteacher/{id}','ExamController@examsCreateTeacher')->name('examsCreateTeacher');
     Route::post('/exams/storeteacher','ExamController@examsStoreTeacher')->name('examsStoreTeacher');
     Route::get('/exams/editteacher/{id}','ExamController@examsEditTeacher')->name('examsEditTeacher');
     Route::put('/exams/updateteacher/{id}','ExamController@examsUpdateTeacher')->name('examsUpdateTeacher');
@@ -63,7 +63,7 @@ Route::group(['middleware'=> 'App\Http\Middleware\StudentMiddleware'], function(
     Route::put('/perfiles/updateperfilstudent/{id}','UserController@updateperfilstudent')->name('updateperfilstudent');
     Route::get('/exams/destroyStudent/{id}','ExamController@examsdestroyStudent')->name('examsdestroyStudent');
     Route::delete('/exams/deleteStudent/{id}','ExamController@examsdeleteStudent')->name('examsdeleteStudent');
-    Route::get('/exams','ExamController@index')->name('exams.index');
+    Route::get('/exams/index/{id}','ExamController@index')->name('exams.index');
     Route::get('/exams/create','ExamController@create')->name('exams.create');
     Route::post('/exams/store','ExamController@store')->name('exams.store');
     Route::get('/exams/edit/{id}','ExamController@edit')->name('exams.edit');

@@ -62,9 +62,6 @@
                                         <a class="dropdown-item" href="{{ url('/perfiles/perfilstudent') }}">
                                             Mi perfil
                                         </a>
-                                        <a class="dropdown-item" href="{{ url('/exams') }}">
-                                            Exámenes
-                                        </a>
                                     @endif
                                     <!--
                                     <a class="dropdown-item" href="{{ url('/dientes') }}">

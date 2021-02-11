@@ -9,7 +9,7 @@
 
                     <div class="panel-body">
                         @include('flash::message')
-                        {!! Form::open(['route' => 'examsCreateTeacher', 'method' => 'get']) !!}
+                        {!! Form::open(['route' => ['examsCreateTeacher',$id], 'method' => 'get']) !!}
                         {!!   Form::submit('Realizar examen', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
 

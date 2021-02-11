@@ -12,6 +12,11 @@
 
                         {!! Form::open(['route' => 'examsStoreTeacher']) !!}
                         <div class="form-group">
+                            {!!Form::label('patient_id', 'Paciente') !!}
+                            <br>
+                            {!! Form::select('patient_id', $patients, $patients->id=$id,['class' => 'form-control', 'required']) !!}
+                        </div>
+                        <div class="form-group">
                             {!! Form::label('date', 'Fecha') !!}
                             {!! Form::date('date',\Carbon\Carbon::now(),['class'=>'form-control', 'required']) !!}
                         </div>
@@ -110,16 +115,13 @@
                         <div>
                             {!!  Form::label('habitos' , 'Hábitos') !!}
                             {!! Form::select('habitos', array('1'=>'Si','0'=>'No'),'0',['class' => 'form-control', 'required']) !!}
-                        </div>
-                        <div class="form-group">
-                            {!!Form::label('patient_id', 'Paciente') !!}
                             <br>
-                            {!! Form::select('patient_id', $patients, ['class' => 'form-control', 'required']) !!}
                         </div>
 
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 
                         {!! Form::close() !!}
+
                     </div>
                 </div>
             </div>

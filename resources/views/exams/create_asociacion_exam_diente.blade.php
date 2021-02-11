@@ -51,7 +51,7 @@
 
                         <br>
                         {!! Form::submit( 'Guardar', ['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}
-                        {!! Form::submit( 'Terminar', ['class' => 'btn btn-warning', 'name' => 'submitbutton', 'value' => 'finish'])!!}
+                        {!! Form::submit( 'Terminar',['class' => 'btn btn-warning', 'name' => 'submitbutton', 'value' => 'finish'])!!}
 
                         {!! Form::close() !!}
                         <br>
