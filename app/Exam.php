@@ -22,3 +22,4 @@ class Exam extends Model
     }
 
 }
+
