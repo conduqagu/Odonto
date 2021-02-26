@@ -7,10 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Exam extends Model
 {
     protected $fillable = [
-        'date','aspectoExtraoralNormal','cancerOral', 'anomaliasLabios', 'otros','patologiaMucosa','fluorosis','estadoS1',
+        //Atributos examen:
+        'date','iva','costeTotal','patient_id',
+        //Atributos exmanen inicial:
+        'aspectoExtraoralNormal','cancerOral', 'anomaliasLabios', 'otros','patologiaMucosa','fluorosis','estadoS1',
         'estadoS2','estadoS3','estadoS4','estadoS5','estadoS6','claseAngle','lateralAngle','tipoDentición',
         'apiñamientoIncisivoInferior','apiñamientoIncisivoSuperior','perdidaEspacioAnterior','perdidaEspacioPosterior',
-        'mordidaCruzadaAnterior','mordidaCruzadaPosterior','desviacionLineaMedia','mordidaAbierta','habitos','patient_id'
+        'mordidaCruzadaAnterior','mordidaCruzadaPosterior','desviacionLineaMedia','mordidaAbierta','habitos',
+        //Atributos examen periodontal
+        'indicePlaca','color','borde','aspecto','consistencia','biotipo',
+        //Atributos Ortodoncia
+        'patronFacial','perfil','menton','tipoTerapia','duraciónEstimada','otros',
+        //Atributos Evaluacion
+        'previsto','maxilar','mandibular','logrado'
+
+
     ];
     public function patient()
     {
@@ -20,6 +31,9 @@ class Exam extends Model
     {
         return $this->hasMany('App\AsociacionExamDiente');
     }
-
+    public function asociacionExamTratamientos()
+    {
+        return $this->hasMany('App\AsociacionExamTratamiento');
+    }
 }
 

@@ -79,6 +79,10 @@ class AsociacionExamDienteController extends Controller
      */
     public function store_asociacionED(Request $request,$exam_id)
     {
+        dd($request->all());
+        if($request->ajax()){
+            flash('Asociación creada correctamente');
+        }
         $this->validate($request, [
             'denticionRaiz' => 'required|String|in:Sano,Cariado,Obturado sin caries,Obturado con caries,Pérdida otro motivo,
                 Fisura Obturada,Pilar puente/corona,Diente no erupcionado,Fractura',
