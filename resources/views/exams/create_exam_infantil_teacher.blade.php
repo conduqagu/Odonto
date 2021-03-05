@@ -10,26 +10,44 @@
                     <div class="card-body">
                         @include('flash::message')
 
-                        {!! Form::model($exam, [ 'route' => ['examsUptadeTeacherInicial',$exam->id],'method'=>'PUT']) !!}
-                        <div class="form-group">
+                        {!! Form::model($exam, [ 'route' => ['examsUptadeTeacherInfantil',$exam->id],'method'=>'PUT']) !!}
+                        <div>
                             {!!Form::label('patient_id', 'Paciente:  '.$exam->patient->name) !!}
-                            <br>
                         </div>
                         <div>
                             {!! Form::label('date', 'Fecha: '.$exam->date) !!}
                         </div>
                         <div>
-                            {!!  Form::label('aspectoExtraoralNormal' , 'Aspecto Extraoral Normal') !!}
-                            {!! Form::select('aspectoExtraoralNormal', array('1'=>'Si','0'=>'No'),'1',['class' => 'form-control', 'required']) !!}
+                            {!!  Form::label('aspectoGeneral' , 'Aspecto General') !!}
+                            {!! Form::text('aspectoGeneral',null, ['class'=>'form-control']) !!}
                         </div>
-
+                        <div>
+                            {!!  Form::label('talla' , 'Talla') !!}
+                            {!! Form::text('talla',null, ['class'=>'form-control']) !!}
+                        </div>
+                        <div>
+                            {!!  Form::label('peso' , 'Peso') !!}
+                            {!! Form::text('peso',null, ['class'=>'form-control']) !!}
+                        </div>
+                        <div>
+                            {!!  Form::label('piel' , 'Piel') !!}
+                            {!! Form::text('piel',null, ['class'=>'form-control']) !!}
+                        </div>
+                        <div>
+                            {!!  Form::label('anomaliaForma' , 'Anomalía en forma') !!}
+                            {!! Form::text('anomaliaForma',null, ['class'=>'form-control']) !!}
+                        </div>
+                        <div>
+                            {!!  Form::label('anomaliaTamaño' , 'Anomalía en tamaño') !!}
+                            {!! Form::text('anomaliaTamaño',null, ['class'=>'form-control']) !!}
+                        </div>
                         <div>
                             {!!  Form::label('otros' , 'Otros') !!}
                             {!! Form::text('otros', $exam->otros, ['class'=>'form-control']) !!}
                             <br>
                         </div>
 
-                        {!! Form::submit('Continuar',['class'=>'btn-primary btn']) !!}
+                        {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 
                         {!! Form::close() !!}
 

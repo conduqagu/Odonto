@@ -15,7 +15,7 @@ class Exam extends Model
         'apiñamientoIncisivoInferior','apiñamientoIncisivoSuperior','perdidaEspacioAnterior','perdidaEspacioPosterior',
         'mordidaCruzadaAnterior','mordidaCruzadaPosterior','desviacionLineaMedia','mordidaAbierta','habitos',
         //Atributos examen infantil
-
+        'aspectoGeneral','talla','peso','piel','anomaliaForma','anomaliaTamaño',
         //Atributos examen periodontal
         'indicePlaca','color','borde','aspecto','consistencia','biotipo',
         //Atributos Ortodoncia

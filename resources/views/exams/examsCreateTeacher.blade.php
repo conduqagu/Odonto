@@ -26,7 +26,7 @@
                             <div class="col-md-6">
                                 <input type="radio" id="inicial" name="tipoExam" value="inicial" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
                                 <label for="inicial">Inicial</label><br>
-                                <input type="radio" id="infantil" name="tipoExam" value="teacher" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
+                                <input type="radio" id="infantil" name="tipoExam" value="infantil" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
                                 <label for="infantil">Infantil</label><br>
                                 <input type="radio" id="ortodoncial" name="tipoExam" value="ortodoncia" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
                                 <label for="ortodoncia">Ortodoncia</label><br>

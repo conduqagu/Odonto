@@ -50,7 +50,10 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
     Route::get('/exams/editasociacionEDTeacher/{id}','AsociacionExamDienteController@editasociacionEDTeacher')->name('editasociacionEDTeacher');
     Route::put('/exams/updateasociacionEDTeacher/{id}','AsociacionExamDienteController@updateasociacionEDTeacher')->name('updateasociacionEDTeacher');
     Route::get('/exams/createTeacherInicial/{id}','ExamController@examsCreateTeacherInicial')->name('examsCreateTeacherInicial');
+    Route::get('/exams/createTeacherInfantil/{id}','ExamController@examsCreateTeacherInfantil')->name('examsCreateTeacherInfantil');
     Route::put('/exams/updateteacherInicial/{id}','ExamController@examsUptadeTeacherInicial')->name('examsUptadeTeacherInicial');
+    Route::put('/exams/updateteacherInfantil/{id}','ExamController@examsUptadeTeacherInfantil')->name('examsUptadeTeacherInfantil');
+
 
 });
 

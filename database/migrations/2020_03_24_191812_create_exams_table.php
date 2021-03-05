@@ -48,6 +48,15 @@ class CreateExamsTable extends Migration
             $table->boolean('mordidaAbierta')->nullable();
             $table->boolean('habitos')->nullable();
 
+            //Atributos examen infantil
+            $table->string('aspectoGeneral')->nullable();
+            $table->string('talla')->nullable();
+            $table->string('peso')->nullable();
+            $table->string('piel')->nullable();
+            $table->string('anomaliaForma')->nullable();
+            $table->string('anomaliaTamaño')->nullable();
+
+
             //Atributos periodoncia
             $table->double('indicePlaca')->nullable();
             $table->enum('color',['rosa','rojo'])->nullable();

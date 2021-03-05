@@ -51,6 +51,11 @@ class ExamController extends Controller
         $exam=Exam::find($id);
         return view('exams/create_exam_inicial_teacher',['exam'=>$exam,'id'=>$id]);
     }
+    public function examsCreateTeacherInfantil($id)
+    {
+        $exam=Exam::find($id);
+        return view('exams/create_exam_infantil_teacher',['exam'=>$exam,'id'=>$id]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -107,6 +112,12 @@ class ExamController extends Controller
 
         return redirect()->route('create_asociacionED',['exam_id'=>$exam->id]);
     }
+    /**
+     * Store a newly created resource in storage for a Teacher
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function examsStoreTeacher(Request $request)
     {
         $this->validate($request, [
@@ -119,50 +130,12 @@ class ExamController extends Controller
         $exam->save();
 
         flash('Examen creado correctamente');
-
         if ($request->tipoExam=='inicial'){
             return redirect()->route('examsCreateTeacherInicial',[$exam->id]);
+        }else if ($request->tipoExam=='infantil'){
+            return redirect()->route('examsCreateTeacherInfantil',[$exam->id]);
         }
-    }
 
-    public function examsUptadeTeacherInicial(Request $request, $id)
-    {
-        //dd($request);
-        $this->validate($request, [
-            'aspectoExtraoralNormal' => ['required', 'boolean'],
-            'cancerOral' => ['required', 'boolean'],
-            'anomaliasLabios' => ['required', 'boolean'],
-            'otros' => ['nullable','string', 'max:255'],
-            'patologiaMucosa'=> ['string','in:Ninguna,Tumor maligno,leucoplasia,Liquen plano'],
-            'fluorosis'=> ['required', 'string','in:Normal,Discutible,Muy ligera,Ligera,Moderada,Intensa,Excluida,No registrada'],
-            'estadoS1'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS2'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS3'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS4'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS5'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS6'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'claseAngle'=> ['required', 'string','in:clase I,clase II,clase III'],
-            'lateralAngle'=> ['required', 'string','in:Unilateral,Bilateral'],
-            'tipoDentición'=> ['required', 'string','in:Temporal,Mixta'],
-            'apiñamientoIncisivoInferior' => ['required', 'boolean'],
-            'apiñamientoIncisivoSuperior' => ['required', 'boolean'],
-            'perdidaEspacioAnterior' => ['required', 'boolean'],
-            'perdidaEspacioPosterior' => ['required', 'boolean'],
-            'mordidaCruzadaAnterior' => ['required', 'boolean'],
-            'mordidaCruzadaPosterior' => ['required', 'boolean'],
-            'desviacionLineaMedia' => ['required', 'boolean'],
-            'mordidaAbierta' => ['required', 'boolean'],
-            'habitos' => ['required', 'boolean'],
-        ]);
-
-        $exam = Exam::find($id);
-        $exam->fill($request->all());
-
-        $exam->save();
-
-        flash('Examen creado correctamente');
-
-        return redirect()->route('create_asociacionED',[$exam->id]);
     }
     /**
      * Display the specified resource.
@@ -299,6 +272,77 @@ class ExamController extends Controller
         flash('Examen modificado correctamente');
 
         return redirect()->route('examsIndexTeacher');
+    }
+    /**
+     * Update "Examen inicial" for a Teacher
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function examsUptadeTeacherInicial(Request $request, $id)
+    {
+        //dd($request);
+        $this->validate($request, [
+            'aspectoExtraoralNormal' => ['required', 'boolean'],
+            'cancerOral' => ['required', 'boolean'],
+            'anomaliasLabios' => ['required', 'boolean'],
+            'otros' => ['nullable','string', 'max:255'],
+            'patologiaMucosa'=> ['string','in:Ninguna,Tumor maligno,leucoplasia,Liquen plano'],
+            'fluorosis'=> ['required', 'string','in:Normal,Discutible,Muy ligera,Ligera,Moderada,Intensa,Excluida,No registrada'],
+            'estadoS1'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+            'estadoS2'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+            'estadoS3'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+            'estadoS4'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+            'estadoS5'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+            'estadoS6'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+            'claseAngle'=> ['required', 'string','in:clase I,clase II,clase III'],
+            'lateralAngle'=> ['required', 'string','in:Unilateral,Bilateral'],
+            'tipoDentición'=> ['required', 'string','in:Temporal,Mixta'],
+            'apiñamientoIncisivoInferior' => ['required', 'boolean'],
+            'apiñamientoIncisivoSuperior' => ['required', 'boolean'],
+            'perdidaEspacioAnterior' => ['required', 'boolean'],
+            'perdidaEspacioPosterior' => ['required', 'boolean'],
+            'mordidaCruzadaAnterior' => ['required', 'boolean'],
+            'mordidaCruzadaPosterior' => ['required', 'boolean'],
+            'desviacionLineaMedia' => ['required', 'boolean'],
+            'mordidaAbierta' => ['required', 'boolean'],
+            'habitos' => ['required', 'boolean'],
+        ]);
+
+        $exam = Exam::find($id);
+        $exam->fill($request->all());
+
+        $exam->save();
+
+        flash('Examen creado correctamente');
+
+        return redirect()->route('create_asociacionED',[$exam->id]);
+    }
+    /**
+     * Update "Examen Infantil" for a Teacher
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function examsUptadeTeacherInfantil(Request $request, $id)
+    {
+        $this->validate($request, [
+            'aspectoGeneral'=>['required','string', 'max:255'],
+            'talla'=>['required','string', 'max:255'],
+            'peso'=>['required','string', 'max:255'],
+            'piel'=>['required','string', 'max:255'],
+            'anomaliaForma'=>['required','string', 'max:255'],
+            'anomaliaTamaño'=>['required','string', 'max:255'],
+        ]);
+
+        $exam = Exam::find($id);
+        $exam->fill($request->all());
+
+        $exam->save();
+
+        flash('Examen creado correctamente');
+
+        return redirect()->route('create_asociacionED',[$exam->id]);
     }
 
     /**
