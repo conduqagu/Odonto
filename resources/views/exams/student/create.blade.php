@@ -10,11 +10,11 @@
                     <div class="card-body">
                         @include('flash::message')
 
-                        {!! Form::open(['route' => 'examsStoreTeacher']) !!}
+                        {!! Form::open(['route' => 'exams.store']) !!}
                         <div class="form-group">
                             {!!Form::label('patient_id', 'Paciente') !!}
                             <br>
-                            {!! Form::select('patient_id', $patients, $patients->id=$id,['class' => 'form-control', 'required']) !!}
+                            {!! Form::select('patient_id', $patients, ['class' => 'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('date', 'Fecha') !!}
@@ -40,14 +40,17 @@
                                 </span>
                                 @enderror
                             </div>
-
-                            {!! Form::submit('Continuar',['class'=>'btn-primary btn']) !!}
-
-                            {!! Form::close() !!}
-
+                        <div class="form-group">
+                            {!! Form::label('pin', 'Pin del profesor') !!}
+                            <input id="pin" type="password" class="form-control" name="pin" required>
                         </div>
+
+                        {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
+
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 @endsection

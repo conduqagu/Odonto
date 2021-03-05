@@ -16,7 +16,7 @@ use function foo\func;
 class AsociacionExamDienteController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the resource. Student
      *
      * @return \Illuminate\Http\Response
      */
@@ -24,8 +24,13 @@ class AsociacionExamDienteController extends Controller
     {
         $asociacion_exam_dientes=AsociacionExamDiente::all()->where('exam_id','=',$exam_id);
 
-        return view('exams.asociacion_exam_diente',['asociacion_exam_dientes'=>$asociacion_exam_dientes,'exam_id'=>$exam_id]);
+        return view('exams/student/asociacion_exam_diente',['asociacion_exam_dientes'=>$asociacion_exam_dientes,'exam_id'=>$exam_id]);
     }
+    /**
+     * Display a listing of the resource. Teacher
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function indexasociacionEDTeacher($exam_id)
     {
         $asociacion_exam_dientes=AsociacionExamDiente::all()->where('exam_id','=',$exam_id);
@@ -134,7 +139,7 @@ class AsociacionExamDienteController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Edit Student
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -150,7 +155,7 @@ class AsociacionExamDienteController extends Controller
             ->get();
         $dientes=$diente->pluck('number', 'id');
 
-        return view('exams.edit_asociacion_exam_diente',['asociacion_exam_diente'=> $asociacion_exam_diente,'dientes'=>$dientes ]);
+        return view('exams/student/edit_asociacion_exam_diente',['asociacion_exam_diente'=> $asociacion_exam_diente,'dientes'=>$dientes ]);
     }
     public function editasociacionEDTeacher($id)
     {
@@ -165,7 +170,7 @@ class AsociacionExamDienteController extends Controller
         return view('exams/edit_asociacion_exam_dienteTeacher',['asociacion_exam_diente'=> $asociacion_exam_diente,'dientes'=>$dientes ]);
     }
     /**
-     * Update the specified resource in storage.
+     * Update Student
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -205,6 +210,13 @@ class AsociacionExamDienteController extends Controller
         return redirect()->route('index_asociacionED',[$asociacion_exam_diente->exam_id]);
 
     }
+    /**
+     * Update Teacher
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function updateasociacionEDTeacher(Request $request, $id)
     {
         $this->validate($request, [
@@ -242,7 +254,7 @@ class AsociacionExamDienteController extends Controller
 
         flash('Asociación eliminada correctamente');
 
-        return redirect()->route('asociacion_exam_dientes.index');
+        return redirect()->route('asociacion_exam_dientes/student/index');
 
     }
 }

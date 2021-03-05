@@ -17,11 +17,10 @@ class CreateExamsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->date('date');
-            $table->integer('iva');
-            $table->integer('costeTotal');
+            $table->integer('costeTotal')->nullable();
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->unsignedBigInteger('patient_id');
-            $table->enum('tipoExam',['inicial','evaluacion']);
+            $table->enum('tipoExam',['inicial','infantil','evaluacion','periodoncial','ortodoncial','evOrto']);
 
 
             //Atributos Examen inicial

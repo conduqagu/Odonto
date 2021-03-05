@@ -23,7 +23,7 @@ class ExamController extends Controller
     public function index($id)
     {
         $exams=Exam::where('exams.patient_id','=',$id)->get();
-        return view('exams.index',['exams'=>$exams,'id'=>$id]);
+        return view('exams/student/index',['exams'=>$exams,'id'=>$id]);
     }
     public function examsIndexTeacher($id)
     {
@@ -38,13 +38,18 @@ class ExamController extends Controller
     public function create()
     {
         $patients = Patient::all()->pluck('name','id');
-        return view('exams.create',['patients'=>$patients]);
+        return view('exams/student/create',['patients'=>$patients]);
     }
 
     public function examsCreateTeacher($id)
     {
         $patients = Patient::all()->pluck('name','id');
         return view('exams/examsCreateTeacher',['patients'=>$patients,'id'=>$id]);
+    }
+    public function examsCreateTeacherInicial($id)
+    {
+        $exam=Exam::find($id);
+        return view('exams/create_exam_inicial_teacher',['exam'=>$exam,'id'=>$id]);
     }
     /**
      * Store a newly created resource in storage.
@@ -100,14 +105,30 @@ class ExamController extends Controller
 
         flash('Examen creado correctamente');
 
-        return redirect()->route('create_asociacionED',[$exam->id]);
+        return redirect()->route('create_asociacionED',['exam_id'=>$exam->id]);
+    }
+    public function examsStoreTeacher(Request $request)
+    {
+        $this->validate($request, [
+            'date'=>['required','date'],
+            'tipoExam'=>['required','string','in:inicial,infantil,evaluacion,periodoncial,ortodoncial,evOrto'],
+            'patient_id' => ['required', 'exists:patients,id']
+        ]);
+
+        $exam = new Exam($request->all());
+        $exam->save();
+
+        flash('Examen creado correctamente');
+
+        if ($request->tipoExam=='inicial'){
+            return redirect()->route('examsCreateTeacherInicial',[$exam->id]);
+        }
     }
 
-    public function examsStoreTeacher(Request $request)
+    public function examsUptadeTeacherInicial(Request $request, $id)
     {
         //dd($request);
         $this->validate($request, [
-            'date'=>['required','date'],
             'aspectoExtraoralNormal' => ['required', 'boolean'],
             'cancerOral' => ['required', 'boolean'],
             'anomaliasLabios' => ['required', 'boolean'],
@@ -132,10 +153,11 @@ class ExamController extends Controller
             'desviacionLineaMedia' => ['required', 'boolean'],
             'mordidaAbierta' => ['required', 'boolean'],
             'habitos' => ['required', 'boolean'],
-            'patient_id' => ['required', 'exists:patients,id'],
         ]);
 
-        $exam = new Exam($request->all());
+        $exam = Exam::find($id);
+        $exam->fill($request->all());
+
         $exam->save();
 
         flash('Examen creado correctamente');
@@ -166,7 +188,7 @@ class ExamController extends Controller
         $exam = Exam::find($id);
         $patients = Patient::all()->pluck('name','id');
 
-        return view('exams/edit',['exam'=> $exam, 'patients'=>$patients ]);
+        return view('exams/student/edit',['exam'=> $exam, 'patients'=>$patients ]);
     }
     public function examsEditTeacher($id)
     {
@@ -224,7 +246,7 @@ class ExamController extends Controller
 
     if(count($profesor)==0){
         flash('Pin incorrecto');
-        return redirect()->route('exams.edit',$id);
+        return redirect()->route('exams/student/edit',$id);
     }
         $exam = Exam::find($id);
         $exam->fill($request->all());
@@ -233,7 +255,7 @@ class ExamController extends Controller
 
         flash('Examen modificado correctamente');
 
-        return redirect()->route('exams.index');
+        return redirect()->route('exams/student/index');
     }
     public function examsUpdateTeacher(Request $request, $id)
     {
@@ -288,7 +310,7 @@ class ExamController extends Controller
 
 
     public function examsdestroyStudent($id){
-        return view('exams/destroyStudent',['id'=>$id]);
+        return view('exams/student/destroyStudent',['id'=>$id]);
     }
     public function examsdeleteStudent(Request $request,$id){
 
@@ -310,7 +332,7 @@ class ExamController extends Controller
         $exam->delete();
         flash('Examen borrado correctamente');
 
-        return redirect()->route('exams.index');
+        return redirect()->route('exams/student/index');
     }
 
     public function examsdeleteTeacher($id)
