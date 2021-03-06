@@ -20,7 +20,7 @@ class CreateExamsTable extends Migration
             $table->integer('costeTotal')->nullable();
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->unsignedBigInteger('patient_id');
-            $table->enum('tipoExam',['inicial','infantil','evaluacion','periodoncial','ortodoncial','evOrto']);
+            $table->enum('tipoExam',['inicial','infantil','periodoncial','ortodoncial','evOrto']);
 
 
             //Atributos Examen inicial

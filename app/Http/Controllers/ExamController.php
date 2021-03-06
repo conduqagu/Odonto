@@ -56,6 +56,21 @@ class ExamController extends Controller
         $exam=Exam::find($id);
         return view('exams/create_exam_infantil_teacher',['exam'=>$exam,'id'=>$id]);
     }
+    public function examsCreateTeacherPersiodontal($id)
+    {
+        $exam=Exam::find($id);
+        return view('exams/create_exam_periodontal_teacher',['exam'=>$exam,'id'=>$id]);
+    }
+    public function examsCreateTeacherOrtodoncia($id)
+    {
+        $exam=Exam::find($id);
+        return view('exams/create_exam_ortodoncia_teacher',['exam'=>$exam,'id'=>$id]);
+    }
+    public function examsCreateTeacherevOrto($id)
+    {
+        $exam=Exam::find($id);
+        return view('exams/create_exam_evOrto_teacher',['exam'=>$exam,'id'=>$id]);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -122,18 +137,23 @@ class ExamController extends Controller
     {
         $this->validate($request, [
             'date'=>['required','date'],
-            'tipoExam'=>['required','string','in:inicial,infantil,evaluacion,periodoncial,ortodoncial,evOrto'],
+            'tipoExam'=>['required','string','in:inicial,infantil,periodoncial,ortodoncial,evOrto'],
             'patient_id' => ['required', 'exists:patients,id']
         ]);
 
         $exam = new Exam($request->all());
         $exam->save();
 
-        flash('Examen creado correctamente');
         if ($request->tipoExam=='inicial'){
             return redirect()->route('examsCreateTeacherInicial',[$exam->id]);
         }else if ($request->tipoExam=='infantil'){
             return redirect()->route('examsCreateTeacherInfantil',[$exam->id]);
+        }else if ($request->tipoExam=='periodoncial'){
+            return redirect()->route('examsCreateTeacherPeriodoncial',[$exam->id]);
+        }else if ($request->tipoExam=='ortodoncial'){
+            return redirect()->route('examsCreateTeacherOrtodoncia',[$exam->id]);
+        }else if ($request->tipoExam=='evOrto'){
+            return redirect()->route('examsCreateTeacherevOrto',[$exam->id]);
         }
 
     }
@@ -345,6 +365,73 @@ class ExamController extends Controller
         return redirect()->route('create_asociacionED',[$exam->id]);
     }
 
+    /**
+     * Update "Examen Infantil" for a Teacher
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function examsUptadeTeacherPeriodoncial(Request $request, $id)
+    {
+        $this->validate($request, [
+            'indicePlaca'=>['nullable','string', 'max:255'],
+            'color'=>['required','string', 'in:rosa,rojo'],
+            'borde'=>['required','string', 'in:afilado,engrosado'],
+            'aspecto'=>['required','string', 'in:puntillado,liso'],
+            'consistencia'=>['required','string', 'in:firme,depresible'],
+            'biotipo'=>['required','integer'],
+        ]);
+        $exam = Exam::find($id);
+        $exam->fill($request->all());
+
+        $exam->save();
+
+        flash('Examen creado correctamente');
+
+        return redirect()->route('create_asociacionED',[$exam->id]);
+    }
+    //TODO: update examen ortodoncia
+    /**
+     * Update "Examen Ortodoncial" for a Teacher
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function examsUptadeTeacherOrtodoncia(Request $request, $id)
+    {
+        $this->validate($request, [
+        ]);
+
+        $exam = Exam::find($id);
+        $exam->fill($request->all());
+
+        $exam->save();
+
+        flash('Examen creado correctamente');
+
+        return redirect()->route('create_asociacionED',[$exam->id]);
+    }
+    //TODO:Update examen evOrto
+    /**
+     * Update "Examen Evaluacion Ortodoncia" for a Teacher
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function examsUptadeTeacherevOrto(Request $request, $id)
+    {
+        $this->validate($request, [
+        ]);
+
+        $exam = Exam::find($id);
+        $exam->fill($request->all());
+
+        $exam->save();
+
+        flash('Examen creado correctamente');
+
+        return redirect()->route('create_asociacionED',[$exam->id]);
+    }
     /**
      * Remove the specified resource from storage.
      *
