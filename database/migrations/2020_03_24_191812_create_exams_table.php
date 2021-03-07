@@ -69,18 +69,14 @@ class CreateExamsTable extends Migration
             $table->enum('patronFacial',['dolicofacial','mesofacial','braquifacial'])->nullable();
             $table->enum('perfil',['armonico','convexo','concavo','plano'])->nullable();
             $table->enum('menton',['marcado','normal','retruido','plano'])->nullable();
-            //TODO: Crear tabla con tipo de terapia
-            $table->integer('tipoTerapia')->nullable();
-            //TODO: Determinar tipo de duración estimada
-            $table->string('duraciónEstimada')->nullable();
-            $table->string('otros')->nullable();
+
 
             //Atributos Evaluacion
             $table->string('previsto')->nullable();
             $table->string('maxilar')->nullable();
             $table->string('mandibular')->nullable();
             $table->string('logrado')->nullable();
-
+            $table->string('otros')->nullable();
         });
     }
 

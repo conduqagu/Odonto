@@ -56,7 +56,7 @@ class ExamController extends Controller
         $exam=Exam::find($id);
         return view('exams/create_exam_infantil_teacher',['exam'=>$exam,'id'=>$id]);
     }
-    public function examsCreateTeacherPersiodontal($id)
+    public function examsCreateTeacherPeriodontal($id)
     {
         $exam=Exam::find($id);
         return view('exams/create_exam_periodontal_teacher',['exam'=>$exam,'id'=>$id]);
@@ -149,7 +149,7 @@ class ExamController extends Controller
         }else if ($request->tipoExam=='infantil'){
             return redirect()->route('examsCreateTeacherInfantil',[$exam->id]);
         }else if ($request->tipoExam=='periodoncial'){
-            return redirect()->route('examsUptadeTeacherPeriodontal',[$exam->id]);
+            return redirect()->route('examsCreateTeacherPeriodontal',[$exam->id]);
         }else if ($request->tipoExam=='ortodoncial'){
             return redirect()->route('examsCreateTeacherOrtodoncia',[$exam->id]);
         }else if ($request->tipoExam=='evOrto'){
@@ -390,7 +390,6 @@ class ExamController extends Controller
 
         return redirect()->route('create_asociacionED',[$exam->id]);
     }
-    //TODO: update examen ortodoncia
     /**
      * Update "Examen Ortodoncial" for a Teacher
      *
@@ -400,6 +399,10 @@ class ExamController extends Controller
     public function examsUptadeTeacherOrtodoncia(Request $request, $id)
     {
         $this->validate($request, [
+            'patronFacial'=>['required','string','in:dolicofacial,mesofacial,braquifacial'],
+            'perfil'=>['required','string','in:armonico,convexo,concavo,plano'],
+            'menton'=>['required','string','in:marcado,normal,retruido,plano'],
+            'otros'=>['nullable','string','max:255']
         ]);
 
         $exam = Exam::find($id);
@@ -411,7 +414,6 @@ class ExamController extends Controller
 
         return redirect()->route('create_asociacionED',[$exam->id]);
     }
-    //TODO:Update examen evOrto
     /**
      * Update "Examen Evaluacion Ortodoncia" for a Teacher
      *
@@ -421,6 +423,11 @@ class ExamController extends Controller
     public function examsUptadeTeacherevOrto(Request $request, $id)
     {
         $this->validate($request, [
+            'previsto'=>['nullable','string','max:255'],
+            'maxilar'=>['nullable','string','max:255'],
+            'mandibular'=>['nullable','string','max:255'],
+            'logrado'=>['nullable','string','max:255'],
+            'otros'=>['nullable','string','max:255']
         ]);
 
         $exam = Exam::find($id);

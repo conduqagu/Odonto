@@ -19,7 +19,7 @@ class Exam extends Model
         //Atributos examen periodontal
         'indicePlaca','color','borde','aspecto','consistencia','biotipo',
         //Atributos Ortodoncia
-        'patronFacial','perfil','menton','tipoTerapia','duraciónEstimada','otros',
+        'patronFacial','perfil','menton','otros',
         //Atributos Evaluacion
         'previsto','maxilar','mandibular','logrado'
 
