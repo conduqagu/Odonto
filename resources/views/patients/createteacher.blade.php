@@ -50,7 +50,7 @@
                         <div class="form-group">
                             {!!Form::label('student_id', 'Estudiante a asignar') !!}
                             <br>
-                            {!! Form::select('student_id', $students, ['class' => 'form-control', 'required']) !!}
+                            {!! Form::select('student_id', $students,null, ['class' => 'form-control']) !!}
                         </div>
 
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}

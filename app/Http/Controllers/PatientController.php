@@ -154,10 +154,12 @@ class PatientController extends Controller
         $patient = new Patient($request->all());
         $patient->save();
 
-        $asociacion_patient_student=new AsociacionPatientStudent();
-        $asociacion_patient_student->student_id= $request->get('student_id');
-        $asociacion_patient_student->patient_id=$patient->id;
-        $asociacion_patient_student->save();
+        if ($request->get('student_id')!=null){
+            $asociacion_patient_student=new AsociacionPatientStudent();
+            $asociacion_patient_student->student_id= $request->get('student_id');
+            $asociacion_patient_student->patient_id=$patient->id;
+            $asociacion_patient_student->save();
+        }
 
         flash('Paciente creado correctamente');
 

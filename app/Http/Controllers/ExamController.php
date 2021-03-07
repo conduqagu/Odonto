@@ -149,7 +149,7 @@ class ExamController extends Controller
         }else if ($request->tipoExam=='infantil'){
             return redirect()->route('examsCreateTeacherInfantil',[$exam->id]);
         }else if ($request->tipoExam=='periodoncial'){
-            return redirect()->route('examsCreateTeacherPeriodoncial',[$exam->id]);
+            return redirect()->route('examsUptadeTeacherPeriodontal',[$exam->id]);
         }else if ($request->tipoExam=='ortodoncial'){
             return redirect()->route('examsCreateTeacherOrtodoncia',[$exam->id]);
         }else if ($request->tipoExam=='evOrto'){
@@ -371,7 +371,7 @@ class ExamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function examsUptadeTeacherPeriodoncial(Request $request, $id)
+    public function examsUptadeTeacherPeriodontal(Request $request, $id)
     {
         $this->validate($request, [
             'indicePlaca'=>['nullable','string', 'max:255'],

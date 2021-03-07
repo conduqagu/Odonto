@@ -5,12 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Examen inicial</div>
+                    <div class="card-header">Examen Periodontal</div>
 
                     <div class="card-body">
                         @include('flash::message')
 
-                        {!! Form::model($exam, [ 'route' => ['examsUptadeTeacherPeriodoncial',$exam->id],'method'=>'PUT']) !!}
+                        {!! Form::model($exam, [ 'route' => ['examsUptadeTeacherPeriodontal',$exam->id],'method'=>'PUT']) !!}
                         <div class="form-group">
                             {!!Form::label('patient_id', 'Paciente:  '.$exam->patient->name) !!}
                             <br>

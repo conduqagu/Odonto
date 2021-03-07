@@ -28,12 +28,12 @@
                                 <label for="inicial">Inicial</label><br>
                                 <input type="radio" id="infantil" name="tipoExam" value="infantil" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
                                 <label for="infantil">Infantil</label><br>
-                                <input type="radio" id="ortodoncial" name="tipoExam" value="ortodoncia" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
-                                <label for="ortodoncia">Ortodoncia</label><br>
-                                <input type="radio" id="perioconcial" name="tipoExam" value="perioconcia" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
-                                <label for="perioconcia">Perioconcial</label><br>
-                                <input type="radio" id="evOrto" name="tipoExam" value="evaluacion" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
-                                <label for="evaluacion">Evaluacion Ortodoncia</label><br>
+                                <input type="radio" id="ortodoncial" name="tipoExam" value="ortodoncial" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
+                                <label for="ortodoncial">Ortodoncia</label><br>
+                                <input type="radio" id="periodoncial" name="tipoExam" value="periodoncial" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
+                                <label for="periodoncia">Periodoncial</label><br>
+                                <input type="radio" id="evOrto" name="tipoExam" value="evOrto" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
+                                <label for="evOrto">Evaluacion Ortodoncia</label><br>
                                 @error('examType')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
