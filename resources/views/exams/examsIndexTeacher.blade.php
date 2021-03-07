@@ -12,18 +12,16 @@
                         {!! Form::open(['route' => ['examsCreateTeacher',$id], 'method' => 'get']) !!}
                         {!!   Form::submit('Realizar examen', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
+                        <br>
+                        <div  class="form-group" >
+                            <b>{!!  Form::label('paciente' , 'Paciente: '.$patient->name." ".$patient->surname) !!}
+                            </b>
+                        </div>
 
-                        <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
-                                <th>Paciente</th>
                                 <th>Fecha del examen</th>
-                                <th>Aspecto Extraoral Normal</th>
-                                <th>Patología mucosa</th>
-                                <th>Angle</th>
-                                <th>Lateral</th>
-                                <th>Dentición</th>
-                                <th>Desviación Línea Media</th>
+                                <th>Tipo Examen</th>
 
                                 <th colspan="3">Acciones</th>
                             </tr>
@@ -32,22 +30,8 @@
                             @foreach ($exams as $exam)
                                 <tr>
 
-                                    <td>{{ $exam->patient->name}}</td>
                                     <td>{{ $exam->date }}</td>
-                                    @if($exam->aspectoExtraoralNormal==1)
-                                        <td>Si</td>
-                                    @else
-                                        <td>No</td>
-                                    @endif
-                                    <td>{{ $exam->patologiaMucosa}}</td>
-                                    <td>{{ $exam->claseAngle}}</td>
-                                    <td>{{ $exam->lateralAngle}}</td>
-                                    <td>{{ $exam->tipoDentición}}</td>
-                                    @if($exam->desviacionLineaMedia==1)
-                                        <td>Si</td>
-                                    @else
-                                        <td>No</td>
-                                    @endif
+                                    <td>{{ $exam->tipoExam}}</td>
 
                                     <td>
                                         {!! Form::open(['route' => ['exams.show',$exam->id], 'method' => 'get']) !!}

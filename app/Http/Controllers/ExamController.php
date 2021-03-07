@@ -28,7 +28,8 @@ class ExamController extends Controller
     public function examsIndexTeacher($id)
     {
         $exams=Exam::where('exams.patient_id','=',$id)->get();
-        return view('exams/examsIndexTeacher',['exams'=>$exams,'id'=>$id]);
+        $patient=Patient::find($id);
+        return view('exams/examsIndexTeacher',['exams'=>$exams,'patient'=>$patient,'id'=>$id]);
     }
     /**
      * Show the form for creating a new resource.
@@ -144,15 +145,15 @@ class ExamController extends Controller
         $exam = new Exam($request->all());
         $exam->save();
 
-        if ($request->tipoExam=='inicial'){
+        if ($exam->tipoExam=='inicial'){
             return redirect()->route('examsCreateTeacherInicial',[$exam->id]);
-        }else if ($request->tipoExam=='infantil'){
+        }else if ($exam->tipoExam=='infantil'){
             return redirect()->route('examsCreateTeacherInfantil',[$exam->id]);
-        }else if ($request->tipoExam=='periodoncial'){
+        }else if ($exam->tipoExam=='periodoncial'){
             return redirect()->route('examsCreateTeacherPeriodontal',[$exam->id]);
-        }else if ($request->tipoExam=='ortodoncial'){
+        }else if ($exam->tipoExam=='ortodoncial'){
             return redirect()->route('examsCreateTeacherOrtodoncia',[$exam->id]);
-        }else if ($request->tipoExam=='evOrto'){
+        }else if ($exam->tipoExam=='evOrto'){
             return redirect()->route('examsCreateTeacherevOrto',[$exam->id]);
         }
 
