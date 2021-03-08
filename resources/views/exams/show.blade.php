@@ -284,16 +284,11 @@
                                 {!! Form::close() !!}
                             @endif
                         <br>
-                            @if(Auth::user()->userType =='teacher')
-                                {!! Form::open(['route' => ['examsIndexTeacher',$exam->patient->id], 'method' => 'get']) !!}
-                                {!!   Form::submit('Todos los exámenes', ['class'=> 'btn btn-outline-dark'])!!}
-                                {!! Form::close() !!}
-                            @endif
-                            @if(Auth::user()->userType =='student')
+
                                 {!! Form::open(['route' => ['exams.index',$exam->patient->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Todos los exámenes', ['class'=> 'btn btn-outline-dark'])!!}
                                 {!! Form::close() !!}
-                            @endif
+
 
 
                 </div>

@@ -23,14 +23,11 @@ class ExamController extends Controller
     public function index($id)
     {
         $exams=Exam::where('exams.patient_id','=',$id)->get();
-        return view('exams/student/index',['exams'=>$exams,'id'=>$id]);
-    }
-    public function examsIndexTeacher($id)
-    {
-        $exams=Exam::where('exams.patient_id','=',$id)->get();
         $patient=Patient::find($id);
-        return view('exams/examsIndexTeacher',['exams'=>$exams,'patient'=>$patient,'id'=>$id]);
+
+        return view('exams/index',['exams'=>$exams,'patient'=>$patient,'id'=>$id]);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -80,33 +77,10 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
         $this->validate($request, [
+
             'date'=>['required','date'],
-            'aspectoExtraoralNormal' => ['required', 'boolean'],
-            'cancerOral' => ['required', 'boolean'],
-            'anomaliasLabios' => ['required', 'boolean'],
-            'otros' => ['nullable','string', 'max:255'],
-            'patologiaMucosa'=> ['string','in:Ninguna,Tumor maligno,leucoplasia,Liquen plano'],
-            'fluorosis'=> ['required', 'string','in:Normal,Discutible,Muy ligera,Ligera,Moderada,Intensa,Excluida,No registrada'],
-            'estadoS1'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS2'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS3'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS4'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS5'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS6'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'claseAngle'=> ['required', 'string','in:clase I,clase II,clase III'],
-            'lateralAngle'=> ['required', 'string','in:Unilateral,Bilateral'],
-            'tipoDentición'=> ['required', 'string','in:Temporal,Mixta'],
-            'apiñamientoIncisivoInferior' => ['required', 'boolean'],
-            'apiñamientoIncisivoSuperior' => ['required', 'boolean'],
-            'perdidaEspacioAnterior' => ['required', 'boolean'],
-            'perdidaEspacioPosterior' => ['required', 'boolean'],
-            'mordidaCruzadaAnterior' => ['required', 'boolean'],
-            'mordidaCruzadaPosterior' => ['required', 'boolean'],
-            'desviacionLineaMedia' => ['required', 'boolean'],
-            'mordidaAbierta' => ['required', 'boolean'],
-            'habitos' => ['required', 'boolean'],
+            'tipoExam'=>['required','string','in:inicial,infantil,periodoncial,ortodoncial,evOrto'],
             'patient_id' => ['required', 'exists:patients,id'],
             'pin'=>['required','integer']
         ]);
@@ -125,8 +99,17 @@ class ExamController extends Controller
         $exam->save();
 
         flash('Examen creado correctamente');
-
-        return redirect()->route('create_asociacionED',['exam_id'=>$exam->id]);
+        if ($exam->tipoExam=='inicial'){
+            return redirect()->route('examsCreateTeacherInicial',[$exam->id]);
+        }else if ($exam->tipoExam=='infantil'){
+            return redirect()->route('examsCreateTeacherInfantil',[$exam->id]);
+        }else if ($exam->tipoExam=='periodoncial'){
+            return redirect()->route('examsCreateTeacherPeriodontal',[$exam->id]);
+        }else if ($exam->tipoExam=='ortodoncial'){
+            return redirect()->route('examsCreateTeacherOrtodoncia',[$exam->id]);
+        }else if ($exam->tipoExam=='evOrto'){
+            return redirect()->route('examsCreateTeacherevOrto',[$exam->id]);
+        }
     }
     /**
      * Store a newly created resource in storage for a Teacher
@@ -292,7 +275,7 @@ class ExamController extends Controller
 
         flash('Examen modificado correctamente');
 
-        return redirect()->route('examsIndexTeacher');
+        return redirect()->route('exams.index');
     }
     /**
      * Update "Examen inicial" for a Teacher
@@ -332,12 +315,20 @@ class ExamController extends Controller
 
         $exam = Exam::find($id);
         $exam->fill($request->all());
-
         $exam->save();
 
         flash('Examen creado correctamente');
 
-        return redirect()->route('create_asociacionED',[$exam->id]);
+
+
+        switch($request->submitbutton) {
+            case 'Continuar examen dental':
+                return redirect()->route('create_asociacionED',[$exam->id]);
+                break;
+            case 'Terminar':
+                return redirect()->route('exams.index',[$exam->patient->id]);
+                break;
+        }
     }
     /**
      * Update "Examen Infantil" for a Teacher
@@ -362,8 +353,7 @@ class ExamController extends Controller
         $exam->save();
 
         flash('Examen creado correctamente');
-
-        return redirect()->route('create_asociacionED',[$exam->id]);
+        return redirect()->route('exams.index',[$exam->patient->id]);
     }
 
     /**
@@ -389,7 +379,8 @@ class ExamController extends Controller
 
         flash('Examen creado correctamente');
 
-        return redirect()->route('create_asociacionED',[$exam->id]);
+        //TODO: cambiar boton a estudio de dientes periodontal
+        return redirect()->route('exams.index',[$exam->patient->id]);
     }
     /**
      * Update "Examen Ortodoncial" for a Teacher
@@ -412,8 +403,7 @@ class ExamController extends Controller
         $exam->save();
 
         flash('Examen creado correctamente');
-
-        return redirect()->route('create_asociacionED',[$exam->id]);
+        return redirect()->route('exams.index',[$exam->patient->id]);
     }
     /**
      * Update "Examen Evaluacion Ortodoncia" for a Teacher
@@ -437,8 +427,8 @@ class ExamController extends Controller
         $exam->save();
 
         flash('Examen creado correctamente');
+        return redirect()->route('exams.index',[$exam->patient->id]);
 
-        return redirect()->route('create_asociacionED',[$exam->id]);
     }
     /**
      * Remove the specified resource from storage.
@@ -480,7 +470,7 @@ class ExamController extends Controller
         $exam->delete();
         flash('Examen borrado correctamente');
 
-        return redirect()->route('examsIndexTeacher');
+        return redirect()->route('exams.index');
     }
 
     public function destroy()

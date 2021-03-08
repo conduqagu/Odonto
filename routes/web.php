@@ -40,7 +40,6 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
     Route::get('/perfiles/perfilteacher','UserController@perfilteacher')->name('perfilteacher');
     Route::put('/perfiles/updateperfilteacher/{id}','UserController@updateperfilteacher')->name('updateperfilteacher');
     Route::get('/exams/indexStudent/{id}','ExamController@indexStudent')->name('examsIndexStudent');
-    Route::get('/examsIndexTeacher/{id}','ExamController@examsIndexTeacher')->name('examsIndexTeacher');
     Route::delete('/exams/delete/{id}','ExamController@examsdeleteTeacher')->name('examsdeleteTeacher');
     Route::get('/exams/createteacher/{id}','ExamController@examsCreateTeacher')->name('examsCreateTeacher');
     Route::post('/exams/storeteacher','ExamController@examsStoreTeacher')->name('examsStoreTeacher');
@@ -49,16 +48,7 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
     Route::get('/exams/indexasociacionEDTeacher/{id}','AsociacionExamDienteController@indexasociacionEDTeacher')->name('indexasociacionEDTeacher');
     Route::get('/exams/editasociacionEDTeacher/{id}','AsociacionExamDienteController@editasociacionEDTeacher')->name('editasociacionEDTeacher');
     Route::put('/exams/updateasociacionEDTeacher/{id}','AsociacionExamDienteController@updateasociacionEDTeacher')->name('updateasociacionEDTeacher');
-    Route::get('/exams/createTeacherInicial/{id}','ExamController@examsCreateTeacherInicial')->name('examsCreateTeacherInicial');
-    Route::put('/exams/updateteacherInicial/{id}','ExamController@examsUptadeTeacherInicial')->name('examsUptadeTeacherInicial');
-    Route::get('/exams/createTeacherInfantil/{id}','ExamController@examsCreateTeacherInfantil')->name('examsCreateTeacherInfantil');
-    Route::put('/exams/updateteacherInfantil/{id}','ExamController@examsUptadeTeacherInfantil')->name('examsUptadeTeacherInfantil');
-    Route::get('/exams/createTeacherPeriodontal/{id}','ExamController@examsCreateTeacherPeriodontal')->name('examsCreateTeacherPeriodontal');
-    Route::put('/exams/updateteacherPeriodontal/{id}','ExamController@examsUptadeTeacherPeriodontal')->name('examsUptadeTeacherPeriodontal');
-    Route::get('/exams/createTeacherOrtodoncia/{id}','ExamController@examsCreateTeacherOrtodoncia')->name('examsCreateTeacherOrtodoncia');
-    Route::put('/exams/updateteacherOrtodoncia/{id}','ExamController@examsUptadeTeacherOrtodoncia')->name('examsUptadeTeacherOrtodoncia');
-    Route::get('/exams/createTeacherevOrto/{id}','ExamController@examsCreateTeacherevOrto')->name('examsCreateTeacherevOrto');
-    Route::put('/exams/updateteacherevOrto/{id}','ExamController@examsUptadeTeacherevOrto')->name('examsUptadeTeacherevOrto');
+
 
 
 
@@ -75,7 +65,6 @@ Route::group(['middleware'=> 'App\Http\Middleware\StudentMiddleware'], function(
     Route::put('/perfiles/updateperfilstudent/{id}','UserController@updateperfilstudent')->name('updateperfilstudent');
     Route::get('/exams/destroyStudent/{id}','ExamController@examsdestroyStudent')->name('examsdestroyStudent');
     Route::delete('/exams/deleteStudent/{id}','ExamController@examsdeleteStudent')->name('examsdeleteStudent');
-    Route::get('/exams/index/{id}','ExamController@index')->name('exams.index');
     Route::get('/exams/create','ExamController@create')->name('exams.create');
     Route::post('/exams/store','ExamController@store')->name('exams.store');
     Route::get('/exams/edit/{id}','ExamController@edit')->name('exams.edit');
@@ -92,10 +81,21 @@ Route::get('/patients/createDientesPac/{id}','DienteController@createDientesPac'
 Route::get('/patients/createDientesPacChild/{id}','DienteController@createDientesPacChild')->name('createDientesPacChild');
 Route::resource('dientes','DienteController');
 
+Route::get('/exams/index/{id}','ExamController@index')->name('exams.index');
 Route::get('/exams/show/{id}','ExamController@show')->name('exams.show');
 Route::get('/exams/create_asociacionED/{id}','AsociacionExamDienteController@create_asociacionED')->name('create_asociacionED');
 Route::post('/exams/store_asociacionED/{id}','AsociacionExamDienteController@store_asociacionED')->name('store_asociacionED');
 
+Route::get('/exams/createTeacherInicial/{id}','ExamController@examsCreateTeacherInicial')->name('examsCreateTeacherInicial');
+Route::put('/exams/updateteacherInicial/{id}','ExamController@examsUptadeTeacherInicial')->name('examsUptadeTeacherInicial');
+Route::get('/exams/createTeacherInfantil/{id}','ExamController@examsCreateTeacherInfantil')->name('examsCreateTeacherInfantil');
+Route::put('/exams/updateteacherInfantil/{id}','ExamController@examsUptadeTeacherInfantil')->name('examsUptadeTeacherInfantil');
+Route::get('/exams/createTeacherPeriodontal/{id}','ExamController@examsCreateTeacherPeriodontal')->name('examsCreateTeacherPeriodontal');
+Route::put('/exams/updateteacherPeriodontal/{id}','ExamController@examsUptadeTeacherPeriodontal')->name('examsUptadeTeacherPeriodontal');
+Route::get('/exams/createTeacherOrtodoncia/{id}','ExamController@examsCreateTeacherOrtodoncia')->name('examsCreateTeacherOrtodoncia');
+Route::put('/exams/updateteacherOrtodoncia/{id}','ExamController@examsUptadeTeacherOrtodoncia')->name('examsUptadeTeacherOrtodoncia');
+Route::get('/exams/createTeacherevOrto/{id}','ExamController@examsCreateTeacherevOrto')->name('examsCreateTeacherevOrto');
+Route::put('/exams/updateteacherevOrto/{id}','ExamController@examsUptadeTeacherevOrto')->name('examsUptadeTeacherevOrto');
 //Route::resource('exams','ExamController');
 
 
