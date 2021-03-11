@@ -18,8 +18,8 @@ class CreateDiagnosticosTable extends Migration
             $table->timestamps();
             $table->string('tipo');
             $table->string('nombre');
-            $table->foreign('patologia_id')->references('id')->on('patologias')->onDelete('cascade');
-            $table->unsignedBigInteger('patologia_id');
+            $table->foreign('tipo_id')->references('id')->on('tipo_diagnosticos')->onDelete('cascade');
+            $table->unsignedBigInteger('tipo_id');
         });
     }
 

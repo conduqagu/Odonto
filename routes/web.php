@@ -80,6 +80,10 @@ Route::get('/patients/dientesPatient/{id}','DienteController@indexPatient')->nam
 Route::get('/patients/createDientesPac/{id}','DienteController@createDientesPac')->name('createDientesPac');
 Route::get('/patients/createDientesPacChild/{id}','DienteController@createDientesPacChild')->name('createDientesPacChild');
 Route::resource('dientes','DienteController');
+Route::resource('diagnosticos','DiagnosticoController');
+Route::resource('patologias','PatologiaController');
+Route::resource('tipo_diagnosticos','TipoDiagnosticoController');
+
 
 Route::get('/exams/index/{id}','ExamController@index')->name('exams.index');
 Route::get('/exams/show/{id}','ExamController@show')->name('exams.show');

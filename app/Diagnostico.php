@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Diagnostico extends Model
 {
     protected $fillable = [
-        'tipo','nombre', 'patologia_id'
+        'nombre','tipo_id'
     ];
-    public function Patologia()
+    public function TipoDiagnostico()
     {
-        return $this->belongsTo('App\Patologia');
+        return $this->belongsTo('App\TipoDiagnostico');
     }
     public function AsociacionDiagnosticoExams()
     {
