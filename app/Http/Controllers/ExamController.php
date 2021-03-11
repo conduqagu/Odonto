@@ -328,6 +328,9 @@ class ExamController extends Controller
             case 'Terminar':
                 return redirect()->route('exams.index',[$exam->patient->id]);
                 break;
+            case 'Añadir diagnóstico':
+                return redirect()->route('asociacion_ExDiags.create',[$exam->patient->id]);
+                break;
         }
     }
     /**
