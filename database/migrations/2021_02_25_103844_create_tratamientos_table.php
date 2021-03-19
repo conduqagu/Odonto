@@ -22,9 +22,9 @@ class CreateTratamientosTable extends Migration
             $table->boolean('cobrado');
             $table->enum('terapia',['sin definir','convencional','fases']);
             //TODO: Determinar tipo de duración estimada
-            $table->string('duraciónEstimada')->nullable();
+            $table->string('duracionEstimada')->nullable();
             $table->unsignedBigInteger('brakets_id');
-            $table->foreign('brakets_id')->references('id')->on('brakets')->onDelete('cascade');
+            $table->foreign('brakets_id')->references('id')->on('brakets')->onDelete('cascade')->nullable();
             $table->timestamps();
         });
     }

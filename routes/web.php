@@ -51,7 +51,6 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
 
 
 
-
 });
 
 Route::group(['middleware'=> 'App\Http\Middleware\StudentMiddleware'], function()
@@ -82,9 +81,13 @@ Route::get('/patients/createDientesPacChild/{id}','DienteController@createDiente
 Route::resource('dientes','DienteController');
 Route::resource('diagnosticos','DiagnosticoController');
 Route::resource('patologias','PatologiaController');
+Route::resource('tratamientos','TratamientoController');
 Route::resource('tipo_diagnosticos','TipoDiagnosticoController');
 Route::post('/asociacion_ExamDiags/store/{id}','AsociacionDiagnosticoExamController@store')->name('asociacion_ExDiags.store');
 Route::get('/asociacion_ExamDiags/create/{id}','AsociacionDiagnosticoExamController@create')->name('asociacion_ExDiags.create');
+Route::post('/asociacion_ExamTratamientos/store/{id}','AsociacionExamTratamientoController@store')->name('asociacion_ExTratamientos.store');
+Route::get('/asociacion_ExamTratamientos/create/{id}','AsociacionExamTratamientoController@create')->name('asociacion_ExTratamientos.create');
+Route::resource('ajustes','AjusteController');
 
 
 

@@ -59,8 +59,8 @@
                                         <a class="dropdown-item" href="{{ url('/patients/index') }}">
                                             Pacientes
                                         </a>
-                                        <a class="dropdown-item" href="{{ url('/perfiles/perfilstudent') }}">
-                                            Mi perfil
+                                        <a class="dropdown-item" href="{{ url('/ajustes') }}">
+                                            Ajustes
                                         </a>
                                     @endif
                                     <!--
@@ -75,14 +75,8 @@
                                         <a class="dropdown-item" href="{{ url('/indexstudents') }}">
                                         Estudiantes
                                         </a>
-                                        <a class="dropdown-item" href="{{ url('/perfiles/perfilteacher') }}">
-                                            Mi perfil
-                                        </a>
-                                        <a class="dropdown-item" href="{{ url('/diagnosticos') }}">
-                                            Diagnosticos
-                                        </a>
-                                        <a class="dropdown-item" href="{{ url('/tipo_diagnosticos') }}">
-                                            Tipo Diagnósticos
+                                        <a class="dropdown-item" href="{{ url('/ajustes') }}">
+                                            Ajustes
                                         </a>
                                     @endif
 
