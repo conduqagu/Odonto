@@ -82,6 +82,8 @@ Route::resource('dientes','DienteController');
 Route::resource('diagnosticos','DiagnosticoController');
 Route::resource('patologias','PatologiaController');
 Route::resource('tratamientos','TratamientoController');
+Route::resource('tipo_tratamientos','TipoTratamientoController');
+
 Route::resource('tipo_diagnosticos','TipoDiagnosticoController');
 Route::post('/asociacion_ExamDiags/store/{id}','AsociacionDiagnosticoExamController@store')->name('asociacion_ExDiags.store');
 Route::get('/asociacion_ExamDiags/create/{id}','AsociacionDiagnosticoExamController@create')->name('asociacion_ExDiags.create');

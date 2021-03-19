@@ -7,15 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Tratamiento extends Model
 {
     protected $fillable = [
-        'nombre','realizado', 'coste','iva', 'cobrado','terapia','brakets_id','duracionEstimada'
+        'realizado', 'coste','iva', 'cobrado','terapia','brakets_id','duracionEstimada','tipo_tratamientos_id'
     ];
 
     public function asociacionExamTratamientos()
     {
         return $this->hasMany('App\AsociacionExamTratamiento');
     }
-    public function Braket()
+    public function braket()
     {
         return $this->belongsTo('App\Braket');
+    }
+    public function tipoTratamiento()
+    {
+        return $this->belongsTo('App\TipoTratamiento');
     }
 }

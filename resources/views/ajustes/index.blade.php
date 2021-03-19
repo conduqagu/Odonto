@@ -26,6 +26,10 @@
                             {!!   Form::submit('Tratamientos', ['class'=> 'btn btn-primary'])!!}
                             {!! Form::close() !!}
                             <br>
+                            {!! Form::open(['route' => 'tipo_tratamientos.index', 'method' => 'get']) !!}
+                            {!!   Form::submit('Tipo de tratamientos', ['class'=> 'btn btn-primary'])!!}
+                            {!! Form::close() !!}
+                            <br>
                             {!! Form::open(['route' => 'diagnosticos.index', 'method' => 'get']) !!}
                             {!!   Form::submit('Diagnosticos', ['class'=> 'btn btn-primary'])!!}
                             {!! Form::close() !!}

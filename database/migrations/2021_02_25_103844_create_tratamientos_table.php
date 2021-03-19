@@ -15,7 +15,6 @@ class CreateTratamientosTable extends Migration
     {
         Schema::create('tratamientos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
             $table->boolean('realizado');
             $table->double('coste');
             $table->double('iva');
@@ -25,6 +24,9 @@ class CreateTratamientosTable extends Migration
             $table->string('duracionEstimada')->nullable();
             $table->unsignedBigInteger('brakets_id');
             $table->foreign('brakets_id')->references('id')->on('brakets')->onDelete('cascade')->nullable();
+            $table->unsignedBigInteger('tipo_tratamientos_id');
+            $table->foreign('tipo_tratamientos_id')->references('id')->on('tipo_tratamientos')->onDelete('cascade')->nullable();
+
             $table->timestamps();
         });
     }
