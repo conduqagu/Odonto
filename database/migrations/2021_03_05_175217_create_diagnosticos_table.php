@@ -16,10 +16,9 @@ class CreateDiagnosticosTable extends Migration
         Schema::create('diagnosticos', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('tipo');
             $table->string('nombre');
-            $table->foreign('tipo_id')->references('id')->on('tipo_diagnosticos')->onDelete('cascade');
-            $table->unsignedBigInteger('tipo_id');
+            $table->foreign('tipo_diagnostico_id')->references('id')->on('tipo_diagnosticos')->onDelete('cascade');
+            $table->unsignedBigInteger('tipo_diagnostico_id');
         });
     }
 

@@ -23,8 +23,8 @@
 
                             @foreach ($diagnosticos as $diagnostico)
                                 <tr>
-                                    <td>{{ $diagnostico->name }}</td>
-                                    <td>{{ $diagnostico->tipo_id }}</td>
+                                    <td>{{ $diagnostico->nombre }}</td>
+                                    <td>{{ $diagnostico->tipoDiagnostico->name}}</td>
 
                                     <td>
                                         {!! Form::open(['route' => ['diagnosticos.edit',$diagnostico->id], 'method' => 'get']) !!}

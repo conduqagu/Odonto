@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Diagnostico extends Model
 {
     protected $fillable = [
-        'nombre','tipo_id'
+        'nombre','tipo_diagnostico_id'
     ];
-    public function TipoDiagnostico()
+    public function tipoDiagnostico()
     {
         return $this->belongsTo('App\TipoDiagnostico');
     }

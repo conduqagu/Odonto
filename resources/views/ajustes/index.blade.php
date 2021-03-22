@@ -33,7 +33,10 @@
                             {!! Form::open(['route' => 'diagnosticos.index', 'method' => 'get']) !!}
                             {!!   Form::submit('Diagnosticos', ['class'=> 'btn btn-primary'])!!}
                             {!! Form::close() !!}
-
+                            <br>
+                            {!! Form::open(['route' => 'brakets.index', 'method' => 'get']) !!}
+                            {!!   Form::submit('Brakets', ['class'=> 'btn btn-primary'])!!}
+                            {!! Form::close() !!}
 
                         </div>
                         </div>

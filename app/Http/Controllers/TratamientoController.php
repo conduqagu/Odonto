@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Braket;
 use App\Diagnostico;
-use App\Diente;
-use App\TipoDiagnostico;
+use App\TipoTratamiento;
 use App\Tratamiento;
 use Illuminate\Http\Request;
 
@@ -31,8 +30,9 @@ class TratamientoController extends Controller
      */
     public function create()
     {
+        $tipo_tratamientos=TipoTratamiento::all()->pluck('name','id');
         $brakets=Braket::all()->pluck('name','id');
-        return view('tratamientos/create',['brakets'=>$brakets]);
+        return view('tratamientos/create',['brakets'=>$brakets,'tipo_tratamientos'=>$tipo_tratamientos]);
     }
 
 
@@ -44,14 +44,15 @@ class TratamientoController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
-            'nombre' => ['required', 'string', 'max:255'],
             'realizado' => ['required', 'boolean'],
             'coste' => ['required', 'integer', 'max:255'],
             'iva' => ['required', 'integer', 'max:255'],
             'terapia' => ['required', 'string', 'in:sin definir,convencional,fases'],
             'duracionEstimada' => ['nullable', 'string', 'max:255'],
-            'brakets_id' => ['required', 'exists:brakets,id'],
+            'braket_id' => ['nullable', 'exists:brakets,id'],
+            'tipo_tratamiento_id' => ['required', 'exists:tipo_tratamientos,id'],
         ]);
 
         $tratamientos=new Tratamiento($request->all());
@@ -81,8 +82,7 @@ class TratamientoController extends Controller
      */
     public function edit($id)
     {
-        $diagnostico = Diagnostico::find($id);
-        return view('diagnosticos.edit',['diagnostico'=> $diagnostico]);
+
     }
 
     /**
@@ -94,18 +94,7 @@ class TratamientoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'nombre' => ['required', 'string', 'max:255'],
-            'tipo_id' => ['required', 'exists:tipo_diagnosticos,id'],
-        ]);
 
-        $diagnostico = Diagnostico::find($id);
-        $diagnostico->fill($request->all());
-        $diagnostico->save();
-
-        flash('Diagnóstico creado correctamente');
-
-        return redirect()->route('diagnosticos.index');
     }
 
     /**
@@ -116,10 +105,6 @@ class TratamientoController extends Controller
      */
     public function destroy($id)
     {
-        $diagnostico = Diagnostico::find($id);
-        $diagnostico->delete();
-        flash('Diagnostico borrado correctamente');
 
-        return redirect()->route('diagnosticos.index');
     }
 }

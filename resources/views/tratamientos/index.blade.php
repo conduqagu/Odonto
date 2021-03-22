@@ -5,7 +5,6 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Dientes</div>
 
                     <div class="panel-body">
                         @include('flash::message')
@@ -29,14 +28,14 @@
 
                             @foreach ($tratamientos as $tratamiento)
                                 <tr>
-                                    <td>{{ $tratamiento->nombre }}</td>
+                                    <td>{{ $tratamiento->tipoTratamiento->name }}</td>
                                     <td>{{ $tratamiento->realizado }}</td>
                                     <td>{{ $tratamiento->coste }}</td>
                                     <td>{{ $tratamiento->iva }}</td>
                                     <td>{{ $tratamiento->cobrado }}</td>
                                     <td>{{ $tratamiento->terapia }}</td>
                                     <td>{{ $tratamiento->duracionEstimada }}</td>
-                                    <td>{{ $tratamiento->braket_id}}</td>
+                                    <td>{{ $tratamiento->braket->name}}</td>
 
 
                                 </tr>

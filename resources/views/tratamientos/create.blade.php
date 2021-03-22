@@ -12,8 +12,8 @@
 
                         {!! Form::open(['route' => 'tratamientos.store']) !!}
                         <div class="form-group">
-                            {!! Form::label('nombre', 'Nombre') !!}
-                            {!! Form::text('nombre',null,['class'=>'form-control', 'required','autofocus']) !!}
+                            {!!  Form::label('tipo_tratamiento_id' , 'Nombre') !!}
+                            {!! Form::select('tipo_tratamiento_id', $tipo_tratamientos,null,['class' => 'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('realizado', 'Realizado') !!}
@@ -40,8 +40,8 @@
                             {!! Form::text('duracionEstimada',null,['class'=>'form-control']) !!}
                         </div>
                         <div class="form-group">
-                            {!!  Form::label('brakets_id' , 'Brakets') !!}
-                            {!! Form::select('brakets_id', $brakets,null,['class' => 'form-control', 'required']) !!}
+                            {!!  Form::label('braket_id' , 'Brakets') !!}
+                            {!! Form::select('braket_id', $brakets,null,['class' => 'form-control']) !!}
                         </div>
                         <br>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}

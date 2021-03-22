@@ -83,6 +83,8 @@ Route::resource('diagnosticos','DiagnosticoController');
 Route::resource('patologias','PatologiaController');
 Route::resource('tratamientos','TratamientoController');
 Route::resource('tipo_tratamientos','TipoTratamientoController');
+Route::resource('brakets','BraketController');
+
 
 Route::resource('tipo_diagnosticos','TipoDiagnosticoController');
 Route::post('/asociacion_ExamDiags/store/{id}','AsociacionDiagnosticoExamController@store')->name('asociacion_ExDiags.store');

@@ -22,10 +22,10 @@ class CreateTratamientosTable extends Migration
             $table->enum('terapia',['sin definir','convencional','fases']);
             //TODO: Determinar tipo de duración estimada
             $table->string('duracionEstimada')->nullable();
-            $table->unsignedBigInteger('brakets_id');
-            $table->foreign('brakets_id')->references('id')->on('brakets')->onDelete('cascade')->nullable();
-            $table->unsignedBigInteger('tipo_tratamientos_id');
-            $table->foreign('tipo_tratamientos_id')->references('id')->on('tipo_tratamientos')->onDelete('cascade')->nullable();
+            $table->unsignedBigInteger('braket_id');
+            $table->foreign('braket_id')->references('id')->on('brakets')->onDelete('cascade')->nullable();
+            $table->unsignedBigInteger('tipo_tratamiento_id');
+            $table->foreign('tipo_tratamiento_id')->references('id')->on('tipo_tratamientos')->onDelete('cascade')->nullable();
 
             $table->timestamps();
         });
