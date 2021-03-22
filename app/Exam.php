@@ -41,5 +41,9 @@ class Exam extends Model
     {
         return $this->hasMany('App\PruebaComplementaria');
     }
+    public function tratamientos()
+    {
+        return $this->hasMany('App\Tratamiento');
+    }
 }
 

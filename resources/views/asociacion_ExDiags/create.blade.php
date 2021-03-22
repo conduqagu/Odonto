@@ -15,7 +15,8 @@
                             {!! Form::select('diagnostico_id', $diagnosticos, null,['class' => 'form-control', 'required']) !!}
                         </div>
                         <br>
-                        {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
+                        {!! Form::submit( 'Guardar', ['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}
+                        {!! Form::submit( 'Tratamiento',['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}
                         {!! Form::close() !!}
                     </div>
                 </div>

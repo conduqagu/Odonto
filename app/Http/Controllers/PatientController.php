@@ -190,7 +190,7 @@ class PatientController extends Controller
     {
         $patient = Patient::find($id);
 
-        return view('patients.edit',['patient'=>$patient ]);
+        return view('patients.edit',['patient'=>$patient]);
 
     }
     /**

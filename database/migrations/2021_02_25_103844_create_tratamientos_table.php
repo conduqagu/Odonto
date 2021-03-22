@@ -26,6 +26,9 @@ class CreateTratamientosTable extends Migration
             $table->foreign('braket_id')->references('id')->on('brakets')->onDelete('cascade')->nullable();
             $table->unsignedBigInteger('tipo_tratamiento_id');
             $table->foreign('tipo_tratamiento_id')->references('id')->on('tipo_tratamientos')->onDelete('cascade')->nullable();
+            $table->unsignedBigInteger('exam_id');
+            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade')->nullable();
+
 
             $table->timestamps();
         });

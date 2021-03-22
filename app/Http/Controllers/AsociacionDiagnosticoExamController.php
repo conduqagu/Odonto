@@ -56,7 +56,14 @@ class AsociacionDiagnosticoExamController extends Controller
         flash('Asociación creada correctamente');
 
         //return redirect()->route('asociacion_ExTratamientos.create',[$exam_id]);
-        return redirect()->route('create_asociacionED',[$exam_id]);
+        switch($request->submitbutton) {
+            case 'Guardar':
+                return redirect()->route('exams.show',$exam_id);
+                break;
+            case 'Tratamiento':
+                return redirect()->route('tratamientos.create',$exam_id);
+                break;
+        }
     }
 
 }

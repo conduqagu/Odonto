@@ -12,6 +12,8 @@
 
                         {!! Form::open(['route' => 'tratamientos.store']) !!}
                         <div class="form-group">
+                        </div>
+                        <div class="form-group">
                             {!!  Form::label('tipo_tratamiento_id' , 'Nombre') !!}
                             {!! Form::select('tipo_tratamiento_id', $tipo_tratamientos,null,['class' => 'form-control', 'required']) !!}
                         </div>
