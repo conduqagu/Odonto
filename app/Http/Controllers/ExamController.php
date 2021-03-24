@@ -119,27 +119,33 @@ class ExamController extends Controller
      */
     public function examsStoreTeacher(Request $request)
     {
-        $this->validate($request, [
-            'date'=>['required','date'],
-            'tipoExam'=>['required','string','in:inicial,infantil,periodoncial,ortodoncial,evOrto'],
-            'patient_id' => ['required', 'exists:patients,id']
-        ]);
+        $patient=Patient::find($request->patient_id);
+        if($patient->child==false&&$request->tipoExam=='infantil'){
+            flash('Este usuario es adulto, no se le puede realizar un examen inicial');
+            //TODO: diferenciar entre alumno y profe
+            return redirect()->route('examsCreateTeacher', [$request->patient_id]);
+        }else {
+            $this->validate($request, [
+                'date' => ['required', 'date'],
+                'tipoExam' => ['required', 'string', 'in:inicial,infantil,periodoncial,ortodoncial,evOrto'],
+                'patient_id' => ['required', 'exists:patients,id']
+            ]);
 
-        $exam = new Exam($request->all());
-        $exam->save();
+            $exam = new Exam($request->all());
+            $exam->save();
 
-        if ($exam->tipoExam=='inicial'){
-            return redirect()->route('examsCreateTeacherInicial',[$exam->id]);
-        }else if ($exam->tipoExam=='infantil'){
-            return redirect()->route('examsCreateTeacherInfantil',[$exam->id]);
-        }else if ($exam->tipoExam=='periodoncial'){
-            return redirect()->route('examsCreateTeacherPeriodontal',[$exam->id]);
-        }else if ($exam->tipoExam=='ortodoncial'){
-            return redirect()->route('examsCreateTeacherOrtodoncia',[$exam->id]);
-        }else if ($exam->tipoExam=='evOrto'){
-            return redirect()->route('examsCreateTeacherevOrto',[$exam->id]);
+            if ($exam->tipoExam == 'inicial') {
+                return redirect()->route('examsCreateTeacherInicial', [$exam->id]);
+            } else if ($exam->tipoExam == 'infantil') {
+                return redirect()->route('examsCreateTeacherInfantil', [$exam->id]);
+            } else if ($exam->tipoExam == 'periodoncial') {
+                return redirect()->route('examsCreateTeacherPeriodontal', [$exam->id]);
+            } else if ($exam->tipoExam == 'ortodoncial') {
+                return redirect()->route('examsCreateTeacherOrtodoncia', [$exam->id]);
+            } else if ($exam->tipoExam == 'evOrto') {
+                return redirect()->route('examsCreateTeacherevOrto', [$exam->id]);
+            }
         }
-
     }
     /**
      * Display the specified resource.

@@ -26,8 +26,11 @@
                             <div class="col-md-6">
                                 <input type="radio" id="inicial" name="tipoExam" value="inicial" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
                                 <label for="inicial">Inicial</label><br>
-                                <input type="radio" id="infantil" name="tipoExam" value="infantil" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
-                                <label for="infantil">Infantil</label><br>
+                                <!--TODO: Tiene sentido esto aqui?-->
+                                @if(\App\Patient::find($id)->child==1)
+                                    <input type="radio" id="infantil" name="tipoExam" value="infantil" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
+                                    <label for="infantil">Infantil</label><br>
+                                @endif
                                 <input type="radio" id="ortodoncial" name="tipoExam" value="ortodoncial" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
                                 <label for="ortodoncial">Ortodoncia</label><br>
                                 <input type="radio" id="periodoncial" name="tipoExam" value="periodoncial" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
