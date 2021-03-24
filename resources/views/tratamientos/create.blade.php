@@ -9,9 +9,9 @@
 
                     <div class="card-body">
                         @include('flash::message')
-
-                        {!! Form::open(['route' => 'tratamientos.store']) !!}
+                        {!! Form::open(['route' => ['tratamientos.store']]) !!}
                         <div class="form-group">
+                            {!!  Form::hidden('exam_id' , $exam_id) !!}
                         </div>
                         <div class="form-group">
                             {!!  Form::label('tipo_tratamiento_id' , 'Nombre') !!}

@@ -20,7 +20,6 @@ class TratamientoController extends Controller
     {
         $tratamientos=Tratamiento::all();
         return view('tratamientos/index',['tratamientos'=>$tratamientos]);
-
     }
 
     /**
@@ -28,11 +27,11 @@ class TratamientoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function createT($exam_id)
     {
         $tipo_tratamientos=TipoTratamiento::all()->pluck('name','id');
         $brakets=Braket::all()->pluck('name','id');
-        return view('tratamientos/create',['brakets'=>$brakets,'tipo_tratamientos'=>$tipo_tratamientos]);
+        return view('tratamientos/create',['brakets'=>$brakets,'tipo_tratamientos'=>$tipo_tratamientos,'exam_id'=>$exam_id]);
     }
 
 
@@ -44,7 +43,6 @@ class TratamientoController extends Controller
      */
     public function store(Request $request)
     {
-
         $this->validate($request, [
             'realizado' => ['required', 'boolean'],
             'coste' => ['required', 'integer', 'max:255'],
@@ -53,14 +51,13 @@ class TratamientoController extends Controller
             'duracionEstimada' => ['nullable', 'string', 'max:255'],
             'braket_id' => ['nullable', 'exists:brakets,id'],
             'tipo_tratamiento_id' => ['required', 'exists:tipo_tratamientos,id'],
+            'exam_id' =>['required','exists:exams,id']
         ]);
-
         $tratamientos=new Tratamiento($request->all());
         $tratamientos->save();
-
         flash('Tratamiento creado correctamente');
 
-        return redirect()->route('tratamientos.index');
+        return redirect()->route('exams.show',$request->exam_id);
     }
 
     /**

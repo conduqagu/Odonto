@@ -61,7 +61,7 @@ class AsociacionDiagnosticoExamController extends Controller
                 return redirect()->route('exams.show',$exam_id);
                 break;
             case 'Tratamiento':
-                return redirect()->route('tratamientos.create',$exam_id);
+                return redirect()->route('tratamientos.createT',$exam_id);
                 break;
         }
     }

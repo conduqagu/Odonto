@@ -81,7 +81,7 @@ Route::get('/patients/createDientesPacChild/{id}','DienteController@createDiente
 Route::resource('dientes','DienteController');
 Route::resource('diagnosticos','DiagnosticoController');
 Route::resource('patologias','PatologiaController');
-//Route::get('/tratamientos/create/{id}','TratamientoController@create')->name('tratamientos.create');
+Route::get('/tratamientos/create/{id}','TratamientoController@createT')->name('tratamientos.createT');
 Route::resource('tratamientos','TratamientoController');
 Route::resource('tipo_tratamientos','TipoTratamientoController');
 Route::resource('brakets','BraketController');

@@ -45,7 +45,7 @@ class DiagnosticoController extends Controller
     {
         $this->validate($request, [
             'nombre' => ['required', 'string', 'max:255'],
-            'tipo_id' => ['required', 'exists:tipo_diagnosticos,id'],
+            'tipo_diagnostico_id' => ['required', 'exists:tipo_diagnosticos,id'],
         ]);
 
         $diagnosticos=new Diagnostico($request->all());
