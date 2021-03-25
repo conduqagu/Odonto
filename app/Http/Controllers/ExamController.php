@@ -122,8 +122,11 @@ class ExamController extends Controller
         $patient=Patient::find($request->patient_id);
         if($patient->child==false&&$request->tipoExam=='infantil'){
             flash('Este usuario es adulto, no se le puede realizar un examen inicial');
-            //TODO: diferenciar entre alumno y profe
-            return redirect()->route('examsCreateTeacher', [$request->patient_id]);
+            if(Auth::user()->userType =='teacher'){
+                return redirect()->route('examsCreateTeacher', [$request->patient_id]);
+            }else{
+                return redirect()->route('exams.create', [$request->patient_id]);
+            }
         }else {
             $this->validate($request, [
                 'date' => ['required', 'date'],

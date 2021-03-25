@@ -24,6 +24,16 @@
                                 <tr>
                                     <td>{{ $braket->name }}</td>
                                 </tr>
+                                <td>
+                                    {!! Form::open(['route' => ['brakets.edit',$braket->id], 'method' => 'get']) !!}
+                                    {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                    {!! Form::close() !!}
+                                </td>
+                                <td>
+                                    {!! Form::open(['route' => ['brakets.destroy',$braket->id], 'method' => 'delete']) !!}
+                                    {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
+                                    {!! Form::close() !!}
+                                </td>
                             @endforeach
                         </table>
                     </div>

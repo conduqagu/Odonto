@@ -12,7 +12,10 @@
                         {!! Form::open(['route' => 'diagnosticos.create', 'method' => 'get']) !!}
                         {!!   Form::submit('Crear diagnostico', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
-
+                        <br>
+                        {!! Form::open(['route' => 'tipo_diagnosticos.create', 'method' => 'get']) !!}
+                        {!!   Form::submit('Crear tipo de diagnostico', ['class'=> 'btn btn-primary'])!!}
+                        {!! Form::close() !!}
                         <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>

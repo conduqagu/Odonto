@@ -22,10 +22,6 @@
                                 {!! Form::close() !!}
                             @endif
                             <br>
-                            {!! Form::open(['route' => 'tratamientos.index', 'method' => 'get']) !!}
-                            {!!   Form::submit('Tratamientos', ['class'=> 'btn btn-primary'])!!}
-                            {!! Form::close() !!}
-                            <br>
                             {!! Form::open(['route' => 'tipo_tratamientos.index', 'method' => 'get']) !!}
                             {!!   Form::submit('Tipo de tratamientos', ['class'=> 'btn btn-primary'])!!}
                             {!! Form::close() !!}

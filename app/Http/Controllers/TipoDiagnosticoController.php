@@ -29,9 +29,7 @@ class TipoDiagnosticoController extends Controller
      */
     public function create()
     {
-        $tipo_diagnosticos = Diagnostico::all()->pluck('name','id');
-
-        return view('tipo_diagnosticos.create',['tipo_diagnosticos'=>$tipo_diagnosticos]);
+        return view('tipo_diagnosticos.create');
     }
 
 

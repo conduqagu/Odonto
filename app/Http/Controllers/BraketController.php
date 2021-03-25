@@ -53,5 +53,58 @@ class BraketController extends Controller
 
         return redirect()->route('brakets.index');
     }
+    public function show($id)
+    {
+        //
+    }
 
+    /**
+     * Edit Student
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $braket = Braket::find($id);
+        return view('brakets.edit',['braket'=> $braket]);
+    }
+
+    /**
+     * Update Student
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+
+        ]);
+
+        $braket = Braket::find($id);
+        $braket->fill($request->all());
+        $braket->save();
+
+        flash('Tipo creado correctamente');
+
+        return redirect()->route('brakets.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $braket = Braket::find($id);
+        $braket->delete();
+        flash('Tipo borrado correctamente');
+
+        return redirect()->route('brakets.index');
+    }
 }
