@@ -84,7 +84,6 @@ class AsociacionExamDienteController extends Controller
      */
     public function store_asociacionED(Request $request,$exam_id)
     {
-        dd($request->all());
         if($request->ajax()){
             flash('Asociación creada correctamente');
         }

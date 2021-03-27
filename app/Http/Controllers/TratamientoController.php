@@ -44,11 +44,11 @@ class TratamientoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'realizado' => ['required', 'boolean'],
             'coste' => ['required', 'integer', 'max:255'],
             'iva' => ['required', 'integer', 'max:255'],
             'terapia' => ['required', 'string', 'in:sin definir,convencional,fases'],
-            'duracionEstimada' => ['nullable', 'string', 'max:255'],
+            'fecha_inicio' => ['nullable', 'date'],
+            'fecha_fin' => ['nullable', 'date'],
             'braket_id' => ['nullable', 'exists:brakets,id'],
             'tipo_tratamiento_id' => ['required', 'exists:tipo_tratamientos,id'],
             'exam_id' =>['required','exists:exams,id']

@@ -16,12 +16,12 @@
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>
-                                <th>Realizado</th>
                                 <th>Coste</th>
                                 <th>Iva</th>
                                 <th>Cobrado</th>
                                 <th>Terapia</th>
-                                <th>Duracion Estimada</th>
+                                <th>Fecha inicio</th>
+                                <th>Fecha fin</th>
                                 <th>Brakets</th>
                                 <th colspan="2">Acciones</th>
                             </tr>
@@ -29,12 +29,12 @@
                             @foreach ($tratamientos as $tratamiento)
                                 <tr>
                                     <td>{{ $tratamiento->tipoTratamiento->name }}</td>
-                                    <td>{{ $tratamiento->realizado }}</td>
                                     <td>{{ $tratamiento->coste }}</td>
                                     <td>{{ $tratamiento->iva }}</td>
                                     <td>{{ $tratamiento->cobrado }}</td>
                                     <td>{{ $tratamiento->terapia }}</td>
-                                    <td>{{ $tratamiento->duracionEstimada }}</td>
+                                    <td>{{ $tratamiento->fecha_inicio }}</td>
+                                    <td>{{ $tratamiento->fecha_fin }}</td>
                                     <td>{{ $tratamiento->braket->name}}</td>
 
 
