@@ -102,7 +102,6 @@ class PatientController extends Controller
             'pin'=>['required','integer']
         ]);
 
-        //TODO: Poner codigo recogido del pin del profesor asignado a paciente en PHP no SQL
         $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
         LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
         LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)
@@ -229,7 +228,6 @@ class PatientController extends Controller
             'pin'=>['required','integer']
         ]);
 
-        //TODO: poner codigo en PHP
         $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
         LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
         LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)

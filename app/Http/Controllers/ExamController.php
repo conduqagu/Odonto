@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\AsociacionExamDiente;
+use App\Diagnostico;
 use App\Exam;
 use App\Patient;
+use App\Tratamiento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -41,8 +43,8 @@ class ExamController extends Controller
 
     public function examsCreateTeacher($id)
     {
-        $patients = Patient::all()->pluck('name','id');
-        return view('exams/examsCreateTeacher',['patients'=>$patients,'id'=>$id]);
+        $patient = Patient::find($id);
+        return view('exams/examsCreateTeacher',['patient'=>$patient]);
     }
     public function examsCreateTeacherInicial($id)
     {
@@ -80,7 +82,7 @@ class ExamController extends Controller
         $this->validate($request, [
 
             'date'=>['required','date'],
-            'tipoExam'=>['required','string','in:inicial,infantil,periodoncial,ortodoncial,evOrto'],
+            'tipoExam'=>['required','string','in:inicial,infantil,periodoncial,ortodoncial,evOrto,otro'],
             'patient_id' => ['required', 'exists:patients,id'],
             'pin'=>['required','integer']
         ]);
@@ -109,6 +111,8 @@ class ExamController extends Controller
             return redirect()->route('examsCreateTeacherOrtodoncia',[$exam->id]);
         }else if ($exam->tipoExam=='evOrto'){
             return redirect()->route('examsCreateTeacherevOrto',[$exam->id]);
+        }else if ($exam->tipoExam=='otro'){
+            return redirect()->route('exams.show',[$exam->id]);
         }
     }
     /**
@@ -119,36 +123,29 @@ class ExamController extends Controller
      */
     public function examsStoreTeacher(Request $request)
     {
-        $patient=Patient::find($request->patient_id);
-        if($patient->child==false&&$request->tipoExam=='infantil'){
-            flash('Este usuario es adulto, no se le puede realizar un examen inicial');
-            if(Auth::user()->userType =='teacher'){
-                return redirect()->route('examsCreateTeacher', [$request->patient_id]);
-            }else{
-                return redirect()->route('exams.create', [$request->patient_id]);
-            }
-        }else {
-            $this->validate($request, [
-                'date' => ['required', 'date'],
-                'tipoExam' => ['required', 'string', 'in:inicial,infantil,periodoncial,ortodoncial,evOrto'],
-                'patient_id' => ['required', 'exists:patients,id']
-            ]);
+        $this->validate($request, [
+            'date' => ['required', 'date'],
+            'tipoExam' => ['required', 'string', 'in:inicial,infantil,periodoncial,ortodoncial,evOrto,otro'],
+            'patient_id' => ['required', 'exists:patients,id']
+        ]);
 
-            $exam = new Exam($request->all());
-            $exam->save();
+        $exam = new Exam($request->all());
+        $exam->save();
 
-            if ($exam->tipoExam == 'inicial') {
-                return redirect()->route('examsCreateTeacherInicial', [$exam->id]);
-            } else if ($exam->tipoExam == 'infantil') {
-                return redirect()->route('examsCreateTeacherInfantil', [$exam->id]);
-            } else if ($exam->tipoExam == 'periodoncial') {
-                return redirect()->route('examsCreateTeacherPeriodontal', [$exam->id]);
-            } else if ($exam->tipoExam == 'ortodoncial') {
-                return redirect()->route('examsCreateTeacherOrtodoncia', [$exam->id]);
-            } else if ($exam->tipoExam == 'evOrto') {
-                return redirect()->route('examsCreateTeacherevOrto', [$exam->id]);
-            }
+        if ($exam->tipoExam == 'inicial') {
+            return redirect()->route('examsCreateTeacherInicial', [$exam->id]);
+        } else if ($exam->tipoExam == 'infantil') {
+            return redirect()->route('examsCreateTeacherInfantil', [$exam->id]);
+        } else if ($exam->tipoExam == 'periodoncial') {
+            return redirect()->route('examsCreateTeacherPeriodontal', [$exam->id]);
+        } else if ($exam->tipoExam == 'ortodoncial') {
+            return redirect()->route('examsCreateTeacherOrtodoncia', [$exam->id]);
+        } else if ($exam->tipoExam == 'evOrto') {
+            return redirect()->route('examsCreateTeacherevOrto', [$exam->id]);
+        }else if ($exam->tipoExam=='otro'){
+            return redirect()->route('exams.show',[$exam->id]);
         }
+
     }
     /**
      * Display the specified resource.
@@ -159,8 +156,12 @@ class ExamController extends Controller
     public function show($id)
     {
         $exam = Exam::find($id);
-
-        return view('exams/show',['exam'=> $exam]);
+        $diagnosticos=DB::table('asociacion_diagnostico_exams')
+            ->where('exam_id','=',$id)
+            ->join('diagnosticos','diagnosticos.id','=','asociacion_diagnostico_exams.diagnostico_id')
+            ->select('diagnosticos.*')->get();
+        $tratamientos=Tratamiento::where('exam_id','=',$id)->get();
+        return view('exams/show',['exam'=> $exam,'diagnosticos'=>$diagnosticos,'tratamientos'=>$tratamientos]);
     }
 
     /**
@@ -328,17 +329,12 @@ class ExamController extends Controller
 
         flash('Examen creado correctamente');
 
-
-
         switch($request->submitbutton) {
             case 'Continuar examen dental':
                 return redirect()->route('create_asociacionED',[$exam->id]);
                 break;
-            case 'Terminar':
-                return redirect()->route('exams.index',[$exam->patient->id]);
-                break;
-            case 'Añadir diagnóstico':
-                return redirect()->route('asociacion_ExDiags.create',[$exam->patient->id]);
+            case 'Guardar':
+                return redirect()->route('exams.show',[$exam->patient->id]);
                 break;
         }
     }

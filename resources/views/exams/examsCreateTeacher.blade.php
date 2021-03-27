@@ -12,9 +12,9 @@
 
                         {!! Form::open(['route' => 'examsStoreTeacher']) !!}
                         <div class="form-group">
-                            {!!Form::label('patient_id', 'Paciente') !!}
-                            <br>
-                            {!! Form::select('patient_id', $patients, $patients->id=$id,['class' => 'form-control', 'required']) !!}
+                            <b>{!!  Form::label('paciente' , 'Paciente: '.$patient->name." ".$patient->surname) !!}
+                            </b>
+                            {!! Form::hidden('patient_id',$patient->id) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('date', 'Fecha') !!}
@@ -26,8 +26,7 @@
                             <div class="col-md-6">
                                 <input type="radio" id="inicial" name="tipoExam" value="inicial" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
                                 <label for="inicial">Inicial</label><br>
-                                <!--TODO: Tiene sentido esto aqui?-->
-                                @if(\App\Patient::find($id)->child==1)
+                                @if($patient->child==1)
                                     <input type="radio" id="infantil" name="tipoExam" value="infantil" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
                                     <label for="infantil">Infantil</label><br>
                                 @endif
@@ -37,6 +36,8 @@
                                 <label for="periodoncia">Periodoncial</label><br>
                                 <input type="radio" id="evOrto" name="tipoExam" value="evOrto" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
                                 <label for="evOrto">Evaluacion Ortodoncia</label><br>
+                                <input type="radio" id="otro" name="tipoExam" value="otro" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
+                                <label for="otro">Otro</label><br>
                                 @error('examType')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

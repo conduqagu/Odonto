@@ -8,7 +8,7 @@ class Exam extends Model
 {
     protected $fillable = [
         //Atributos examen:
-        'date','costeTotal','patient_id','tipoExam',
+        'date','costeTotal','patient_id','tipoExam','otros',
         //Atributos exmanen inicial:
         'aspectoExtraoralNormal','cancerOral', 'anomaliasLabios', 'otros','patologiaMucosa','fluorosis','estadoS1',
         'estadoS2','estadoS3','estadoS4','estadoS5','estadoS6','claseAngle','lateralAngle','tipoDentición',
@@ -19,7 +19,7 @@ class Exam extends Model
         //Atributos examen periodontal
         'indicePlaca','color','borde','aspecto','consistencia','biotipo',
         //Atributos Ortodoncia
-        'patronFacial','perfil','menton','otros',
+        'patronFacial','perfil','menton',
         //Atributos Evaluacion
         'previsto','maxilar','mandibular','logrado'
 

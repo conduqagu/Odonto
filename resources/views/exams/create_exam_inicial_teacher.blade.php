@@ -117,8 +117,7 @@
                         <br>
                     </div>
                     {!! Form::submit( 'Continuar examen dental', ['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}
-                    {!! Form::submit( 'Terminar',['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'finish'])!!}
-                    {!! Form::submit( 'Añadir diagnóstico',['class'=> 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save',$exam->id]) !!}
+                    {!! Form::submit( 'Guardar',['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'finish'])!!}
 
                     {!! Form::close() !!}
 

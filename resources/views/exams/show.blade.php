@@ -264,10 +264,70 @@
                             </div>
                         </div>
                     @endif
-
                             </div>
 
                             </div>
+                <br>
+                    <div class="card">
+                        <div class="card-header">Diagnósticos</div>
+                        <div class="card-body">
+                            {!! Form::open(['route' => ['asociacion_ExDiags.create',$exam->id], 'method' => 'get']) !!}
+                            {!!   Form::submit('Añadir diagnóstico', ['class'=> 'btn btn-primary'])!!}
+                            {!! Form::close() !!}
+                    <table class="table table-striped table-bordered">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Tipo diagnostico</th>
+                            <th colspan="3">Acciones</th>
+                        </tr>
+
+                        @foreach ($diagnosticos as $diagnositico)
+                            <tr>
+                                <td>{{ $diagnositico->nombre }}</td>
+                                <td>{{ $diagnositico->tipo_diagnostico_id}}</td>
+                            </tr>
+                        @endforeach
+                    </table>
+                    </div>
+                    </div>
+                    </div>
+                <br>
+                <div class="card">
+                    <div class="card-header">Tratamientos</div>
+                    <div class="card-body">
+                        {!! Form::open(['route' => ['tratamientos.createT',$exam->id], 'method' => 'get']) !!}
+                        {!!   Form::submit('Añadir tratamiento', ['class'=> 'btn btn-primary'])!!}
+                        {!! Form::close() !!}
+                        <table class="table table-striped table-bordered">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Coste</th>
+                                <th>Iva</th>
+                                <th>Cobrado</th>
+                                <th>Terapia</th>
+                                <th>Fecha inicio</th>
+                                <th>Fecha fin</th>
+                                <th>Brakets</th>
+                                <th colspan="2">Acciones</th>
+                            </tr>
+
+                            @foreach ($tratamientos as $tratamiento)
+                                <tr>
+                                    <td>{{ $tratamiento->tipoTratamiento->name }}</td>
+                                    <td>{{ $tratamiento->coste }}</td>
+                                    <td>{{ $tratamiento->iva }}</td>
+                                    <td>{{ $tratamiento->cobrado }}</td>
+                                    <td>{{ $tratamiento->terapia }}</td>
+                                    <td>{{ $tratamiento->fecha_inicio }}</td>
+                                    <td>{{ $tratamiento->fecha_fin }}</td>
+                                    <td>{{ $tratamiento->braket->name}}</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+            </div>
+
                         <div class="card-body">
                             {!! Form::open(['route' => ['exams.edit',$exam->id], 'method' => 'get']) !!}
                             {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
