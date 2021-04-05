@@ -6,6 +6,7 @@ use App\AsociacionExamDiente;
 use App\Diagnostico;
 use App\Exam;
 use App\Patient;
+use App\PruebaComplementaria;
 use App\Tratamiento;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -161,7 +162,8 @@ class ExamController extends Controller
             ->join('diagnosticos','diagnosticos.id','=','asociacion_diagnostico_exams.diagnostico_id')
             ->select('diagnosticos.*')->get();
         $tratamientos=Tratamiento::where('exam_id','=',$id)->get();
-        return view('exams/show',['exam'=> $exam,'diagnosticos'=>$diagnosticos,'tratamientos'=>$tratamientos]);
+        $prueba_complementarias=PruebaComplementaria::where('exam_id','=',$id)->get();
+        return view('exams/show',['exam'=> $exam,'diagnosticos'=>$diagnosticos,'tratamientos'=>$tratamientos,'prueba_complementarias'=>$prueba_complementarias]);
     }
 
     /**
@@ -295,7 +297,6 @@ class ExamController extends Controller
      */
     public function examsUptadeTeacherInicial(Request $request, $id)
     {
-        //dd($request);
         $this->validate($request, [
             'aspectoExtraoralNormal' => ['required', 'boolean'],
             'cancerOral' => ['required', 'boolean'],
@@ -361,7 +362,7 @@ class ExamController extends Controller
         $exam->save();
 
         flash('Examen creado correctamente');
-        return redirect()->route('exams.index',[$exam->patient->id]);
+        return redirect()->route('exams.show',[$exam->id]);
     }
 
     /**
@@ -388,7 +389,7 @@ class ExamController extends Controller
         flash('Examen creado correctamente');
 
         //TODO: cambiar boton a estudio de dientes periodontal
-        return redirect()->route('exams.index',[$exam->patient->id]);
+        return redirect()->route('exams.show',[$exam->id]);
     }
     /**
      * Update "Examen Ortodoncial" for a Teacher
@@ -411,7 +412,7 @@ class ExamController extends Controller
         $exam->save();
 
         flash('Examen creado correctamente');
-        return redirect()->route('exams.index',[$exam->patient->id]);
+        return redirect()->route('exams.show',[$exam->id]);
     }
     /**
      * Update "Examen Evaluacion Ortodoncia" for a Teacher
@@ -435,7 +436,7 @@ class ExamController extends Controller
         $exam->save();
 
         flash('Examen creado correctamente');
-        return redirect()->route('exams.index',[$exam->patient->id]);
+        return redirect()->route('exams.show',[$exam->id]);
 
     }
     /**

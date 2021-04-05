@@ -17,8 +17,8 @@ class CreatePruebaComplementariasTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('nombre');
-            $table->string('ficharo');
-            $table->string('comentario');
+            $table->string('fichero');
+            $table->string('comentario')->nullable();
             $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
             $table->unsignedBigInteger('exam_id');
 

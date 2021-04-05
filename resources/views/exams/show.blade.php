@@ -274,6 +274,7 @@
                             {!! Form::open(['route' => ['asociacion_ExDiags.create',$exam->id], 'method' => 'get']) !!}
                             {!!   Form::submit('Añadir diagnóstico', ['class'=> 'btn btn-primary'])!!}
                             {!! Form::close() !!}
+                            <br>
                     <table class="table table-striped table-bordered">
                         <tr>
                             <th>Nombre</th>
@@ -290,14 +291,15 @@
                     </table>
                     </div>
                     </div>
-                    </div>
-                <br>
+
+            <br>
                 <div class="card">
                     <div class="card-header">Tratamientos</div>
                     <div class="card-body">
                         {!! Form::open(['route' => ['tratamientos.createT',$exam->id], 'method' => 'get']) !!}
                         {!!   Form::submit('Añadir tratamiento', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
+                        <br>
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>
@@ -316,7 +318,11 @@
                                     <td>{{ $tratamiento->tipoTratamiento->name }}</td>
                                     <td>{{ $tratamiento->coste }}</td>
                                     <td>{{ $tratamiento->iva }}</td>
-                                    <td>{{ $tratamiento->cobrado }}</td>
+                                    @if( $tratamiento->cobrado==1)
+                                        <td>{{'Si'}}</td>
+                                    @else
+                                        <td><b><FONT COLOR="red">{{'No'}}</FONT></b></td>
+                                    @endif
                                     <td>{{ $tratamiento->terapia }}</td>
                                     <td>{{ $tratamiento->fecha_inicio }}</td>
                                     <td>{{ $tratamiento->fecha_fin }}</td>
@@ -326,7 +332,35 @@
                         </table>
                     </div>
                 </div>
+
+                <br>
+                <div class="card">
+                    <div class="card-header">Pruebas complementarias</div>
+                       <div class="card-body">
+                            {!! Form::open(['route' => ['prueba_complementarias.createT',$exam->id], 'method' => 'get']) !!}
+                            {!!   Form::submit('Añadir prueba complementaria', ['class'=> 'btn btn-primary'])!!}
+                            {!! Form::close() !!}
+                           <br>
+                        <table class="table table-striped table-bordered">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Fichero</th>
+                                <th>Comentario</th>
+                                <th colspan="2">Acciones</th>
+                            </tr>
+
+                            @foreach ($prueba_complementarias as $prueba_complementaria)
+                                <tr>
+                                    <td>{{ $prueba_complementaria->nombre }}</td>
+                                    <td>{{ $prueba_complementaria->fichero }}</td>
+                                    <td>{{ $prueba_complementaria->comentario }}</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
             </div>
+
 
                         <div class="card-body">
                             {!! Form::open(['route' => ['exams.edit',$exam->id], 'method' => 'get']) !!}
@@ -348,8 +382,6 @@
                                 {!! Form::open(['route' => ['exams.index',$exam->patient->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Todos los exámenes', ['class'=> 'btn btn-outline-dark'])!!}
                                 {!! Form::close() !!}
-
-
 
                 </div>
                 </div>
