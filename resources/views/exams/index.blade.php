@@ -38,17 +38,6 @@
                                         {!!   Form::submit('Ver detalle', ['class'=> 'btn btn-primary'])!!}
                                         {!! Form::close() !!}
                                     </td>
-                                    <td>
-                                        {!! Form::open(['route' => ['examsEditTeacher',$exam->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
-                                        {!! Form::close() !!}
-                                    </td>
-                                    <td>
-                                        {!! Form::open(['route' => ['examsdeleteTeacher',$exam->id], 'method' => 'delete']) !!}
-                                        {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
-                                        {!! Form::close() !!}
-                                    </td>
-
 
                                 </tr>
                             @endforeach

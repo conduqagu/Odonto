@@ -387,10 +387,7 @@
 
 
                         <div class="card-body">
-                            {!! Form::open(['route' => ['exams.edit',$exam->id], 'method' => 'get']) !!}
-                            {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
-                            {!! Form::close() !!}
-                       <br>
+
                             @if(Auth::user()->userType =='teacher'&&$exam->tipoExam=='inicial')
                                 {!! Form::open(['route' => ['indexasociacionEDTeacher',$exam->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary'])!!}
@@ -401,11 +398,32 @@
                                 {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary'])!!}
                                 {!! Form::close() !!}
                             @endif
-                        <br>
 
-                                {!! Form::open(['route' => ['exams.index',$exam->patient->id], 'method' => 'get']) !!}
-                                {!!   Form::submit('Todos los exámenes', ['class'=> 'btn btn-outline-dark'])!!}
+                        <br>
+                            @if(Auth::user()->userType =='teacher'&&$exam->tipoExam=='inicial')
+                                {!! Form::open(['route' => ['examsEditTeacher',$exam->id], 'method' => 'get']) !!}
+                                {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                 {!! Form::close() !!}
+                            @endif
+                            @if(Auth::user()->userType =='student'&&$exam->tipoExam=='inicial')
+                                {!! Form::open(['route' => ['exams.edit',$exam->id], 'method' => 'get']) !!}
+                                {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                {!! Form::close() !!}                            @endif
+
+                        <br>
+                            @if(Auth::user()->userType =='teacher'&&$exam->tipoExam=='inicial')
+                                {!! Form::open(['route' => ['examsdeleteTeacher',$exam->id], 'method' => 'delete']) !!}
+                                {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
+                                {!! Form::close() !!}
+                            @endif
+                            @if(Auth::user()->userType =='student'&&$exam->tipoExam=='inicial')
+                               <!--TODO: Buscar boton eliminar de estudiantes-->
+                            @endif
+                        <br>
+                            {!! Form::open(['route' => ['exams.index',$exam->patient->id], 'method' => 'get']) !!}
+                            {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark'])!!}
+                            {!! Form::close() !!}
+
 
                 </div>
                 </div>
