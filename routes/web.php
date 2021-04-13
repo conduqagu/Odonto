@@ -90,6 +90,11 @@ Route::resource('brakets','BraketController');
 Route::resource('tipo_diagnosticos','TipoDiagnosticoController');
 Route::post('/asociacion_ExamDiags/store/{id}','AsociacionDiagnosticoExamController@store')->name('asociacion_ExDiags.store');
 Route::get('/asociacion_ExamDiags/create/{id}','AsociacionDiagnosticoExamController@create')->name('asociacion_ExDiags.create');
+Route::get('/asociacion_ExamDiags/edit/{id}','AsociacionDiagnosticoExamController@edit')->name('asociacion_ExDiags.edit');
+Route::put('/asociacion_ExamDiags/update/{id}','AsociacionDiagnosticoExamController@update')->name('asociacion_ExDiags.update');
+Route::delete('/asociacion_ExamDiags/destroy/{id}','AsociacionDiagnosticoExamController@destroy')->name('asociacion_ExDiags.destroy');
+
+
 Route::post('/asociacion_ExamTratamientos/store/{id}','AsociacionExamTratamientoController@store')->name('asociacion_ExTratamientos.store');
 Route::get('/asociacion_ExamTratamientos/create/{id}','AsociacionExamTratamientoController@create')->name('asociacion_ExTratamientos.create');
 Route::resource('ajustes','AjusteController');

@@ -335,7 +335,7 @@ class ExamController extends Controller
                 return redirect()->route('create_asociacionED',[$exam->id]);
                 break;
             case 'Guardar':
-                return redirect()->route('exams.show',[$exam->patient->id]);
+                return redirect()->route('exams.show',[$exam->id]);
                 break;
         }
     }

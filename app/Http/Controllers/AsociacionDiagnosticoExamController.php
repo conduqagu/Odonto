@@ -66,4 +66,56 @@ class AsociacionDiagnosticoExamController extends Controller
         }
     }
 
+
+    /**
+     * Edit Student
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $asociacion=AsociacionDiagnosticoExam::find($id);
+        $diagnosticos = Diagnostico::all()->pluck('nombre','id');
+        return view('asociacion_ExDiags.edit',['asociacion'=>$asociacion,'diagnosticos'=> $diagnosticos]);
+    }
+
+    /**
+     * Update Student
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'diagnostico_id' => 'required|exists:diagnosticos,id',
+        ]);
+
+        $asociacion_exam_diagnostico=AsociacionDiagnosticoExam::find($id);
+        $asociacion_exam_diagnostico->diagnostico_id= $request->get('diagnostico_id');
+        $asociacion_exam_diagnostico->save();
+
+        flash('Diagnóstico creado correctamente');
+
+        return redirect()->route('exams.show',$asociacion_exam_diagnostico->exam_id);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $asociacion = AsociacionDiagnosticoExam::find($id);
+        $exam_id=$asociacion->exam_id;
+        $asociacion->delete();
+        flash('Diagnostico borrado correctamente');
+
+        return redirect()->route('exams.show',$exam_id);
+    }
+
 }

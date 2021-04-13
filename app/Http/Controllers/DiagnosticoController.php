@@ -76,7 +76,8 @@ class DiagnosticoController extends Controller
     public function edit($id)
     {
         $diagnostico = Diagnostico::find($id);
-        return view('diagnosticos.edit',['diagnostico'=> $diagnostico]);
+        $tipo_diagnosticos=TipoDiagnostico::all()->pluck('name','id');
+        return view('diagnosticos.edit',['diagnostico'=> $diagnostico,'tipo_diagnosticos'=>$tipo_diagnosticos]);
     }
 
     /**
@@ -90,9 +91,8 @@ class DiagnosticoController extends Controller
     {
         $this->validate($request, [
             'nombre' => ['required', 'string', 'max:255'],
-            'tipo_id' => ['required', 'exists:tipo_diagnosticos,id'],
+            'tipo_diagnostico_id' => ['required', 'exists:tipo_diagnosticos,id'],
         ]);
-
         $diagnostico = Diagnostico::find($id);
         $diagnostico->fill($request->all());
         $diagnostico->save();
@@ -111,9 +111,10 @@ class DiagnosticoController extends Controller
     public function destroy($id)
     {
         $diagnostico = Diagnostico::find($id);
+        $exam_id=$diagnostico->exam_id;
         $diagnostico->delete();
         flash('Diagnostico borrado correctamente');
 
-        return redirect()->route('diagnosticos.index');
+        return redirect()->route('exams.show',$exam_id);
     }
 }

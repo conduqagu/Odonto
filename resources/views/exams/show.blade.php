@@ -286,6 +286,14 @@
                             <tr>
                                 <td>{{ $diagnositico->nombre }}</td>
                                 <td>{{ $diagnositico->tipo_diagnostico_id}}</td>
+                                <td> {!! Form::open(['route' => ['asociacion_ExDiags.edit',$diagnositico->id], 'method' => 'get']) !!}
+                                    {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                    {!! Form::close() !!}</td>
+                                <td>
+                                    {!! Form::open(['route' => ['asociacion_ExDiags.destroy',$diagnositico->id], 'method' => 'delete']) !!}
+                                    {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
+                                    {!! Form::close() !!}
+                                </td>
                             </tr>
                         @endforeach
                     </table>
