@@ -79,7 +79,11 @@ class TratamientoController extends Controller
      */
     public function edit($id)
     {
+        $tratamiento = Tratamiento::find($id);
 
+        $tipo_tratamientos = TipoTratamiento::all()->pluck('name','id');
+        $brakets=Braket::all()->pluck('name','id');
+        return view('tratamientos.edit',['tratamiento'=> $tratamiento, 'tipo_tratamientos'=>$tipo_tratamientos,'brakets'=>$brakets ]);
     }
 
     /**
@@ -91,7 +95,24 @@ class TratamientoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, [
+            'coste' => ['required', 'integer', 'max:255'],
+            'iva' => ['required', 'integer', 'max:255'],
+            'terapia' => ['required', 'string', 'in:sin definir,convencional,fases'],
+            'fecha_inicio' => ['nullable', 'date'],
+            'fecha_fin' => ['nullable', 'date'],
+            'braket_id' => ['nullable', 'exists:brakets,id'],
+            'tipo_tratamiento_id' => ['required', 'exists:tipo_tratamientos,id'],
+        ]);
 
+        $tratamiento = Tratamiento::find($id);
+        $tratamiento->fill($request->all());
+
+        $tratamiento->save();
+
+        flash('Diente modificado correctamente');
+
+        return redirect()->route('exams.show',$tratamiento->exam_id);
     }
 
     /**
@@ -102,6 +123,11 @@ class TratamientoController extends Controller
      */
     public function destroy($id)
     {
+        $tratamiento = Tratamiento::find($id);
+        $exam_id=$tratamiento->exam_id;
+        $tratamiento->delete();
+        flash('Tratamiento borrado correctamente');
 
+        return redirect()->route('exams.show',$exam_id);
     }
 }

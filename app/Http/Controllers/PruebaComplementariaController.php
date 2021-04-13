@@ -72,8 +72,8 @@ class PruebaComplementariaController extends Controller
      */
     public function edit($id)
     {
-        $tipo_diagnostico = TipoDiagnostico::find($id);
-        return view('tipo_diagnosticos.edit',['tipo_diagnostico'=> $tipo_diagnostico]);
+        $prueba_complementaria=PruebaComplementaria::find($id);
+        return view('prueba_complementarias.edit',['prueba_complementaria'=>$prueba_complementaria]);
     }
 
     /**
@@ -86,17 +86,18 @@ class PruebaComplementariaController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-
+            'nombre' => ['required', 'string', 'max:255'],
+            'fichero' => ['required', 'string', 'max:255'],
+            'comentario' => ['nullable', 'string', 'max:255'],
         ]);
 
-        $tipo_diagnostico = TipoDiagnostico::find($id);
-        $tipo_diagnostico->fill($request->all());
-        $tipo_diagnostico->save();
+        $prueba_complementaria = PruebaComplementaria::find($id);
+        $prueba_complementaria->fill($request->all());
+        $prueba_complementaria->save();
 
-        flash('Tipo creado correctamente');
+        flash('Peueba creada correctamente');
 
-        return redirect()->route('tipo_diagnosticos.index');
+        return redirect()->route('exams.show',$prueba_complementaria->exam_id);
     }
 
     /**
@@ -107,10 +108,11 @@ class PruebaComplementariaController extends Controller
      */
     public function destroy($id)
     {
-        $tipo_diagnostico = TipoDiagnostico::find($id);
-        $tipo_diagnostico->delete();
-        flash('Tipo borrado correctamente');
+        $prueba_complementaria = PruebaComplementaria::find($id);
+        $exam_id=$prueba_complementaria->exam_id;
+        $prueba_complementaria->delete();
+        flash('Prueba borrada correctamente');
 
-        return redirect()->route('tipo_diagnosticos.index');
+        return redirect()->route('exams.show',$exam_id);
     }
 }

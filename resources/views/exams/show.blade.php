@@ -282,15 +282,15 @@
                             <th colspan="3">Acciones</th>
                         </tr>
 
-                        @foreach ($diagnosticos as $diagnositico)
+                        @foreach ($diagnosticos as $diagnostico)
                             <tr>
-                                <td>{{ $diagnositico->nombre }}</td>
-                                <td>{{ $diagnositico->tipo_diagnostico_id}}</td>
-                                <td> {!! Form::open(['route' => ['asociacion_ExDiags.edit',$diagnositico->id], 'method' => 'get']) !!}
+                                <td>{{ $diagnostico->nombre }}</td>
+                                <td>{{ $diagnostico->tipo_diagnostico_id}}</td>
+                                <td> {!! Form::open(['route' => ['asociacion_ExDiags.edit',$diagnostico->id], 'method' => 'get']) !!}
                                     {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                     {!! Form::close() !!}</td>
                                 <td>
-                                    {!! Form::open(['route' => ['asociacion_ExDiags.destroy',$diagnositico->id], 'method' => 'delete']) !!}
+                                    {!! Form::open(['route' => ['asociacion_ExDiags.destroy',$diagnostico->id], 'method' => 'delete']) !!}
                                     {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                     {!! Form::close() !!}
                                 </td>
@@ -335,6 +335,14 @@
                                     <td>{{ $tratamiento->fecha_inicio }}</td>
                                     <td>{{ $tratamiento->fecha_fin }}</td>
                                     <td>{{ $tratamiento->braket->name}}</td>
+                                    <td> {!! Form::open(['route' => ['tratamientos.edit',$tratamiento->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                        {!! Form::close() !!}</td>
+                                    <td>
+                                        {!! Form::open(['route' => ['tratamientos.destroy',$tratamiento->id], 'method' => 'delete']) !!}
+                                        {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
+                                        {!! Form::close() !!}
+                                    </td>
                                 </tr>
                             @endforeach
                         </table>
@@ -362,6 +370,14 @@
                                     <td>{{ $prueba_complementaria->nombre }}</td>
                                     <td>{{ $prueba_complementaria->fichero }}</td>
                                     <td>{{ $prueba_complementaria->comentario }}</td>
+                                    <td> {!! Form::open(['route' => ['prueba_complementarias.edit',$prueba_complementaria->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                        {!! Form::close() !!}</td>
+                                    <td>
+                                        {!! Form::open(['route' => ['prueba_complementarias.destroy',$prueba_complementaria->id], 'method' => 'delete']) !!}
+                                        {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
+                                        {!! Form::close() !!}
+                                    </td>
                                 </tr>
                             @endforeach
                         </table>
