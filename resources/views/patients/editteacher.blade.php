@@ -48,6 +48,7 @@
                             {!!  Form::label('child' , 'Infantil') !!}
                             {!! Form::select('child', array('1'=>'Si','0'=>'No'),$patient->child,['class' => 'form-control', 'required']) !!}
                         </div>
+                        <br>
 
                         {!! Form::submit('Actualizar',['class'=>'btn-primary btn']) !!}
 

@@ -57,8 +57,7 @@ class AsociacionExamDienteController extends Controller
                     ->where('dientes.patient_id','=',$patient_id)
                     ->join('asociacion_exam_dientes',function ($join){
                         $join->on('asociacion_exam_dientes.diente_id','=','dientes.id');
-                    })->pluck('dientes.id')->values())
-                ->pluck('number', 'id');
+                    })->pluck('dientes.id')->values())->get();
 
         }elseif($child==0){
             $dientes=Diente::where('dientes.patient_id','=',$patient_id)
@@ -67,9 +66,7 @@ class AsociacionExamDienteController extends Controller
                     ->where('dientes.patient_id','=',$patient_id)
                     ->join('asociacion_exam_dientes',function ($join){
                         $join->on('asociacion_exam_dientes.diente_id','=','dientes.id');
-                    })->pluck('dientes.id')->values())
-                ->pluck('number', 'id');
-
+                    })->pluck('dientes.id')->values())->get();
         }
 
         return view('exams.create_asociacion_exam_diente',['exam_id'=>$exam_id,'dientes'=>$dientes]);
@@ -84,46 +81,36 @@ class AsociacionExamDienteController extends Controller
      */
     public function store_asociacionED(Request $request,$exam_id)
     {
-        if($request->ajax()){
-            flash('Asociación creada correctamente');
+        $child=Patient::find(Exam::find($exam_id)->patient_id)->child;
+        if($child==1){
+            $lista=array(51,52,53,54,55,61,62,63,64,65,71,72,73,74,75,81,82,83,84,85);
+        }else{
+            $lista=array(11,12,13,14,15,16,17,18,21,22,23,24,25,26,27,28,31,32,33,34,35,36,37,38,41,42,43,44,45,46,47,48);
         }
-        $this->validate($request, [
-            'denticionRaiz' => 'required|String|in:Sano,Cariado,Obturado sin caries,Obturado con caries,Pérdida otro motivo,
+        foreach ($lista as $a){
+            $this->validate($request, [
+                'denticionRaiz'.$a => 'required|String|in:Sano,Cariado,Obturado sin caries,Obturado con caries,Pérdida otro motivo,
                 Fisura Obturada,Pilar puente/corona,Diente no erupcionado,Fractura',
-            'denticionCorona' => 'required|String|in:Sano,Cariado,Obturado,sin caries,Obturado,con caries,Pérdida otro motivo,
+                'denticionCorona'.$a => 'required|String|in:Sano,Cariado,Obturado,sin caries,Obturado,con caries,Pérdida otro motivo,
                 Fisura Obturada,Pilar puente/corona,Diente no erupcionado,Fractura',
-            'tratamiento' => 'required|String|in:Ninguno,Preventivo,Obturación de fisuras,Obt. 1 o mas superficies,Obt 2 o mas superficies,Corona,Carilla estética,Tratamiento pulgar,Exodoncia,No registrado',
-            'opacidad' => 'required|String|in:Ningún estado anormal,Opacidad delimitada,OpacidadDifusa,Hipoplasia,
+                'tratamiento'.$a => 'required|String|in:Ninguno,Preventivo,Obturación de fisuras,Obt. 1 o mas superficies,Obt 2 o mas superficies,Corona,Carilla estética,Tratamiento pulgar,Exodoncia,No registrado',
+                'opacidad'.$a => 'required|String|in:Ningún estado anormal,Opacidad delimitada,OpacidadDifusa,Hipoplasia,
                 Otros defectos,Opacidad elimitada y difusa,Opacidad delimitada e hipoplasia,Opacidad difusa e hipoplasia',
-            'diente_id' => 'required|exists:dientes,id',
-        ]);
+                'diente_id'.$a => 'required|exists:dientes,id',
+            ]);
 
-        $asociacion_exam_diente=new AsociacionExamDiente();
-        $asociacion_exam_diente->denticionRaiz= $request->get('denticionRaiz');
-        $asociacion_exam_diente->denticionCorona= $request->get('denticionCorona');
-        $asociacion_exam_diente->tratamiento= $request->get('tratamiento');
-        $asociacion_exam_diente->opacidad= $request->get('opacidad');
-        $asociacion_exam_diente->diente_id= $request->get('diente_id');
-        $asociacion_exam_diente->exam_id=$exam_id;
-        $asociacion_exam_diente->save();
-
+            $asociacion_exam_diente=new AsociacionExamDiente();
+            $asociacion_exam_diente->denticionRaiz= $request->get('denticionRaiz'.$a);
+            $asociacion_exam_diente->denticionCorona= $request->get('denticionCorona'.$a);
+            $asociacion_exam_diente->tratamiento= $request->get('tratamiento'.$a);
+            $asociacion_exam_diente->opacidad= $request->get('opacidad'.$a);
+            $asociacion_exam_diente->diente_id= $request->get('diente_id'.$a);
+            $asociacion_exam_diente->exam_id=$exam_id;
+            $asociacion_exam_diente->save();
+        }
 
         flash('Asociación creada correctamente');
-
-        switch($request->submitbutton) {
-            case 'Guardar':
-                return redirect()->route('create_asociacionED',[$exam_id]);
-                break;
-            case 'Terminar':
-                if (Auth::user()->userType =='student'){
-                    $id_patient = Exam::find($exam_id)->patient_id;
-                    return redirect()->route('exams.index',$id_patient);
-                }else{
-                    $id_patient = Exam::find($exam_id)->patient_id;
-                    return redirect()->route('examsIndexTeacher',$id_patient);
-                }
-                break;
-        }
+        return redirect()->route('index_asociacionED',[$exam_id]);
     }
 
     /**

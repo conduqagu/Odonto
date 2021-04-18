@@ -17,42 +17,39 @@
                         @include('flash::message')
 
                         {!! Form::open( [ 'route' => ['store_asociacionED',$exam_id], 'method'=>'post']) !!}
-
-                        <div class="form-group">
-                            {!!Form::label('diente__id', 'Diente') !!}
-                            <br>
-                            {!! Form::select('diente_id', $dientes, ['class' => 'form-control', 'required']) !!}
-                        </div>
-                        <div>
-                            {!!  Form::label('denticionRaiz' , 'Dentición raíz') !!}
-                            {!! Form::select('denticionRaiz', array('Sano'=>'Sano','Cariado'=>'Cariado','Obturado sin caries'=>'Obturado sin caries',
+                        <table class="table table-striped table-bordered">
+                            <tr>
+                                <th>Numero Diente</th>
+                                <th>Denticion Raiz</th>
+                                <th>Denticion corona</th>
+                                <th>Tratamiento</th>
+                                <th>Opacidad</th>
+                                <th>Acción</th>
+                            </tr>
+                            @foreach ($dientes as $diente)
+                                <tr>
+                                    <td>{!! Form::label('diente_id'.$diente->number,$diente->number) !!}{!! Form::hidden('diente_id'.$diente->number,$diente->id) !!}</td>
+                                    <td>{!! Form::select('denticionRaiz'.$diente->number, array('Sano'=>'Sano','Cariado'=>'Cariado','Obturado sin caries'=>'Obturado sin caries',
                             'Pérdida otro motivo'=>'Pérdida otro motivo', 'Fisura Obturada'=>'Fisura Obturada','Pilar puente/corona'=>'Pilar puente/corona','Cariado'=>'Cariado',
-                            'Diente no erupcionado'=>'Diente no erupcionado','Fractura'=>'Fractura'),'Sano',['class' => 'form-control']) !!}
-                        </div>
-                        <div>
-                            {!!  Form::label('denticionCorona' , 'Dentición Corona') !!}
-                            {!! Form::select('denticionCorona', array('Sano'=>'Sano','Cariado'=>'Cariado','Obturado sin caries'=>'Obturado sin caries',
+                            'Diente no erupcionado'=>'Diente no erupcionado','Fractura'=>'Fractura'),'Sano',['id'=>$diente."denticionRaiz",'class' => 'form-control']) !!}</td>
+                                    <td>{!! Form::select('denticionCorona'.$diente->number, array('Sano'=>'Sano','Cariado'=>'Cariado','Obturado sin caries'=>'Obturado sin caries',
                             'Pérdida otro motivo'=>'Pérdida otro motivo', 'Fisura Obturada'=>'Fisura Obturada','Pilar puente/corona'=>'Pilar puente/corona','Cariado'=>'Cariado',
-                            'Diente no erupcionado'=>'Diente no erupcionado','Fractura'=>'Fractura'),'Sano',['class' => 'form-control']) !!}
-                        </div>
-                        <div>
-                            {!!  Form::label('tratamiento' , 'Tratamiento') !!}
-                            {!! Form::select('tratamiento', array('Ninguno'=>'Ninguno','Preventivo'=>'Preventivo','Obturación de fisuras'=>'Obturación de fisuras',
+                            'Diente no erupcionado'=>'Diente no erupcionado','Fractura'=>'Fractura'),'Sano',['id'=>$diente."denticionCorona",'class' => 'form-control']) !!}</td>
+                                    <td>{!! Form::select('tratamiento'.$diente->number, array('Ninguno'=>'Ninguno','Preventivo'=>'Preventivo','Obturación de fisuras'=>'Obturación de fisuras',
                             'Obt. 1 o mas superficies'=>'Obt. 1 o mas superficies','Obt 2 o mas superficies'=>'Obt 2 o mas superficies','Corona'=>'Corona',
-                            'Carilla estética'=>'Carilla estética','Tratamiento pulgar'=>'Tratamiento pulgar','Exodoncia'=>'Exodoncia','No registrado'=>'No registrado'),'Ninguno',['class' => 'form-control']) !!}
-                        </div>
-                        <div>
-                            {!!  Form::label('opacidad' , 'Opacidad') !!}
-                            {!! Form::select('opacidad', array('Ningún estado anormal'=>'Ningún estado anormal','Opacidad delimitada'=>'Opacidad delimitada',
+                            'Carilla estética'=>'Carilla estética','Tratamiento pulgar'=>'Tratamiento pulgar','Exodoncia'=>'Exodoncia','No registrado'=>'No registrado'),'Ninguno',
+                            ['id'=>$diente."tratamiento",'class' => 'form-control']) !!}</td>
+                                    <td>{!! Form::select('opacidad'.$diente->number, array('Ningún estado anormal'=>'Ningún estado anormal','Opacidad delimitada'=>'Opacidad delimitada',
                             'OpacidadDifusa'=>'Opacidad Difusa','Hipoplasia'=>'Hipoplasia','Otros defectos'=>'Otros defectos',
                             'Opacidad elimitada y difusa'=>'Opacidad elimitada y difusa','Opacidad delimitada e hipoplasia'=>'Opacidad delimitada e hipoplasia',
-                            'Opacidad difusa e hipoplasia'=>'Opacidad difusa e hipoplasia'),'Temporal',['class' => 'form-control']) !!}
-                        </div>
+                            'Opacidad difusa e hipoplasia'=>'Opacidad difusa e hipoplasia'),'Temporal',['id'=>$diente."opacidad",'class' => 'form-control']) !!}</td>
+
+                                </tr>
+                            @endforeach
+                        </table>
 
                         <br>
-                        {!! Form::submit( 'Guardar', ['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}
-                        {!! Form::submit( 'Terminar',['class' => 'btn btn-warning', 'name' => 'submitbutton', 'value' => 'finish'])!!}
-
+                        {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
                         {!! Form::close() !!}
                         <br>
 

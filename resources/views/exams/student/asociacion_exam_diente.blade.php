@@ -35,10 +35,20 @@
                                     <td>{{ $asociacion_exam_diente->tratamiento }}</td>
                                     <td>{{ $asociacion_exam_diente->opacidad }}</td>
                                     <td>
-                                        {!! Form::open(['route' => ['edit_asociacionED',$asociacion_exam_diente->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
-                                        {!! Form::close() !!}
+                                        @if(Auth::user()->userType =='student')
+                                            {!! Form::open(['route' => ['edit_asociacionED',$asociacion_exam_diente->id], 'method' => 'get']) !!}
+                                            {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                            {!! Form::close() !!}
+
+                                        @endif
+                                        @if(Auth::user()->userType =='teacher')
+                                                {!! Form::open(['route' => ['editasociacionEDTeacher',$asociacion_exam_diente->id], 'method' => 'get']) !!}
+                                                {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                                {!! Form::close() !!}
+                                        @endif
+
                                     </td>
+
                                 </tr>
                             @endforeach
                         </table>

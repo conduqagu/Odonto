@@ -476,10 +476,11 @@ class ExamController extends Controller
     public function examsdeleteTeacher($id)
     {
         $exam = Exam::find($id);
+        $patient_id=$exam->patient_id;
         $exam->delete();
         flash('Examen borrado correctamente');
 
-        return redirect()->route('exams.index');
+        return redirect()->route('exams.index',$patient_id);
     }
 
     public function destroy()
