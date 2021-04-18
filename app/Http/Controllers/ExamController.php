@@ -23,9 +23,12 @@ class ExamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id)
+    public function index($id, Request $request)
     {
-        $exams=Exam::where('exams.patient_id','=',$id)->get();
+        $exams=Exam::where('exams.patient_id','=',$id)
+            ->where('exams.tipoExam','LIKE','%'.$request->get("query")."%")
+            ->where('exams.date','LIKE','%'.$request->get("query2")."%")
+            ->get();
         $patient=Patient::find($id);
 
         return view('exams/index',['exams'=>$exams,'patient'=>$patient,'id'=>$id]);

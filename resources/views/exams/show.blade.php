@@ -179,6 +179,8 @@
                                         {!! Form::label('No') !!}
                                     @endif
                                 </div>
+                            </div>
+                        </div>
                     @elseif($exam->tipoExam=='infantil')
                         <br>
                         <div class="card">
@@ -264,9 +266,6 @@
                             </div>
                         </div>
                     @endif
-                            </div>
-
-                            </div>
                 <br>
                     <div class="card">
                         <div class="card-header">Diagnósticos</div>
@@ -383,7 +382,7 @@
                         </table>
                     </div>
                 </div>
-            </div>
+
 
 
                         <div class="card-body">
@@ -400,23 +399,23 @@
                             @endif
 
                         <br>
-                            @if(Auth::user()->userType =='teacher'&&$exam->tipoExam=='inicial')
+                            @if(Auth::user()->userType =='teacher')
                                 {!! Form::open(['route' => ['examsEditTeacher',$exam->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                 {!! Form::close() !!}
                             @endif
-                            @if(Auth::user()->userType =='student'&&$exam->tipoExam=='inicial')
+                            @if(Auth::user()->userType =='student')
                                 {!! Form::open(['route' => ['exams.edit',$exam->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                 {!! Form::close() !!}                            @endif
 
                         <br>
-                            @if(Auth::user()->userType =='teacher'&&$exam->tipoExam=='inicial')
+                            @if(Auth::user()->userType =='teacher')
                                 {!! Form::open(['route' => ['examsdeleteTeacher',$exam->id], 'method' => 'delete']) !!}
                                 {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                 {!! Form::close() !!}
                             @endif
-                            @if(Auth::user()->userType =='student'&&$exam->tipoExam=='inicial')
+                            @if(Auth::user()->userType =='student')
                                <!--TODO: Buscar boton eliminar de estudiantes-->
                             @endif
                         <br>
@@ -424,7 +423,7 @@
                             {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark'])!!}
                             {!! Form::close() !!}
 
-
+                    </div>
                 </div>
                 </div>
             </div>

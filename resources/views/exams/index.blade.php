@@ -2,13 +2,23 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Exámenes</div>
 
                     <div class="panel-body">
                         @include('flash::message')
+                        <div class="form-group" >
+                            {!! Form::open(['route' => ['exams.index',$patient], 'method' => 'get']) !!}
+                            {!! Form::select('query',array('inicial'=>'Inicial','infantil'=>'Infantil','periodoncial'=>'Periodoncial',
+                                'ortodoncial'=>'Ortodoncial','evOrto'=>'Evaluación ortodoncia','otro'=>'Otro',null=>'Tipo de examen'), null,
+                                ['class'=>'col-md-4','autofocus']) !!}
+                            {!! Form::date('query2',null,['class'=>'col-md-4','autofocus','paceholder'=>'Fecha']) !!}
+                            {!! Form::submit('Buscar', ['class'=> 'btn btn-success col-md-2'])!!}
+                            {!! Form::close() !!}
+                        </div>
+
                         {!! Form::open(['route' => ['examsCreateTeacher',$id], 'method' => 'get']) !!}
                         {!!   Form::submit('Realizar examen', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
@@ -42,6 +52,18 @@
                                 </tr>
                             @endforeach
                         </table>
+
+                        @if(Auth::user()->userType =='teacher')
+                            {!! Form::open(['route' => ['indexteacher'], 'method' => 'get']) !!}
+                            {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark'])!!}
+                            {!! Form::close() !!}
+                        @endif
+                        @if(Auth::user()->userType =='student')
+                            {!! Form::open(['route' => ['patients.index'], 'method' => 'get']) !!}
+                            {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark'])!!}
+                            {!! Form::close() !!}
+                        @endif
+
                     </div>
                 </div>
             </div>
