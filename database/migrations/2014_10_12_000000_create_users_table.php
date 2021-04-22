@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
 
             //posibles clases que puede tomar, tipos de usuario
-            $table->enum('userType', ['student', 'teacher']);
+            $table->enum('userType', ['student', 'teacher','admin']);
 
         });
     }
