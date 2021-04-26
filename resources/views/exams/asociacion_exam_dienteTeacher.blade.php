@@ -39,11 +39,15 @@
                                 </tr>
                             @endforeach
                         </table>
-                        <td>
+                        @if(sizeof($asociacion_exam_dientes)==0)
+                            {!! Form::open(['route' => ['create_asociacionED',$exam_id], 'method' => 'get']) !!}
+                            {!!   Form::submit('Realizar examen dental', ['class'=> 'btn btn-primary'])!!}
+                            {!! Form::close() !!}
+                        @endif
+                        <br>
                             {!! Form::open(['route' => ['exams.show',$exam_id], 'method' => 'get']) !!}
                             {!!   Form::submit('Detalle examen', ['class'=> 'btn btn-outline-dark'])!!}
                             {!! Form::close() !!}
-                        </td>
                     </div>
                 </div>
             </div>

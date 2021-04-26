@@ -267,7 +267,7 @@
                         </div>
                     @endif
                 <br>
-                    <div class="card">
+                    <div class="card" style="width: max-content">
                         <div class="card-header">Diagnósticos</div>
                         <div class="card-body">
                             {!! Form::open(['route' => ['asociacion_ExDiags.create',$exam->id], 'method' => 'get']) !!}
@@ -300,7 +300,7 @@
                     </div>
 
             <br>
-                <div class="card">
+                <div class="card" style="width: max-content">
                     <div class="card-header">Tratamientos</div>
                     <div class="card-body">
                         {!! Form::open(['route' => ['tratamientos.createT',$exam->id], 'method' => 'get']) !!}
@@ -349,7 +349,7 @@
                 </div>
 
                 <br>
-                <div class="card">
+                <div class="card" style="width: max-content">
                     <div class="card-header">Pruebas complementarias</div>
                        <div class="card-body">
                             {!! Form::open(['route' => ['prueba_complementarias.createT',$exam->id], 'method' => 'get']) !!}
@@ -359,8 +359,8 @@
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>
-                                <th>Fichero</th>
-                                <th>Comentario</th>
+                                <th style="width:200px">Fichero</th>
+                                <th style="width:300px">Comentario</th>
                                 <th colspan="2">Acciones</th>
                             </tr>
 

@@ -14,6 +14,12 @@
                             </a>
                         </div>
                         <br>
+                        <div>
+                            {!! Form::open(['route' => ['exams.show',$exam_id], 'method' => 'get']) !!}
+                            {!!   Form::submit('Detalle examen', ['class'=> 'btn btn-outline-dark'])!!}
+                            {!! Form::close() !!}
+                        </div>
+                        <br>
                         <table class="table table-striped table-bordered">
 
 

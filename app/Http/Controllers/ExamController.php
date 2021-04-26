@@ -290,7 +290,7 @@ class ExamController extends Controller
 
         flash('Examen modificado correctamente');
 
-        return redirect()->route('exams.index');
+        return redirect()->route('exams.index',$exam->patient_id);
     }
     /**
      * Update "Examen inicial" for a Teacher
