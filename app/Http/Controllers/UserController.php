@@ -177,6 +177,41 @@ class UserController extends Controller
 
         return redirect()->route('perfilteacher');
     }
+
+    /**
+     * Mostar datos del admin (usuario)
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function perfiladmin(){
+        $user=Auth::user();
+        return view('perfiles/perfiladmin',['user'=>$user]);
+    }
+    /**
+     * Editar datos del profesor (usuario)
+     *
+     * @param id_profesor
+     * @return \Illuminate\Http\Response
+     */
+    public function updateperfiladmin(Request $request, $id){
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'surname'=>['required','string','max:255'],
+            'email'=>['required','string','max:255'],
+            'dni'=>['required','string','max:255'],
+        ]);
+
+        $user=\App\User::find($id);
+        $user->name=$request->get('name');
+        $user->surname=$request->get('surname');
+        $user->email=$request->get('email');
+        $user->dni=$request->get('dni');
+        $user->save();
+
+        flash('Datos actializados correctamente');
+
+        return redirect()->route('perfiladmin');
+    }
     /**
      * Store a newly created resource in storage.
      *

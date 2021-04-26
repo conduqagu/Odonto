@@ -80,6 +80,13 @@
                                         <a class="dropdown-item" href="{{ url('/ajustes') }}">
                                             Ajustes
                                         </a>
+
+                                    @endif
+
+                                    @if(Auth::user()->userType =='admin')
+                                        <a class="dropdown-item" href="{{ url('/ajustes') }}">
+                                            Ajustes
+                                        </a>
                                         <a class="dropdown-item" href="{{ url('register') }}">
                                             Nuevo registro
                                         </a>

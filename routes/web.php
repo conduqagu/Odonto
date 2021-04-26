@@ -21,6 +21,13 @@ Route::get('/información', function () {
 });
 
 
+Route::group(['middleware'=> 'App\Http\Middleware\AdminMiddleware'], function()
+{
+    Route::get('/perfiladmin','UserController@perfiladmin')->name('perfiladmin');
+    Route::put('/perfiladmin/update/{id}','UserController@updateperfiladmin')->name('updateperfiladmin');
+
+});
+
 Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function()
 {
     Route::get('/indexstudents','UserController@indexstudents')->name('indexstudents');

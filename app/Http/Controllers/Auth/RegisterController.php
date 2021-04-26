@@ -39,8 +39,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        //$this->middleware('guess');
-        $this->middleware('App\Http\Middleware\TeacherMiddleware');
+        $this->middleware('App\Http\Middleware\AdminMiddleware');
     }
 
     /**
@@ -56,7 +55,7 @@ class RegisterController extends Controller
             'surname'=>['required', 'string','max:255'],
             'dni' => ['required','unique:users','string','max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'userType'=> ['required', 'string','in:student,teacher'],
+            'userType'=> ['required', 'string','in:student,teacher,admin'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
@@ -78,4 +77,6 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+
+
 }

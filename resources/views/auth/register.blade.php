@@ -71,6 +71,10 @@
                                 <label for="student">Alumno</label><br>
                                 <input type="radio" id="teacher" name="userType" value="teacher" class="@error('userType') is-invalid @enderror" name="userType" value="{{ old('userType') }}" required autocomplete="userType" autofocus>
                                 <label for="teacher">Profesor</label><br>
+                                @if(Auth::user()->userType =='admin')
+                                    <input type="radio" id="admin" name="userType" value="admin" class="@error('userType') is-invalid @enderror" name="userType" value="{{ old('userType') }}" required autocomplete="userType" autofocus>
+                                    <label for="admin">Administrador</label><br>
+                                @endif
 
                                 @error('userType')
                                 <span class="invalid-feedback" role="alert">
