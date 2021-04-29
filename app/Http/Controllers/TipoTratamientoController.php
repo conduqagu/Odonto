@@ -57,5 +57,54 @@ class TipoTratamientoController extends Controller
 
         return redirect()->route('tipo_tratamientos.index');
     }
+    /**
+     * Edit Student
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $tipo_tratamiento = TipoTratamiento::find($id);
+        return view('tipo_tratamientos/edit',['tipo_tratamiento'=> $tipo_tratamiento]);
+    }
+
+    /**
+     * Update Student
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+
+        ]);
+
+        $tipo_tratamiento = TipoTratamiento::find($id);
+        $tipo_tratamiento->fill($request->all());
+        $tipo_tratamiento->save();
+
+        flash('Tipo creado correctamente');
+
+        return redirect()->route('tipo_tratamientos.index');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $tipo_tratamiento = TipoTratamiento::find($id);
+        $tipo_tratamiento->delete();
+        flash('Tipo borrado correctamente');
+
+        return redirect()->route('tipo_tratamientos.index');
+    }
 
 }

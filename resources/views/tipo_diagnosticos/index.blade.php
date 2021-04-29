@@ -5,13 +5,18 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Dientes</div>
+                    <div class="panel-heading">Tipos de diagnósticos</div>
 
                     <div class="panel-body">
                         @include('flash::message')
                         {!! Form::open(['route' => 'tipo_diagnosticos.create', 'method' => 'get']) !!}
                         {!!   Form::submit('Crear tipo', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
+                        <br>
+                        {!! Form::open(['route' => ['ajustes.index'], 'method' => 'get']) !!}
+                        {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark' ])!!}
+                        {!! Form::close() !!}
+
 
                         <br><br>
                         <table class="table table-striped table-bordered">
