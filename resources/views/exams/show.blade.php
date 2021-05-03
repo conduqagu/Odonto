@@ -387,13 +387,15 @@
 
 
                         <div class="card-body">
-
-                            @if(Auth::user()->userType =='teacher'&&$exam->tipoExam=='inicial')
+                            @if($exam->tipoExam=='periodoncial')
+                                {!! Form::open(['route' => ['index_asociacionEDPeriodoncia',$exam->id], 'method' => 'get']) !!}
+                                {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary'])!!}
+                                {!! Form::close() !!}
+                            @elseif(Auth::user()->userType =='teacher'&&$exam->tipoExam=='inicial')
                                 {!! Form::open(['route' => ['indexasociacionEDTeacher',$exam->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary'])!!}
                                 {!! Form::close() !!}
-                            @endif
-                            @if(Auth::user()->userType =='student'&&$exam->tipoExam=='inicial')
+                            @elseif(Auth::user()->userType =='student'&&$exam->tipoExam=='inicial')
                                 {!! Form::open(['route' => ['index_asociacionED',$exam->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary'])!!}
                                 {!! Form::close() !!}

@@ -37,6 +37,17 @@ class AsociacionExamDienteController extends Controller
 
         return view('exams.asociacion_exam_dienteTeacher',['asociacion_exam_dientes'=>$asociacion_exam_dientes,'exam_id'=>$exam_id]);
     }
+    /**
+     * Display a listing of the resource. Teacher
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function indexPeriodoncia($exam_id)
+    {
+        $asociacion_exam_dientes=AsociacionExamDiente::all()->where('exam_id','=',$exam_id);
+
+        return view('asociacion_ExDiente_Periodoncia.index',['asociacion_exam_dientes'=>$asociacion_exam_dientes,'exam_id'=>$exam_id]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -69,7 +80,36 @@ class AsociacionExamDienteController extends Controller
                     })->pluck('dientes.id')->values())->get();
         }
 
-        return view('exams.create_asociacion_exam_diente',['exam_id'=>$exam_id,'dientes'=>$dientes]);
+        return view('asociacion_ExDiente.create_asociacion_exam_diente',['exam_id'=>$exam_id,'dientes'=>$dientes]);
+    }
+
+    public function create_asociacionEDPeriodoncia($exam_id)
+    {
+        $exam=Exam::find($exam_id);
+        $patient_id=$exam->patient_id;
+        $patient=Patient::find($patient_id);
+        $child=$patient->child;
+
+        if($child==1){
+            $dientes=Diente::where('dientes.patient_id','=',$patient_id)
+                ->where('number','>','50')
+                ->whereNotIn('dientes.id', Diente::where('asociacion_exam_dientes.exam_id','=',$exam_id)
+                    ->where('dientes.patient_id','=',$patient_id)
+                    ->join('asociacion_exam_dientes',function ($join){
+                        $join->on('asociacion_exam_dientes.diente_id','=','dientes.id');
+                    })->pluck('dientes.id')->values())->get();
+
+        }elseif($child==0){
+            $dientes=Diente::where('dientes.patient_id','=',$patient_id)
+                ->where('number','<','50')
+                ->whereNotIn('dientes.id', Diente::where('asociacion_exam_dientes.exam_id','=',$exam_id)
+                    ->where('dientes.patient_id','=',$patient_id)
+                    ->join('asociacion_exam_dientes',function ($join){
+                        $join->on('asociacion_exam_dientes.diente_id','=','dientes.id');
+                    })->pluck('dientes.id')->values())->get();
+        }
+
+        return view('asociacion_ExDiente_Periodoncia.create',['exam_id'=>$exam_id,'dientes'=>$dientes]);
     }
 
 
@@ -113,6 +153,43 @@ class AsociacionExamDienteController extends Controller
         return redirect()->route('index_asociacionED',[$exam_id]);
     }
 
+    public function store_asociacionEDPeriodoncia(Request $request,$exam_id)
+    {
+        $child=Patient::find(Exam::find($exam_id)->patient_id)->child;
+        if($child==1){
+            $lista=array(51,52,53,54,55,61,62,63,64,65,71,72,73,74,75,81,82,83,84,85);
+        }else{
+            $lista=array(11,12,13,14,15,16,17,18,21,22,23,24,25,26,27,28,31,32,33,34,35,36,37,38,41,42,43,44,45,46,47,48);
+        }
+        foreach ($lista as $a){
+            $this->validate($request, [
+                'furca'.$a => 'required|Integer|max:255',
+                'retraccion'.$a =>  'required|Integer|max:255',
+                'hipertrofia'.$a =>  'required|Integer|max:255',
+                'sondaje'.$a =>  'required|boolean',
+                'movilidad'.$a =>  'required|boolean',
+                'sangrado'.$a =>  'required|boolean',
+                'encia_insertada'.$a =>  'required|boolean',
+                'diente_id'.$a => 'required|exists:dientes,id',
+            ]);
+
+            $asociacion_exam_diente=new AsociacionExamDiente();
+            $asociacion_exam_diente->furca= $request->get('furca'.$a);
+            $asociacion_exam_diente->retraccion= $request->get('retraccion'.$a);
+            $asociacion_exam_diente->hipertrofia= $request->get('hipertrofia'.$a);
+            $asociacion_exam_diente->sondaje= $request->get('sondaje'.$a);
+            $asociacion_exam_diente->movilidad= $request->get('movilidad'.$a);
+            $asociacion_exam_diente->sangrado= $request->get('sangrado'.$a);
+            $asociacion_exam_diente->encia_insertada= $request->get('encia_insertada'.$a);
+            $asociacion_exam_diente->diente_id= $request->get('diente_id'.$a);
+            $asociacion_exam_diente->exam_id=$exam_id;
+            $asociacion_exam_diente->save();
+        }
+
+        flash('Asociación creada correctamente');
+        return redirect()->route('index_asociacionEDPeriodoncia',[$exam_id]);
+    }
+
     /**
      * Display the specified resource.
      *
@@ -153,7 +230,7 @@ class AsociacionExamDienteController extends Controller
             ->get();
         $dientes=$diente->pluck('number', 'id');
 
-        return view('exams/edit_asociacion_exam_dienteTeacher',['asociacion_exam_diente'=> $asociacion_exam_diente,'dientes'=>$dientes ]);
+        return view('asociacion_ExDiente/edit_asociacion_exam_dienteTeacher',['asociacion_exam_diente'=> $asociacion_exam_diente,'dientes'=>$dientes ]);
     }
     /**
      * Update Student

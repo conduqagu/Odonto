@@ -113,6 +113,12 @@ Route::get('/exams/show/{id}','ExamController@show')->name('exams.show');
 Route::get('/exams/create_asociacionED/{id}','AsociacionExamDienteController@create_asociacionED')->name('create_asociacionED');
 Route::post('/exams/store_asociacionED/{id}','AsociacionExamDienteController@store_asociacionED')->name('store_asociacionED');
 Route::get('/exams/index_asociacionED/{id}','AsociacionExamDienteController@index')->name('index_asociacionED');
+Route::get('/asociacion_exam_diente_periodoncia/create/{id}','AsociacionExamDienteController@create_asociacionEDPeriodoncia')->name('create_asociacionEDPeriodoncia');
+Route::post('/asociacion_exam_diente_periodoncia/store/{id}','AsociacionExamDienteController@store_asociacionEDPeriodoncia')->name('store_asociacionEDPeriodoncia');
+Route::get('/asociacion_exam_diente_periodoncia/index/{id}','AsociacionExamDienteController@indexPeriodoncia')->name('index_asociacionEDPeriodoncia');
+Route::get('/asociacion_exam_diente_periodoncia/edit/{id}','AsociacionExamDienteController@edit_asociacionEDPeriodoncia')->name('edit_asociacionEDPeriodoncia');
+Route::put('/asociacion_exam_diente_periodoncia/update/{id}','AsociacionExamDienteController@update_asociacionEDPeriodoncia')->name('update_asociacionEDPeriodoncia');
+
 
 
 Route::get('/exams/createTeacherInicial/{id}','ExamController@examsCreateTeacherInicial')->name('examsCreateTeacherInicial');

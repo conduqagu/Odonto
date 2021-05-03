@@ -384,6 +384,7 @@ class ExamController extends Controller
             'consistencia'=>['required','string', 'in:firme,depresible'],
             'biotipo'=>['required','integer'],
         ]);
+
         $exam = Exam::find($id);
         $exam->fill($request->all());
 

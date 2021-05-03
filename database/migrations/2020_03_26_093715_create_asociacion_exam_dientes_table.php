@@ -25,6 +25,13 @@ class CreateAsociacionExamDientesTable extends Migration
             $table->enum('opacidad', ['Ningún estado anormal','Opacidad delimitada','OpacidadDifusa','Hipoplasia',
                 'Otros defectos','Opacidad elimitada y difusa','Opacidad delimitada e hipoplasia','Opacidad difusa e hipoplasia',
                 'Las tres alteraciones']);
+            $table->integer('furca');
+            $table->integer('rertraccion');
+            $table->integer('hipertrofia');
+            $table->integer('sondaje');
+            $table->boolean('movilidad');
+            $table->boolean('sangrado');
+            $table->boolean('encia_insertada');
             $table->unsignedBigInteger('exam_id');
             $table->unsignedBigInteger('diente_id');
 

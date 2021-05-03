@@ -23,8 +23,8 @@
                             {!! Form::text('indicePlaca', null,['class' => 'form-control']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('indicePlaca' , 'Índice de placa') !!}
-                            {!! Form::select('indicePlaca', array('rosa'=>'Rosa','rojo'=>'Rojo'),'rosa',['class' => 'form-control', 'required']) !!}
+                            {!!  Form::label('color' , 'Color') !!}
+                            {!! Form::select('color', array('rosa'=>'Rosa','rojo'=>'Rojo'),'rosa',['class' => 'form-control', 'required']) !!}
                         </div>
                         <div>
                             {!!  Form::label('borde' , 'Borde') !!}
