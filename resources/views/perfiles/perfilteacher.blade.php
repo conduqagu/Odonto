@@ -29,12 +29,12 @@
                             {!! Form::text('dni',$user->dni,['class' => 'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!!  Form::label('pin' , 'PIN original: ') !!}
-                            <input id="pin" type="password" class="form-control" name="pin" placeholder="Dejar este campo en blanco en caso de no tener ningún pin previo">
+                            {!!  Form::label('oldpin' , 'PIN original: ') !!}
+                            <input id="oldpin" type="password" class="form-control" name="oldpin" placeholder="Inicialmente es su DNI">
                         </div>
                         <div class="form-group">
-                            {!!  Form::label('newpin','Nuevo PIN:') !!}
-                            <input id="newpin" type="password" class="form-control" name="newpin" placeholder="Introduzca un nuevo pin numérico">
+                            {!!  Form::label('pin','Nuevo PIN:') !!}
+                            <input id="pin" type="password" class="form-control" name="pin" placeholder="Introduzca un nuevo pin numérico">
                         </div>
                         <div class="form-group">
                             {!!  Form::label('confirmpin','Corfirmar nuevo PIN:') !!}

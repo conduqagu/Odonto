@@ -46,7 +46,8 @@
                             {!! Form::select('braket_id', $brakets,null,['class' => 'form-control']) !!}
                         </div>
                         <br>
-                        {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
+                        {!! Form::submit( 'Guardar', ['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}
+                        {!! Form::submit( 'Añadir tratamiento',['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}
                         {!! Form::close() !!}
                     </div>
                 </div>

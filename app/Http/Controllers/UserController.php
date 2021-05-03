@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\AsociacionTeacherStudent;
+use Illuminate\Support\Facades\Hash;
 use Laracasts\Flash\Flash;
 
 class UserController extends Controller
@@ -153,9 +154,9 @@ class UserController extends Controller
             'surname'=>['required','string','max:255'],
             'email'=>['required','string','max:255'],
             'dni'=>['required','string','max:255'],
-            'pin'=>['nullable','integer'],
-            'newpin'=>['nullable','integer'],
-            'confirmpin'=>['nullable','integer']
+            'oldpin'=>['nullable','string'],
+            'pin'=>['nullable','string', 'unique:users'],
+            'confirmpin'=>['nullable','string']
         ]);
 
         $user=\App\User::find($id);
@@ -163,9 +164,9 @@ class UserController extends Controller
         $user->surname=$request->get('surname');
         $user->email=$request->get('email');
         $user->dni=$request->get('dni');
-        if ($user->pin==$request->get('pin') or $user->pin==null){
-            if($request->get('newpin')==$request->get('confirmpin')){
-                $user->pin=$request->get('newpin');
+        if ($user->pin==Hash::make($request->oldpin)){
+            if($request->pin==$request->confirmpin){
+                $user->pin=Hash::make($request->pin);
                 flash('Datos actualizados correctamente');
             }else{
                 flash('¡ERROR! Nuevo pin y confirmación de pin no coinciden');

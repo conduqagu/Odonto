@@ -289,7 +289,8 @@
                                     {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                     {!! Form::close() !!}</td>
                                 <td>
-                                    {!! Form::open(['route' => ['asociacion_ExDiags.destroy',$diagnostico->id], 'method' => 'delete']) !!}
+                                    <!--TODO: Arreglar numero de parametros que se pasan-->
+                                    {!! Form::open(['route' => ['asociacion_ExDiags.destroy',$diagnostico->id,$exam->id], 'method' => 'delete']) !!}
                                     {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                     {!! Form::close() !!}
                                 </td>
