@@ -156,7 +156,10 @@ class UserController extends Controller
             'dni'=>['required','string','max:255'],
             'oldpin'=>['nullable','string'],
             'pin'=>['nullable','string', 'unique:users'],
-            'confirmpin'=>['nullable','string']
+            'confirmpin'=>['nullable','string'],
+            'oldpassword'=>['nullable','string'],
+            'password'=>['nullable','string'],
+            'confirpassword'=>['nullable','string'],
         ]);
 
         $user=\App\User::find($id);
@@ -172,7 +175,17 @@ class UserController extends Controller
                 flash('¡ERROR! Nuevo pin y confirmación de pin no coinciden');
             }
         }else{
-            flash('Pin no actualizado, el resto de datos se han actualizado correctamente');
+            flash('Pin no actualizado');
+        }
+        if ($user->password==Hash::make($request->password)){
+            if($request->password==$request->confirpassword){
+                $user->password=Hash::make($request->password);
+                flash('Datos actualizados correctamente');
+            }else{
+                flash('¡ERROR! Nueva contraseña y confirmación de contraseña no coinciden');
+            }
+        }else{
+            flash('Contraseña no actualizada');
         }
         $user->save();
 
