@@ -13,6 +13,18 @@ use Laracasts\Flash\Flash;
 class UserController extends Controller
 {
     /**
+     * Lista de usuarios
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $users = \App\User::all();
+
+        return view('perfiles/index',['users'=>$users]);
+    }
+
+    /**
      * Lista de estudiantes no asignados al profesor (usuario)
      *
      * @return \Illuminate\Http\Response
@@ -45,6 +57,8 @@ class UserController extends Controller
             ->get();
         return view('listsmystudent',['students'=>$students]);
     }
+
+
     /**
      * Asignar un alumno al profesor (usuario)
      *
@@ -89,9 +103,41 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
-        //
+        return view('perfiles/register');
+
+    }
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'surname'=>['required', 'string','max:255'],
+            'dni' => ['required','unique:users','string','max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'userType'=> ['required', 'string','in:student,teacher,admin'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $user=new \App\User($request->all());
+        $user->password=Hash::make($request->getPassword());
+        $user->save();
+
+        flash('Usuario creado correctamente');
+
+        if(Auth::user()->userType=='admin'){
+            return redirect()->route('userIndex');
+        }else{
+            return redirect()->route('ajustes');
+        }
+
     }
 
     /**
@@ -226,16 +272,8 @@ class UserController extends Controller
 
         return redirect()->route('perfiladmin');
     }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+
+
 
     /**
      * Display the specified resource.

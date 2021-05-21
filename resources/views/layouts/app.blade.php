@@ -87,8 +87,8 @@
                                     <a class="dropdown-item" href="{{ url('/ajustes') }}">
                                         Ajustes
                                     </a>
-                                    <a class="dropdown-item" href="{{ url('register') }}">
-                                        Nuevo registro
+                                    <a class="dropdown-item" href="{{ url('/user') }}">
+                                        Usuarios
                                     </a>
 
                                 @endif
