@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use http\Client\Curl\User;
+use App\User;
+use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\AsociacionTeacherStudent;
 use Illuminate\Support\Facades\Hash;
-use Laracasts\Flash\Flash;
 
 class UserController extends Controller
 {
@@ -32,15 +32,10 @@ class UserController extends Controller
     public function indexstudents(Request $request) //Lista de estudiantes para profesores
     {
 
-        $students= \App\User::whereNotIn('users.id',
-                AsociacionTeacherStudent::where('teacher_id','=',Auth::user()->id)
-                    ->join('users','users.id','=','asociacion_teacher_students.student_id')
-                    ->pluck('users.id')->values()
-                )
+        $students= \App\User::whereNotIn('users.id',\App\User::find(Auth::user()->id)->students()->pluck('users.id')->values())
             ->where('users.name','LIKE','%'.$request->get("query")."%")
             ->where('userType','=','student')
             ->get();
-
         return view('indexstudents',['students'=>$students]);
     }
     /**
@@ -50,11 +45,7 @@ class UserController extends Controller
      */
     public function listsmystudent() //Lista de estudiantes para profesores
     {
-        $students = DB::table('asociacion_teacher_students')
-            ->where('teacher_id','=',Auth::user()->id)
-            ->join('users', 'users.id', '=', 'asociacion_teacher_students.student_id')
-            ->select('users.*')
-            ->get();
+        $students = \App\User::find(Auth::user()->id)->students()->get();
         return view('listsmystudent',['students'=>$students]);
     }
 
@@ -67,10 +58,8 @@ class UserController extends Controller
      */
     public function asignaralumno($id)
     {
-        $asociacion_teacher_student=new AsociacionTeacherStudent();
-        $asociacion_teacher_student->teacher_id= Auth::user()->id;
-        $asociacion_teacher_student->student_id=$id;
-        $asociacion_teacher_student->save();
+        $teacher = User::find(Auth::user()->id);
+        $teacher->students()->attach($id);
 
         flash('Alumno asignado correctamente');
 
@@ -85,14 +74,9 @@ class UserController extends Controller
      */
     public function destroyasociacion($id)
     {
-        $students = DB::table('asociacion_teacher_students')
-            ->where('teacher_id','=',Auth::user()->id)
-            ->where('student_id','=',$id)
-            ->select('asociacion_teacher_students.id')
-            ->get();
-        $asociacion_teacher_student=AsociacionTeacherStudent::find($students[0]->id);
+        $teacher = User::find(Auth::user()->id);
+        $teacher->students()->detach($id);
 
-        $asociacion_teacher_student->delete();
 
         flash('Alumno quitado correctamente');
 
