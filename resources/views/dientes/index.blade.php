@@ -31,9 +31,9 @@
                                     <td>{{ $diente->cuadrante }}</td>
                                     <td>{{ $diente->sextante }}</td>
                                     @if($diente->ausente==1)
-                                        <td>Si</td>
+                                        <td style="color:#FF0000">Si</td>
                                     @else
-                                        <td>No</td>
+                                        <td >No</td>
                                     @endif
 
                                     <td>

@@ -13,20 +13,20 @@
                         {!! Form::model($user, [ 'route' => ['updateperfilstudent',$user->id], 'method'=>'PUT']) !!}
 
                         <div class="form-group">
-                            {!! Form::label('name', 'Nombre') !!}
-                            {!! Form::text('name',$user->name,['class'=>'form-control', 'required']) !!}
+                            {!! Form::label('name', 'Nombre: ') !!}
+                            {!! Form::label('name',$user->name) !!}
                         </div>
-                        <div>
-                            {!!  Form::label('surname' , 'Apellidos') !!}
-                            {!! Form::text('surname', $user->surname,['class' => 'form-control', 'required']) !!}
+                        <div class="form-group">
+                            {!!  Form::label('surname' , 'Apellidos: ') !!}
+                            {!! Form::label('surname', $user->surname) !!}
                         </div>
-                        <div>
+                        <div class="form-group">
+                            {!!  Form::label('dni' , 'DNI: ') !!}
+                            {!! Form::label('dni',$user->dni) !!}
+                        </div>
+                        <div class="form-group">
                             {!!  Form::label('email' , 'Correo electrónico') !!}
                             {!! Form::text('email',$user->email,['class' => 'form-control', 'required']) !!}
-                        </div>
-                        <div>
-                            {!!  Form::label('dni' , 'DNI') !!}
-                            {!! Form::text('dni',$user->dni,['class' => 'form-control', 'required']) !!}
                         </div>
                         <div>
                             <br>

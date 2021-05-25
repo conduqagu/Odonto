@@ -127,6 +127,9 @@ class UserController extends Controller
         ]);
 
         $user=new \App\User($request->all());
+        if($request->userType=='teacher'){
+            $user->pin=MD5($request->dni);
+        }
         $user->password=Hash::make($request->getPassword());
         $user->save();
 
@@ -135,7 +138,7 @@ class UserController extends Controller
         if(Auth::user()->userType=='admin'){
             return redirect()->route('userIndex');
         }else{
-            return redirect()->route('ajustes');
+            return redirect()->route('ajustes.index');
         }
 
     }
@@ -196,42 +199,22 @@ class UserController extends Controller
      */
     public function updateperfilteacher(Request $request, $id){
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'surname'=>['required','string','max:255'],
             'email'=>['required','string','max:255'],
-            'dni'=>['required','string','max:255'],
             'oldpin'=>['nullable','string'],
             'pin'=>['nullable','string', 'unique:users'],
             'confirmpin'=>['nullable','string'],
-            'oldpassword'=>['nullable','string'],
-            'password'=>['nullable','string'],
-            'confirpassword'=>['nullable','string'],
         ]);
-
         $user=\App\User::find($id);
-        $user->name=$request->get('name');
-        $user->surname=$request->get('surname');
         $user->email=$request->get('email');
-        $user->dni=$request->get('dni');
-        if ($user->pin==Hash::make($request->oldpin)){
+        if ($user->pin==MD5($request->oldpin)){
             if($request->pin==$request->confirmpin){
-                $user->pin=Hash::make($request->pin);
+                $user->pin=MD5($request->pin);
                 flash('Datos actualizados correctamente');
             }else{
                 flash('¡ERROR! Nuevo pin y confirmación de pin no coinciden');
             }
         }else{
             flash('Pin no actualizado');
-        }
-        if ($user->password==Hash::make($request->password)){
-            if($request->password==$request->confirpassword){
-                $user->password=Hash::make($request->password);
-                flash('Datos actualizados correctamente');
-            }else{
-                flash('¡ERROR! Nueva contraseña y confirmación de contraseña no coinciden');
-            }
-        }else{
-            flash('Contraseña no actualizada');
         }
         $user->save();
 

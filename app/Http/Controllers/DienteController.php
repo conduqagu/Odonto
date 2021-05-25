@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Diente;
 use App\Patient;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DienteController extends Controller
 {
@@ -121,21 +123,31 @@ class DienteController extends Controller
             'cuadrante' => ['required', 'integer','max:8' ],
             'sextante' => ['required', 'integer','max:6' ],
             'ausente' => ['required', 'boolean'],
-            'pin'=>['required','integer']
+            'pin'=>['nullable','string']
         ]);
 
-        $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
-        LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
-        LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)
-        WHERE laravel.users.id ='.Auth::user()->id.' AND teachers.pin='.$request->get('pin').';'));
-
-        if(count($profesor)==0){
-            flash('Pin incorrecto');
-            return redirect()->route('dientes.edit',$id);
+        if(Auth::user()->userType=='student') {
+            /**$profesor = DB::select(DB::raw('SELECT * FROM laravel.users
+            LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
+            LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)
+            WHERE laravel.users.id =' . Auth::user()->id . ' AND teachers.pin='.$request->get('pin').';'));
+            */
+            $profesores=DB::table('users')
+                ->join('asociacion_teacher_students','asociacion_teacher_students.teacher_id','=','users.id')
+                ->where('asociacion_teacher_students.student_id','=',Auth::user()->id)
+                ->select('asociacion_teacher_students.*')->get();
+            $result=false;
+            foreach ($profesores as $profesor){
+                $pin=User::find($profesor->teacher_id)->pin;
+                $result=$result||($pin==MD5($request->pin));
+            }
+            if ($result == false) {
+                flash('Pin incorrecto');
+                return redirect()->route('dientes.edit', $id);
+            }
         }
         $diente = Diente::find($id);
         $diente->fill($request->all());
-
         $diente->save();
 
         flash('Diente modificado correctamente');

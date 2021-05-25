@@ -20,7 +20,7 @@
                                 {!!   Form::submit('Mi perfil', ['class'=> 'btn btn-primary'])!!}
                                 {!! Form::close() !!}
                             <br>
-                                {!! Form::open(['route' => 'userCreate', 'method' => 'get']) !!}
+                                {!! Form::open(['route' => 'userCreateT', 'method' => 'get']) !!}
                                 {!!   Form::submit('Nuevo Registro de Usuario', ['class'=> 'btn btn-primary'])!!}
                                 {!! Form::close() !!}
                             @elseif(Auth::user()->userType =='admin')

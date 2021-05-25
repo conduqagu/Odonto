@@ -41,7 +41,11 @@
                                 <tr>
 
                                     <td>{{ $exam->date }}</td>
-                                    <td>{{ $exam->tipoExam}}</td>
+                                    @if($exam->tipoExam=='evOrto')
+                                        <td>{{ 'Evaluación ortodoncia' }}</td>
+                                    @else
+                                        <td>{{ $exam->tipoExam}}</td>
+                                    @endif
 
                                     <td>
                                         {!! Form::open(['route' => ['exams.show',$exam->id], 'method' => 'get']) !!}

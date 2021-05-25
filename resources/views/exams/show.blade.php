@@ -289,8 +289,9 @@
                                     {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                     {!! Form::close() !!}</td>
                                 <td>
-                                    <!--TODO: Arreglar numero de parametros que se pasan-->
-                                    {!! Form::open(['route' => ['asociacion_ExDiags.destroy',$diagnostico->id,$exam->id], 'method' => 'delete']) !!}
+                                    <!--TODO: Input Examen-->
+                                    {!! Form::open(['route' => ['asociacion_ExDiags.destroy',$diagnostico->id], 'method' => 'delete']) !!}
+                                    {!! Form::hidden('exam_id',$exam->id) !!}
                                     {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                     {!! Form::close() !!}
                                 </td>
@@ -410,16 +411,13 @@
                             @if(Auth::user()->userType =='student')
                                 {!! Form::open(['route' => ['exams.edit',$exam->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
-                                {!! Form::close() !!}                            @endif
-
+                                {!! Form::close() !!}
+                            @endif
                         <br>
                             @if(Auth::user()->userType =='teacher')
                                 {!! Form::open(['route' => ['examsdeleteTeacher',$exam->id], 'method' => 'delete']) !!}
                                 {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                 {!! Form::close() !!}
-                            @endif
-                            @if(Auth::user()->userType =='student')
-                               <!--TODO: Buscar boton eliminar de estudiantes-->
                             @endif
                         <br>
                             {!! Form::open(['route' => ['exams.index',$exam->patient->id], 'method' => 'get']) !!}

@@ -108,11 +108,10 @@ class AsociacionDiagnosticoExamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($diagnostico_id,$exam_id)
+    public function destroy($diagnostico_id,Request $request)
     {
         $asociacion = AsociacionDiagnosticoExam::where('diagnostico_id','=',$diagnostico_id)
-            ->where('exam_id','=',$exam_id)->first();
-        dd($asociacion);
+            ->where('exam_id','=',$request->exam_id)->first();
         $exam_id=$asociacion->exam_id;
         $asociacion->delete();
         flash('Diagnostico borrado correctamente');
