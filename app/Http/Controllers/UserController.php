@@ -261,7 +261,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $user = User::find($id);
+
+        return view('perfiles.edit',['user'=>$user]);
     }
 
     /**
@@ -273,7 +275,20 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'surname'=>['required', 'string','max:255'],
+            'dni' => ['required','unique:users','string','max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'userType'=> ['required', 'string','in:student,teacher,admin'],
+        ]);
+
+        $user=User::find($id);
+        $user->fill($request->all());
+        $user->save();
+
+        flash('Usuario modiifcado correctamente');
+        return redirect()->route('userIndex');
     }
 
     /**
@@ -284,6 +299,11 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        flash('Usuario borrado correctamente');
+
+        return redirect()->route('userIndex');
     }
 }

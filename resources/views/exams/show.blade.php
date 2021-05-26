@@ -289,7 +289,6 @@
                                     {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                     {!! Form::close() !!}</td>
                                 <td>
-                                    <!--TODO: Input Examen-->
                                     {!! Form::open(['route' => ['asociacion_ExDiags.destroy',$diagnostico->id], 'method' => 'delete']) !!}
                                     {!! Form::hidden('exam_id',$exam->id) !!}
                                     {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}

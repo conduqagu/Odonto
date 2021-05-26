@@ -28,8 +28,9 @@ Route::group(['middleware'=> 'App\Http\Middleware\AdminMiddleware'], function()
     Route::get('/user/create','UserController@create')->name('userCreate');
     Route::post('/user/store','UserController@store')->name('userStore');
     Route::get('/user','UserController@index')->name('userIndex');
-
-
+    Route::get('/user/edit/{id}','UserController@edit')->name('user.edit');
+    Route::put('/user/update/{id}','UserController@update')->name('user.update');
+    Route::delete('/user/destroy/{id}','UserController@destroy')->name('user.destroy');
 
 });
 

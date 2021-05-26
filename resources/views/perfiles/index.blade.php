@@ -29,14 +29,25 @@
                                     <td>{{ $user->surname }}</td>
                                     <td>{{ $user->dni }}</td>
                                     <td>{{ $user->email }}</td>
-                                    <td>{{ $user->userType }}</td>
+                                    @if($user->userType=='student')
+                                        <td>{{ 'Alumno/a' }}</td>
+                                    @elseif($user->userType=='teacher')
+                                        <td>{{ 'Profesor/a' }}</td>
+                                    @else
+                                        <td>{{ 'Administrador/a' }}</td>
+                                    @endif
 
-                                    <td>
+                                        <td>
                                         <!--TODO: Edit user-->
-                                        {!! Form::open(['route' => ['patients.edit',$user->id], 'method' => 'get']) !!}
+                                        {!! Form::open(['route' => ['user.edit',$user->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}
                                         <!--TODO: crear eliminar-->
+                                        <br>
+                                        {!! Form::open(['route' => ['user.destroy',$user->id], 'method' => 'delete']) !!}
+                                        {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
+                                        {!! Form::close() !!}
+
                                     </td>
 
                                 </tr>
