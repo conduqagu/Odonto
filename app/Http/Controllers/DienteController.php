@@ -63,12 +63,10 @@ class DienteController extends Controller
             'pin'=>['required','integer']
         ]);
 
-        $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
-        LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
-        LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)
-        WHERE laravel.users.id ='.Auth::user()->id.' AND teachers.pin='.$request->get('pin').';'));
+        $profesores=User::find(Auth::user()->id)->teachers()->get();
+        $profesores->wherein('pin',MD5($request->pin));
 
-        if(count($profesor)==0){
+        if(count($profesores)==0){
             flash('Pin incorrecto');
             return redirect()->route('dientes.create');
         }
@@ -127,21 +125,10 @@ class DienteController extends Controller
         ]);
 
         if(Auth::user()->userType=='student') {
-            /**$profesor = DB::select(DB::raw('SELECT * FROM laravel.users
-            LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
-            LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)
-            WHERE laravel.users.id =' . Auth::user()->id . ' AND teachers.pin='.$request->get('pin').';'));
-            */
-            $profesores=DB::table('users')
-                ->join('asociacion_teacher_students','asociacion_teacher_students.teacher_id','=','users.id')
-                ->where('asociacion_teacher_students.student_id','=',Auth::user()->id)
-                ->select('asociacion_teacher_students.*')->get();
-            $result=false;
-            foreach ($profesores as $profesor){
-                $pin=User::find($profesor->teacher_id)->pin;
-                $result=$result||($pin==MD5($request->pin));
-            }
-            if ($result == false) {
+            $profesores=User::find(Auth::user()->id)->teachers()->get();
+            $profesores->wherein('pin',MD5($request->pin));
+
+            if (count($profesores) == false) {
                 flash('Pin incorrecto');
                 return redirect()->route('dientes.edit', $id);
             }
