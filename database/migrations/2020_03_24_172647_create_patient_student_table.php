@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAsociacionPatientStudentsTable extends Migration
+class CreatePatientStudentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateAsociacionPatientStudentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('asociacion_patient_students', function (Blueprint $table) {
+        Schema::create('patient_student', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('student_id');
-            $table->unsignedBigInteger('patient_id');
-
-            $table->foreign('student_id')->references('id')->on('users');
-            $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
-
+            $table->integer('student_id')->unsigned();
+            $table->integer('patient_id')->unsigned();
         });
     }
 

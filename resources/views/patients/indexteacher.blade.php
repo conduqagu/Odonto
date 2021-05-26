@@ -52,8 +52,8 @@
                                     <td>{{ $patient->observaciones }}</td>
 
                                     <td>
-                                    @foreach ($patient->asociacionPatientStudents as $asociacionPatientStudent)
-                                     {{$asociacionPatientStudent->student->name.", " }}
+                                    @foreach ($patient->students as $student)
+                                     {{$student->name.", " }}
                                     @endforeach
                                     </td>
 

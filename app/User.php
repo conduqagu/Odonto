@@ -42,8 +42,7 @@ class User extends Authenticatable
     public function students () {
         return $this->belongsToMany('App\User','student_teacher', 'teacher_id', 'student_id');
     }
-    public function asociacionPatientStudents()
-    {
-        return $this->hasMany('App\AsociacionPatientStudent');
+    public function patients () {
+        return $this->belongsToMany('App\Patient','patient_student','student_id','patient_id');
     }
 }

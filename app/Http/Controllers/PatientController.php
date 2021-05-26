@@ -33,12 +33,7 @@ class PatientController extends Controller
      */
     public function index(Request $request)
     {
-        $patients = DB::table('asociacion_patient_students')
-            ->where('student_id','=',Auth::user()->id)
-            ->join('patients', 'patients.id', '=', 'asociacion_patient_students.patient_id')
-            ->where('patients.name','LIKE','%'.$request->get("query")."%")
-            ->select('patients.*')
-            ->get();
+        $patients=User::find(Auth::user()->id)->patients()->get();
         return view('patients.index',['patients'=>$patients]);
     }
     /**
@@ -88,7 +83,6 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-
         $this ->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
@@ -99,15 +93,12 @@ class PatientController extends Controller
             'riesgoASA' => ['required','in:I,II,III'],
             'observaciones' => ['nullable','string', 'max:255'],
             'child'=>['required','boolean'],
-            'pin'=>['required','integer']
+            'pin'=>['required','string']
         ]);
+        $profesores=User::find(Auth::user()->id)->teachers()->get();
+        $profesores->wherein('pin',MD5($request->pin));
 
-        $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
-        LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
-        LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)
-        WHERE laravel.users.id ='.Auth::user()->id.' AND teachers.pin='.$request->get('pin').';'));
-
-        if(count($profesor)==0){
+        if(count($profesores)==0){
             flash('Pin incorrecto');
             return redirect()->route('patients.create');
         }
@@ -115,10 +106,8 @@ class PatientController extends Controller
         $patient = new Patient($request->all());
         $patient->save();
 
-        $asociacion_patient_student=new AsociacionPatientStudent();
-        $asociacion_patient_student->student_id=Auth::user()->id;
-        $asociacion_patient_student->patient_id=$patient->id;
-        $asociacion_patient_student->save();
+        $student=User::find(Auth::user()->id);
+        $student->patients()->attach($patient->id);
 
 
         flash('Paciente creado correctamente');
@@ -154,10 +143,8 @@ class PatientController extends Controller
         $patient->save();
 
         if ($request->get('student_id')!=null){
-            $asociacion_patient_student=new AsociacionPatientStudent();
-            $asociacion_patient_student->student_id= $request->get('student_id');
-            $asociacion_patient_student->patient_id=$patient->id;
-            $asociacion_patient_student->save();
+            $student=User::find($request->student_id);
+            $student->patients()->attach($patient->id);
         }
 
         flash('Paciente creado correctamente');
@@ -228,12 +215,10 @@ class PatientController extends Controller
             'pin'=>['required','integer']
         ]);
 
-        $profesor=DB::select(DB::raw('SELECT * FROM laravel.users
-        LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
-        LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)
-        WHERE laravel.users.id ='.Auth::user()->id.' AND teachers.pin='.$request->get('pin').';'));
+        $profesores=User::find(Auth::user()->id)->teachers()->get();
+        $profesores->wherein('pin',MD5($request->pin));
 
-        if(count($profesor)==0){
+        if(count($profesores)==0){
             flash('Pin incorrecto');
             return redirect()->route('patients.edit',$id);
         }
@@ -302,22 +287,18 @@ class PatientController extends Controller
      * @param  array  $data
      * @return \App\Patient
      */
+    //TODO: Crear lista de alumnos
     public function añadirAlumno($id)
     {
-        $students=DB::table('users')
-            ->whereNotIn('users.id', AsociacionPatientStudent::where('asociacion_patient_students.patient_id','=',$id)
-                ->join('users', function($join) {
-                    $join->on('users.id','=','asociacion_patient_students.student_id');
-                })->pluck('users.id')->values())->where('userType','=','student')->pluck('name', 'id');
+        $students1=Patient::find($id)->students()->pluck('users.id');
+        $students=User::all()->whereNotIn('id',$students1)->where('userType','=','student');
 
         return view('patients.añadirAlumno',['patient_id'=>$id,'students'=>$students]);
     }
 
     public function storeAlumno(Request $request,$id){
-        $asociacion_patient_student=new AsociacionPatientStudent();
-        $asociacion_patient_student->student_id= $request->get('student_id');
-        $asociacion_patient_student->patient_id=$id;
-        $asociacion_patient_student->save();
+        $student=User::find($request->student_id);
+        $student->patients()->attach($id);
 
         return redirect()->route('indexteacher');
     }
@@ -342,14 +323,10 @@ class PatientController extends Controller
      * @param  $id_paciente
      * @return \App\Patient
      */
+    //TODO: Crear lista de alumnos
     public function destroyStudent($id)
     {
-        $users = DB::table('asociacion_patient_students')
-            ->where('patient_id','=',$id)
-            ->join('users','users.id','=','asociacion_patient_students.student_id')
-            ->select('users.*')
-            ->get();
-        $students= $users->where('userType','=','student')->pluck('name', 'id');
+        $students=Patient::find($id)->students()->pluck('name','surname','id');
         $patient = Patient::find($id);
 
         return view('patients.destroyStudent',['patient'=>$patient,'students'=>$students ]);
@@ -361,14 +338,8 @@ class PatientController extends Controller
      */
     public function deleteStudent(Request $request,$id)
     {
-        $students = DB::table('asociacion_patient_students')
-            ->where('student_id','=',$request->get('student_id'))
-            ->where('patient_id','=',$id)
-            ->select('asociacion_patient_students.*')
-            ->get();
-        $asociacion_patient_student=AsociacionPatientStudent::find($students[0]->id);
-
-        $asociacion_patient_student->delete();
+        $student=User::find($request->student_id);
+        $student->patients()->dettach($id);
 
         flash('Alumno borrado correctamente');
 
