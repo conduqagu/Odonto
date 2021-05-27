@@ -287,18 +287,26 @@ class PatientController extends Controller
      * @param  array  $data
      * @return \App\Patient
      */
-    //TODO: Crear lista de alumnos
-    public function añadirAlumno($id)
+    //TODO: Query orwhere filtro alumnos
+    public function añadirAlumno(Request $request,$id)
     {
         $students1=Patient::find($id)->students()->pluck('users.id');
         $students=User::all()->whereNotIn('id',$students1)->where('userType','=','student');
+/**        $students->where('users.dni','LIKE','%'.$request->get("query")."%")
+            ->orWhere('users.name','LIKE','%'.$request->get("query")."%")
+            ->orWhere('users.surname','LIKE','%'.$request->get("query")."%");
+ */
+        $patient=Patient::find($id);
 
-        return view('patients.añadirAlumno',['patient_id'=>$id,'students'=>$students]);
+        return view('patients.añadirAlumno',['patient'=>$patient,'students'=>$students]);
     }
 
-    public function storeAlumno(Request $request,$id){
-        $student=User::find($request->student_id);
-        $student->patients()->attach($id);
+    public function storeAlumno(Request $request,$student_id){
+        $student=User::find($student_id);
+        $student->patients()->attach($request->patient_id);
+
+        flash('Alumno asignado correctamente');
+
 
         return redirect()->route('indexteacher');
     }
@@ -323,10 +331,13 @@ class PatientController extends Controller
      * @param  $id_paciente
      * @return \App\Patient
      */
-    //TODO: Crear lista de alumnos
-    public function destroyStudent($id)
+    public function destroyStudent(Request $request,$id)
     {
-        $students=Patient::find($id)->students()->pluck('name','surname','id');
+        $students=Patient::find($id)->students()->where('users.dni','LIKE','%'.$request->get("query")."%")
+        ->orWhere('users.name','LIKE','%'.$request->get("query")."%")
+        ->orWhere('users.surname','LIKE','%'.$request->get("query")."%")
+        ->get();
+
         $patient = Patient::find($id);
 
         return view('patients.destroyStudent',['patient'=>$patient,'students'=>$students ]);
@@ -336,10 +347,10 @@ class PatientController extends Controller
      *
      * @return \App\Patient
      */
-    public function deleteStudent(Request $request,$id)
+    public function deleteStudent(Request $request,$student_id)
     {
-        $student=User::find($request->student_id);
-        $student->patients()->dettach($id);
+        $student=User::find($student_id);
+        $student->patients()->detach($request->patient_id);
 
         flash('Alumno borrado correctamente');
 

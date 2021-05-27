@@ -7,20 +7,44 @@
                 <div class="card">
                     <div class="card-header">Eliminar alumno de paciente</div>
 
-                    <div class="card-body">
-                        @include('flash::message')
-                        {!! Form::open(['route' => ['deleteStudent',$patient->id], 'method' => 'delete']) !!}
-                        <div>
-                            {!!Form::label('student_id', 'Estudiante a asignar') !!}
-                            <br>
-                            {!! Form::select('student_id', $students, ['class' => 'form-control', 'required']) !!}
-                        </div>
-                        {!! Form::submit('Eliminar',['class'=>'btn-primary btn']) !!}
+                <div class="card-body">
 
+                <div class="panel-body">
+                    @include('flash::message')
+                    <div class="form-group" >
+                        {!! Form::open(['route' => ['destroyStudent',$patient->id], 'method' => 'get']) !!}
+                        {!! Form::text('query',null,['class'=>'col-md-4', 'autofocus', 'placeholder'=>'Nombre, apellido o DNI']) !!}
+                        {!! Form::submit('Buscar', ['class'=> 'btn btn-success col-md-2'])!!}
                         {!! Form::close() !!}
 
                     </div>
+                        {{Form::label('paciente','Paciente: '.$patient->name.' '.$patient->surname)}}
+
+                        <table class="table table-striped table-bordered">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>DNI</th>
+                            <th colspan="4">Acciones</th>
+                        </tr>
+
+                        @foreach ($students as $student)
+                            <tr>
+                                <td>{{ $student->name }}</td>
+                                <td>{{ $student->surname }}</td>
+                                <td>{{ $student->dni }}</td>
+                                <td>
+                                    {!! Form::open(['route' => ['deleteStudent',$student->id], 'method' => 'delete']) !!}
+                                    {{Form::hidden('patient_id',$patient->id)}}
+                                    {!!   Form::submit('Eliminar de este paciente', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
+                                    {!! Form::close() !!}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
                 </div>
+                </div>
+            </div>
             </div>
         </div>
     </div>

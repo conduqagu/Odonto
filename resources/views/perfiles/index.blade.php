@@ -38,11 +38,9 @@
                                     @endif
 
                                         <td>
-                                        <!--TODO: Edit user-->
                                         {!! Form::open(['route' => ['user.edit',$user->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}
-                                        <!--TODO: crear eliminar-->
                                         <br>
                                         {!! Form::open(['route' => ['user.destroy',$user->id], 'method' => 'delete']) !!}
                                         {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
