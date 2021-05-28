@@ -426,6 +426,10 @@
                             {!! Form::open(['route' => ['exams.evaluaciones',$exam->id], 'method' => 'get']) !!}
                             {!!   Form::submit('Mostrar evaluaciones', ['class'=> 'btn btn-outline-dark'])!!}
                             {!! Form::close() !!}
+                        <br>
+                            {!! Form::open(['route' => ['imprimir_examen',$exam->id], 'method' => 'get']) !!}
+                            {!!   Form::submit('Generar PDF', ['class'=> 'btn btn-primary'])!!}
+                            {!! Form::close() !!}
                     </div>
                 </div>
                 </div>

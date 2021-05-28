@@ -497,4 +497,9 @@ class ExamController extends Controller
     {
 
     }
+    public function imprimir($id){
+        $exam=Exam::find($id);
+        $pdf = \PDF::loadView('exams/pdf',['exam'=>$exam]);
+        return $pdf->download('pdf.pdf');
+    }
 }
