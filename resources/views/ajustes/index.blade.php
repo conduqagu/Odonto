@@ -23,23 +23,21 @@
                                 {!! Form::open(['route' => 'userCreateT', 'method' => 'get']) !!}
                                 {!!   Form::submit('Nuevo Registro de Usuario', ['class'=> 'btn btn-primary'])!!}
                                 {!! Form::close() !!}
-                            @elseif(Auth::user()->userType =='admin')
-                                {!! Form::open(['route' => 'perfiladmin', 'method' => 'get']) !!}
-                                {!!   Form::submit('Mi perfil', ['class'=> 'btn btn-primary'])!!}
-                                {!! Form::close() !!}
-                            @endif
-                            @if(Auth::user()->userType =='student'||Auth::user()->userType =='teacher')
-                                <br>
+                            <br>
                                 {!! Form::open(['route' => 'tipo_tratamientos.index', 'method' => 'get']) !!}
                                 {!!   Form::submit('Tipo de tratamientos', ['class'=> 'btn btn-primary'])!!}
                                 {!! Form::close() !!}
-                                <br>
+                            <br>
                                 {!! Form::open(['route' => 'diagnosticos.index', 'method' => 'get']) !!}
                                 {!!   Form::submit('Diagnosticos', ['class'=> 'btn btn-primary'])!!}
                                 {!! Form::close() !!}
-                                <br>
+                            <br>
                                 {!! Form::open(['route' => 'brakets.index', 'method' => 'get']) !!}
                                 {!!   Form::submit('Brakets', ['class'=> 'btn btn-primary'])!!}
+                                {!! Form::close() !!}
+                            @elseif(Auth::user()->userType =='admin')
+                                {!! Form::open(['route' => 'perfiladmin', 'method' => 'get']) !!}
+                                {!!   Form::submit('Mi perfil', ['class'=> 'btn btn-primary'])!!}
                                 {!! Form::close() !!}
                             @endif
                         </div>

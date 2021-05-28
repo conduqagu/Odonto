@@ -74,7 +74,15 @@ class ExamController extends Controller
     public function examsCreateTeacherevOrto($id)
     {
         $exam=Exam::find($id);
-        return view('exams/create_exam_evOrto_teacher',['exam'=>$exam,'id'=>$id]);
+        $ortodoncias=Exam::all()->where('patient_id','=',$exam->patient_id)
+            ->where('tipoExam','=','ortodoncial')->pluck('date','id');
+        return view('exams/create_exam_evOrto_teacher',['exam'=>$exam,'id'=>$id,'ortodoncias'=>$ortodoncias]);
+    }
+    public function evaluaciones($id)
+    {
+        $evaluaciones=Exam::all()->where('orto_id','=',$id);
+
+        return view('exams/evaluaciones',['evaluaciones'=>$evaluaciones]);
     }
     /**
      * Store a newly created resource in storage.
@@ -428,18 +436,21 @@ class ExamController extends Controller
             'maxilar'=>['nullable','string','max:255'],
             'mandibular'=>['nullable','string','max:255'],
             'logrado'=>['nullable','string','max:255'],
-            'otros'=>['nullable','string','max:255']
+            'otros'=>['nullable','string','max:255'],
+            'orto_id'=>['required','exists:exams,id']
         ]);
 
         $exam = Exam::find($id);
         $exam->fill($request->all());
-
+        $exam->orto_id=$request->orto_id;
         $exam->save();
+
 
         flash('Examen creado correctamente');
         return redirect()->route('exams.show',[$exam->id]);
 
     }
+
     /**
      * Remove the specified resource from storage.
      *

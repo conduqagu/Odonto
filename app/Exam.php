@@ -45,5 +45,11 @@ class Exam extends Model
     {
         return $this->hasMany('App\Tratamiento');
     }
+    public function evOrtos(){
+        $this->belongsTo('App\Exam');
+    }
+    public function ortodoncia(){
+        $this->hasMany('App\Exam');
+    }
 }
 

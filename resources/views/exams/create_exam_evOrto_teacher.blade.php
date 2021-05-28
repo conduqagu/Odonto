@@ -18,6 +18,10 @@
                             {!! Form::label('date', 'Fecha: '.$exam->date) !!}
                         </div>
                         <div>
+                            {!!  Form::label('orto_id' , 'Ortodoncia principal') !!}
+                            {!! Form::select('orto_id',$ortodoncias, ['class'=>'form-control']) !!}
+                        </div>
+                        <div>
                             {!!  Form::label('previsto' , 'Previsto') !!}
                             {!! Form::text('previsto',null, ['class'=>'form-control']) !!}
                         </div>

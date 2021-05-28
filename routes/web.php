@@ -63,8 +63,12 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
     Route::get('/exams/indexasociacionEDTeacher/{id}','AsociacionExamDienteController@indexasociacionEDTeacher')->name('indexasociacionEDTeacher');
     Route::get('/exams/editasociacionEDTeacher/{id}','AsociacionExamDienteController@editasociacionEDTeacher')->name('editasociacionEDTeacher');
     Route::put('/exams/updateasociacionEDTeacher/{id}','AsociacionExamDienteController@updateasociacionEDTeacher')->name('updateasociacionEDTeacher');
+    Route::get('/exams/evaluaciones/{id}','ExamController@evaluaciones')->name('exams.evaluaciones');
 
-
+    Route::resource('tipo_tratamientos', 'TipoTratamientoController');
+    Route::resource('brakets', 'BraketController');
+    Route::resource('diagnosticos', 'DiagnosticoController');
+    Route::resource('tipo_diagnosticos', 'TipoDiagnosticoController');
 
 });
 
@@ -89,19 +93,11 @@ Route::group(['middleware'=> 'App\Http\Middleware\StudentMiddleware'], function(
 });
 
 Route::group(['middleware'=> 'auth'], function() {
+
     Route::get('/patients/dientesPatient/{id}', 'DienteController@indexPatient')->name('dientesPatient');
     Route::get('/patients/createDientesPac/{id}', 'DienteController@createDientesPac')->name('createDientesPac');
     Route::get('/patients/createDientesPacChild/{id}', 'DienteController@createDientesPacChild')->name('createDientesPacChild');
     Route::resource('dientes', 'DienteController');
-    Route::resource('diagnosticos', 'DiagnosticoController');
-    Route::resource('patologias', 'PatologiaController');
-
-    Route::get('/tratamientos/create/{id}', 'TratamientoController@createT')->name('tratamientos.createT');
-    Route::resource('tratamientos', 'TratamientoController');
-    Route::resource('tipo_tratamientos', 'TipoTratamientoController');
-    Route::resource('brakets', 'BraketController');
-
-    Route::resource('tipo_diagnosticos', 'TipoDiagnosticoController');
     Route::post('/asociacion_ExamDiags/store/{id}', 'AsociacionDiagnosticoExamController@store')->name('asociacion_ExDiags.store');
     Route::get('/asociacion_ExamDiags/create/{id}', 'AsociacionDiagnosticoExamController@create')->name('asociacion_ExDiags.create');
     Route::get('/asociacion_ExamDiags/edit/{id}', 'AsociacionDiagnosticoExamController@edit')->name('asociacion_ExDiags.edit');
@@ -109,11 +105,11 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::delete('/asociacion_ExamDiags/destroy/{id}', 'AsociacionDiagnosticoExamController@destroy')->name('asociacion_ExDiags.destroy');
 
 
-    Route::post('/asociacion_ExamTratamientos/store/{id}', 'AsociacionExamTratamientoController@store')->name('asociacion_ExTratamientos.store');
-    Route::get('/asociacion_ExamTratamientos/create/{id}', 'AsociacionExamTratamientoController@create')->name('asociacion_ExTratamientos.create');
     Route::resource('ajustes', 'AjusteController');
     Route::get('/prueba_complementaria/create/{id}', 'PruebaComplementariaController@create')->name('prueba_complementarias.createT');
     Route::resource('prueba_complementarias', 'PruebaComplementariaController');
+    Route::get('/tratamientos/create/{id}', 'TratamientoController@createT')->name('tratamientos.createT');
+    Route::resource('tratamientos', 'TratamientoController');
 
 
     Route::get('/exams/index/{id}', 'ExamController@index')->name('exams.index');

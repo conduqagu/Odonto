@@ -422,7 +422,10 @@
                             {!! Form::open(['route' => ['exams.index',$exam->patient->id], 'method' => 'get']) !!}
                             {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark'])!!}
                             {!! Form::close() !!}
-
+                        <br>
+                            {!! Form::open(['route' => ['exams.evaluaciones',$exam->id], 'method' => 'get']) !!}
+                            {!!   Form::submit('Mostrar evaluaciones', ['class'=> 'btn btn-outline-dark'])!!}
+                            {!! Form::close() !!}
                     </div>
                 </div>
                 </div>
