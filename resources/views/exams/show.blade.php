@@ -384,21 +384,20 @@
                     </div>
                 </div>
 
-
-
                         <div class="card-body">
                             @if($exam->tipoExam=='periodoncial')
                                 {!! Form::open(['route' => ['index_asociacionEDPeriodoncia',$exam->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary'])!!}
                                 {!! Form::close() !!}
-                            @elseif(Auth::user()->userType =='teacher'&&$exam->tipoExam=='inicial')
-                                {!! Form::open(['route' => ['indexasociacionEDTeacher',$exam->id], 'method' => 'get']) !!}
-                                {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary'])!!}
-                                {!! Form::close() !!}
-                            @elseif(Auth::user()->userType =='student'&&$exam->tipoExam=='inicial')
+                            @elseif($exam->tipoExam=='inicial')
                                 {!! Form::open(['route' => ['index_asociacionED',$exam->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary'])!!}
                                 {!! Form::close() !!}
+                            @elseif($exam->tipoExam=='ortodoncial')
+                                {!! Form::open(['route' => ['exams.evaluaciones',$exam->id], 'method' => 'get']) !!}
+                                {!!   Form::submit('Mostrar evaluaciones', ['class'=> 'btn btn-primary'])!!}
+                                {!! Form::close() !!}
+                                <br>
                             @endif
 
                         <br>
@@ -423,10 +422,7 @@
                             {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark'])!!}
                             {!! Form::close() !!}
                         <br>
-                            {!! Form::open(['route' => ['exams.evaluaciones',$exam->id], 'method' => 'get']) !!}
-                            {!!   Form::submit('Mostrar evaluaciones', ['class'=> 'btn btn-outline-dark'])!!}
-                            {!! Form::close() !!}
-                        <br>
+
                             {!! Form::open(['route' => ['imprimir_examen',$exam->id], 'method' => 'get']) !!}
                             {!!   Form::submit('Generar PDF', ['class'=> 'btn btn-primary'])!!}
                             {!! Form::close() !!}

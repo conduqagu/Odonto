@@ -33,10 +33,6 @@ class Exam extends Model
     {
         return $this->hasMany('App\AsociacionExamDiente');
     }
-    public function asociacionExamTratamientos()
-    {
-        return $this->hasMany('App\AsociacionExamTratamiento');
-    }
     public function PruebaComplementarias()
     {
         return $this->hasMany('App\PruebaComplementaria');
@@ -50,6 +46,10 @@ class Exam extends Model
     }
     public function ortodoncia(){
         $this->hasMany('App\Exam');
+    }
+    public function AsociacionDiagnosticoExams()
+    {
+        return $this->hasMany('App\AsociacionDiagnosticoExam');
     }
 }
 

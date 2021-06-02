@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AsociacionDiagnosticoExam;
 use App\AsociacionExamDiente;
 use App\Diagnostico;
 use App\Exam;

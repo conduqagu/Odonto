@@ -17,21 +17,21 @@ class CreateAsociacionExamDientesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->enum('denticionRaiz', ['Sano','Cariado','Obturado sin caries','Obturado con caries',
-                'Pérdida otro motivo', 'Fisura Obturada','Pilar puente/corona','Diente no erupcionado','Fractura']);
+                'Pérdida otro motivo', 'Fisura Obturada','Pilar puente/corona','Diente no erupcionado','Fractura'])->nullable();
             $table->enum('denticionCorona', ['Sano','Cariado','Obturado sin caries','Obturado con caries',
-                'Pérdida otro motivo', 'Fisura Obturada','Pilar puente/corona','Diente no erupcionado','Fractura']);
+                'Pérdida otro motivo', 'Fisura Obturada','Pilar puente/corona','Diente no erupcionado','Fractura'])->nullable();
             $table->enum('tratamiento',['Ninguno','Preventivo','Obturación de fisuras','Obt. 1 o mas superficies',
-                'Obt 2 o mas superficies','Corona','Carilla estética','Tratamiento pulgar','Exodoncia','No registrado']);
+                'Obt 2 o mas superficies','Corona','Carilla estética','Tratamiento pulgar','Exodoncia','No registrado'])->nullable();
             $table->enum('opacidad', ['Ningún estado anormal','Opacidad delimitada','OpacidadDifusa','Hipoplasia',
                 'Otros defectos','Opacidad elimitada y difusa','Opacidad delimitada e hipoplasia','Opacidad difusa e hipoplasia',
-                'Las tres alteraciones']);
-            $table->integer('furca');
-            $table->integer('rertraccion');
-            $table->integer('hipertrofia');
-            $table->integer('sondaje');
-            $table->boolean('movilidad');
-            $table->boolean('sangrado');
-            $table->boolean('encia_insertada');
+                'Las tres alteraciones'])->nullable();
+            $table->integer('furca')->nullable();
+            $table->integer('rertraccion')->nullable();
+            $table->integer('hipertrofia')->nullable();
+            $table->integer('sondaje')->nullable();
+            $table->boolean('movilidad')->nullable();
+            $table->boolean('sangrado')->nullable();
+            $table->boolean('encia_insertada')->nullable();
             $table->unsignedBigInteger('exam_id');
             $table->unsignedBigInteger('diente_id');
 

@@ -69,7 +69,7 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
     Route::resource('brakets', 'BraketController');
     Route::resource('diagnosticos', 'DiagnosticoController');
     Route::resource('tipo_diagnosticos', 'TipoDiagnosticoController');
-
+    Route::resource('storage', 'StorageController');
 });
 
 Route::group(['middleware'=> 'App\Http\Middleware\StudentMiddleware'], function()

@@ -39,13 +39,14 @@ class PruebaComplementariaController extends Controller
     {
         $this->validate($request, [
             'nombre' => ['required', 'string', 'max:255'],
-            'fichero' => ['required', 'string', 'max:255'],
             'comentario' => ['nullable', 'string', 'max:255'],
-            'exam_id' => ['required', 'exists:exams,id']
-
+            'exam_id' => ['required', 'exists:exams,id'],
         ]);
 
         $prueba_complementaria=new PruebaComplementaria($request->all());
+        $prueba_complementaria->fichero=$request->file('fichero')->getClientOriginalName();
+
+
         $prueba_complementaria->save();
 
         flash('Tipo creado correctamente');

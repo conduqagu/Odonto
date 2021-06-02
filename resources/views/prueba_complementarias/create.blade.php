@@ -5,12 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Diagnóstico</div>
+                    <div class="card-header">Prueba complementaria</div>
 
                     <div class="card-body">
                         @include('flash::message')
 
-                        {!! Form::open(['route' => 'prueba_complementarias.store']) !!}
+                        {!! Form::open(['route' => 'prueba_complementarias.store','enctype'=>"multipart/form-data"]) !!}
                         <hidden>
                             {!! Form::hidden('exam_id', $exam_id) !!}
                         </hidden>
@@ -19,8 +19,10 @@
                             {!! Form::text('nombre',null,['class'=>'form-control', 'required','autofocus']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('fichero', 'Fichero') !!}
-                            {!! Form::text('fichero',null,['class'=>'form-control', 'required','autofocus']) !!}
+                            <label>Nuevo Archivo</label>
+                            <br>
+                            {!! Form::file('fichero',null,['class'=>'form-control', 'required','autofocus']) !!}
+
                         </div>
                         <div class="form-group">
                             {!! Form::label('comentario', 'Comentario') !!}
