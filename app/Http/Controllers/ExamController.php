@@ -168,12 +168,9 @@ class ExamController extends Controller
     public function show($id)
     {
         $exam = Exam::find($id);
-        $diagnosticos=DB::table('asociacion_diagnostico_exams')
-            ->where('exam_id','=',$id)
-            ->join('diagnosticos','diagnosticos.id','=','asociacion_diagnostico_exams.diagnostico_id')
-            ->select('diagnosticos.*')->get();
-        $tratamientos=Tratamiento::where('exam_id','=',$id)->get();
-        $prueba_complementarias=PruebaComplementaria::where('exam_id','=',$id)->get();
+        $diagnosticos=$exam->diagnosticos()->get();
+        $tratamientos=$exam->tratamientos()->get();
+        $prueba_complementarias=$exam->PruebaComplementarias()->get();
         return view('exams/show',['exam'=> $exam,'diagnosticos'=>$diagnosticos,'tratamientos'=>$tratamientos,'prueba_complementarias'=>$prueba_complementarias]);
     }
 
@@ -500,7 +497,13 @@ class ExamController extends Controller
     }
     public function imprimir($id){
         $exam=Exam::find($id);
-        $pdf = \PDF::loadView('exams/pdf',['exam'=>$exam]);
+        $exam = Exam::find($id);
+        $diagnosticos=$exam->diagnosticos()->get();
+        $tratamientos=$exam->tratamientos()->get();
+        $prueba_complementarias=$exam->PruebaComplementarias()->get();
+        $pdf = \PDF::loadView('exams/pdf',['exam'=>$exam,'diagnosticos'=>$diagnosticos,
+            'tratamientos'=>$tratamientos,'prueba_complementarias'=>$prueba_complementarias]);
+
         return $pdf->download('pdf.pdf');
     }
 }

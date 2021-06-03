@@ -340,7 +340,15 @@
     <body>Diagnósticos:</body>
 
     <table border="1" width="100%">
+        <tr>
+            <th bgcolor="#CCCCCC">Nombre</th>
+        </tr>
 
+        @foreach ($diagnosticos as $diagnostico)
+            <tr>
+                <td>{{ $diagnostico->nombre }}</td>
+            </tr>
+        @endforeach
     </table>
 
 
@@ -355,10 +363,12 @@
             <td bgcolor="#CCCCCC">Terapia</td>
             <td bgcolor="#CCCCCC">Fecha inicio</td>
             <td bgcolor="#CCCCCC">Fecha fin</td>
-            <td bgcolor="#CCCCCC">Brakets</td>
+            @if($exam->tipoExam=='ortodoncial')
+                <td bgcolor="#CCCCCC">Brakets</td>
+            @endif
         </tr>
 
-        @foreach ($exam->tratamientos() as $tratamiento)
+        @foreach ($tratamientos as $tratamiento)
             <tr>
                 <td>{{ $tratamiento->tipoTratamiento->name }}</td>
                 <td>{{ $tratamiento->coste }}</td>
@@ -371,15 +381,10 @@
                 <td>{{ $tratamiento->terapia }}</td>
                 <td>{{ $tratamiento->fecha_inicio }}</td>
                 <td>{{ $tratamiento->fecha_fin }}</td>
-                <td>{{ $tratamiento->braket->name}}</td>
-                <td> {!! Form::open(['route' => ['tratamientos.edit',$tratamiento->id], 'method' => 'get']) !!}
-                    {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
-                    {!! Form::close() !!}</td>
-                <td>
-                    {!! Form::open(['route' => ['tratamientos.destroy',$tratamiento->id], 'method' => 'delete']) !!}
-                    {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
-                    {!! Form::close() !!}
-                </td>
+                @if($exam->tipoExam=='ortodoncial')
+                    <td>{{ $tratamiento->braket->name}}</td>
+                @endif
+
             </tr>
         @endforeach
     </table>
@@ -388,7 +393,20 @@
     <body>Pruebas complementarias:</body>
 
     <table border="1" width="100%">
+        <tr>
+            <td>Nombre</td>
+            <td style="width:200px">Fichero</td>
+            <td style="width:300px">Comentario</td>
+        </tr>
 
+        @foreach ($prueba_complementarias as $prueba_complementaria)
+            <tr>
+                <td bgcolor="#CCCCCC">{{ $prueba_complementaria->nombre }}</td>
+                <td bgcolor="#CCCCCC">{{ $prueba_complementaria->fichero }}</td>
+                <td bgcolor="#CCCCCC">{{ $prueba_complementaria->comentario }}</td>
+
+            </tr>
+        @endforeach
     </table>
 
 </div>

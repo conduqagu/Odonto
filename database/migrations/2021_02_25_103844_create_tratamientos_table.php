@@ -21,7 +21,7 @@ class CreateTratamientosTable extends Migration
             $table->enum('terapia',['sin definir','convencional','fases']);
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();
-            $table->unsignedBigInteger('braket_id');
+            $table->unsignedBigInteger('braket_id')->nullable();
             $table->foreign('braket_id')->references('id')->on('brakets')->onDelete('cascade')->nullable();
             $table->unsignedBigInteger('tipo_tratamiento_id');
             $table->foreign('tipo_tratamiento_id')->references('id')->on('tipo_tratamientos')->onDelete('cascade')->nullable();

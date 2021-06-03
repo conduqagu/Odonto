@@ -25,14 +25,12 @@
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>
-                                <th>Tipo</th>
                                 <th colspan="2">Acciones</th>
                             </tr>
 
                             @foreach ($diagnosticos as $diagnostico)
                                 <tr>
                                     <td>{{ $diagnostico->nombre }}</td>
-                                    <td>{{ $diagnostico->tipoDiagnostico->name}}</td>
 
                                     <td>
                                         {!! Form::open(['route' => ['diagnosticos.edit',$diagnostico->id], 'method' => 'get']) !!}

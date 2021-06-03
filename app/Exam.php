@@ -8,7 +8,7 @@ class Exam extends Model
 {
     protected $fillable = [
         //Atributos examen:
-        'date','costeTotal','patient_id','tipoExam','otros',
+        'date','costeTotal','patient_id','tipoExam','otros','pin',
         //Atributos exmanen inicial:
         'aspectoExtraoralNormal','cancerOral', 'anomaliasLabios', 'otros','patologiaMucosa','fluorosis','estadoS1',
         'estadoS2','estadoS3','estadoS4','estadoS5','estadoS6','claseAngle','lateralAngle','tipoDentición',
@@ -47,9 +47,12 @@ class Exam extends Model
     public function ortodoncia(){
         $this->hasMany('App\Exam');
     }
-    public function AsociacionDiagnosticoExams()
+    /**public function AsociacionDiagnosticoExams()
     {
         return $this->hasMany('App\AsociacionDiagnosticoExam');
+    }*/
+    public function diagnosticos () {
+        return $this->belongsToMany('App\Diagnostico','diagnostico_exam', 'exam_id', 'diagnostico_id');
     }
 }
 

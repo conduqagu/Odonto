@@ -41,10 +41,12 @@
                             {!! Form::label('fecha_fin', 'Fecha fin') !!}
                             {!! Form::date('fecha_fin',null,['class'=>'form-control']) !!}
                         </div>
+                        @if(\App\Exam::find($exam_id)->tipoExam=='ortodoncial')
                         <div class="form-group">
                             {!!  Form::label('braket_id' , 'Brakets') !!}
                             {!! Form::select('braket_id', $brakets,null,['class' => 'form-control']) !!}
                         </div>
+                        @endif
                         <br>
                         {!! Form::submit( 'Guardar', ['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}
                         {!! Form::submit( 'Añadir tratamiento',['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}

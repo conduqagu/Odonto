@@ -21,6 +21,7 @@ class CreateExamsTable extends Migration
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->unsignedBigInteger('patient_id');
             $table->enum('tipoExam',['inicial','infantil','periodoncial','ortodoncial','evOrto','otro']);
+            $table->string('pin')->nullable();
 
 
             //Atributos Examen inicial

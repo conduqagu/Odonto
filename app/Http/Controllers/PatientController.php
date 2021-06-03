@@ -71,8 +71,7 @@ class PatientController extends Controller
      */
     protected function createteacher()
     {
-        $students = User::all()->where('userType', '=', 'student')->pluck('name', 'id');
-        return view('patients.createteacher',['students'=>$students]);
+        return view('patients.createteacher');
     }
 
     /**
@@ -142,10 +141,6 @@ class PatientController extends Controller
         $patient = new Patient($request->all());
         $patient->save();
 
-        if ($request->get('student_id')!=null){
-            $student=User::find($request->student_id);
-            $student->patients()->attach($patient->id);
-        }
 
         flash('Paciente creado correctamente');
 

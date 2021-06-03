@@ -15,11 +15,6 @@
                             {!! Form::label('nombre', 'Nombre') !!}
                             {!! Form::text('nombre',null,['class'=>'form-control', 'required','autofocus']) !!}
                         </div>
-                        <div class="form-group">
-                            {!!Form::label('tipo_diagnostico_id', 'Tipo') !!}
-                            <br>
-                            {!! Form::select('tipo_diagnostico_id', $tipo_diagnosticos, null,['class' => 'form-control', 'required']) !!}
-                        </div>
                         <br>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
                         {!! Form::close() !!}

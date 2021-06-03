@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Diagnostico;
 use App\Diente;
-use App\TipoDiagnostico;
+use App\Exam;
 use Illuminate\Http\Request;
 
 class DiagnosticoController extends Controller
@@ -29,9 +29,8 @@ class DiagnosticoController extends Controller
      */
     public function create()
     {
-        $tipo_diagnosticos=TipoDiagnostico::all()->pluck('name','id');
 
-        return view('diagnosticos.create',['tipo_diagnosticos'=>$tipo_diagnosticos]);
+        return view('diagnosticos.create');
     }
 
 
@@ -45,7 +44,6 @@ class DiagnosticoController extends Controller
     {
         $this->validate($request, [
             'nombre' => ['required', 'string', 'max:255'],
-            'tipo_diagnostico_id' => ['required', 'exists:tipo_diagnosticos,id'],
         ]);
 
         $diagnosticos=new Diagnostico($request->all());
@@ -76,8 +74,7 @@ class DiagnosticoController extends Controller
     public function edit($id)
     {
         $diagnostico = Diagnostico::find($id);
-        $tipo_diagnosticos=TipoDiagnostico::all()->pluck('name','id');
-        return view('diagnosticos.edit',['diagnostico'=> $diagnostico,'tipo_diagnosticos'=>$tipo_diagnosticos]);
+        return view('diagnosticos.edit',['diagnostico'=> $diagnostico]);
     }
 
     /**
@@ -91,7 +88,6 @@ class DiagnosticoController extends Controller
     {
         $this->validate($request, [
             'nombre' => ['required', 'string', 'max:255'],
-            'tipo_diagnostico_id' => ['required', 'exists:tipo_diagnosticos,id'],
         ]);
         $diagnostico = Diagnostico::find($id);
         $diagnostico->fill($request->all());
@@ -117,4 +113,40 @@ class DiagnosticoController extends Controller
 
         return redirect()->route('exams.show',$exam_id);
     }
+
+    public function create_asociacion_diagnostico_exam($exam_id)
+    {
+        $diagnosticos=Diagnostico::all()->pluck('nombre','id');
+        return view('asociacion_ExDiags/create',['exam_id'=>$exam_id,'diagnosticos'=>$diagnosticos]);
+    }
+    public function store_asociacion_diagnostico_exam(Request $request,$exam_id)
+    {
+        $this->validate($request, [
+            'diagnostico_id' => 'required|exists:diagnosticos,id',
+        ]);
+
+        $exam=Exam::find($exam_id);
+        $exam->diagnosticos()->attach($request->diagnostico_id);
+
+        flash('Asociación creada correctamente');
+
+        switch($request->submitbutton) {
+            case 'Guardar':
+                return redirect()->route('exams.show',$exam_id);
+                break;
+            case 'Tratamiento':
+                return redirect()->route('tratamientos.createT',$exam_id);
+                break;
+        }
+    }
+    public function destroy_asociacion_diagnostico_exam($diagnostico_id,Request $request)
+    {
+        $exam=Exam::find($request->exam_id);
+        $exam->diagnosticos()->detach($diagnostico_id);
+
+        flash('Diagnostico borrado correctamente');
+
+        return redirect()->route('exams.show',$request->exam_id);
+    }
+
 }

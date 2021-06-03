@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAsociacionDiagnosticoExamsTable extends Migration
+class CreateDiagnosticoExamTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAsociacionDiagnosticoExamsTable extends Migration
      */
     public function up()
     {
-        Schema::create('asociacion_diagnostico_exams', function (Blueprint $table) {
+        Schema::create('diagnostico_exam', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
             $table->unsignedBigInteger('exam_id');

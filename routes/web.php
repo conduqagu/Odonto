@@ -68,7 +68,6 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
     Route::resource('tipo_tratamientos', 'TipoTratamientoController');
     Route::resource('brakets', 'BraketController');
     Route::resource('diagnosticos', 'DiagnosticoController');
-    Route::resource('tipo_diagnosticos', 'TipoDiagnosticoController');
     Route::resource('storage', 'StorageController');
 });
 
@@ -99,11 +98,9 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::get('/patients/createDientesPac/{id}', 'DienteController@createDientesPac')->name('createDientesPac');
     Route::get('/patients/createDientesPacChild/{id}', 'DienteController@createDientesPacChild')->name('createDientesPacChild');
     Route::resource('dientes', 'DienteController');
-    Route::post('/asociacion_ExamDiags/store/{id}', 'AsociacionDiagnosticoExamController@store')->name('asociacion_ExDiags.store');
-    Route::get('/asociacion_ExamDiags/create/{id}', 'AsociacionDiagnosticoExamController@create')->name('asociacion_ExDiags.create');
-    Route::get('/asociacion_ExamDiags/edit/{id}', 'AsociacionDiagnosticoExamController@edit')->name('asociacion_ExDiags.edit');
-    Route::put('/asociacion_ExamDiags/update/{id}', 'AsociacionDiagnosticoExamController@update')->name('asociacion_ExDiags.update');
-    Route::delete('/asociacion_ExamDiags/destroy/{id}', 'AsociacionDiagnosticoExamController@destroy')->name('asociacion_ExDiags.destroy');
+    Route::post('/asociacion_ExamDiags/store/{id}', 'DiagnosticoController@store_asociacion_diagnostico_exam')->name('asociacion_ExDiags.store');
+    Route::get('/asociacion_ExamDiags/create/{id}', 'DiagnosticoController@create_asociacion_diagnostico_exam')->name('asociacion_ExDiags.create');
+    Route::delete('/asociacion_ExamDiags/destroy/{id}', 'DiagnosticoController@destroy_asociacion_diagnostico_exam')->name('asociacion_ExDiags.destroy');
 
 
     Route::resource('ajustes', 'AjusteController');

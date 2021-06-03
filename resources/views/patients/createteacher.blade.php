@@ -47,11 +47,7 @@
                             {!!  Form::label('child' , 'Infantil') !!}
                             {!! Form::select('child', array('1'=>'Si','0'=>'No'),'0',['class' => 'form-control', 'required']) !!}
                         </div>
-                        <div class="form-group">
-                            {!!Form::label('student_id', 'Estudiante a asignar') !!}
-                            <br>
-                            {!! Form::select('student_id', $students,null, ['class' => 'form-control']) !!}
-                        </div>
+                        <br>
 
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 

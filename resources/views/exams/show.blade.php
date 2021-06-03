@@ -20,7 +20,7 @@
                 @if($exam->tipoExam=='inicial')
 
                 <br>
-                        <div class="card">
+                        <div class="card ">
                             <div class="card-header">Mucosas</div>
                             <div class="card-body">
                                 <div >
@@ -267,7 +267,7 @@
                         </div>
                     @endif
                 <br>
-                    <div class="card" style="width: max-content">
+                    <div class="card" >
                         <div class="card-header">Diagnósticos</div>
                         <div class="card-body">
                             {!! Form::open(['route' => ['asociacion_ExDiags.create',$exam->id], 'method' => 'get']) !!}
@@ -277,17 +277,12 @@
                     <table class="table table-striped table-bordered">
                         <tr>
                             <th>Nombre</th>
-                            <th>Tipo diagnostico</th>
                             <th colspan="3">Acciones</th>
                         </tr>
 
                         @foreach ($diagnosticos as $diagnostico)
                             <tr>
                                 <td>{{ $diagnostico->nombre }}</td>
-                                <td>{{ $diagnostico->tipo_diagnostico_id}}</td>
-                                <td> {!! Form::open(['route' => ['asociacion_ExDiags.edit',$diagnostico->id], 'method' => 'get']) !!}
-                                    {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
-                                    {!! Form::close() !!}</td>
                                 <td>
                                     {!! Form::open(['route' => ['asociacion_ExDiags.destroy',$diagnostico->id], 'method' => 'delete']) !!}
                                     {!! Form::hidden('exam_id',$exam->id) !!}
@@ -317,7 +312,9 @@
                                 <th>Terapia</th>
                                 <th>Fecha inicio</th>
                                 <th>Fecha fin</th>
+                                @if($exam->tipoExam=='ortodoncial')
                                 <th>Brakets</th>
+                                @endif
                                 <th colspan="2">Acciones</th>
                             </tr>
 
@@ -334,7 +331,9 @@
                                     <td>{{ $tratamiento->terapia }}</td>
                                     <td>{{ $tratamiento->fecha_inicio }}</td>
                                     <td>{{ $tratamiento->fecha_fin }}</td>
+                                    @if($exam->tipoExam=='ortodoncial')
                                     <td>{{ $tratamiento->braket->name}}</td>
+                                    @endif
                                     <td> {!! Form::open(['route' => ['tratamientos.edit',$tratamiento->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}</td>
