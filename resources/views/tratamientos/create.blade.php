@@ -22,14 +22,6 @@
                             {!! Form::number('coste',null,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('iva', 'Iva') !!}
-                            {!! Form::number('iva','0',['class'=>'form-control','required']) !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('cobrado', 'Cobrado') !!}
-                            {!! Form::select('cobrado',array('1'=>'Si','0'=>'No'),'0',['class'=>'form-control']) !!}
-                        </div>
-                        <div class="form-group">
                             {!!  Form::label('terapia' , 'Terapia') !!}
                             {!! Form::select('terapia', array('sin definir'=>'Sin definir','convencional'=>'Convencional','fases'=>'Fases'),'sin definir',['class'=>'form-control']) !!}
                         </div>

@@ -109,7 +109,8 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::get('/tratamientos/create/{id}', 'TratamientoController@createT')->name('tratamientos.createT');
     Route::resource('tratamientos', 'TratamientoController');
 
-
+    Route::get('/exams/edit_iva/{id}','ExamController@edit_iva')->name('edit_iva');
+    Route::put('/exams/update_iva/{id}','ExamController@update_iva')->name('update_iva');
     Route::get('/exams/index/{id}', 'ExamController@index')->name('exams.index');
     Route::get('/exams/show/{id}', 'ExamController@show')->name('exams.show');
     Route::get('/exams/create_asociacionED/{id}', 'AsociacionExamDienteController@create_asociacionED')->name('create_asociacionED');

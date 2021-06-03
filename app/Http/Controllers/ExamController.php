@@ -98,7 +98,7 @@ class ExamController extends Controller
             'date'=>['required','date'],
             'tipoExam'=>['required','string','in:inicial,infantil,periodoncial,ortodoncial,evOrto,otro'],
             'patient_id' => ['required', 'exists:patients,id'],
-            'pin'=>['required','integer']
+            'pin'=>['required','string']
         ]);
 
         $profesores=User::find(Auth::user()->id)->teachers()->get();
@@ -110,6 +110,9 @@ class ExamController extends Controller
         }
 
         $exam = new Exam($request->all());
+        $exam->pin=MD5($request->pin);
+        $exam->iva=0;
+        $exam->cobrado=false;
         $exam->save();
 
         flash('Examen creado correctamente');
@@ -142,6 +145,8 @@ class ExamController extends Controller
         ]);
 
         $exam = new Exam($request->all());
+        $exam->iva=0;
+        $exam->cobrado=false;
         $exam->save();
 
         if ($exam->tipoExam == 'inicial') {
@@ -248,6 +253,7 @@ class ExamController extends Controller
         return redirect()->route('exams/student/edit',$id);
     }
         $exam = Exam::find($id);
+        $exam->pin=MD5($request->pin);
         $exam->fill($request->all());
 
         $exam->save();
@@ -258,7 +264,6 @@ class ExamController extends Controller
     }
     public function examsUpdateTeacher(Request $request, $id)
     {
-
         $this->validate($request, [
             'date'=>['required','date'],
             'aspectoExtraoralNormal' => ['required', 'boolean'],
@@ -509,5 +514,22 @@ class ExamController extends Controller
             'tratamientos'=>$tratamientos,'prueba_complementarias'=>$prueba_complementarias]);
 
         return $pdf->download('pdf.pdf');
+    }
+    public function edit_iva($exam_id){
+        $exam=Exam::find($exam_id);
+        return view('exams/edit_iva',['exam'=>$exam]);
+
+    }
+    public function update_iva($exam_id,Request $request){
+        $this->validate($request, [
+            'iva'=>['nullable','integer','max:100'],
+        ]);
+
+        $exam = Exam::find($exam_id);
+        $exam->fill($request->all());
+        $exam->save();
+
+        flash('Examen creado correctamente');
+        return redirect()->route('exams.show',[$exam_id]);
     }
 }

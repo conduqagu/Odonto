@@ -45,7 +45,6 @@ class TratamientoController extends Controller
     {
         $this->validate($request, [
             'coste' => ['required', 'integer', 'max:255'],
-            'iva' => ['required', 'integer', 'max:255'],
             'terapia' => ['required', 'string', 'in:sin definir,convencional,fases'],
             'fecha_inicio' => ['nullable', 'date'],
             'fecha_fin' => ['nullable', 'date'],
@@ -104,7 +103,6 @@ class TratamientoController extends Controller
     {
         $this->validate($request, [
             'coste' => ['required', 'integer', 'max:255'],
-            'iva' => ['required', 'integer', 'max:255'],
             'terapia' => ['required', 'string', 'in:sin definir,convencional,fases'],
             'fecha_inicio' => ['nullable', 'date'],
             'fecha_fin' => ['nullable', 'date'],

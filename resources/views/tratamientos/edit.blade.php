@@ -20,14 +20,6 @@
                             {!! Form::number('coste',$tratamiento->coste,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('iva', 'Iva') !!}
-                            {!! Form::number('iva',$tratamiento->iva,['class'=>'form-control','required']) !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('cobrado', 'Cobrado') !!}
-                            {!! Form::select('cobrado',array('1'=>'Si','0'=>'No'),$tratamiento->cobrado,['class'=>'form-control']) !!}
-                        </div>
-                        <div class="form-group">
                             {!!  Form::label('terapia' , 'Terapia') !!}
                             {!! Form::select('terapia', array('sin definir'=>'Sin definir','convencional'=>'Convencional','fases'=>'Fases'),$tratamiento->terapia,['class'=>'form-control']) !!}
                         </div>

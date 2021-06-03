@@ -309,14 +309,12 @@
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>
-                                <th>Coste (IVA incluido)</th>
-                                <th>Iva (%)</th>
-                                <th>Cobrado</th>
+                                <th>Coste</th>
                                 <th>Terapia</th>
                                 <th>Fecha inicio</th>
                                 <th>Fecha fin</th>
                                 @if($exam->tipoExam=='ortodoncial')
-                                <th>Brakets</th>
+                                    <th>Brakets</th>
                                 @endif
                                 <th colspan="2">Acciones</th>
                             </tr>
@@ -325,12 +323,6 @@
                                 <tr>
                                     <td>{{ $tratamiento->tipoTratamiento->name }}</td>
                                     <td>{{ $tratamiento->coste }}</td>
-                                    <td>{{ $tratamiento->iva }}</td>
-                                    @if( $tratamiento->cobrado==1)
-                                        <td>{{'Si'}}</td>
-                                    @else
-                                        <td><b><FONT COLOR="red">{{'No'}}</FONT></b></td>
-                                    @endif
                                     <td>{{ $tratamiento->terapia }}</td>
                                     <td>{{ $tratamiento->fecha_inicio }}</td>
                                     <td>{{ $tratamiento->fecha_fin }}</td>
@@ -348,13 +340,32 @@
                                 </tr>
                             @endforeach
                             <tr>
-                                <th>Coste total: </th>
+                                <th>IVA (%):
+                                <br>
+                                    {!! Form::open(['route' => ['edit_iva',$exam->id], 'method' => 'get']) !!}
+                                    {!!   Form::submit('Modificar IVA', ['class'=> 'btn btn-outline-dark' ])!!}
+                                    {!! Form::close() !!}
+                                </th>
+                                <th>{{$exam->iva}}</th>
+
+                            </tr>
+                            <tr>
+                                <th>Coste total (€): </th>
+                                <!--TODO: Cambiar moneda-->
                                 <th>{{$coste_total}}</th>
                             </tr>
                             <tr>
-                                <th>IVA: </th>
-                                <th>{{$coste_total}}</th>
-                            </tr>
+                                <th>Cobrado:
+                                <!--TODO: boton pagar-->
+                                    {!! Form::open() !!}
+                                    {!!   Form::submit('Pagar', ['class'=> 'btn btn-outline-dark' ])!!}
+                                    {!! Form::close() !!}
+                                </th>
+                                @if( $exam->cobrado==1)
+                                    <td>{{'Si'}}</td>
+                                @else
+                                    <td><b><FONT COLOR="red">{{'No'}}</FONT></b></td>
+                                @endif                            </tr>
                         </table>
                     </div>
                 </div>
