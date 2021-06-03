@@ -121,8 +121,8 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::get('/asociacion_exam_diente_periodoncia/index/{id}', 'AsociacionExamDienteController@indexPeriodoncia')->name('index_asociacionEDPeriodoncia');
     Route::get('/asociacion_exam_diente_periodoncia/edit/{id}', 'AsociacionExamDienteController@edit_asociacionEDPeriodoncia')->name('edit_asociacionEDPeriodoncia');
     Route::put('/asociacion_exam_diente_periodoncia/update/{id}', 'AsociacionExamDienteController@update_asociacionEDPeriodoncia')->name('update_asociacionEDPeriodoncia');
-    Route::get('/paypal/pay', 'PaymentController@payWithPayPal');
-    Route::get('/paypal/status', 'PaymentController@payPalStatus');
+    Route::get('/paypal/pay/{id}', 'PaymentController@payWithPayPal')->name('paypal_pay');
+    Route::get('/paypal/status/{id}', 'PaymentController@payPalStatus')->name('paypal_status');
 
 
     Route::get('/exams/createTeacherInicial/{id}', 'ExamController@examsCreateTeacherInicial')->name('examsCreateTeacherInicial');

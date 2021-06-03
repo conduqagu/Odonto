@@ -357,7 +357,7 @@
                             <tr>
                                 <th>Cobrado:
                                 <!--TODO: boton pagar-->
-                                    {!! Form::open() !!}
+                                    {!! Form::open(['route'=> ['paypal_pay',$exam->id], 'method'=>'get']) !!}
                                     {!!   Form::submit('Pagar', ['class'=> 'btn btn-outline-dark' ])!!}
                                     {!! Form::close() !!}
                                 </th>
