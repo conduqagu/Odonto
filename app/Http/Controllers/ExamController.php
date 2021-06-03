@@ -405,7 +405,14 @@ class ExamController extends Controller
         flash('Examen creado correctamente');
 
         //TODO: cambiar boton a estudio de dientes periodontal
-        return redirect()->route('exams.show',[$exam->id]);
+        switch($request->submitbutton) {
+            case 'Continuar examen dental':
+                return redirect()->route('create_asociacionEDPeriodoncia',[$exam->id]);
+                break;
+            case 'Guardar':
+                return redirect()->route('exams.show',[$exam->id]);
+                break;
+        }
     }
     /**
      * Update "Examen Ortodoncial" for a Teacher
@@ -510,8 +517,13 @@ class ExamController extends Controller
         $diagnosticos=$exam->diagnosticos()->get();
         $tratamientos=$exam->tratamientos()->get();
         $prueba_complementarias=$exam->PruebaComplementarias()->get();
+        $coste_total=0;
+        foreach ($tratamientos as $tratamiento) {
+            $coste_total = $tratamiento->coste + $coste_total;
+        }
         $pdf = \PDF::loadView('exams/pdf',['exam'=>$exam,'diagnosticos'=>$diagnosticos,
-            'tratamientos'=>$tratamientos,'prueba_complementarias'=>$prueba_complementarias]);
+            'tratamientos'=>$tratamientos,'prueba_complementarias'=>$prueba_complementarias,
+            'coste_total'=>$coste_total]);
 
         return $pdf->download('pdf.pdf');
     }

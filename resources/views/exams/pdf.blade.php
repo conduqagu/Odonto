@@ -227,7 +227,7 @@
             </td>
         </tr>
     </table>
-    <br>
+    <br><br><br>
     @elseif($exam->tipoExam=='infantil')
     <table border="1" width="100%">
         <tr>
@@ -338,28 +338,28 @@
     @endif
 
     <body>Diagnósticos:</body>
-
     <table border="1" width="100%">
         <tr>
             <th bgcolor="#CCCCCC">Nombre</th>
+            <th bgcolor="#CCCCCC">Comentario</th>
+
         </tr>
 
         @foreach ($diagnosticos as $diagnostico)
             <tr>
                 <td>{{ $diagnostico->nombre }}</td>
+                <td>{{ $diagnostico->pivot->comentario }}</td>
             </tr>
         @endforeach
     </table>
 
-
+    <br>
     <body>Tratamientos:</body>
 
-    <table border="1" width="100%">
+    <table border="1" width="100%" align="center">
         <tr>
             <td bgcolor="#CCCCCC">Nombre</td>
             <td bgcolor="#CCCCCC">Coste</td>
-            <td bgcolor="#CCCCCC">Iva</td>
-            <td bgcolor="#CCCCCC">Cobrado</td>
             <td bgcolor="#CCCCCC">Terapia</td>
             <td bgcolor="#CCCCCC">Fecha inicio</td>
             <td bgcolor="#CCCCCC">Fecha fin</td>
@@ -372,21 +372,31 @@
             <tr>
                 <td>{{ $tratamiento->tipoTratamiento->name }}</td>
                 <td>{{ $tratamiento->coste }}</td>
-                <td>{{ $tratamiento->iva }}</td>
-                @if( $tratamiento->cobrado==1)
-                    <td>{{'Si'}}</td>
-                @else
-                    <td><b><FONT COLOR="red">{{'No'}}</FONT></b></td>
-                @endif
                 <td>{{ $tratamiento->terapia }}</td>
                 <td>{{ $tratamiento->fecha_inicio }}</td>
                 <td>{{ $tratamiento->fecha_fin }}</td>
                 @if($exam->tipoExam=='ortodoncial')
                     <td>{{ $tratamiento->braket->name}}</td>
                 @endif
-
             </tr>
         @endforeach
+            <tr>
+                <th>IVA (%):</th>
+                <th>{{$exam->iva}}</th>
+            </tr>
+            <tr>
+                <th>Coste total (€): </th>
+                <th>{{$coste_total}}</th>
+            </tr>
+            <tr>
+                <th>Cobrado:</th>
+                @if( $exam->cobrado==1)
+                    <td>{{'Si'}}</td>
+                @else
+                    <td><FONT COLOR="red" >{{'No'}}</FONT></td>
+                @endif
+            </tr>
+
     </table>
 
     <br>
@@ -395,14 +405,12 @@
     <table border="1" width="100%">
         <tr>
             <td>Nombre</td>
-            <td style="width:200px">Fichero</td>
             <td style="width:300px">Comentario</td>
         </tr>
 
         @foreach ($prueba_complementarias as $prueba_complementaria)
             <tr>
                 <td bgcolor="#CCCCCC">{{ $prueba_complementaria->nombre }}</td>
-                <td bgcolor="#CCCCCC">{{ $prueba_complementaria->fichero }}</td>
                 <td bgcolor="#CCCCCC">{{ $prueba_complementaria->comentario }}</td>
 
             </tr>

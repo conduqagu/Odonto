@@ -31,10 +31,26 @@
                                     <td>{{ $asociacion_exam_diente->furca }}</td>
                                     <td>{{ $asociacion_exam_diente->retraccion }}</td>
                                     <td>{{ $asociacion_exam_diente->hipertrofia }}</td>
-                                    <td>{{ $asociacion_exam_diente->sondaje }}</td>
-                                    <td>{{ $asociacion_exam_diente->movilidad }}</td>
-                                    <td>{{ $asociacion_exam_diente->sangrado }}</td>
-                                    <td>{{ $asociacion_exam_diente->encia_insertada }}</td>
+                                    @if($asociacion_exam_diente->sondaje==1)
+                                        <td><FONT COLOR="blue">{{'Si'}}</FONT></td>
+                                    @else
+                                        <td>{{'No'}}</td>
+                                    @endif
+                                    @if($asociacion_exam_diente->movilidad==1)
+                                        <td><FONT COLOR="blue">{{'Si'}}</FONT></td>
+                                    @else
+                                        <td>{{'No'}}</td>
+                                    @endif
+                                    @if($asociacion_exam_diente->sangrado==1)
+                                        <td><FONT COLOR="blue">{{'Si'}}</FONT></td>
+                                    @else
+                                        <td>{{'No'}}</td>
+                                    @endif
+                                    @if($asociacion_exam_diente->encia_insertada==1)
+                                        <td><FONT COLOR="blue">{{'Si'}}</FONT></td>
+                                    @else
+                                        <td>{{'No'}}</td>
+                                    @endif
                                     <td>
                                         {!! Form::open(['route' => ['edit_asociacionEDPeriodoncia',$asociacion_exam_diente->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}

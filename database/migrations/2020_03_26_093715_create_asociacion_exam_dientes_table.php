@@ -26,7 +26,7 @@ class CreateAsociacionExamDientesTable extends Migration
                 'Otros defectos','Opacidad elimitada y difusa','Opacidad delimitada e hipoplasia','Opacidad difusa e hipoplasia',
                 'Las tres alteraciones'])->nullable();
             $table->integer('furca')->nullable();
-            $table->integer('rertraccion')->nullable();
+            $table->integer('retraccion')->nullable();
             $table->integer('hipertrofia')->nullable();
             $table->integer('sondaje')->nullable();
             $table->boolean('movilidad')->nullable();
