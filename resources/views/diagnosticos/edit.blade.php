@@ -14,7 +14,7 @@
 
                         <div class="form-group">
                             {!! Form::label('nombre', 'Nombre') !!}
-                            {!! Form::text('nombre',null,['class'=>'form-control', 'required','autofocus']) !!}
+                            {!! Form::text('nombre',$diagnostico->nombre,['class'=>'form-control', 'required','autofocus']) !!}
                         </div>
 
                         {!! Form::submit('Actualizar',['class'=>'btn-primary btn']) !!}

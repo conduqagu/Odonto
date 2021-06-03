@@ -14,6 +14,10 @@
                         <div class="form-group">
                             {!! Form::select('diagnostico_id', $diagnosticos, null,['class' => 'form-control', 'required']) !!}
                         </div>
+                        <div class="form-group">
+                            {!! Form::label('comentario', 'Comentario') !!}
+                            {!! Form::text('comentario',null,['class'=>'form-control', 'required','autofocus']) !!}
+                        </div>
                         <br>
                         {!! Form::submit( 'Guardar', ['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}
                         {!! Form::submit( 'Tratamiento',['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}

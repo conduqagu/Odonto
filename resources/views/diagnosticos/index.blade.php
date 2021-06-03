@@ -12,10 +12,7 @@
                         {!! Form::open(['route' => 'diagnosticos.create', 'method' => 'get']) !!}
                         {!!   Form::submit('Crear diagnostico', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
-                        <br>
-                        {!! Form::open(['route' => 'tipo_diagnosticos.index', 'method' => 'get']) !!}
-                        {!!   Form::submit('Tipos de diagnosticos', ['class'=> 'btn btn-primary'])!!}
-                        {!! Form::close() !!}
+
                         <br>
                         {!! Form::open(['route' => ['ajustes.index'], 'method' => 'get']) !!}
                         {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark' ])!!}

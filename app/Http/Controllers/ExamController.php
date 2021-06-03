@@ -171,7 +171,11 @@ class ExamController extends Controller
         $diagnosticos=$exam->diagnosticos()->get();
         $tratamientos=$exam->tratamientos()->get();
         $prueba_complementarias=$exam->PruebaComplementarias()->get();
-        return view('exams/show',['exam'=> $exam,'diagnosticos'=>$diagnosticos,'tratamientos'=>$tratamientos,'prueba_complementarias'=>$prueba_complementarias]);
+        $coste_total=0;
+        foreach ($tratamientos as $tratamiento) {
+            $coste_total = $tratamiento->coste + $coste_total;
+        }
+        return view('exams/show',['exam'=> $exam,'diagnosticos'=>$diagnosticos,'tratamientos'=>$tratamientos,'prueba_complementarias'=>$prueba_complementarias,'coste_total'=>$coste_total]);
     }
 
     /**

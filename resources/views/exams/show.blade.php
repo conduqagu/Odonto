@@ -277,12 +277,15 @@
                     <table class="table table-striped table-bordered">
                         <tr>
                             <th>Nombre</th>
+                            <th>Comentario</th>
                             <th colspan="3">Acciones</th>
                         </tr>
 
                         @foreach ($diagnosticos as $diagnostico)
                             <tr>
                                 <td>{{ $diagnostico->nombre }}</td>
+                                <td>{{ $diagnostico->pivot->comentario }}</td>
+
                                 <td>
                                     {!! Form::open(['route' => ['asociacion_ExDiags.destroy',$diagnostico->id], 'method' => 'delete']) !!}
                                     {!! Form::hidden('exam_id',$exam->id) !!}
@@ -306,8 +309,8 @@
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>
-                                <th>Coste</th>
-                                <th>Iva</th>
+                                <th>Coste (IVA incluido)</th>
+                                <th>Iva (%)</th>
                                 <th>Cobrado</th>
                                 <th>Terapia</th>
                                 <th>Fecha inicio</th>
@@ -344,6 +347,14 @@
                                     </td>
                                 </tr>
                             @endforeach
+                            <tr>
+                                <th>Coste total: </th>
+                                <th>{{$coste_total}}</th>
+                            </tr>
+                            <tr>
+                                <th>IVA: </th>
+                                <th>{{$coste_total}}</th>
+                            </tr>
                         </table>
                     </div>
                 </div>

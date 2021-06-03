@@ -17,8 +17,6 @@ class CreateDiagnosticosTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('nombre');
-            $table->foreign('tipo_diagnostico_id')->references('id')->on('tipo_diagnosticos')->onDelete('cascade');
-            $table->unsignedBigInteger('tipo_diagnostico_id');
         });
     }
 

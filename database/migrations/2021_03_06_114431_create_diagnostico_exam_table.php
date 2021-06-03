@@ -16,6 +16,7 @@ class CreateDiagnosticoExamTable extends Migration
         Schema::create('diagnostico_exam', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('comentario');
             $table->unsignedBigInteger('exam_id');
             $table->unsignedBigInteger('diagnostico_id');
 

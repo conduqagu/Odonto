@@ -52,7 +52,7 @@ class Exam extends Model
         return $this->hasMany('App\AsociacionDiagnosticoExam');
     }*/
     public function diagnosticos () {
-        return $this->belongsToMany('App\Diagnostico','diagnostico_exam', 'exam_id', 'diagnostico_id');
+        return $this->belongsToMany('App\Diagnostico','diagnostico_exam', 'exam_id', 'diagnostico_id')->withPivot('comentario');
     }
 }
 

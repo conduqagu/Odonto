@@ -88,6 +88,7 @@ class DiagnosticoController extends Controller
     {
         $this->validate($request, [
             'nombre' => ['required', 'string', 'max:255'],
+
         ]);
         $diagnostico = Diagnostico::find($id);
         $diagnostico->fill($request->all());
@@ -123,10 +124,12 @@ class DiagnosticoController extends Controller
     {
         $this->validate($request, [
             'diagnostico_id' => 'required|exists:diagnosticos,id',
+            'comentario'=>['required', 'string', 'max:255'],
         ]);
 
         $exam=Exam::find($exam_id);
-        $exam->diagnosticos()->attach($request->diagnostico_id);
+        $exam->diagnosticos()->attach($request->diagnostico_id, array('comentario'=>$request->comentario));
+
 
         flash('Asociación creada correctamente');
 
@@ -141,8 +144,8 @@ class DiagnosticoController extends Controller
     }
     public function destroy_asociacion_diagnostico_exam($diagnostico_id,Request $request)
     {
-        $exam=Exam::find($request->exam_id);
-        $exam->diagnosticos()->detach($diagnostico_id);
+        $exam=Exam::find($diagnostico_id);
+        $exam->diagnosticos()->detach($request->exam_id);
 
         flash('Diagnostico borrado correctamente');
 
