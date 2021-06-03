@@ -404,7 +404,6 @@ class ExamController extends Controller
 
         flash('Examen creado correctamente');
 
-        //TODO: cambiar boton a estudio de dientes periodontal
         switch($request->submitbutton) {
             case 'Continuar examen dental':
                 return redirect()->route('create_asociacionEDPeriodoncia',[$exam->id]);

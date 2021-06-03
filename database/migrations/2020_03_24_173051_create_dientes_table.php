@@ -20,7 +20,6 @@ class CreateDientesTable extends Migration
             $table->integer('cuadrante');
             $table->integer('sextante');
             $table->boolean('ausente');
-            //TODO: Movilidad(boolean) y conductos(integer)
             $table->unsignedBigInteger('patient_id');
             $table->timestamps();
 
