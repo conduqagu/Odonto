@@ -6,6 +6,7 @@ use App\AsociacionExamDiente;
 use App\Diente;
 use App\Exam;
 use App\Patient;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -129,6 +130,18 @@ class AsociacionExamDienteController extends Controller
         } else {
             $lista = array(11, 12, 13, 14, 15, 16, 17, 18, 21, 22, 23, 24, 25, 26, 27, 28, 31, 32, 33, 34, 35, 36, 37, 38, 41, 42, 43, 44, 45, 46, 47, 48);
         }
+        if (Auth::user()->userType=='student'){
+            $this->validate($request,
+                ['pin' => ['required', 'string', 'max:255']]);
+            $profesores=User::find(Auth::user()->id)->teachers()->get();
+            $profesores->wherein('pin',MD5($request->pin));
+
+            if(count($profesores)==0) {
+                flash('Pin incorrecto');
+                return redirect()->route('create_asociacionED',$exam_id);
+            }
+        }
+
         foreach ($lista as $a) {
             $this->validate($request, [
                 'denticionRaiz' . $a => 'required|String|in:Sano,Cariado,Obturado sin caries,Obturado con caries,Pérdida otro motivo,
@@ -148,8 +161,10 @@ class AsociacionExamDienteController extends Controller
             $asociacion_exam_diente->opacidad = $request->get('opacidad' . $a);
             $asociacion_exam_diente->diente_id = $request->get('diente_id' . $a);
             $asociacion_exam_diente->exam_id = $exam_id;
+            $asociacion_exam_diente->pin=MD5($request->pin);
             $asociacion_exam_diente->save();
         }
+
 
         flash('Asociación creada correctamente');
         return redirect()->route('index_asociacionED', [$exam_id]);
@@ -265,14 +280,12 @@ class AsociacionExamDienteController extends Controller
             'pin' => ['required', 'string', 'max:255']
         ]);
 
-        $profesor = DB::select(DB::raw('SELECT * FROM laravel.users
-        LEFT JOIN laravel.asociacion_teacher_students ON (laravel.asociacion_teacher_students.student_id = users.id)
-        LEFT JOIN laravel.users as teachers ON (teachers.id = laravel.asociacion_teacher_students.teacher_id)
-        WHERE laravel.users.id =' . Auth::user()->id . ' AND teachers.pin=' . $request->get('pin') . ';'));
+        $profesores=User::find(Auth::user()->id)->teachers()->get();
+        $profesores->wherein('pin',MD5($request->pin));
 
-        if (count($profesor) == 0) {
+        if(count($profesores)==0) {
             flash('Pin incorrecto');
-            return redirect()->route('edit_asociacionED', $id);
+            return redirect()->route('edit_asociacionED',$id);
         }
 
         $asociacion_exam_diente = AsociacionExamDiente::find($id);
