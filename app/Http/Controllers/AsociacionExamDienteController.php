@@ -140,7 +140,11 @@ class AsociacionExamDienteController extends Controller
                 flash('Pin incorrecto');
                 return redirect()->route('create_asociacionED',$exam_id);
             }
+            $user=User::where('pin','=',MD5($request->pin))->first();
         }
+
+
+
 
         foreach ($lista as $a) {
             $this->validate($request, [
@@ -161,7 +165,9 @@ class AsociacionExamDienteController extends Controller
             $asociacion_exam_diente->opacidad = $request->get('opacidad' . $a);
             $asociacion_exam_diente->diente_id = $request->get('diente_id' . $a);
             $asociacion_exam_diente->exam_id = $exam_id;
-            $asociacion_exam_diente->pin=MD5($request->pin);
+            if(Auth::user()->userType=='student') {
+                $asociacion_exam_diente->teacher_id = $user->id;
+            }
             $asociacion_exam_diente->save();
         }
 

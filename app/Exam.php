@@ -56,7 +56,6 @@ class Exam extends Model
     }
     public function teacher(){
         return $this->hasMany('App\User');
-
     }
 }
 

@@ -85,7 +85,7 @@ class PaymentController extends Controller
 
         if (!$paymentId || !$payerId || !$token) {
             flash('Lo sentimos! El pago a través de PayPal no se pudo realizar.');
-            return redirect()->route('exams.show',$exam_id);
+            return redirect()->route('pago_error');
         }
 
         $payment = Payment::get($paymentId, $this->apiContext);
@@ -101,10 +101,17 @@ class PaymentController extends Controller
             $exam=Exam::find($exam_id);
             $exam->cobrado=true;
             $exam->save();
-            return redirect()->route('exams.show',$exam_id);
+            return redirect()->route('pago_correcto');
         }
 
         flash('Lo sentimos! El pago a través de PayPal no se pudo realizar.');
-        return redirect()->route('exams.show',$exam_id);
+        return redirect()->route('pago_error');
+    }
+
+    public function pago_error(){
+        return view('paypal/error');
+    }
+    public function pago_correcto(){
+        return view('paypal/correcto');
     }
 }

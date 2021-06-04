@@ -396,9 +396,7 @@
                     <td><FONT COLOR="red" >{{'No'}}</FONT></td>
                 @endif
             </tr>
-
     </table>
-
     <br>
     <body>Pruebas complementarias:</body>
 

@@ -6,6 +6,7 @@ use App\AsociacionDiagnosticoExam;
 use App\AsociacionExamDiente;
 use App\Diagnostico;
 use App\Exam;
+use App\Mail\CorreoPago;
 use App\Patient;
 use App\PruebaComplementaria;
 use App\Tratamiento;
@@ -13,6 +14,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ExamController extends Controller
 {
@@ -552,5 +554,18 @@ class ExamController extends Controller
 
         flash('Examen creado correctamente');
         return redirect()->route('exams.show',[$exam_id]);
+    }
+
+    public function correo_pago($exam_id){
+        $exam=Exam::find($exam_id);
+        $correo=Patient::find($exam->patient_id)->pluck('email');
+        Mail::to($correo)->send(new CorreoPago($exam));
+    }
+    public function pagado($exam_id){
+        $exam=Exam::find($exam_id);
+        $exam->cobrado=true;
+        $exam->save();
+        return redirect()->route('exams.show',[$exam_id]);
+
     }
 }

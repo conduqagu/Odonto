@@ -356,10 +356,15 @@
                             </tr>
                             <tr>
                                 <th>Cobrado:
-                                <!--TODO: boton pagar-->
-                                    {!! Form::open(['route'=> ['paypal_pay',$exam->id], 'method'=>'get']) !!}
-                                    {!!   Form::submit('Pagar', ['class'=> 'btn btn-outline-dark' ])!!}
+                                    {!! Form::open(['route'=> ['correo_pago',$exam->id], 'method'=>'get']) !!}
+                                    {!!   Form::submit('Pagar con PAYPAL', ['class'=> 'btn btn-outline-dark' ])!!}
                                     {!! Form::close() !!}
+                                    <br>
+                                    @if($exam->cobrado==0)
+                                    {!! Form::open(['route'=> ['pagado',$exam->id], 'method'=>'get']) !!}
+                                    {!!   Form::submit('Pagado', ['class'=> 'btn btn-warning' ])!!}
+                                    {!! Form::close() !!}
+                                    @endif
                                 </th>
                                 @if( $exam->cobrado==1)
                                     <td>{{'Si'}}</td>
@@ -410,10 +415,12 @@
                                 {!! Form::open(['route' => ['index_asociacionEDPeriodoncia',$exam->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary'])!!}
                                 {!! Form::close() !!}
+                                <br>
                             @elseif($exam->tipoExam=='inicial')
                                 {!! Form::open(['route' => ['index_asociacionED',$exam->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary'])!!}
                                 {!! Form::close() !!}
+                                <br>
                             @elseif($exam->tipoExam=='ortodoncial')
                                 {!! Form::open(['route' => ['exams.evaluaciones',$exam->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Mostrar evaluaciones', ['class'=> 'btn btn-primary'])!!}
@@ -421,24 +428,27 @@
                                 <br>
                             @endif
 
-                        <br>
+
                             @if(Auth::user()->userType =='teacher')
                                 {!! Form::open(['route' => ['examsEditTeacher',$exam->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                 {!! Form::close() !!}
+                                <br>
                             @endif
                             @if(Auth::user()->userType =='student')
                                 {!! Form::open(['route' => ['exams.edit',$exam->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                 {!! Form::close() !!}
+                                    <br>
                             @endif
-                        <br>
+
                             @if(Auth::user()->userType =='teacher')
                                 {!! Form::open(['route' => ['examsdeleteTeacher',$exam->id], 'method' => 'delete']) !!}
                                 {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                 {!! Form::close() !!}
+                                    <br>
                             @endif
-                        <br>
+
                             {!! Form::open(['route' => ['exams.index',$exam->patient->id], 'method' => 'get']) !!}
                             {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark'])!!}
                             {!! Form::close() !!}
