@@ -10,7 +10,7 @@
                     <div class="panel-body">
                         @include('flash::message')
                         <div class="form-group" >
-                            {!! Form::open(['route' => ['exams.index',$patient], 'method' => 'get']) !!}
+                            {!! Form::open(['route' => ['indexExamsAdmin'], 'method' => 'get']) !!}
                             {!! Form::select('query',array('inicial'=>'Inicial','infantil'=>'Infantil','periodoncial'=>'Periodoncial',
                                 'ortodoncial'=>'Ortodoncial','evOrto'=>'Evaluación ortodoncia','otro'=>'Otro',null=>'Tipo de examen'), null,
                                 ['class'=>'col-md-4','autofocus']) !!}
@@ -18,26 +18,13 @@
                             {!! Form::submit('Buscar', ['class'=> 'btn btn-success col-md-2'])!!}
                             {!! Form::close() !!}
                         </div>
-
-                        @if(\Illuminate\Support\Facades\Auth::user()->userType=='teacher')
-                        {!! Form::open(['route' => ['examsCreateTeacher',$id], 'method' => 'get']) !!}
-                        {!!   Form::submit('Realizar examen', ['class'=> 'btn btn-primary'])!!}
-                        {!! Form::close() !!}
-                        @elseif(\Illuminate\Support\Facades\Auth::user()->userType=='student')
-                            {!! Form::open(['route' => ['exams.create',$id], 'method' => 'get']) !!}
-                            {!!   Form::submit('Realizar examen', ['class'=> 'btn btn-primary'])!!}
-                            {!! Form::close() !!}
-                        @endif
                         <br>
-                        <div  class="form-group" >
-                            <b>{!!  Form::label('paciente' , 'Paciente: '.$patient->name." ".$patient->surname) !!}
-                            </b>
-                        </div>
-
                         <table class="table table-striped table-bordered">
                             <tr>
+                                <th>Paciente</th>
                                 <th>Fecha del examen</th>
                                 <th>Tipo Examen</th>
+                                <th>Profesor</th>
 
                                 <th colspan="3">Acciones</th>
                             </tr>
@@ -46,12 +33,15 @@
                             @foreach ($exams as $exam)
                                 <tr>
 
-                                    <td>{{ $exam->date }}</td>
+                                    <td>{{ \App\Patient::find($exam->patient_id)->name." ".\App\Patient::find($exam->patient_id)->surname }}</td>
+                                    <td>{{ $exam->date}}</td>
                                     @if($exam->tipoExam=='evOrto')
                                         <td>{{ 'Evaluación ortodoncia' }}</td>
                                     @else
                                         <td>{{ $exam->tipoExam}}</td>
                                     @endif
+
+                                    <td>{{\App\User::find($exam->teacher_id)->dni}}</td>
 
                                     <td>
                                         {!! Form::open(['route' => ['exams.show',$exam->id], 'method' => 'get']) !!}

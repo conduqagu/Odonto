@@ -8,7 +8,7 @@ class Exam extends Model
 {
     protected $fillable = [
         //Atributos examen:
-        'date','iva','cobrado','patient_id','tipoExam','otros','pin',
+        'date','iva','cobrado','patient_id','tipoExam','otros','teacher_id',
         //Atributos exmanen inicial:
         'aspectoExtraoralNormal','cancerOral', 'anomaliasLabios', 'otros','patologiaMucosa','fluorosis','estadoS1',
         'estadoS2','estadoS3','estadoS4','estadoS5','estadoS6','claseAngle','lateralAngle','tipoDentición',
@@ -53,6 +53,10 @@ class Exam extends Model
     }*/
     public function diagnosticos () {
         return $this->belongsToMany('App\Diagnostico','diagnostico_exam', 'exam_id', 'diagnostico_id')->withPivot('comentario');
+    }
+    public function teacher(){
+        return $this->hasMany('App\User');
+
     }
 }
 

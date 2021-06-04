@@ -8,7 +8,7 @@ class AsociacionExamDiente extends Model
 {
     protected $fillable = [
         'denticionRaiz','denticionCorona', 'tratamiento ', 'opacidad','exam_id','diente_id','furca',
-        'retraccion','hipertrofia','sondaje','movilidad','sangrado','encia_insertada','pin'
+        'retraccion','hipertrofia','sondaje','movilidad','sangrado','encia_insertada','teacher_id'
     ];
     public function exam()
     {
@@ -17,5 +17,9 @@ class AsociacionExamDiente extends Model
     public function diente()
     {
         return $this->belongsTo('App\Diente');
+    }
+    public function teacher(){
+        return $this->hasMany('App\User');
+
     }
 }

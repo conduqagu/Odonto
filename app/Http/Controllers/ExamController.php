@@ -35,16 +35,25 @@ class ExamController extends Controller
 
         return view('exams/index',['exams'=>$exams,'patient'=>$patient,'id'=>$id]);
     }
+    public function indexExamsAdmin(Request $request)
+    {
+        $exams=Exam::where('exams.tipoExam','LIKE','%'.$request->get("query")."%")
+            ->where('exams.date','LIKE','%'.$request->get("query2")."%")
+            ->get();
+
+        return view('exams/indexExamAdmin',['exams'=>$exams]);
+    }
+
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        $patients = Patient::all()->pluck('name','id');
-        return view('exams/student/create',['patients'=>$patients]);
+        $patient = Patient::find($id);
+        return view('exams/student/create',['patient'=>$patient]);
     }
 
     public function examsCreateTeacher($id)
@@ -94,11 +103,10 @@ class ExamController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-
             'date'=>['required','date'],
             'tipoExam'=>['required','string','in:inicial,infantil,periodoncial,ortodoncial,evOrto,otro'],
+            'pin'=>['required','string'],
             'patient_id' => ['required', 'exists:patients,id'],
-            'pin'=>['required','string']
         ]);
 
         $profesores=User::find(Auth::user()->id)->teachers()->get();
@@ -109,8 +117,9 @@ class ExamController extends Controller
             return redirect()->route('exams.create');
         }
 
+        $user=User::where('pin','=',MD5($request->pin))->first();
         $exam = new Exam($request->all());
-        $exam->pin=MD5($request->pin);
+        $exam->teacher_id=$user->id;
         $exam->iva=0;
         $exam->cobrado=false;
         $exam->save();
@@ -252,8 +261,9 @@ class ExamController extends Controller
         flash('Pin incorrecto');
         return redirect()->route('exams/student/edit',$id);
     }
+        $user=User::where('pin','=',MD5($request->pin))->first();
         $exam = Exam::find($id);
-        $exam->pin=MD5($request->pin);
+        $exam->teacher_id=$user->id;
         $exam->fill($request->all());
 
         $exam->save();

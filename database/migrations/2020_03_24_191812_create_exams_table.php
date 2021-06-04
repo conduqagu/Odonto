@@ -21,8 +21,9 @@ class CreateExamsTable extends Migration
             $table->boolean('cobrado')->nullable();
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->unsignedBigInteger('patient_id');
+            $table->foreign('teacher_id')->references('id')->on('users');
+            $table->unsignedBigInteger('teacher_id')->nullable();
             $table->enum('tipoExam',['inicial','infantil','periodoncial','ortodoncial','evOrto','otro']);
-            $table->string('pin')->nullable();
 
 
 

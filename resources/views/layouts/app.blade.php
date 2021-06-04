@@ -90,7 +90,9 @@
                                     <a class="dropdown-item" href="{{ url('/user') }}">
                                         Usuarios
                                     </a>
-
+                                    <a class="dropdown-item" href="{{ url('/exams/indexExamsAdmin') }}">
+                                        Exámenes
+                                    </a>
                                 @endif
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"

@@ -12,9 +12,8 @@
 
                         {!! Form::open(['route' => 'exams.store']) !!}
                         <div class="form-group">
-                            {!!Form::label('patient_id', 'Paciente') !!}
-                            <br>
-                            {!! Form::select('patient_id', $patients, ['class' => 'form-control', 'required']) !!}
+                            {!!Form::label('patient', 'Paciente: '.$patient->name.' '.$patient->surname) !!}
+                            {!! Form::hidden('patient_id',$patient->id) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('date', 'Fecha') !!}
@@ -40,7 +39,7 @@
                                 </span>
                                 @enderror
                             </div>
-                        <div class="form-group">
+                        <div>
                             {!! Form::label('pin', 'Pin del profesor') !!}
                             <input id="pin" type="password" class="form-control" name="pin" required>
                         </div>
