@@ -10,7 +10,7 @@
                     <div class="card-body">
                         @include('flash::message')
 
-                        {!! Form::open(['route' => 'prueba_complementarias.store','enctype'=>"multipart/form-data"]) !!}
+                        {!! Form::open(['route' => 'prueba_complementarias.store','enctype'=>"multipart/form-data",'files'=>'true']) !!}
                         <hidden>
                             {!! Form::hidden('exam_id', $exam_id) !!}
                         </hidden>

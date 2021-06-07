@@ -4,6 +4,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                @include('flash::message')
+
                 <div class="card">
                     <div class="card-header">Detalles del examen</div>
                         <div class="card-body">
@@ -351,19 +353,20 @@
                             </tr>
                             <tr>
                                 <th>Coste total (€): </th>
-                                <!--TODO: Cambiar moneda-->
                                 <th>{{$coste_total}}</th>
                             </tr>
                             <tr>
                                 <th>Cobrado:
-                                    {!! Form::open(['route'=> ['correo_pago',$exam->id], 'method'=>'get']) !!}
-                                    {!!   Form::submit('Pagar con PAYPAL', ['class'=> 'btn btn-outline-dark' ])!!}
-                                    {!! Form::close() !!}
-                                    <br>
-                                    @if($exam->cobrado==0)
-                                    {!! Form::open(['route'=> ['pagado',$exam->id], 'method'=>'get']) !!}
-                                    {!!   Form::submit('Pagado', ['class'=> 'btn btn-warning' ])!!}
-                                    {!! Form::close() !!}
+                                    @if($coste_total!='0' && $exam->cobrado==0)
+                                        {!! Form::open(['route'=> ['correo_pago',$exam->id], 'method'=>'get']) !!}
+                                        {!!   Form::submit('Pagar con PAYPAL', ['class'=> 'btn btn-outline-dark' ])!!}
+                                        {!! Form::close() !!}
+                                        <br>
+
+                                        {!! Form::open(['route'=> ['pagado',$exam->id], 'method'=>'get']) !!}
+                                        {!!   Form::submit('Pagado', ['class'=> 'btn btn-warning' ])!!}
+                                        {!! Form::close() !!}
+
                                     @endif
                                 </th>
                                 @if( $exam->cobrado==1)
@@ -394,7 +397,9 @@
                             @foreach ($prueba_complementarias as $prueba_complementaria)
                                 <tr>
                                     <td>{{ $prueba_complementaria->nombre }}</td>
-                                    <td>{{ $prueba_complementaria->fichero }}</td>
+                                    <td width="120px">
+                                    <div class="text-center"><a target="_blank" href="/{{$prueba_complementaria->fichero}}">
+                                            <img src="/pdf.png" height="35px"/></a></div></td>
                                     <td>{{ $prueba_complementaria->comentario }}</td>
                                     <td> {!! Form::open(['route' => ['prueba_complementarias.edit',$prueba_complementaria->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\AsociacionTeacherStudent;
 use Illuminate\Support\Facades\Hash;
 
+
 class UserController extends Controller
 {
     /**
@@ -114,7 +115,7 @@ class UserController extends Controller
         if($request->userType=='teacher'){
             $user->pin=MD5($request->dni);
         }
-        $user->password=Hash::make($request->getPassword());
+        $user->password=Hash::make($request->get('password'));
         $user->save();
 
         flash('Usuario creado correctamente');

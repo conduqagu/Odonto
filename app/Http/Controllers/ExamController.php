@@ -188,7 +188,7 @@ class ExamController extends Controller
         $diagnosticos=$exam->diagnosticos()->get();
         $tratamientos=$exam->tratamientos()->get();
         $prueba_complementarias=$exam->PruebaComplementarias()->get();
-        $coste_total=0;
+        $coste_total=0.0;
         foreach ($tratamientos as $tratamiento) {
             $coste_total = $tratamiento->coste + $coste_total;
         }
@@ -231,6 +231,7 @@ class ExamController extends Controller
         ]);
         if($exam->tipoExam=='inicial') {
             $this->validate($request, [
+                'aspectoExtraoralNormal' => ['required', 'boolean'],
                 'aspectoExtraoralNormal' => ['required', 'boolean'],
                 'cancerOral' => ['required', 'boolean'],
                 'anomaliasLabios' => ['required', 'boolean'],
@@ -627,9 +628,12 @@ class ExamController extends Controller
     }
 
     public function correo_pago($exam_id){
+        flash('Correo enviado correctamente');
         $exam=Exam::find($exam_id);
-        $correo=Patient::find($exam->patient_id)->pluck('email');
-        Mail::to($correo)->send(new CorreoPago($exam));
+        $patient_email=$exam->patient->email;
+        //$correo=Patient::find($patient->patient_id)->pluck('email');
+        Mail::to($patient_email)->send(new CorreoPago($exam));
+        return redirect()->route('home');
     }
     public function pagado($exam_id){
         $exam=Exam::find($exam_id);

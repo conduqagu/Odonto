@@ -44,7 +44,7 @@ class TratamientoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'coste' => ['required', 'integer', 'max:255'],
+            'coste' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/   ', 'max:255'],
             'terapia' => ['required', 'string', 'in:sin definir,convencional,fases'],
             'fecha_inicio' => ['nullable', 'date'],
             'fecha_fin' => ['nullable', 'date'],
@@ -102,7 +102,7 @@ class TratamientoController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'coste' => ['required', 'integer', 'max:255'],
+            'coste' => ['required', 'float', 'max:255'],
             'terapia' => ['required', 'string', 'in:sin definir,convencional,fases'],
             'fecha_inicio' => ['nullable', 'date'],
             'fecha_fin' => ['nullable', 'date'],

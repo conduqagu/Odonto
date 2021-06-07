@@ -19,7 +19,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('coste', 'Coste') !!}
-                            {!! Form::number('coste',null,['class'=>'form-control', 'required']) !!}
+                            {!! Form::number('coste',null,['class'=>'form-control', 'required','step'=>'0.01']) !!}
                         </div>
                         <div class="form-group">
                             {!!  Form::label('terapia' , 'Terapia') !!}

@@ -63,7 +63,6 @@ class PatientController extends Controller
     {
         return view('patients.create');
     }
-    //TODO: revisar funcionalidad:
     /**
      * Crear un paciente desde usuario profesor
      *
@@ -283,7 +282,6 @@ class PatientController extends Controller
      * @param  array  $data
      * @return \App\Patient
      */
-    //TODO: Query orwhere filtro alumnos
     public function añadirAlumno(Request $request,$id)
     {
         $students1=Patient::find($id)->students()->pluck('users.id');

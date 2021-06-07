@@ -42,14 +42,21 @@ class PruebaComplementariaController extends Controller
             'comentario' => ['nullable', 'string', 'max:255'],
             'exam_id' => ['required', 'exists:exams,id'],
         ]);
-
         $prueba_complementaria=new PruebaComplementaria($request->all());
-        $prueba_complementaria->fichero=$request->file('fichero')->getClientOriginalName();
+        $prueba_complementaria->save();
 
+        if ($request->hasFile('fichero')) {
+            $file = $request->file('fichero');
+            $fileName = $file->getClientOriginalName();
+            $path = $request->file('fichero')->storeAs(
+                $prueba_complementaria->id, $fileName, 'pruebas'
+            );
+            $prueba_complementaria->fichero = 'pruebas/'.$prueba_complementaria->id.'/'.$fileName;
+        }
 
         $prueba_complementaria->save();
 
-        flash('Tipo creado correctamente');
+        flash('Prueba añadida correctamente');
 
         return redirect()->route('exams.show',$request->exam_id);
     }

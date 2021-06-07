@@ -17,7 +17,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('coste', 'Coste') !!}
-                            {!! Form::number('coste',$tratamiento->coste,['class'=>'form-control', 'required']) !!}
+                            {!! Form::number('coste',$tratamiento->coste,['class'=>'form-control', 'required','step'=>'0.01']) !!}
                         </div>
                         <div class="form-group">
                             {!!  Form::label('terapia' , 'Terapia') !!}
