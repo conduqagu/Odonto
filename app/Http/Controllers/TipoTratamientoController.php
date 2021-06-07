@@ -47,6 +47,8 @@ class TipoTratamientoController extends Controller
     {
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
+            'coste' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/   ', 'max:255'],
+
 
         ]);
 
@@ -80,6 +82,7 @@ class TipoTratamientoController extends Controller
     {
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
+            'coste' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/   ', 'max:255'],
 
         ]);
 

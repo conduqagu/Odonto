@@ -16,6 +16,9 @@ class CreateTipoTratamientosTable extends Migration
         Schema::create('tipo_tratamientos', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->double('coste');
+            $table->double('iva');
+
             $table->timestamps();
         });
     }

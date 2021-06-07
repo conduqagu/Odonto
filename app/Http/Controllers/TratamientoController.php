@@ -44,7 +44,6 @@ class TratamientoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'coste' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/   ', 'max:255'],
             'terapia' => ['required', 'string', 'in:sin definir,convencional,fases'],
             'fecha_inicio' => ['nullable', 'date'],
             'fecha_fin' => ['nullable', 'date'],
@@ -52,8 +51,12 @@ class TratamientoController extends Controller
             'tipo_tratamiento_id' => ['required', 'exists:tipo_tratamientos,id'],
             'exam_id' =>['required','exists:exams,id']
         ]);
-        $tratamientos=new Tratamiento($request->all());
-        $tratamientos->save();
+        $tratamiento=new Tratamiento($request->all());
+        $tratamiento->save();
+        $tratamiento->coste=$tratamiento->tipoTratamiento->coste;
+        $tratamiento->iva=$tratamiento->tipoTratamiento->iva;
+        $tratamiento->save();
+
         flash('Tratamiento creado correctamente');
 
         switch($request->submitbutton) {
@@ -102,7 +105,6 @@ class TratamientoController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'coste' => ['required', 'float', 'max:255'],
             'terapia' => ['required', 'string', 'in:sin definir,convencional,fases'],
             'fecha_inicio' => ['nullable', 'date'],
             'fecha_fin' => ['nullable', 'date'],
@@ -112,7 +114,9 @@ class TratamientoController extends Controller
 
         $tratamiento = Tratamiento::find($id);
         $tratamiento->fill($request->all());
-
+        $tratamiento->save();
+        $tratamiento->coste=$tratamiento->tipoTratamiento->coste;
+        $tratamiento->iva=$tratamiento->tipoTratamiento->iva;
         $tratamiento->save();
 
         flash('Diente modificado correctamente');

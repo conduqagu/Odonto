@@ -312,6 +312,7 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Coste</th>
+                                <th>IVA</th>
                                 <th>Terapia</th>
                                 <th>Fecha inicio</th>
                                 <th>Fecha fin</th>
@@ -325,6 +326,7 @@
                                 <tr>
                                     <td>{{ $tratamiento->tipoTratamiento->name }}</td>
                                     <td>{{ $tratamiento->coste }}</td>
+                                    <td>{{$tratamiento->iva}}</td>
                                     <td>{{ $tratamiento->terapia }}</td>
                                     <td>{{ $tratamiento->fecha_inicio }}</td>
                                     <td>{{ $tratamiento->fecha_fin }}</td>
@@ -341,16 +343,7 @@
                                     </td>
                                 </tr>
                             @endforeach
-                            <tr>
-                                <th>IVA (%):
-                                <br>
-                                    {!! Form::open(['route' => ['edit_iva',$exam->id], 'method' => 'get']) !!}
-                                    {!!   Form::submit('Modificar IVA', ['class'=> 'btn btn-outline-dark' ])!!}
-                                    {!! Form::close() !!}
-                                </th>
-                                <th>{{$exam->iva}}</th>
 
-                            </tr>
                             <tr>
                                 <th>Coste total (€): </th>
                                 <th>{{$coste_total}}</th>

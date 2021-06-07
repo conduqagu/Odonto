@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class TipoTratamiento extends Model
 {
     protected $fillable = [
-        'name'
+        'name','coste','iva'
     ];
 
     public function tratamientos()

@@ -15,7 +15,8 @@ class CreateTratamientosTable extends Migration
     {
         Schema::create('tratamientos', function (Blueprint $table) {
             $table->id();
-            $table->double('coste');
+            $table->double('coste')->nullable();
+            $table->double('iva')->nullable();
             $table->enum('terapia',['sin definir','convencional','fases']);
             $table->date('fecha_inicio')->nullable();
             $table->date('fecha_fin')->nullable();

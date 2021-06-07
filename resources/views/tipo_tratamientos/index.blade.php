@@ -22,6 +22,9 @@
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>
+                                <th>Coste</th>
+                                <th>IVA</th>
+
 
                                 <th colspan="2">Acciones</th>
                             </tr>
@@ -29,9 +32,10 @@
                             @foreach ($tipo_tratamientos as $tipo_tratamiento)
                                 <tr>
                                     <td>{{ $tipo_tratamiento->name }}</td>
+                                    <td>{{ $tipo_tratamiento->coste }}</td>
+                                    <td>{{ $tipo_tratamiento->iva }}</td>
 
-
-                                <td>
+                                    <td>
                                     {!! Form::open(['route' => ['tipo_tratamientos.edit',$tipo_tratamiento->id], 'method' => 'get']) !!}
                                     {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                     {!! Form::close() !!}

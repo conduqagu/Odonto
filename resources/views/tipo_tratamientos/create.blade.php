@@ -15,6 +15,14 @@
                             {!! Form::label('name', 'Nombre') !!}
                             {!! Form::text('name',null,['class'=>'form-control', 'required','autofocus']) !!}
                         </div>
+                        <div class="form-group">
+                            {!! Form::label('coste', 'Coste') !!}
+                            {!! Form::number('coste',null,['class'=>'form-control', 'required','step'=>'0.01']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('iva', 'IVA') !!}
+                            {!! Form::text('iva',0,['class'=>'form-control', 'required','autofocus']) !!}
+                        </div>
 
                         <br>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}

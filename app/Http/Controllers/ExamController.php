@@ -123,7 +123,6 @@ class ExamController extends Controller
         $user=User::where('pin','=',MD5($request->pin))->first();
         $exam = new Exam($request->all());
         $exam->teacher_id=$user->id;
-        $exam->iva=0;
         $exam->cobrado=false;
         $exam->save();
 
@@ -157,7 +156,6 @@ class ExamController extends Controller
         ]);
 
         $exam = new Exam($request->all());
-        $exam->iva=0;
         $exam->cobrado=false;
         $exam->save();
 
@@ -190,7 +188,7 @@ class ExamController extends Controller
         $prueba_complementarias=$exam->PruebaComplementarias()->get();
         $coste_total=0.0;
         foreach ($tratamientos as $tratamiento) {
-            $coste_total = $tratamiento->coste + $coste_total;
+            $coste_total = $tratamiento->tipoTratamiento->coste + $coste_total;
         }
         return view('exams/show',['exam'=> $exam,'diagnosticos'=>$diagnosticos,'tratamientos'=>$tratamientos,'prueba_complementarias'=>$prueba_complementarias,'coste_total'=>$coste_total]);
     }
@@ -609,23 +607,7 @@ class ExamController extends Controller
 
         return $pdf->download('pdf.pdf');
     }
-    public function edit_iva($exam_id){
-        $exam=Exam::find($exam_id);
-        return view('exams/edit_iva',['exam'=>$exam]);
 
-    }
-    public function update_iva($exam_id,Request $request){
-        $this->validate($request, [
-            'iva'=>['nullable','integer','max:100'],
-        ]);
-
-        $exam = Exam::find($exam_id);
-        $exam->fill($request->all());
-        $exam->save();
-
-        flash('Examen creado correctamente');
-        return redirect()->route('exams.show',[$exam_id]);
-    }
 
     public function correo_pago($exam_id){
         flash('Correo enviado correctamente');

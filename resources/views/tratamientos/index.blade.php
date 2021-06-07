@@ -17,6 +17,7 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Coste</th>
+                                <th>IVA</th>
                                 <th>Terapia</th>
                                 <th>Fecha inicio</th>
                                 <th>Fecha fin</th>
@@ -27,7 +28,8 @@
                             @foreach ($tratamientos as $tratamiento)
                                 <tr>
                                     <td>{{ $tratamiento->tipoTratamiento->name }}</td>
-                                    <td>{{ $tratamiento->coste }}</td>
+                                    <td>{{$tratamiento->coste}}</td>
+                                    <td>{{$tratamiento->iva}}</td>
                                     <td>{{ $tratamiento->terapia }}</td>
                                     <td>{{ $tratamiento->fecha_inicio }}</td>
                                     <td>{{ $tratamiento->fecha_fin }}</td>

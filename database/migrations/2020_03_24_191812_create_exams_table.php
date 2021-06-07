@@ -17,7 +17,6 @@ class CreateExamsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->date('date');
-            $table->integer('iva')->nullable();
             $table->boolean('cobrado')->nullable();
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->unsignedBigInteger('patient_id');

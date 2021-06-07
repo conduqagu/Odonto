@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tratamiento extends Model
 {
     protected $fillable = [
-        'coste','terapia','braket_id','tipo_tratamiento_id','exam_id','fecha_inicio','fecha_fin'
+        'coste','iva','terapia','braket_id','tipo_tratamiento_id','exam_id','fecha_inicio','fecha_fin'
     ];
 
     public function asociacionExamTratamientos()

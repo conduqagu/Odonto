@@ -14,6 +14,14 @@
                             {!! Form::label('name', 'Nombre') !!}
                             {!! Form::text('name',$tipo_tratamiento->name,['class'=>'form-control', 'required','autofocus']) !!}
                         </div>
+                        <div class="form-group">
+                            {!! Form::label('coste', 'Coste') !!}
+                            {!! Form::number('coste',$tipo_tratamiento->coste,['class'=>'form-control', 'required','step'=>'0.01']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::label('iva', 'IVA') !!}
+                            {!! Form::text('iva',$tipo_tratamiento->iva,['class'=>'form-control', 'required','autofocus']) !!}
+                        </div>
 
                         <br>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
