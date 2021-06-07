@@ -25,8 +25,9 @@ class CreateTratamientosTable extends Migration
             $table->unsignedBigInteger('tipo_tratamiento_id');
             $table->foreign('tipo_tratamiento_id')->references('id')->on('tipo_tratamientos')->onDelete('cascade')->nullable();
             $table->unsignedBigInteger('exam_id');
-            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade')->nullable();
-
+            $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
+            $table->unsignedBigInteger('asociacion_exam_diente_id')->nullable();
+            $table->foreign('asociacion_exam_diente_id')->references('id')->on('asociacion_exam_dientes')->onDelete('cascade');
 
             $table->timestamps();
         });

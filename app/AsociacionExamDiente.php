@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class AsociacionExamDiente extends Model
 {
     protected $fillable = [
-        'denticionRaiz','denticionCorona', 'tratamiento ', 'opacidad','exam_id','diente_id','furca',
+        'denticionRaiz','denticionCorona', 'opacidad','exam_id','diente_id','furca',
         'retraccion','hipertrofia','sondaje','movilidad','sangrado','encia_insertada','teacher_id'
     ];
     public function exam()
@@ -20,6 +20,9 @@ class AsociacionExamDiente extends Model
     }
     public function teacher(){
         return $this->hasMany('App\User');
-
+    }
+    public function tratamiento()
+    {
+        return $this->hasMany('App\Tratamiento');
     }
 }

@@ -314,6 +314,7 @@
                                 <th>Coste</th>
                                 <th>IVA</th>
                                 <th>Terapia</th>
+                                <th>Zona</th>
                                 <th>Fecha inicio</th>
                                 <th>Fecha fin</th>
                                 @if($exam->tipoExam=='ortodoncial')
@@ -328,12 +329,20 @@
                                     <td>{{ $tratamiento->coste }}</td>
                                     <td>{{$tratamiento->iva}}</td>
                                     <td>{{ $tratamiento->terapia }}</td>
+                                    <td>@if($tratamiento->asociacion_exam_diente_id!=null)
+                                            {{'Diente '.$tratamiento->asociacion_exam_diente->diente->number}}
+                                        @else
+                                            {{'Bucal'}}
+                                        @endif
+                                    </td>
                                     <td>{{ $tratamiento->fecha_inicio }}</td>
                                     <td>{{ $tratamiento->fecha_fin }}</td>
                                     @if($exam->tipoExam=='ortodoncial')
                                     <td>{{ $tratamiento->braket->name}}</td>
                                     @endif
-                                    <td> {!! Form::open(['route' => ['tratamientos.edit',$tratamiento->id], 'method' => 'get']) !!}
+
+                                    <td>
+                                        {!! Form::open(['route' => ['tratamientos.edit',$tratamiento->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}</td>
                                     <td>

@@ -29,7 +29,7 @@
                                         {{ $asociacion_exam_diente->diente->name}}</td>
                                     <td>{{ $asociacion_exam_diente->denticionRaiz }}</td>
                                     <td>{{ $asociacion_exam_diente->denticionCorona }}</td>
-                                    <td>{{ $asociacion_exam_diente->tratamiento }}</td>
+                                    <td>{{ $asociacion_exam_diente->tipo_tratamiento->name }}</td>
                                     <td>{{ $asociacion_exam_diente->opacidad }}</td>
                                     <td>
                                         {!! Form::open(['route' => ['editasociacionEDTeacher',$asociacion_exam_diente->id], 'method' => 'get']) !!}

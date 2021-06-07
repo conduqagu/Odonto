@@ -452,9 +452,10 @@ class DienteController extends Controller
 
         if(Auth::user()->userType =='student') {
             return redirect()->route('patients.index');
-        }
-        if(Auth::user()->userType =='teacher') {
+        }elseif(Auth::user()->userType =='teacher') {
             return redirect()->route('indexteacher');
+        }else{
+
         }
     }
 

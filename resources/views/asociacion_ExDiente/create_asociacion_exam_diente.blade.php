@@ -34,10 +34,7 @@
                                     <td>{!! Form::select('denticionCorona'.$diente->number, array('Sano'=>'Sano','Cariado'=>'Cariado','Obturado sin caries'=>'Obturado sin caries',
                             'Pérdida otro motivo'=>'Pérdida otro motivo', 'Fisura Obturada'=>'Fisura Obturada','Pilar puente/corona'=>'Pilar puente/corona','Cariado'=>'Cariado',
                             'Diente no erupcionado'=>'Diente no erupcionado','Fractura'=>'Fractura'),'Sano',['id'=>$diente."denticionCorona",'class' => 'form-control', 'style'=>"width: max-content"]) !!}</td>
-                                    <td>{!! Form::select('tratamiento'.$diente->number, array('Ninguno'=>'Ninguno','Preventivo'=>'Preventivo','Obturación de fisuras'=>'Obturación de fisuras',
-                            'Obt. 1 o mas superficies'=>'Obt. 1 o mas superficies','Obt 2 o mas superficies'=>'Obt 2 o mas superficies','Corona'=>'Corona',
-                            'Carilla estética'=>'Carilla estética','Tratamiento pulgar'=>'Tratamiento pulgar','Exodoncia'=>'Exodoncia','No registrado'=>'No registrado'),'Ninguno',
-                            ['id'=>$diente."tratamiento",'class' => 'form-control', 'style'=>"width: max-content"]) !!}</td>
+                                    <td> {!! Form::select('tipo_tratamiento_id'.$diente->number, $tipo_tratamientos,null,['class' => 'form-control', 'required','style'=>"width: max-content"]) !!}</td>
                                     <td>{!! Form::select('opacidad'.$diente->number, array('Ningún estado anormal'=>'Ningún estado anormal','Opacidad delimitada'=>'Opacidad delimitada',
                             'OpacidadDifusa'=>'Opacidad Difusa','Hipoplasia'=>'Hipoplasia','Otros defectos'=>'Otros defectos',
                             'Opacidad elimitada y difusa'=>'Opacidad elimitada y difusa','Opacidad delimitada e hipoplasia'=>'Opacidad delimitada e hipoplasia',

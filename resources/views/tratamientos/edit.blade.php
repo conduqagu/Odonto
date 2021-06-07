@@ -11,6 +11,11 @@
                         @include('flash::message')
 
                         {!! Form::model($tratamiento, [ 'route' => ['tratamientos.update',$tratamiento->id], 'method'=>'PUT']) !!}
+                        @if($tratamiento->asociacion_exam_diente_id!=null)
+                        <div class="form-group">
+                            {!!  Form::label('asociacion_exam_diente_id' , 'Diente: '.$tratamiento->asociacion_exam_diente->diente->number) !!}
+                        </div>
+                        @endif
                         <div class="form-group">
                             {!!  Form::label('tipo_tratamiento_id' , 'Nombre') !!}
                             {!! Form::select('tipo_tratamiento_id', $tipo_tratamientos,$tratamiento->tipo_tratamiento_id,['class' => 'form-control', 'required']) !!}

@@ -36,10 +36,7 @@
                         </div>
                         <div>
                             {!!  Form::label('tratamiento' , 'Tratamiento') !!}
-                            {!! Form::select('tratamiento', array('Ninguno'=>'Ninguno','Preventivo'=>'Preventivo','Obturación de fisuras'=>'Obturación de fisuras',
-                            'Obt. 1 o mas superficies'=>'Obt. 1 o mas superficies','Obt 2 o mas superficies'=>'Obt 2 o mas superficies','Corona'=>'Corona',
-                            'Carilla estética'=>'Carilla estética','Tratamiento pulgar'=>'Tratamiento pulgar','Exodoncia'=>'Exodoncia',
-                            'No registrado'=>'No registrado'),$asociacion_exam_diente->tratamiento,['class' => 'form-control']) !!}
+                            {!! Form::select('tratamiento', $tipo_tratamientos,$asociacion_exam_diente->tipo_tratamiento,['class' => 'form-control']) !!}
                         </div>
                         <div>
                             {!!  Form::label('opacidad' , 'Opacidad') !!}

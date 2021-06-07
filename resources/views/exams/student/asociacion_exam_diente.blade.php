@@ -38,7 +38,9 @@
                                         {{ $asociacion_exam_diente->diente->name}}</td>
                                     <td>{{ $asociacion_exam_diente->denticionRaiz }}</td>
                                     <td>{{ $asociacion_exam_diente->denticionCorona }}</td>
-                                    <td>{{ $asociacion_exam_diente->tratamiento }}</td>
+                                    <td>@foreach($asociacion_exam_diente->tratamiento as $tratamiento)
+                                        {{$tratamiento->tipoTratamiento->name}}<br>
+                                    @endforeach</td>
                                     <td>{{ $asociacion_exam_diente->opacidad }}</td>
                                     <td>
                                         @if(Auth::user()->userType =='student')

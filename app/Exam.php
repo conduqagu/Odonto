@@ -10,7 +10,7 @@ class Exam extends Model
         //Atributos examen:
         'date','cobrado','patient_id','tipoExam','otros','teacher_id',
         //Atributos exmanen inicial:
-        'aspectoExtraoralNormal','cancerOral', 'anomaliasLabios', 'otros','patologiaMucosa','fluorosis','estadoS1',
+        'aspectoExtraoralNormal','cancerOral', 'anomaliasLabios', 'patologiaMucosa','fluorosis','estadoS1',
         'estadoS2','estadoS3','estadoS4','estadoS5','estadoS6','claseAngle','lateralAngle','tipoDentición',
         'apiñamientoIncisivoInferior','apiñamientoIncisivoSuperior','perdidaEspacioAnterior','perdidaEspacioPosterior',
         'mordidaCruzadaAnterior','mordidaCruzadaPosterior','desviacionLineaMedia','mordidaAbierta','habitos',
@@ -21,7 +21,7 @@ class Exam extends Model
         //Atributos Ortodoncia
         'patronFacial','perfil','menton',
         //Atributos Evaluacion
-        'previsto','maxilar','mandibular','logrado'
+        'previsto','maxilar','mandibular','logrado','orto_id'
 
 
     ];

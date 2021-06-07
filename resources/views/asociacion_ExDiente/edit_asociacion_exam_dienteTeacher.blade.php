@@ -15,7 +15,7 @@
                     <div class="card-body">
                         @include('flash::message')
 
-                        {!! Form::model($asociacion_exam_diente, ['route'=>['updateasociacionEDPeriodoncia',$asociacion_exam_diente],'method'=>'put']) !!}
+                        {!! Form::model($asociacion_exam_diente, ['route'=>['updateasociacionEDTeacher',$asociacion_exam_diente],'method'=>'put']) !!}
 
                         <div class="form-group">
                             {!!Form::label('diente__id', 'Diente') !!}
@@ -23,40 +23,28 @@
                             {!! Form::select('diente_id', $dientes,$asociacion_exam_diente->diente_id, ['class' => 'form-control', 'required']) !!}
                         </div>
                         <div>
-                            {!!Form::label('furca', 'Furca') !!}
-                            <br>
-                            {!! Form::number('furca',$asociacion_exam_diente->furca, ['class' => 'form-control', 'required']) !!}</div>
-                        <div>
-                            {!!Form::label('retraccion', 'Retracción') !!}
-                            <br>
-                            {!! Form::number('retraccion',$asociacion_exam_diente->retraccion, ['class' => 'form-control', 'required']) !!}
+                            {!!  Form::label('denticionRaiz' , 'Dentición raíz') !!}
+                            {!! Form::select('denticionRaiz', array('Sano'=>'Sano','Cariado'=>'Cariado','Obturado sin caries'=>'Obturado sin caries',
+                            'Pérdida otro motivo'=>'Pérdida otro motivo', 'Fisura Obturada'=>'Fisura Obturada','Pilar puente/corona'=>'Pilar puente/corona','Cariado'=>'Cariado',
+                            'Diente no erupcionado'=>'Diente no erupcionado','Fractura'=>'Fractura'),$asociacion_exam_diente->denticionRaiz,['class' => 'form-control']) !!}
                         </div>
                         <div>
-                            {!!Form::label('hipertrofia', 'hipertrofia') !!}
-                            <br>
-                            {!! Form::number('hipertrofia',$asociacion_exam_diente->hipertrofia, ['class' => 'form-control', 'required']) !!}
+                            {!!  Form::label('denticionCorona' , 'Dentición Corona') !!}
+                            {!! Form::select('denticionCorona', array('Sano'=>'Sano','Cariado'=>'Cariado','Obturado sin caries'=>'Obturado sin caries',
+                            'Pérdida otro motivo'=>'Pérdida otro motivo', 'Fisura Obturada'=>'Fisura Obturada','Pilar puente/corona'=>'Pilar puente/corona','Cariado'=>'Cariado',
+                            'Diente no erupcionado'=>'Diente no erupcionado','Fractura'=>'Fractura'),$asociacion_exam_diente->denticionCorona,['class' => 'form-control']) !!}
                         </div>
                         <div>
-                            {!!Form::label('sondaje', 'Sondaje') !!}
-                            <br>
-                            {!! Form::number('sondaje',$asociacion_exam_diente->sondaje, ['class' => 'form-control', 'required']) !!}
+                            {!!  Form::label('tratamiento' , 'Tratamiento') !!}
+                            {!! Form::select('tratamiento', $tipo_tratamientos,$asociacion_exam_diente->tipo_tratamiento,['class' => 'form-control']) !!}
                         </div>
                         <div>
-                            {!!Form::label('movilidad', 'Movilidad') !!}
-                            <br>
-                            {!! Form::boolean('movilidad',$asociacion_exam_diente->movilidad, ['class' => 'form-control', 'required']) !!}
+                            {!!  Form::label('opacidad' , 'Opacidad') !!}
+                            {!! Form::select('opacidad', array('Ningún estado anormal'=>'Ningún estado anormal','Opacidad delimitada'=>'Opacidad delimitada',
+                            'OpacidadDifusa'=>'Opacidad Difusa','Hipoplasia'=>'Hipoplasia','Otros defectos'=>'Otros defectos',
+                            'Opacidad elimitada y difusa'=>'Opacidad elimitada y difusa','Opacidad delimitada e hipoplasia'=>'Opacidad delimitada e hipoplasia',
+                            'Opacidad difusa e hipoplasia'=>'Opacidad difusa e hipoplasia'),$asociacion_exam_diente->opacidad,['class' => 'form-control']) !!}
                         </div>
-                        <div>
-                            {!!Form::label('sangrado', 'Sangrado') !!}
-                            <br>
-                            {!! Form::boolean('sangrado',$asociacion_exam_diente->sangrado, ['class' => 'form-control', 'required']) !!}
-                        </div>
-                        <div>
-                            {!!Form::label('encia_insertada', 'Encía insertada') !!}
-                            <br>
-                            {!! Form::boolean('encia_insertada',$asociacion_exam_diente->encia_insertada, ['class' => 'form-control', 'required']) !!}
-                        </div>
-
                         <br>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 

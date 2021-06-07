@@ -6,6 +6,8 @@ use App\AsociacionExamDiente;
 use App\Diente;
 use App\Exam;
 use App\Patient;
+use App\TipoTratamiento;
+use App\Tratamiento;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,6 +65,8 @@ class AsociacionExamDienteController extends Controller
         $patient_id = $exam->patient_id;
         $patient = Patient::find($patient_id);
         $child = $patient->child;
+        $tipo_tratamientos=TipoTratamiento::all()->pluck('name','id');
+
 
         if ($child == 1) {
             $dientes = Diente::where('dientes.patient_id', '=', $patient_id)
@@ -83,7 +87,7 @@ class AsociacionExamDienteController extends Controller
                     })->pluck('dientes.id')->values())->get();
         }
 
-        return view('asociacion_ExDiente.create_asociacion_exam_diente', ['exam_id' => $exam_id, 'dientes' => $dientes]);
+        return view('asociacion_ExDiente.create_asociacion_exam_diente', ['exam_id' => $exam_id, 'dientes' => $dientes,'tipo_tratamientos'=>$tipo_tratamientos]);
     }
 
     public function create_asociacionEDPeriodoncia($exam_id)
@@ -152,16 +156,15 @@ class AsociacionExamDienteController extends Controller
                 Fisura Obturada,Pilar puente/corona,Diente no erupcionado,Fractura',
                 'denticionCorona' . $a => 'required|String|in:Sano,Cariado,Obturado,sin caries,Obturado,con caries,Pérdida otro motivo,
                 Fisura Obturada,Pilar puente/corona,Diente no erupcionado,Fractura',
-                'tratamiento' . $a => 'required|String|in:Ninguno,Preventivo,Obturación de fisuras,Obt. 1 o mas superficies,Obt 2 o mas superficies,Corona,Carilla estética,Tratamiento pulgar,Exodoncia,No registrado',
                 'opacidad' . $a => 'required|String|in:Ningún estado anormal,Opacidad delimitada,OpacidadDifusa,Hipoplasia,
                 Otros defectos,Opacidad elimitada y difusa,Opacidad delimitada e hipoplasia,Opacidad difusa e hipoplasia',
                 'diente_id' . $a => 'required|exists:dientes,id',
+                'tipo_tratamiento_id'.$a=>'required|exists:tipo_tratamientos,id'
             ]);
 
             $asociacion_exam_diente = new AsociacionExamDiente();
             $asociacion_exam_diente->denticionRaiz = $request->get('denticionRaiz' . $a);
             $asociacion_exam_diente->denticionCorona = $request->get('denticionCorona' . $a);
-            $asociacion_exam_diente->tratamiento = $request->get('tratamiento' . $a);
             $asociacion_exam_diente->opacidad = $request->get('opacidad' . $a);
             $asociacion_exam_diente->diente_id = $request->get('diente_id' . $a);
             $asociacion_exam_diente->exam_id = $exam_id;
@@ -169,6 +172,16 @@ class AsociacionExamDienteController extends Controller
                 $asociacion_exam_diente->teacher_id = $user->id;
             }
             $asociacion_exam_diente->save();
+            if($request->get('tipo_tratamiento_id' .$a)!=1){
+                $tipo_tratamiento=TipoTratamiento::find($request->get('tipo_tratamiento_id' .$a));
+                $tratamiento=new Tratamiento();
+                $tratamiento->tipo_tratamiento_id=$request->get('tipo_tratamiento_id' .$a);
+                $tratamiento->exam_id=$exam_id;
+                $tratamiento->coste=$tipo_tratamiento->coste;
+                $tratamiento->iva=$tipo_tratamiento->iva;
+                $tratamiento->asociacion_exam_diente_id=$asociacion_exam_diente->id;
+                $tratamiento->save();
+            }
         }
 
 
@@ -294,8 +307,6 @@ class AsociacionExamDienteController extends Controller
                 Fisura Obturada,Pilar puente/corona,Diente no erupcionado,Fractura',
             'denticionCorona' => 'required|String|in:Sano,Cariado,Obturado sin caries,Obturado con caries,Pérdida otro motivo,
                 Fisura Obturada,Pilar puente/corona,Diente no erupcionado,Fractura',
-            'tratamiento' => 'required|String|in:Ninguno,Preventivo,Obturación de fisuras,Obt. 1 o mas superficies,Obt 2 o mas superficies,
-                Corona,Carilla estética,Tratamiento pulgar,Exodoncia,No registrado',
             'opacidad' => 'required|String|in:Ningún estado anormal,Opacidad delimitada,OpacidadDifusa,Hipoplasia,
                 Otros defectos,Opacidad elimitada y difusa,Opacidad delimitada e hipoplasia,Opacidad difusa e hipoplasia',
             'diente_id' => 'required|exists:dientes,id',
@@ -337,8 +348,6 @@ class AsociacionExamDienteController extends Controller
                 Fisura Obturada,Pilar puente/corona,Diente no erupcionado,Fractura',
             'denticionCorona' => 'required|String|in:Sano,Cariado,Obturado sin caries,Obturado con caries,Pérdida otro motivo,
                 Fisura Obturada,Pilar puente/corona,Diente no erupcionado,Fractura',
-            'tratamiento' => 'required|String|in:Ninguno,Preventivo,Obturación de fisuras,Obt. 1 o mas superficies,Obt 2 o mas superficies,
-                Corona,Carilla estética,Tratamiento pulgar,Exodoncia,No registrado',
             'opacidad' => 'required|String|in:Ningún estado anormal,Opacidad delimitada,OpacidadDifusa,Hipoplasia,
                 Otros defectos,Opacidad elimitada y difusa,Opacidad delimitada e hipoplasia,Opacidad difusa e hipoplasia',
             'diente_id' => 'required|exists:dientes,id',

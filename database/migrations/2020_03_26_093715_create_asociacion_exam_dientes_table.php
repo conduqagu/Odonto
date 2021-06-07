@@ -20,8 +20,8 @@ class CreateAsociacionExamDientesTable extends Migration
                 'Pérdida otro motivo', 'Fisura Obturada','Pilar puente/corona','Diente no erupcionado','Fractura'])->nullable();
             $table->enum('denticionCorona', ['Sano','Cariado','Obturado sin caries','Obturado con caries',
                 'Pérdida otro motivo', 'Fisura Obturada','Pilar puente/corona','Diente no erupcionado','Fractura'])->nullable();
-            $table->enum('tratamiento',['Ninguno','Preventivo','Obturación de fisuras','Obt. 1 o mas superficies',
-                'Obt 2 o mas superficies','Corona','Carilla estética','Tratamiento pulgar','Exodoncia','No registrado'])->nullable();
+            //$table->enum('tratamiento',['Ninguno','Preventivo','Obturación de fisuras','Obt. 1 o mas superficies',
+              //  'Obt 2 o mas superficies','Corona','Carilla estética','Tratamiento pulgar','Exodoncia','No registrado'])->nullable();
             $table->enum('opacidad', ['Ningún estado anormal','Opacidad delimitada','OpacidadDifusa','Hipoplasia',
                 'Otros defectos','Opacidad elimitada y difusa','Opacidad delimitada e hipoplasia','Opacidad difusa e hipoplasia',
                 'Las tres alteraciones'])->nullable();
@@ -36,7 +36,6 @@ class CreateAsociacionExamDientesTable extends Migration
             $table->unsignedBigInteger('diente_id');
             $table->foreign('teacher_id')->references('id')->on('users');
             $table->unsignedBigInteger('teacher_id')->nullable();
-
             $table->foreign('exam_id')->references('id')->on('exams')->onDelete('cascade');
             $table->foreign('diente_id')->references('id')->on('dientes');
 

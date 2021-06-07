@@ -80,6 +80,7 @@ class CreateExamsTable extends Migration
             $table->string('mandibular')->nullable();
             $table->string('logrado')->nullable();
             $table->string('otros')->nullable();
+
             $table->foreign('orto_id')->references('id')->on('exams')->onDelete('cascade');
             $table->unsignedBigInteger('orto_id')->nullable();
 
