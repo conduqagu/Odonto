@@ -12,9 +12,12 @@
 
                         {!! Form::model($exam, [ 'route' => ['exams.update',$exam->id], 'method'=>'PUT']) !!}
                         <div class="form-group">
-                            {!! Form::label('date', 'Fecha') !!}
-                            {!! Form::date('date',$exam->date,['class'=>'form-control', 'required']) !!}
+                            {!!Form::label('patient_id', 'Paciente: '.$exam->patient->name) !!}
                         </div>
+                        <div class="form-group">
+                            {!! Form::label('date', 'Fecha: '.$exam->date) !!}
+                        </div>
+                        @if($exam->tipoExam=='inicial')
                         <div>
                             {!!  Form::label('aspectoExtraoralNormal' , 'Aspecto Extraoral Normal') !!}
                             {!! Form::select('aspectoExtraoralNormal', array('1'=>'Si','0'=>'No'),$exam->aspectoExtraoralNormal,['class' => 'form-control', 'required']) !!}
@@ -26,10 +29,6 @@
                         <div>
                             {!!  Form::label('anomaliasLabios' , 'Anomalias en labios') !!}
                             {!! Form::select('anomaliasLabios', array('1'=>'Si','0'=>'No'),$exam->anomaliasLabios,['class' => 'form-control', 'required']) !!}
-                        </div>
-                        <div>
-                            {!!  Form::label('otros' , 'Otros') !!}
-                            {!! Form::text('otros', $exam->otros, ['class'=>'form-control']) !!}
                         </div>
                         <div>
                             {!!  Form::label('patologiaMucosa' , 'Patologías en mucosas') !!}
@@ -111,14 +110,104 @@
                             {!!  Form::label('habitos' , 'Hábitos') !!}
                             {!! Form::select('habitos', array('1'=>'Si','0'=>'No'),$exam->habitos,['class' => 'form-control', 'required']) !!}
                         </div>
-                        <div class="form-group">
-                            {!!Form::label('patient_id', 'Paciente') !!}
+                        @elseif($exam->tipoExam=='infantil')
+                            <div>
+                                {!!  Form::label('aspectoGeneral' , 'Aspecto General') !!}
+                                {!! Form::text('aspectoGeneral',$exam->aspectoGeneral, ['class'=>'form-control']) !!}
+                            </div>
+                            <div>
+                                {!!  Form::label('talla' , 'Talla') !!}
+                                {!! Form::text('talla',$exam->talla, ['class'=>'form-control']) !!}
+                            </div>
+                            <div>
+                                {!!  Form::label('peso' , 'Peso') !!}
+                                {!! Form::text('peso',$exam->peso, ['class'=>'form-control']) !!}
+                            </div>
+                            <div>
+                                {!!  Form::label('piel' , 'Piel') !!}
+                                {!! Form::text('piel',$exam->piel, ['class'=>'form-control']) !!}
+                            </div>
+                            <div>
+                                {!!  Form::label('anomaliaForma' , 'Anomalía en forma') !!}
+                                {!! Form::text('anomaliaForma',$exam->anomaliaForma, ['class'=>'form-control']) !!}
+                            </div>
+                            <div>
+                                {!!  Form::label('anomaliaTamaño' , 'Anomalía en tamaño') !!}
+                                {!! Form::text('anomaliaTamaño',$exam->anomaliaTamaño, ['class'=>'form-control']) !!}
+                            </div>
+
+                        @elseif($exam->tipoExam=='periodoncial')
+                            <div>
+                                {!!  Form::label('indicePlaca' , 'Índice de placa') !!}
+                                {!! Form::text('indicePlaca', $exam->indicePlaca,['class' => 'form-control']) !!}
+                            </div>
+                            <div>
+                                {!!  Form::label('color' , 'Color') !!}
+                                {!! Form::select('color', array('rosa'=>'Rosa','rojo'=>'Rojo'),$exam->color,['class' => 'form-control', 'required']) !!}
+                            </div>
+                            <div>
+                                {!!  Form::label('borde' , 'Borde') !!}
+                                {!! Form::select('borde', array('afilado'=>'Afilado','engrosado'=>'Engrosado'),$exam->borde,['class' => 'form-control', 'required']) !!}
+                            </div>
+                            <div>
+                                {!!  Form::label('aspecto' , 'Aspecto') !!}
+                                {!! Form::select('aspecto', array('puntillado'=>'Puntillado','liso'=>'Liso'),$exam->aspecto,['class' => 'form-control', 'required']) !!}
+                            </div>
+                            <div>
+                                {!!  Form::label('consistencia' , 'Consistencia') !!}
+                                {!! Form::select('consistencia', array('firme'=>'Firme','depresible'=>'Depresible'),$exam->consistencia,['class' => 'form-control', 'required']) !!}
+                            </div>
+                            <div>
+                                {!!  Form::label('biotipo' , 'Biotipo') !!}
+                                {!! Form::number('biotipo', $exam->biotipo,['class' => 'form-control']) !!}
+                            </div>
+
+
+                        @elseif($exam->tipoExam='ortodoncial')
+                            <div class="form-group">
+                                {!!  Form::label('patronFacial' , 'Patrón Facial') !!}
+                                {!! Form::select('patronFacial', array('dolicofacial'=>'Dolicofacial','mesofacial'=>'Mesofacial','braquifacial'=>'Braquifacial'),$exam->patronFacial,['class' => 'form-control', 'required']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!!  Form::label('perfil' , 'Perfil') !!}
+                                {!! Form::select('perfil', array('armonico'=>'Armónico','convexo'=>'Convexo','concavo'=>'Concavo','plano'=>'Plano'),$exam->perfil,['class' => 'form-control', 'required']) !!}
+                            </div>
+                            <div class="form-group">
+                                {!!  Form::label('menton' , 'Mentón') !!}
+                                {!! Form::select('menton', array('marcado'=>'Marcado','normal'=>'Normal','retruido'=>'Retruido','plano'=>'Plano'),$exam->menton,['class' => 'form-control', 'required']) !!}
+                            </div>
+
+                        @elseif($exam->tipoExam='evOrto')
+                            <div>
+                                {!!  Form::label('orto_id' , 'Ortodoncia principal') !!}
+                                {!! Form::select('orto_id',$ortodoncias, ['class'=>'form-control']) !!}
+                            </div>
+                            <div>
+                                {!!  Form::label('previsto' , 'Previsto') !!}
+                                {!! Form::text('previsto',$exam->previsto, ['class'=>'form-control']) !!}
+                            </div>
+                            <div>
+                                {!!  Form::label('maxilar' , 'Maxilar') !!}
+                                {!! Form::text('maxilar',$exam->maxilar, ['class'=>'form-control']) !!}
+                            </div>
+                            <div>
+                                {!!  Form::label('mandibular' , 'Mandibular') !!}
+                                {!! Form::text('mandibular',$exam->mandibular, ['class'=>'form-control']) !!}
+                            </div>
+                            <div>
+                                {!!  Form::label('logrado' , 'Logrado') !!}
+                                {!! Form::text('logrado',$exam->logrado, ['class'=>'form-control']) !!}
+                            </div>
+                        @endif
+                        <div>
+                            {!!  Form::label('otros' , 'Otros') !!}
+                            {!! Form::text('otros', $exam->otros, ['class'=>'form-control']) !!}
                             <br>
-                            {!! Form::select('patient_id', $patients,$exam->patient_id, ['class' => 'form-control', 'required']) !!}
                         </div>
+
                         <div class="form-group">
                             {!! Form::label('pin', 'Pin del profesor') !!}
-                            <input id="pin" type="password" class="awesome" name="pin" required>
+                            <input id="pin" type="password" class="form-control" name="pin" required>
                         </div>
 
                         {!! Form::submit('Actualizar',['class'=>'btn-primary btn']) !!}

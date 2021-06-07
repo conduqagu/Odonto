@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group">
                             {!!  Form::label('riesgoASA' , 'Riesgo ASA') !!}
-                            {!! Form::select('riesgoASA', array('I' => 'I', 'II' => 'II','III'=>'III')) !!}
+                            {!! Form::select('riesgoASA', array('I' => 'I', 'II' => 'II','III'=>'III'),'I',['class'=>'form-control']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('observaciones', 'Observaciones') !!}

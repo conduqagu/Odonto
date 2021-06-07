@@ -42,6 +42,13 @@
                                 </tr>
                             @endforeach
                         </table>
+                        <br>
+                        @if (\Illuminate\Support\Facades\Auth::user()->userType=='student')
+                            <div class="form-group">
+                                {!! Form::label('pin', 'Pin del profesor') !!}
+                                <input id="pin" type="password" class="form-control" name="pin" required>
+                            </div>
+                        @endif
 
                         <br>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}

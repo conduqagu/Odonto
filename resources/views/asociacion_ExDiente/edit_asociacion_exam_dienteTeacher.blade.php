@@ -56,6 +56,7 @@
                             <br>
                             {!! Form::boolean('encia_insertada',$asociacion_exam_diente->encia_insertada, ['class' => 'form-control', 'required']) !!}
                         </div>
+
                         <br>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 

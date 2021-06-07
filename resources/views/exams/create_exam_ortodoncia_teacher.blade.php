@@ -12,7 +12,7 @@
 
                         {!! Form::model($exam, [ 'route' => ['examsUptadeTeacherOrtodoncia',$exam->id],'method'=>'PUT']) !!}
                         <div>
-                            {!!Form::label('patient_id', 'Paciente:  '.$exam->patient->name) !!}
+                            {!!Form::label('patient_id', 'Paciente:  '.$exam->patient->name.' '.$exam->patient->surname) !!}
                         </div>
                         <div>
                             {!! Form::label('date', 'Fecha: '.$exam->date) !!}

@@ -17,11 +17,6 @@ class DienteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $dientes=Diente::all();
-        return view('dientes.index',['dientes'=>$dientes]);
-    }
     public function indexPatient($id)
     {
         $patient=Patient::find($id);
@@ -31,7 +26,7 @@ class DienteController extends Controller
         }elseif($child==0){
             $dientes=Diente::all()->where('patient_id','=',$id)->where('number','<','50');
         }
-        return view('dientes.index',['dientes'=>$dientes]);
+        return view('dientes.index',['dientes'=>$dientes,'patient'=>$patient]);
     }
     /**
      * Create a new diente instance after a valid registration.
@@ -39,10 +34,10 @@ class DienteController extends Controller
      * @param  array  $data
      * @return \App\Diente
      */
-    public function create()
+    public function create($patient_id)
     {
-        $patients = Patient::all()->pluck('name','id');
-        return view('dientes.create',['patients'=>$patients]);
+        $patient = Patient::find($patient_id);
+        return view('dientes.create',['patient'=>$patient]);
     }
 
     /**
@@ -53,6 +48,7 @@ class DienteController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'number' => ['required', 'integer', 'max:100'],
@@ -60,22 +56,25 @@ class DienteController extends Controller
             'sextante' => ['required', 'integer','max:6' ],
             'ausente' => ['required', 'boolean'],
             'patient_id'=>['required','exists:patients,id'],
-            'pin'=>['required','integer']
         ]);
+        if(Auth::user()->userType=='student'){
+            $this->validate($request,[
+                'pin'=>['required','string']
+            ]);
+            $profesores=User::find(Auth::user()->id)->teachers()
+                ->where('pin','=',MD5($request->pin))->get();
 
-        $profesores=User::find(Auth::user()->id)->teachers()->get();
-        $profesores->wherein('pin',MD5($request->pin));
-
-        if(count($profesores)==0){
-            flash('Pin incorrecto');
-            return redirect()->route('dientes.create');
+            if(count($profesores)==0){
+                flash('Pin incorrecto');
+                return redirect()->route('diente.create',[$request->patient_id]);
+            }
         }
         $diente=new Diente($request->all());
         $diente->save();
 
         flash('Diente creado correctamente');
 
-        return redirect()->route('dientes.index');
+        return redirect()->route('dientesPatient',[$diente->patient_id]);
     }
 
 
@@ -121,12 +120,14 @@ class DienteController extends Controller
             'cuadrante' => ['required', 'integer','max:8' ],
             'sextante' => ['required', 'integer','max:6' ],
             'ausente' => ['required', 'boolean'],
-            'pin'=>['nullable','string']
         ]);
 
         if(Auth::user()->userType=='student') {
-            $profesores=User::find(Auth::user()->id)->teachers()->get();
-            $profesores->wherein('pin',MD5($request->pin));
+            $this->validate($request,[
+                'pin'=>['required','string']
+            ]);
+            $profesores=User::find(Auth::user()->id)->teachers()
+                ->where('pin','=',MD5($request->pin))->get();
 
             if (count($profesores) == false) {
                 flash('Pin incorrecto');

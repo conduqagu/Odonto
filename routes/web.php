@@ -99,6 +99,7 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::get('/patients/dientesPatient/{id}', 'DienteController@indexPatient')->name('dientesPatient');
     Route::get('/patients/createDientesPac/{id}', 'DienteController@createDientesPac')->name('createDientesPac');
     Route::get('/patients/createDientesPacChild/{id}', 'DienteController@createDientesPacChild')->name('createDientesPacChild');
+    Route::get('/diente/create/{id}','DienteController@create')->name('diente.create');
     Route::resource('dientes', 'DienteController');
     Route::post('/asociacion_ExamDiags/store/{id}', 'DiagnosticoController@store_asociacion_diagnostico_exam')->name('asociacion_ExDiags.store');
     Route::get('/asociacion_ExamDiags/create/{id}', 'DiagnosticoController@create_asociacion_diagnostico_exam')->name('asociacion_ExDiags.create');

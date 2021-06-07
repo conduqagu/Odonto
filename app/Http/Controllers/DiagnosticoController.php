@@ -124,7 +124,7 @@ class DiagnosticoController extends Controller
     {
         $this->validate($request, [
             'diagnostico_id' => 'required|exists:diagnosticos,id',
-            'comentario'=>['required', 'string', 'max:255'],
+            'comentario'=>['nullable', 'string', 'max:255'],
         ]);
 
         $exam=Exam::find($exam_id);
@@ -133,14 +133,8 @@ class DiagnosticoController extends Controller
 
         flash('Asociación creada correctamente');
 
-        switch($request->submitbutton) {
-            case 'Guardar':
-                return redirect()->route('exams.show',$exam_id);
-                break;
-            case 'Tratamiento':
-                return redirect()->route('tratamientos.createT',$exam_id);
-                break;
-        }
+        return redirect()->route('exams.show',$exam_id);
+
     }
     public function destroy_asociacion_diagnostico_exam($diagnostico_id,Request $request)
     {

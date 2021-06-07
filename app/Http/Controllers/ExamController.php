@@ -104,6 +104,7 @@ class ExamController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
             'date'=>['required','date'],
             'tipoExam'=>['required','string','in:inicial,infantil,periodoncial,ortodoncial,evOrto,otro'],
@@ -111,8 +112,8 @@ class ExamController extends Controller
             'patient_id' => ['required', 'exists:patients,id'],
         ]);
 
-        $profesores=User::find(Auth::user()->id)->teachers()->get();
-        $profesores->wherein('pin',MD5($request->pin));
+        $profesores=User::find(Auth::user()->id)->teachers()
+            ->where('pin','=',MD5($request->pin))->get();
 
         if(count($profesores)==0) {
             flash('Pin incorrecto');
@@ -223,48 +224,83 @@ class ExamController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $this->validate($request, [
-            'date'=>['required','date'],
-            'aspectoExtraoralNormal' => ['required', 'boolean'],
-            'cancerOral' => ['required', 'boolean'],
-            'anomaliasLabios' => ['required', 'boolean' ],
-            'otros' => ['nullable','string', 'max:1000'],
-            'patologiaMucosa'=> ['string','in:Ninguna,Tumor maligno,leucoplasia,Liquen plano'],
-            'fluorosis'=> ['required', 'string','in:Normal,Discutible,Muy ligera,Ligera,
-                Moderada,Intensa,Excluida,No registrada'],
-            'estadoS1'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS2'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS3'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS4'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS5'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS6'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'claseAngle'=> ['required', 'string','in:clase I,clase II,clase III'],
-            'lateralAngle'=> ['required', 'string','in:Unilateral,Bilateral'],
-            'tipoDentición'=> ['required', 'string','in:Temporal,Mixta'],
-            'apiñamientoIncisivoInferior' => ['required', 'boolean'],
-            'apiñamientoIncisivoInferior' => ['required', 'boolean'],
-            'apiñamientoIncisivoSuperior' => ['required', 'boolean'],
-            'perdidaEspacioAnterior' => ['required', 'boolean'],
-            'perdidaEspacioPosterior' => ['required', 'boolean'],
-            'mordidaCruzadaAnterior' => ['required', 'boolean'],
-            'mordidaCruzadaPosterior' => ['required', 'boolean'],
-            'desviacionLineaMedia' => ['required', 'boolean'],
-            'mordidaAbierta' => ['required', 'boolean'],
-            'habitos' => ['required', 'boolean'],
-            'patient_id' => ['required', 'exists:patients,id'],
-            'pin'=>['required','integer']
+        $exam = Exam::find($id);
+        $this->validate($request,[
+            'otros' => ['nullable', 'string', 'max:1000'],
+            'pin' => ['required', 'string']
         ]);
+        if($exam->tipoExam=='inicial') {
+            $this->validate($request, [
+                'aspectoExtraoralNormal' => ['required', 'boolean'],
+                'cancerOral' => ['required', 'boolean'],
+                'anomaliasLabios' => ['required', 'boolean'],
+                'patologiaMucosa' => ['string', 'in:Ninguna,Tumor maligno,leucoplasia,Liquen plano'],
+                'fluorosis' => ['required', 'string', 'in:Normal,Discutible,Muy ligera,Ligera,
+                Moderada,Intensa,Excluida,No registrada'],
+                'estadoS1' => ['required', 'string', 'in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+                'estadoS2' => ['required', 'string', 'in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+                'estadoS3' => ['required', 'string', 'in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+                'estadoS4' => ['required', 'string', 'in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+                'estadoS5' => ['required', 'string', 'in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+                'estadoS6' => ['required', 'string', 'in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+                'claseAngle' => ['required', 'string', 'in:clase I,clase II,clase III'],
+                'lateralAngle' => ['required', 'string', 'in:Unilateral,Bilateral'],
+                'tipoDentición' => ['required', 'string', 'in:Temporal,Mixta'],
+                'apiñamientoIncisivoInferior' => ['required', 'boolean'],
+                'apiñamientoIncisivoInferior' => ['required', 'boolean'],
+                'apiñamientoIncisivoSuperior' => ['required', 'boolean'],
+                'perdidaEspacioAnterior' => ['required', 'boolean'],
+                'perdidaEspacioPosterior' => ['required', 'boolean'],
+                'mordidaCruzadaAnterior' => ['required', 'boolean'],
+                'mordidaCruzadaPosterior' => ['required', 'boolean'],
+                'desviacionLineaMedia' => ['required', 'boolean'],
+                'mordidaAbierta' => ['required', 'boolean'],
+                'habitos' => ['required', 'boolean'],
+            ]);
+        }elseif ($exam->tipoExam=='infantil'){
+            $this->validate($request, [
+                'aspectoGeneral'=>['required','string', 'max:255'],
+                'talla'=>['required','string', 'max:255'],
+                'peso'=>['required','string', 'max:255'],
+                'piel'=>['required','string', 'max:255'],
+                'anomaliaForma'=>['required','string', 'max:255'],
+                'anomaliaTamaño'=>['required','string', 'max:255'],
+            ]);
+        }elseif($exam->tipoExam=='periodoncial'){
 
-        $profesores=User::find(Auth::user()->id)->teachers()->get();
-        $profesores->wherein('pin',MD5($request->pin));
+            $this->validate($request, [
+                'indicePlaca'=>['nullable','string', 'max:255'],
+                'color'=>['required','string', 'in:rosa,rojo'],
+                'borde'=>['required','string', 'in:afilado,engrosado'],
+                'aspecto'=>['required','string', 'in:puntillado,liso'],
+                'consistencia'=>['required','string', 'in:firme,depresible'],
+                'biotipo'=>['required','integer'],
+            ]);
+        }elseif($exam->tipoExam=='ortodoncial'){
+            $this->validate($request, [
+                'patronFacial'=>['required','string','in:dolicofacial,mesofacial,braquifacial'],
+                'perfil'=>['required','string','in:armonico,convexo,concavo,plano'],
+                'menton'=>['required','string','in:marcado,normal,retruido,plano'],
+            ]);
+        }elseif($exam->tipoExam=='evOrto'){
+            $this->validate($request, [
+                'previsto'=>['nullable','string','max:255'],
+                'maxilar'=>['nullable','string','max:255'],
+                'mandibular'=>['nullable','string','max:255'],
+                'logrado'=>['nullable','string','max:255'],
+                'orto_id'=>['required','exists:exams,id']
+            ]);
+        }
+
+
+        $profesores=User::find(Auth::user()->id)->teachers()
+            ->where('pin','=',MD5($request->pin))->get();
 
         if(count($profesores)==0){
         flash('Pin incorrecto');
-        return redirect()->route('exams/student/edit',$id);
+        return redirect()->route('exams.edit',$id);
     }
         $user=User::where('pin','=',MD5($request->pin))->first();
-        $exam = Exam::find($id);
         $exam->teacher_id=$user->id;
         $exam->fill($request->all());
 
@@ -272,49 +308,83 @@ class ExamController extends Controller
 
         flash('Examen modificado correctamente');
 
-        return redirect()->route('exams/student/index');
+        return redirect()->route('exams.show',$id);
     }
     public function examsUpdateTeacher(Request $request, $id)
     {
-        $this->validate($request, [
-            'date'=>['required','date'],
-            'aspectoExtraoralNormal' => ['required', 'boolean'],
-            'cancerOral' => ['required', 'boolean'],
-            'anomaliasLabios' => ['required', 'boolean' ],
-            'otros' => ['nullable','string', 'max:1000'],
-            'patologiaMucosa'=> ['string','in:Ninguna,Tumor maligno,leucoplasia,Liquen plano'],
-            'fluorosis'=> ['required', 'string','in:Normal,Discutible,Muy ligera,Ligera,
-                Moderada,Intensa,Excluida,No registrada'],
-            'estadoS1'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS2'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS3'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS4'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS5'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'estadoS6'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
-            'claseAngle'=> ['required', 'string','in:clase I,clase II,clase III'],
-            'lateralAngle'=> ['required', 'string','in:Unilateral,Bilateral'],
-            'tipoDentición'=> ['required', 'string','in:Temporal,Mixta'],
-            'apiñamientoIncisivoInferior' => ['required', 'boolean'],
-            'apiñamientoIncisivoInferior' => ['required', 'boolean'],
-            'apiñamientoIncisivoSuperior' => ['required', 'boolean'],
-            'perdidaEspacioAnterior' => ['required', 'boolean'],
-            'perdidaEspacioPosterior' => ['required', 'boolean'],
-            'mordidaCruzadaAnterior' => ['required', 'boolean'],
-            'mordidaCruzadaPosterior' => ['required', 'boolean'],
-            'desviacionLineaMedia' => ['required', 'boolean'],
-            'mordidaAbierta' => ['required', 'boolean'],
-            'habitos' => ['required', 'boolean'],
-            'patient_id' => ['required', 'exists:patients,id'],
-        ]);
-
         $exam = Exam::find($id);
+        $this->validate($request,[
+            'otros' => ['nullable', 'string', 'max:1000'],
+        ]);
+        if($exam->tipoExam=='inicial') {
+            $this->validate($request, [
+                'date' => ['required', 'date'],
+                'aspectoExtraoralNormal' => ['required', 'boolean'],
+                'cancerOral' => ['required', 'boolean'],
+                'anomaliasLabios' => ['required', 'boolean'],
+                'patologiaMucosa' => ['string', 'in:Ninguna,Tumor maligno,leucoplasia,Liquen plano'],
+                'fluorosis' => ['required', 'string', 'in:Normal,Discutible,Muy ligera,Ligera,
+                Moderada,Intensa,Excluida,No registrada'],
+                'estadoS1' => ['required', 'string', 'in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+                'estadoS2' => ['required', 'string', 'in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+                'estadoS3' => ['required', 'string', 'in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+                'estadoS4' => ['required', 'string', 'in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+                'estadoS5' => ['required', 'string', 'in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+                'estadoS6' => ['required', 'string', 'in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
+                'claseAngle' => ['required', 'string', 'in:clase I,clase II,clase III'],
+                'lateralAngle' => ['required', 'string', 'in:Unilateral,Bilateral'],
+                'tipoDentición' => ['required', 'string', 'in:Temporal,Mixta'],
+                'apiñamientoIncisivoInferior' => ['required', 'boolean'],
+                'apiñamientoIncisivoInferior' => ['required', 'boolean'],
+                'apiñamientoIncisivoSuperior' => ['required', 'boolean'],
+                'perdidaEspacioAnterior' => ['required', 'boolean'],
+                'perdidaEspacioPosterior' => ['required', 'boolean'],
+                'mordidaCruzadaAnterior' => ['required', 'boolean'],
+                'mordidaCruzadaPosterior' => ['required', 'boolean'],
+                'desviacionLineaMedia' => ['required', 'boolean'],
+                'mordidaAbierta' => ['required', 'boolean'],
+                'habitos' => ['required', 'boolean'],
+            ]);
+        }elseif ($exam->tipoExam=='infantil'){
+            $this->validate($request, [
+                'aspectoGeneral'=>['required','string', 'max:255'],
+                'talla'=>['required','string', 'max:255'],
+                'peso'=>['required','string', 'max:255'],
+                'piel'=>['required','string', 'max:255'],
+                'anomaliaForma'=>['required','string', 'max:255'],
+                'anomaliaTamaño'=>['required','string', 'max:255'],
+            ]);
+        }elseif($exam->tipoExam=='periodoncial'){
+            $this->validate($request, [
+                'indicePlaca'=>['nullable','string', 'max:255'],
+                'color'=>['required','string', 'in:rosa,rojo'],
+                'borde'=>['required','string', 'in:afilado,engrosado'],
+                'aspecto'=>['required','string', 'in:puntillado,liso'],
+                'consistencia'=>['required','string', 'in:firme,depresible'],
+                'biotipo'=>['required','integer'],
+            ]);
+        }elseif($exam->tipoExam=='ortodoncial'){
+            $this->validate($request, [
+                'patronFacial'=>['required','string','in:dolicofacial,mesofacial,braquifacial'],
+                'perfil'=>['required','string','in:armonico,convexo,concavo,plano'],
+                'menton'=>['required','string','in:marcado,normal,retruido,plano'],
+            ]);
+        }elseif($exam->tipoExam=='evOrto'){
+            $this->validate($request, [
+                'previsto'=>['nullable','string','max:255'],
+                'maxilar'=>['nullable','string','max:255'],
+                'mandibular'=>['nullable','string','max:255'],
+                'logrado'=>['nullable','string','max:255'],
+                'orto_id'=>['required','exists:exams,id']
+            ]);
+        }
         $exam->fill($request->all());
 
         $exam->save();
 
         flash('Examen modificado correctamente');
 
-        return redirect()->route('exams.index',$exam->patient_id);
+        return redirect()->route('exams.show',$id);
     }
     /**
      * Update "Examen inicial" for a Teacher
@@ -493,8 +563,8 @@ class ExamController extends Controller
             'pin'=>['required','integer']
         ]);
 
-        $profesores=User::find(Auth::user()->id)->teachers()->get();
-        $profesores->wherein('pin',MD5($request->pin));
+        $profesores=User::find(Auth::user()->id)->teachers()
+            ->where('pin','=',MD5($request->pin))->get();
 
         if(count($profesores)==0){
             flash('Pin incorrecto');

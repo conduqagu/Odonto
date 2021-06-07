@@ -18,7 +18,7 @@
                         {!! Form::model($asociacion_exam_diente, ['route'=>['update_asociacionEDPeriodoncia',$asociacion_exam_diente],'method'=>'put']) !!}
 
                         <div class="form-group">
-                            {!!Form::label('diente__id', 'Diente: '.$asociacion_exam_diente->diente->id) !!}
+                            {!!Form::label('diente__id', 'Diente: '.$asociacion_exam_diente->diente->number) !!}
                         </div>
                         <div>
                             {!!  Form::label('furca' , 'Furca') !!}
@@ -48,6 +48,13 @@
                             {!!  Form::label('encia_insertada' , 'Encia insertada') !!}
                             {!! Form::select('encia_insertada',array('1'=>'Si','0'=>'No'), $asociacion_exam_diente->encia_insertada,['class' => 'form-control']) !!}
                         </div>
+
+                        @if (\Illuminate\Support\Facades\Auth::user()->userType=='student')
+                            <div class="form-group">
+                                {!! Form::label('pin', 'Pin del profesor') !!}
+                                <input id="pin" type="password" class="form-control" name="pin" required>
+                            </div>
+                        @endif
                         <br>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
 

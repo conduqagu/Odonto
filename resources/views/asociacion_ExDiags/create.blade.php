@@ -16,11 +16,10 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('comentario', 'Comentario') !!}
-                            {!! Form::text('comentario',null,['class'=>'form-control', 'required','autofocus']) !!}
+                            {!! Form::text('comentario',null,['class'=>'form-control', 'autofocus']) !!}
                         </div>
                         <br>
-                        {!! Form::submit( 'Guardar', ['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}
-                        {!! Form::submit( 'Tratamiento',['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}
+                        {!! Form::submit( 'Guardar', ['class' => 'btn btn-primary'])!!}
                         {!! Form::close() !!}
                     </div>
                 </div>

@@ -31,10 +31,12 @@
                             {!! Form::label('fecha_fin', 'Fecha fin') !!}
                             {!! Form::date('fecha_fin',$tratamiento->fecha_fin,['class'=>'form-control']) !!}
                         </div>
-                        <div class="form-group">
-                            {!!  Form::label('braket_id' , 'Brakets') !!}
-                            {!! Form::select('braket_id', $brakets,$tratamiento->braket_id,['class' => 'form-control']) !!}
-                        </div>
+                        @if(\App\Exam::find($tratamiento->exam_id)->tipoExam=='ortodoncial')
+                            <div class="form-group">
+                                {!!  Form::label('braket_id' , 'Brakets') !!}
+                                {!! Form::select('braket_id', $brakets,null,['class' => 'form-control']) !!}
+                            </div>
+                        @endif
                         <br>
                         {!! Form::submit('Actualizar',['class'=>'btn-primary btn']) !!}
 

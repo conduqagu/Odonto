@@ -94,8 +94,8 @@ class PatientController extends Controller
             'child'=>['required','boolean'],
             'pin'=>['required','string']
         ]);
-        $profesores=User::find(Auth::user()->id)->teachers()->get();
-        $profesores->wherein('pin',MD5($request->pin));
+        $profesores=User::find(Auth::user()->id)->teachers()
+            ->where('pin','=',MD5($request->pin))->get();
 
         if(count($profesores)==0){
             flash('Pin incorrecto');
@@ -197,6 +197,7 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
@@ -207,11 +208,11 @@ class PatientController extends Controller
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
             'observaciones' => ['nullable','string', 'max:255'],
             'child'=>['required','boolean'],
-            'pin'=>['required','integer']
+            'pin'=>['required','string']
         ]);
 
-        $profesores=User::find(Auth::user()->id)->teachers()->get();
-        $profesores->wherein('pin',MD5($request->pin));
+        $profesores=User::find(Auth::user()->id)->teachers()
+            ->where('pin','=',MD5($request->pin))->get();
 
         if(count($profesores)==0){
             flash('Pin incorrecto');
@@ -287,10 +288,10 @@ class PatientController extends Controller
     {
         $students1=Patient::find($id)->students()->pluck('users.id');
         $students=User::all()->whereNotIn('id',$students1)->where('userType','=','student');
-/**        $students->where('users.dni','LIKE','%'.$request->get("query")."%")
-            ->orWhere('users.name','LIKE','%'.$request->get("query")."%")
-            ->orWhere('users.surname','LIKE','%'.$request->get("query")."%");
- */
+        $students->where('users.dni','LIKE','%'.$request->get("query")."%")
+            ->where('users.name','LIKE','%'.$request->get("query")."%")
+            ->where('users.surname','LIKE','%'.$request->get("query")."%");
+
         $patient=Patient::find($id);
 
         return view('patients.añadirAlumno',['patient'=>$patient,'students'=>$students]);
@@ -328,10 +329,11 @@ class PatientController extends Controller
      */
     public function destroyStudent(Request $request,$id)
     {
-        $students=Patient::find($id)->students()->where('users.dni','LIKE','%'.$request->get("query")."%")
-        ->orWhere('users.name','LIKE','%'.$request->get("query")."%")
-        ->orWhere('users.surname','LIKE','%'.$request->get("query")."%")
-        ->get();
+        $students=Patient::find($id)->students()
+            ->where('users.dni','LIKE','%'.$request->get("query")."%")
+            ->where('users.name','LIKE','%'.$request->get("query")."%")
+            ->where('users.surname','LIKE','%'.$request->get("query")."%")
+            ->get();
 
         $patient = Patient::find($id);
 

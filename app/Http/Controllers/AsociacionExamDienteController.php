@@ -133,8 +133,8 @@ class AsociacionExamDienteController extends Controller
         if (Auth::user()->userType=='student'){
             $this->validate($request,
                 ['pin' => ['required', 'string', 'max:255']]);
-            $profesores=User::find(Auth::user()->id)->teachers()->get();
-            $profesores->wherein('pin',MD5($request->pin));
+            $profesores=User::find(Auth::user()->id)->teachers()
+                ->where('pin','=',MD5($request->pin))->get();
 
             if(count($profesores)==0) {
                 flash('Pin incorrecto');
@@ -184,7 +184,18 @@ class AsociacionExamDienteController extends Controller
         } else {
             $lista = array(11, 12, 13, 14, 15, 16, 17, 18, 21, 22, 23, 24, 25, 26, 27, 28, 31, 32, 33, 34, 35, 36, 37, 38, 41, 42, 43, 44, 45, 46, 47, 48);
         }
-        $user=User::where('pin','=',MD5($request->pin))->first();
+        if(Auth::user()->userType=='student'){
+            $this->validate($request,
+                ['pin' => ['required', 'string', 'max:255']]);
+            $profesores=User::find(Auth::user()->id)->teachers()
+                ->where('pin','=',MD5($request->pin))->get();
+
+            if(count($profesores)==0) {
+                flash('Pin incorrecto');
+                return redirect()->route('create_asociacionED',$exam_id);
+            }
+            $user=User::where('pin','=',MD5($request->pin))->first();
+        }
 
         foreach ($lista as $a) {
             $this->validate($request, [
@@ -208,7 +219,9 @@ class AsociacionExamDienteController extends Controller
             $asociacion_exam_diente->encia_insertada = $request->get('encia_insertada' . $a);
             $asociacion_exam_diente->diente_id = $request->get('diente_id' . $a);
             $asociacion_exam_diente->exam_id = $exam_id;
-            $asociacion_exam_diente->teacher_id=$user->id;
+            if(Auth::user()->userType=='student') {
+                $asociacion_exam_diente->teacher_id = $user->id;
+            }
             $asociacion_exam_diente->save();
         }
 
@@ -289,8 +302,9 @@ class AsociacionExamDienteController extends Controller
             'pin' => ['required', 'string', 'max:255']
         ]);
 
-        $profesores=User::find(Auth::user()->id)->teachers()->get();
-        $profesores->wherein('pin',MD5($request->pin));
+
+        $profesores=User::find(Auth::user()->id)->teachers()
+            ->where('pin','=',MD5($request->pin))->get();
 
         if(count($profesores)==0) {
             flash('Pin incorrecto');
@@ -352,6 +366,20 @@ class AsociacionExamDienteController extends Controller
             'encia_insertada' => 'required|boolean',
         ]);
         $asociacion_exam_diente = AsociacionExamDiente::find($id);
+
+        if(Auth::user()->userType=='student'){
+            $this->validate($request,
+                ['pin' => ['required', 'string', 'max:255']]);
+            $profesores=User::find(Auth::user()->id)->teachers()
+                ->where('pin','=',MD5($request->pin))->get();
+
+            if(count($profesores)==0) {
+                flash('Pin incorrecto');
+                return redirect()->route('edit_asociacionEDPeriodoncia',$asociacion_exam_diente->id);
+            }
+            $user=User::where('pin','=',MD5($request->pin))->first();
+            $asociacion_exam_diente->teacher_id=$user->id;
+        }
         $asociacion_exam_diente->fill($request->all());
         $asociacion_exam_diente->save();
 

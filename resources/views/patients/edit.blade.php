@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group">
                             {!!  Form::label('riesgoASA' , 'Riesgo ASA') !!}
-                            {!! Form::select('riesgoASA', array('I' => 'I', 'II' => 'II','III'=>'III'), $patient->riesgoASA) !!}
+                            {!! Form::select('riesgoASA', array('I' => 'I', 'II' => 'II','III'=>'III'),'I',['class'=>'form-control']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('observaciones', 'Observaciones') !!}
@@ -50,7 +50,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('pin', 'Pin del profesor') !!}
-                            <input id="pin" type="password" class="awesome" name="pin" required>
+                            <input id="pin" type="password" class="form-control" name="pin" required>
                         </div>
                         {!! Form::submit('Actualizar',['class'=>'btn-primary btn']) !!}
 

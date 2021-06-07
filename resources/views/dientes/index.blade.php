@@ -9,7 +9,7 @@
 
                     <div class="panel-body">
                         @include('flash::message')
-                        {!! Form::open(['route' => 'dientes.create', 'method' => 'get']) !!}
+                        {!! Form::open(['route' => ['diente.create',$patient->id], 'method' => 'get']) !!}
                         {!!   Form::submit('Crear diente', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
 

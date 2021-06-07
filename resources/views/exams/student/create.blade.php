@@ -27,9 +27,9 @@
                                 <label for="inicial">Inicial</label><br>
                                 <input type="radio" id="infantil" name="tipoExam" value="teacher" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
                                 <label for="infantil">Infantil</label><br>
-                                <input type="radio" id="ortodoncial" name="tipoExam" value="ortodoncia" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
+                                <input type="radio" id="ortodoncial" name="tipoExam" value="ortodoncial" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
                                 <label for="ortodoncia">Ortodoncia</label><br>
-                                <input type="radio" id="perioconcial" name="tipoExam" value="perioconcia" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
+                                <input type="radio" id="periodoncial" name="tipoExam" value="periodoncial" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
                                 <label for="perioconcia">Perioconcial</label><br>
                                 <input type="radio" id="evOrto" name="tipoExam" value="evaluacion" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
                                 <label for="evaluacion">Evaluacion Ortodoncia</label><br>
@@ -39,7 +39,7 @@
                                 </span>
                                 @enderror
                             </div>
-                        <div>
+                        <div class="form-group">
                             {!! Form::label('pin', 'Pin del profesor') !!}
                             <input id="pin" type="password" class="form-control" name="pin" required>
                         </div>
