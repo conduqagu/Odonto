@@ -16,15 +16,15 @@
                             {!! Form::label('name', 'Nombre') !!}
                             {!! Form::text('name',$user->name,['class'=>'form-control', 'required']) !!}
                         </div>
-                        <div>
+                        <div class="form-group">
                             {!!  Form::label('surname' , 'Apellidos') !!}
                             {!! Form::text('surname', $user->surname,['class' => 'form-control', 'required']) !!}
                         </div>
-                        <div>
+                        <div class="form-group">
                             {!!  Form::label('email' , 'Correo electrónico') !!}
                             {!! Form::text('email',$user->email,['class' => 'form-control', 'required']) !!}
                         </div>
-                        <div>
+                        <div class="form-group">
                             {!!  Form::label('dni' , 'DNI') !!}
                             {!! Form::text('dni',$user->dni,['class' => 'form-control', 'required']) !!}
                         </div>

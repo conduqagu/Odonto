@@ -100,7 +100,7 @@
                                     <div class="subnav">
                                         <button class="subnavbtn dropdown-item">Ajustes <i class="fa fa-caret-down"></i></button>
                                         <div class="subnav-content">
-                                            <a href="{{ url('/perfiles/perfiladmin') }}">Perfil</a>
+                                            <a href="{{ url('/perfiladmin') }}">Perfil</a>
                                             <a href="{{ url('/tipo_tratamientos') }}">Tratamientos</a>
                                             <a href="{{ url('/brakets') }}">Brakets</a>
                                             <a href="{{ url('/diagnosticos') }}">Diagnósticos</a>
