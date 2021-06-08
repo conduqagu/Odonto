@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Cassandra\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
