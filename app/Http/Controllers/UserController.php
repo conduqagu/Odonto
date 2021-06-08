@@ -44,9 +44,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function listsmystudent() //Lista de estudiantes para profesores
+    public function listsmystudent(Request $request) //Lista de estudiantes para profesores
     {
-        $students = \App\User::find(Auth::user()->id)->students()->get();
+        $students = \App\User::find(Auth::user()->id)->students()
+            ->where('users.name','LIKE','%'.$request->get("query")."%")
+            ->where('userType','=','student')
+            ->get();
         return view('listsmystudent',['students'=>$students]);
     }
 
@@ -135,11 +138,7 @@ class UserController extends Controller
      */
     public function perfilstudent(){
         $user=Auth::user();
-        $teachers = DB::table('asociacion_teacher_students')
-            ->where('student_id','=',Auth::user()->id)
-            ->join('users', 'users.id', '=', 'asociacion_teacher_students.teacher_id')
-            ->select('users.*')
-            ->get();
+        $teachers=$user->teachers;
         return view('perfiles/perfilstudent',['user'=>$user,'teachers'=>$teachers]);
     }
     /**

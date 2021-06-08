@@ -11,7 +11,7 @@
             </div>
             <div >
                 <div class="card">
-                    <div class="card-header">Examen dental</div>
+                    <div class="card-header"><h5>Examen dental</h5></div>
 
                     <div class="card-body">
                         @include('flash::message')

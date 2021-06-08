@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Eliminar alumno de paciente</div>
+                    <div class="card-header"><h5>Eliminar alumno de paciente</h5></div>
 
                 <div class="card-body">
 
@@ -36,12 +36,15 @@
                                 <td>
                                     {!! Form::open(['route' => ['deleteStudent',$student->id], 'method' => 'delete']) !!}
                                     {{Form::hidden('patient_id',$patient->id)}}
-                                    {!!   Form::submit('Eliminar de este paciente', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
+                                    {!!   Form::submit('Eliminar de este paciente', ['class'=> 'btn btn-danger button-align' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                     {!! Form::close() !!}
                                 </td>
                             </tr>
                         @endforeach
                     </table>
+                    <a class="btn btn-outline-dark button-align-right " style="margin-bottom: 15px" href="{{ url()->previous() }}">
+                        Cancelar
+                    </a>
                 </div>
                 </div>
             </div>

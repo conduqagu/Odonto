@@ -10,7 +10,7 @@
             </div>
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Examen dental</div>
+                    <div class="card-header"><h5>Examen dental</h5></div>
 
                     <div class="card-body">
                         @include('flash::message')
@@ -56,10 +56,12 @@
                             </div>
                         @endif
                         <br>
-                        {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
-
+                        {!! Form::submit('Guardar',['class'=>'btn-primary btn button-align']) !!}
                         {!! Form::close() !!}
-                        <br>
+
+                        <a class="btn btn-outline-dark button-align-right " style="margin-bottom: 15px" href="{{ url()->previous() }}">
+                            Cancelar
+                        </a>
 
                     </div>
                 </div>

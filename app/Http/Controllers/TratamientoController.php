@@ -6,7 +6,9 @@ use App\Braket;
 use App\Diagnostico;
 use App\TipoTratamiento;
 use App\Tratamiento;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TratamientoController extends Controller
 {
@@ -51,6 +53,17 @@ class TratamientoController extends Controller
             'tipo_tratamiento_id' => ['required', 'exists:tipo_tratamientos,id'],
             'exam_id' =>['required','exists:exams,id']
         ]);
+        if(Auth::user()->userType=='student'){
+            $this->validate($request,
+                ['pin' => ['required', 'string', 'max:255']]);
+            $profesores=User::find(Auth::user()->id)->teachers()
+                ->where('pin','=',MD5($request->pin))->get();
+
+            if(count($profesores)==0) {
+                flash('Pin incorrecto');
+                return redirect()->back();
+            }
+        }
         $tratamiento=new Tratamiento($request->all());
         $tratamiento->save();
         $tratamiento->coste=$tratamiento->tipoTratamiento->coste;
@@ -111,6 +124,17 @@ class TratamientoController extends Controller
             'braket_id' => ['nullable', 'exists:brakets,id'],
             'tipo_tratamiento_id' => ['required', 'exists:tipo_tratamientos,id'],
         ]);
+        if(Auth::user()->userType=='student'){
+            $this->validate($request,
+                ['pin' => ['required', 'string', 'max:255']]);
+            $profesores=User::find(Auth::user()->id)->teachers()
+                ->where('pin','=',MD5($request->pin))->get();
+
+            if(count($profesores)==0) {
+                flash('Pin incorrecto');
+                return redirect()->back();
+            }
+        }
 
         $tratamiento = Tratamiento::find($id);
         $tratamiento->fill($request->all());

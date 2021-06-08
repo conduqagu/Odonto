@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+    <div class="container2">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Usuarios</div>
+                    <div class="panel-heading"><h5>Usuarios</h5></div>
 
                     <div class="panel-body">
                         @include('flash::message')

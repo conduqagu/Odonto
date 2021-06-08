@@ -7,7 +7,7 @@
                 <div class="card">
 
 
-                    <div class="card-header">Editar diagnostico</div>
+                    <div class="card-header"><h5>Editar diagnostico</h5></div>
 
                     <div class="card-body">
                         @include('flash::message')

@@ -10,7 +10,7 @@
             </div>
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Examen dental</div>
+                    <div class="card-header"><h5>Examen dental</h5></div>
 
                     <div class="card-body">
                         @include('flash::message')
@@ -35,8 +35,8 @@
                             'Diente no erupcionado'=>'Diente no erupcionado','Fractura'=>'Fractura'),$asociacion_exam_diente->denticionCorona,['class' => 'form-control']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('tratamiento' , 'Tratamiento') !!}
-                            {!! Form::select('tratamiento', $tipo_tratamientos,$asociacion_exam_diente->tipo_tratamiento,['class' => 'form-control']) !!}
+                            {!!  Form::label('tipo_tratamiento_id' , 'Tratamiento') !!}
+                            {!! Form::select('tipo_tratamiento_id', $tipo_tratamientos,$asociacion_exam_diente->tipo_tratamiento,['class' => 'form-control']) !!}
                         </div>
                         <div>
                             {!!  Form::label('opacidad' , 'Opacidad') !!}
@@ -51,12 +51,11 @@
                             <input id="pin" type="password" class="form-control" name="pin" required>
                         </div>
 
-                        {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
-
+                        {!! Form::submit('Guardar',['class'=>'btn-primary btn button-align']) !!}
                         {!! Form::close() !!}
-
-
-
+                        <a class="btn btn-outline-dark button-align-right " style="margin-bottom: 15px" href="{{ url()->previous() }}">
+                            Cancelar
+                        </a>
                     </div>
                 </div>
             </div>

@@ -1,18 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+    <div class="container2">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Pacientes </div>
+                    <div class="panel-heading"><h5>Pacientes</h5> </div>
 
                     <div class="panel-body">
                         @include('flash::message')
                         <div class="form-group" >
                             {!! Form::open(['route' => ['indexteacher'], 'method' => 'get']) !!}
-                            {!! Form::text('query',null,['class'=>'col-md-4', 'autofocus', 'placeholder'=>'Nombre, apellido o DNI']) !!}
-                            {!! Form::submit('Buscar', ['class'=> 'btn btn-success col-md-2'])!!}
+                            {!! Form::text('query',null,['class'=>'col-md-3', 'autofocus', 'placeholder'=>'Nombre, apellido o DNI']) !!}
+                            {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary'])!!}
                             {!! Form::close() !!}
 
                         </div>

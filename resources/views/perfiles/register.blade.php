@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Crear usuario</div>
+                    <div class="card-header"><h5>Crear usuario</h5></div>
 
                     <div class="card-body">
                         @include('flash::message')
@@ -114,9 +114,12 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                {!! Form::submit('Registrar',['class'=>'btn-primary btn']) !!}
+                                {!! Form::submit('Registrar',['class'=>'btn-primary btn button-align']) !!}
                                 {!! Form::close() !!}
-                            </div>
+
+                                <a class="btn btn-outline-dark button-align-right " style="margin-bottom: 15px" href="{{ url()->previous() }}">
+                                    Cancelar
+                                </a>
                         </div>
 
 

@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Crear tipo de tratamiento</div>
+                    <div class="card-header"><h5>Crear tipo de tratamiento</h5></div>
 
                     <div class="card-body">
                         @include('flash::message')
@@ -17,16 +17,20 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('coste', 'Coste') !!}
-                            {!! Form::number('coste',null,['class'=>'form-control', 'required','step'=>'0.01']) !!}
+                            {!! Form::number('coste',0,['class'=>'form-control', 'required','step'=>'0.01']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('iva', 'IVA') !!}
-                            {!! Form::text('iva',0,['class'=>'form-control', 'required','autofocus']) !!}
+                            {!! Form::number('iva',0,['class'=>'form-control', 'required','autofocus','step'=>'0.01']) !!}
                         </div>
 
                         <br>
-                        {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
+                        {!! Form::submit('Guardar',['class'=>'btn-primary btn button-align']) !!}
                         {!! Form::close() !!}
+
+                        <a class="btn btn-outline-dark button-align-right " style="margin-bottom: 15px" href="{{ url()->previous() }}">
+                            Cancelar
+                        </a>
                     </div>
                 </div>
             </div>

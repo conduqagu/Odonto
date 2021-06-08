@@ -1,21 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+    <div class="container2">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Tipos de  tratamientos</div>
+                    <div class="panel-heading"><h5>Tipos de  tratamientos</h5></div>
 
                     <div class="panel-body">
                         @include('flash::message')
 
                         {!! Form::open(['route' => 'tipo_tratamientos.create', 'method' => 'get']) !!}
-                        {!!   Form::submit('Crear tipo tratamiento', ['class'=> 'btn btn-primary'])!!}
-                        {!! Form::close() !!}
-                        <br>
-                        {!! Form::open(['route' => ['ajustes.index'], 'method' => 'get']) !!}
-                        {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark' ])!!}
+                        {!!   Form::submit('Crear tratamiento', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
 
                         <br><br>

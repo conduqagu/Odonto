@@ -7,7 +7,7 @@
                 @include('flash::message')
 
                 <div class="card">
-                    <div class="card-header">Detalles del examen</div>
+                    <div class="card-header"><h5>Detalles del examen</h5></div>
                         <div class="card-body">
                             <div >
                                 {!! Form::label('date', 'Fecha:') !!}
@@ -23,7 +23,7 @@
 
                 <br>
                         <div class="card ">
-                            <div class="card-header">Mucosas</div>
+                            <div class="card-header"><h5>Mucosas</h5></div>
                             <div class="card-body">
                                 <div >
                                     {!!  Form::label('aspectoExtraoralNormal' , 'Aspecto Extraoral Normal: ') !!}
@@ -65,7 +65,7 @@
                         </div>
                         <br>
                         <div class="card">
-                            <div class="card-header">Índice Periodontitis comunitario(IPC)</div>
+                            <div class="card-header"><h5>Índice Periodontitis comunitario(IPC)</h5></div>
                             <div class="card-body">
                                 <div>
                                     {!!  Form::label('estadoS1' , 'Estado primer sextante: ') !!}
@@ -95,7 +95,7 @@
                         </div>
                             <br>
                         <div class="card">
-                            <div class="card-header">Anomalías dentofaciales</div>
+                            <div class="card-header"><h5>Anomalías dentofaciales</h5></div>
                             <div class="card-body">
                                 <div>
                                     {!!  Form::label('claseAngle' , 'Angle: ') !!}
@@ -186,7 +186,7 @@
                     @elseif($exam->tipoExam=='infantil')
                         <br>
                         <div class="card">
-                            <div class="card-header">Examen Infantil</div>
+                            <div class="card-header"><h5>Examen Infantil</h5></div>
                             <div class="card-body">
                                 <div>
                                     {!!  Form::label('aspectoGeneral' , 'Aspecto General: '.$exam->aspectoGeneral) !!}
@@ -209,7 +209,7 @@
                     @elseif($exam->tipoExam=='periodoncial')
                         <br>
                         <div class="card">
-                            <div class="card-header">Examen Periodontal</div>
+                            <div class="card-header"><h5>Examen Periodontal</h5></div>
                             <div class="card-body">
                                 <div>
                                     {!!  Form::label('indicePlaca' , 'Índice de placa: '.$exam->indicePlaca) !!}
@@ -233,7 +233,7 @@
                     @elseif($exam->tipoExam=='ortodoncial')
                         <br>
                         <div class="card">
-                            <div class="card-header">Examen Ortodoncia</div>
+                            <div class="card-header"><h5>Examen Ortodoncia</h5></div>
                             <div class="card-body">
                                 <div>
                                     {!!  Form::label('patronFacial' , 'Patrón Facial: '.$exam->patronFacial) !!}
@@ -251,7 +251,7 @@
                         </div>
                     @elseif($exam->tipoExam=='evOrto')
                         <div class="card">
-                            <div class="card-header">Evaluación ortodoncia</div>
+                            <div class="card-header"><h5>Evaluación ortodoncia</h5></div>
                             <div class="card-body">
                                 <div>
                                     {!!  Form::label('previsto' , 'Previsto: '.$exam->previsto) !!}
@@ -268,32 +268,45 @@
                             </div>
                         </div>
                     @endif
-                <br>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container2">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
                     <div class="card" >
-                        <div class="card-header">Diagnósticos</div>
+                        <div class="card-header"><h5>Diagnósticos</h5></div>
                         <div class="card-body">
+                            @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
                             {!! Form::open(['route' => ['asociacion_ExDiags.create',$exam->id], 'method' => 'get']) !!}
                             {!!   Form::submit('Añadir diagnóstico', ['class'=> 'btn btn-primary'])!!}
                             {!! Form::close() !!}
                             <br>
+                            @endif
                     <table class="table table-striped table-bordered">
                         <tr>
                             <th>Nombre</th>
                             <th>Comentario</th>
-                            <th colspan="3">Acciones</th>
+                            @if(\Illuminate\Support\Facades\Auth::user()=='teacher')
+                                <th colspan="3">Acciones</th>
+                            @endif
                         </tr>
 
                         @foreach ($diagnosticos as $diagnostico)
                             <tr>
                                 <td>{{ $diagnostico->nombre }}</td>
                                 <td>{{ $diagnostico->pivot->comentario }}</td>
+                                @if(\Illuminate\Support\Facades\Auth::user()->userType=='teacher')
 
                                 <td>
+
                                     {!! Form::open(['route' => ['asociacion_ExDiags.destroy',$diagnostico->id], 'method' => 'delete']) !!}
                                     {!! Form::hidden('exam_id',$exam->id) !!}
                                     {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                     {!! Form::close() !!}
                                 </td>
+                                @endif
                             </tr>
                         @endforeach
                     </table>
@@ -301,12 +314,15 @@
                     </div>
 
             <br>
-                <div class="card" style="width: max-content">
-                    <div class="card-header">Tratamientos</div>
+                <div class="card" >
+                    <div class="card-header"><h5>Tratamientos</h5></div>
                     <div class="card-body">
+                        @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
+
                         {!! Form::open(['route' => ['tratamientos.createT',$exam->id], 'method' => 'get']) !!}
                         {!!   Form::submit('Añadir tratamiento', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
+                        @endif
                         <br>
                         <table class="table table-striped table-bordered">
                             <tr>
@@ -320,7 +336,9 @@
                                 @if($exam->tipoExam=='ortodoncial')
                                     <th>Brakets</th>
                                 @endif
+                                @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
                                 <th colspan="2">Acciones</th>
+                                @endif
                             </tr>
 
                             @foreach ($tratamientos as $tratamiento)
@@ -341,15 +359,21 @@
                                     <td>{{ $tratamiento->braket->name}}</td>
                                     @endif
 
-                                    <td>
+                                    @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
+                                        <td>
                                         {!! Form::open(['route' => ['tratamientos.edit',$tratamiento->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}</td>
-                                    <td>
+                                    @endif
+
+                                    @if(\Illuminate\Support\Facades\Auth::user()->userType=='teacher')
+                                        <td>
                                         {!! Form::open(['route' => ['tratamientos.destroy',$tratamiento->id], 'method' => 'delete']) !!}
                                         {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                         {!! Form::close() !!}
-                                    </td>
+                                        </td>
+                                    @endif
+
                                 </tr>
                             @endforeach
 
@@ -360,15 +384,14 @@
                             <tr>
                                 <th>Cobrado:
                                     @if($coste_total!='0' && $exam->cobrado==0)
-                                        {!! Form::open(['route'=> ['correo_pago',$exam->id], 'method'=>'get']) !!}
-                                        {!!   Form::submit('Pagar con PAYPAL', ['class'=> 'btn btn-outline-dark' ])!!}
-                                        {!! Form::close() !!}
-                                        <br>
+                                            {!! Form::open(['route'=> ['correo_pago',$exam->id], 'method'=>'get']) !!}
+                                            {!!   Form::submit('Pagar con PAYPAL', ['class'=> 'btn btn-outline-dark' ])!!}
+                                            {!! Form::close() !!}
+                                            <br>
 
-                                        {!! Form::open(['route'=> ['pagado',$exam->id], 'method'=>'get']) !!}
-                                        {!!   Form::submit('Pagado', ['class'=> 'btn btn-warning' ])!!}
-                                        {!! Form::close() !!}
-
+                                            {!! Form::open(['route'=> ['pagado',$exam->id], 'method'=>'get']) !!}
+                                            {!!   Form::submit('Pagado', ['class'=> 'btn btn-warning' ])!!}
+                                            {!! Form::close() !!}
                                     @endif
                                 </th>
                                 @if( $exam->cobrado==1)
@@ -381,19 +404,24 @@
                 </div>
 
                 <br>
-                <div class="card" style="width: max-content">
-                    <div class="card-header">Pruebas complementarias</div>
+                <div class="card" >
+                    <div class="card-header"><h5>Pruebas complementarias</h5></div>
                        <div class="card-body">
-                            {!! Form::open(['route' => ['prueba_complementarias.createT',$exam->id], 'method' => 'get']) !!}
+                           @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
+
+                           {!! Form::open(['route' => ['prueba_complementarias.createT',$exam->id], 'method' => 'get']) !!}
                             {!!   Form::submit('Añadir prueba complementaria', ['class'=> 'btn btn-primary'])!!}
                             {!! Form::close() !!}
                            <br>
+                           @endif
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>
                                 <th style="width:200px">Fichero</th>
                                 <th style="width:300px">Comentario</th>
-                                <th colspan="2">Acciones</th>
+                                @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
+                                    <th colspan="2">Acciones</th>
+                                @endif
                             </tr>
 
                             @foreach ($prueba_complementarias as $prueba_complementaria)
@@ -403,14 +431,19 @@
                                     <div class="text-center"><a target="_blank" href="/{{$prueba_complementaria->fichero}}">
                                             <img src="/pdf.png" height="35px"/></a></div></td>
                                     <td>{{ $prueba_complementaria->comentario }}</td>
+                                    @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
+
                                     <td> {!! Form::open(['route' => ['prueba_complementarias.edit',$prueba_complementaria->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}</td>
-                                    <td>
+                                    @endif
+                                    @if(\Illuminate\Support\Facades\Auth::user()->userType=='teacher')
+                                        <td>
                                         {!! Form::open(['route' => ['prueba_complementarias.destroy',$prueba_complementaria->id], 'method' => 'delete']) !!}
                                         {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                         {!! Form::close() !!}
                                     </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </table>
@@ -419,51 +452,68 @@
 
                         <div class="card-body">
                             @if($exam->tipoExam=='periodoncial')
+                                @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
                                 {!! Form::open(['route' => ['index_asociacionEDPeriodoncia',$exam->id], 'method' => 'get']) !!}
-                                {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary'])!!}
+                                {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary button-align'])!!}
                                 {!! Form::close() !!}
-                                <br>
+                                @else
+                                {!! Form::open(['route' => ['index_asociacionEDPeriodonciaA',$exam->id], 'method' => 'get']) !!}
+                                {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary button-align'])!!}
+                                {!! Form::close() !!}
+                                @endif
                             @elseif($exam->tipoExam=='inicial')
-                                {!! Form::open(['route' => ['index_asociacionED',$exam->id], 'method' => 'get']) !!}
-                                {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary'])!!}
-                                {!! Form::close() !!}
-                                <br>
+                                @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
+                                    {!! Form::open(['route' => ['index_asociacionED',$exam->id], 'method' => 'get']) !!}
+                                    {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary button-align'])!!}
+                                    {!! Form::close() !!}
+                                @else
+                                    {!! Form::open(['route' => ['indexasociacionEDA',$exam->id], 'method' => 'get']) !!}
+                                    {!!   Form::submit('Detalles examen dental', ['class'=> 'btn btn-primary button-align'])!!}
+                                    {!! Form::close() !!}
+                                @endif
+
                             @elseif($exam->tipoExam=='ortodoncial')
-                                {!! Form::open(['route' => ['exams.evaluaciones',$exam->id], 'method' => 'get']) !!}
-                                {!!   Form::submit('Mostrar evaluaciones', ['class'=> 'btn btn-primary'])!!}
-                                {!! Form::close() !!}
-                                <br>
+                                    {!! Form::open(['route' => ['exams.evaluaciones',$exam->id], 'method' => 'get']) !!}
+                                    {!!   Form::submit('Mostrar evaluaciones', ['class'=> 'btn btn-primary button-align'])!!}
+                                    {!! Form::close() !!}
+
+
                             @endif
 
 
                             @if(Auth::user()->userType =='teacher')
                                 {!! Form::open(['route' => ['examsEditTeacher',$exam->id], 'method' => 'get']) !!}
-                                {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                {!!   Form::submit('Editar', ['class'=> 'btn btn-warning button-align'])!!}
                                 {!! Form::close() !!}
-                                <br>
+
                             @endif
                             @if(Auth::user()->userType =='student')
                                 {!! Form::open(['route' => ['exams.edit',$exam->id], 'method' => 'get']) !!}
-                                {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                {!!   Form::submit('Editar', ['class'=> 'btn btn-warning button-align'])!!}
                                 {!! Form::close() !!}
-                                    <br>
+
                             @endif
 
                             @if(Auth::user()->userType =='teacher')
                                 {!! Form::open(['route' => ['examsdeleteTeacher',$exam->id], 'method' => 'delete']) !!}
-                                {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
+                                {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger button-align' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                 {!! Form::close() !!}
-                                    <br>
                             @endif
+                                {!! Form::open(['route' => ['imprimir_examen',$exam->id], 'method' => 'get']) !!}
+                                {!!   Form::submit('Generar PDF', ['class'=> 'btn btn-primary button-align'])!!}
+                                {!! Form::close() !!}
+                            @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
 
-                            {!! Form::open(['route' => ['exams.index',$exam->patient->id], 'method' => 'get']) !!}
-                            {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark'])!!}
-                            {!! Form::close() !!}
-                        <br>
 
-                            {!! Form::open(['route' => ['imprimir_examen',$exam->id], 'method' => 'get']) !!}
-                            {!!   Form::submit('Generar PDF', ['class'=> 'btn btn-primary'])!!}
-                            {!! Form::close() !!}
+                                {!! Form::open(['route' => ['exams.index',$exam->patient->id], 'method' => 'get']) !!}
+                                {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
+                                {!! Form::close() !!}
+                            @else
+
+                                {!! Form::open(['route' => ['indexExamsAdmin'], 'method' => 'get']) !!}
+                                {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
+                                {!! Form::close() !!}
+                            @endif
                     </div>
                 </div>
                 </div>

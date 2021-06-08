@@ -39,7 +39,7 @@ class AsociacionExamDienteController extends Controller
     {
         $asociacion_exam_dientes = AsociacionExamDiente::all()->where('exam_id', '=', $exam_id);
 
-        return view('exams.asociacion_exam_dienteTeacher', ['asociacion_exam_dientes' => $asociacion_exam_dientes, 'exam_id' => $exam_id]);
+        return view('asociacion_ExDiente.asociacion_exam_dienteTeacher', ['asociacion_exam_dientes' => $asociacion_exam_dientes, 'exam_id' => $exam_id]);
     }
 
     /**
@@ -269,8 +269,9 @@ class AsociacionExamDienteController extends Controller
             ->select('dientes.*')
             ->get();
         $dientes = $diente->pluck('number', 'id');
+        $tipo_tratamientos=TipoTratamiento::all()->pluck('name','id');
 
-        return view('exams/student/edit_asociacion_exam_diente', ['asociacion_exam_diente' => $asociacion_exam_diente, 'dientes' => $dientes]);
+        return view('exams/student/edit_asociacion_exam_diente', ['asociacion_exam_diente' => $asociacion_exam_diente, 'dientes' => $dientes,'tipo_tratamientos'=>$tipo_tratamientos]);
     }
 
     public function editasociacionEDTeacher($id)
@@ -282,8 +283,10 @@ class AsociacionExamDienteController extends Controller
             ->select('dientes.*')
             ->get();
         $dientes = $diente->pluck('number', 'id');
+        $tipo_tratamientos=TipoTratamiento::all()->pluck('name','id');
 
-        return view('asociacion_ExDiente/edit_asociacion_exam_dienteTeacher', ['asociacion_exam_diente' => $asociacion_exam_diente, 'dientes' => $dientes]);
+
+        return view('asociacion_ExDiente/edit_asociacion_exam_dienteTeacher', ['asociacion_exam_diente' => $asociacion_exam_diente, 'dientes' => $dientes,'tipo_tratamientos'=>$tipo_tratamientos]);
     }
 
     public function edit_asociacionEDPeriodoncia($id)
@@ -310,7 +313,8 @@ class AsociacionExamDienteController extends Controller
             'opacidad' => 'required|String|in:Ningún estado anormal,Opacidad delimitada,OpacidadDifusa,Hipoplasia,
                 Otros defectos,Opacidad elimitada y difusa,Opacidad delimitada e hipoplasia,Opacidad difusa e hipoplasia',
             'diente_id' => 'required|exists:dientes,id',
-            'pin' => ['required', 'string', 'max:255']
+            'pin' => ['required', 'string', 'max:255'],
+
         ]);
 
 
@@ -321,12 +325,33 @@ class AsociacionExamDienteController extends Controller
             flash('Pin incorrecto');
             return redirect()->route('edit_asociacionED',$id);
         }
-
-        $user=User::where('pin','=',MD5($request->pin))->first();
         $asociacion_exam_diente = AsociacionExamDiente::find($id);
+
+        if($request->get('tipo_tratamiento_id')!=1 && $asociacion_exam_diente->tipo_tratamiento_id==null){
+            $tipo_tratamiento=TipoTratamiento::find($request->get('tipo_tratamiento_id'));
+            $tratamiento=new Tratamiento();
+            $tratamiento->tipo_tratamiento_id=$request->get('tipo_tratamiento_id');
+            $tratamiento->exam_id=$asociacion_exam_diente->exam_id;
+            $tratamiento->coste=$tipo_tratamiento->coste;
+            $tratamiento->iva=$tipo_tratamiento->iva;
+            $tratamiento->asociacion_exam_diente_id=$asociacion_exam_diente->id;
+            $tratamiento->save();
+        }elseif($request->get('tipo_tratamiento_id')!=1&& $asociacion_exam_diente->tipo_tratamiento_id!=null){
+            $tipo_tratamiento=TipoTratamiento::find($request->get('tipo_tratamiento_id'));
+            $tratamiento=Tratamiento::find($asociacion_exam_diente->tratamiento_id);
+            $tratamiento->tipo_tratamiento_id=$request->get('tipo_tratamiento_id');
+            $tratamiento->exam_id=$asociacion_exam_diente->exam_id;
+            $tratamiento->coste=$tipo_tratamiento->coste;
+            $tratamiento->iva=$tipo_tratamiento->iva;
+            $tratamiento->asociacion_exam_diente_id=$asociacion_exam_diente->id;
+            $tratamiento->save();
+        }
+        $user=User::where('pin','=',MD5($request->pin))->first();
         $asociacion_exam_diente->fill($request->all());
         $asociacion_exam_diente->teacher_id=$user->id;
         $asociacion_exam_diente->save();
+
+
 
         flash('Asociación editada correctamente');
 
@@ -351,9 +376,30 @@ class AsociacionExamDienteController extends Controller
             'opacidad' => 'required|String|in:Ningún estado anormal,Opacidad delimitada,OpacidadDifusa,Hipoplasia,
                 Otros defectos,Opacidad elimitada y difusa,Opacidad delimitada e hipoplasia,Opacidad difusa e hipoplasia',
             'diente_id' => 'required|exists:dientes,id',
+            'tipo_tratamiento_id'=>'required|exists:tipo_tratamientos,id'
+
         ]);
 
         $asociacion_exam_diente = AsociacionExamDiente::find($id);
+        if($request->get('tipo_tratamiento_id')!=1 && $asociacion_exam_diente->tipo_tratamiento_id==null){
+            $tipo_tratamiento=TipoTratamiento::find($request->get('tipo_tratamiento_id'));
+            $tratamiento=new Tratamiento();
+            $tratamiento->tipo_tratamiento_id=$request->get('tipo_tratamiento_id');
+            $tratamiento->exam_id=$asociacion_exam_diente->exam_id;
+            $tratamiento->coste=$tipo_tratamiento->coste;
+            $tratamiento->iva=$tipo_tratamiento->iva;
+            $tratamiento->asociacion_exam_diente_id=$asociacion_exam_diente->id;
+            $tratamiento->save();
+        }elseif($request->get('tipo_tratamiento_id')!=1&& $asociacion_exam_diente->tipo_tratamiento_id!=null){
+            $tipo_tratamiento=TipoTratamiento::find($request->get('tipo_tratamiento_id'));
+            $tratamiento=Tratamiento::find($asociacion_exam_diente->tratamiento_id);
+            $tratamiento->tipo_tratamiento_id=$request->get('tipo_tratamiento_id');
+            $tratamiento->exam_id=$asociacion_exam_diente->exam_id;
+            $tratamiento->coste=$tipo_tratamiento->coste;
+            $tratamiento->iva=$tipo_tratamiento->iva;
+            $tratamiento->asociacion_exam_diente_id=$asociacion_exam_diente->id;
+            $tratamiento->save();
+        }
         $asociacion_exam_diente->fill($request->all());
         $asociacion_exam_diente->save();
 

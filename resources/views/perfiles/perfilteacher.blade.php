@@ -7,7 +7,7 @@
                 {!! Form::model($user, [ 'route' => ['updateperfilteacher',$user->id], 'method'=>'PUT']) !!}
 
                 <div class="card">
-                    <div class="card-header">Mi perfil</div>
+                    <div class="card-header"><h5>Mi perfil</h5></div>
 
                     <div class="card-body">
                         @include('flash::message')

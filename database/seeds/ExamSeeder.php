@@ -98,7 +98,7 @@ class ExamSeeder extends Seeder
             'maxilar'=>Str::random(20),
             'mandibular'=>Str::random(20),
             'logrado'=>Str::random(20),
-            'orto_id'=>1
+            'orto_id'=>4
 
         ]);
 

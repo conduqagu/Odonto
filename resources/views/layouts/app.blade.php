@@ -61,9 +61,12 @@
                                     <a class="dropdown-item" href="{{ url('/patients/index') }}">
                                         Pacientes
                                     </a>
-                                    <a class="dropdown-item" href="{{ url('/ajustes') }}">
-                                        Ajustes
-                                    </a>
+                                    <div class="subnav">
+                                        <button class="subnavbtn dropdown-item">Ajustes <i class="fa fa-caret-down"></i></button>
+                                        <div class="subnav-content">
+                                            <a href="{{ url('/perfiles/perfilstudent') }}">Perfil</a>
+                                        </div>
+                                    </div>
                                 @endif
                             <!--
                                     <a class="dropdown-item" href="{{ url('/dientes') }}">
@@ -77,22 +80,32 @@
                                     <a class="dropdown-item" href="{{ url('/indexstudents') }}">
                                         Estudiantes
                                     </a>
-                                    <a class="dropdown-item" href="{{ url('/ajustes') }}">
-                                        Ajustes
-                                    </a>
+                                    <div class="subnav">
+                                        <button class="subnavbtn dropdown-item">Ajustes <i class="fa fa-caret-down"></i></button>
+                                        <div class="subnav-content">
+                                            <a href="{{ url('/perfiles/perfilteacher') }}">Perfil</a>
+                                            <a href="{{ url('/user/createT') }}">Nuevo ususario</a>
+                                        </div>
+                                    </div>
 
                                 @endif
 
                                 @if(Auth::user()->userType =='admin')
-                                    <a class="dropdown-item" href="{{ url('/ajustes') }}">
-                                        Ajustes
-                                    </a>
                                     <a class="dropdown-item" href="{{ url('/user') }}">
                                         Usuarios
                                     </a>
                                     <a class="dropdown-item" href="{{ url('/exams/indexExamsAdmin') }}">
                                         Exámenes
                                     </a>
+                                    <div class="subnav">
+                                        <button class="subnavbtn dropdown-item">Ajustes <i class="fa fa-caret-down"></i></button>
+                                        <div class="subnav-content">
+                                            <a href="{{ url('/perfiles/perfiladmin') }}">Perfil</a>
+                                            <a href="{{ url('/tipo_tratamientos') }}">Tratamientos</a>
+                                            <a href="{{ url('/brakets') }}">Brakets</a>
+                                            <a href="{{ url('/diagnosticos') }}">Diagnósticos</a>
+                                        </div>
+                                    </div>
                                 @endif
 
                                 <a class="dropdown-item" href="{{ route('logout') }}"

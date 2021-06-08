@@ -42,7 +42,6 @@ class ExamController extends Controller
         $exams=Exam::where('exams.tipoExam','LIKE','%'.$request->get("query")."%")
             ->where('exams.date','LIKE','%'.$request->get("query2")."%")
             ->get();
-
         return view('exams/indexExamAdmin',['exams'=>$exams]);
     }
 
@@ -116,8 +115,9 @@ class ExamController extends Controller
             ->where('pin','=',MD5($request->pin))->get();
 
         if(count($profesores)==0) {
+            dd(MD5('22222222A'));
             flash('Pin incorrecto');
-            return redirect()->route('exams.create');
+            return redirect()->route('exams.create',$request->patient_id);
         }
 
         $user=User::where('pin','=',MD5($request->pin))->first();
@@ -592,14 +592,13 @@ class ExamController extends Controller
 
     }
     public function imprimir($id){
-        $exam=Exam::find($id);
         $exam = Exam::find($id);
         $diagnosticos=$exam->diagnosticos()->get();
         $tratamientos=$exam->tratamientos()->get();
         $prueba_complementarias=$exam->PruebaComplementarias()->get();
-        $coste_total=0;
+        $coste_total=0.0;
         foreach ($tratamientos as $tratamiento) {
-            $coste_total = $tratamiento->coste + $coste_total;
+            $coste_total = $tratamiento->tipoTratamiento->coste + $coste_total;
         }
         $pdf = \PDF::loadView('exams/pdf',['exam'=>$exam,'diagnosticos'=>$diagnosticos,
             'tratamientos'=>$tratamientos,'prueba_complementarias'=>$prueba_complementarias,

@@ -27,6 +27,7 @@ class UserSeeder extends Seeder
             'userType' => 'teacher',
             'email' => Str::random(10).'@gmail.com',
             'password' => Hash::make('password'),
+            'pin'=>MD5('22222222P')
         ]);
         DB::table('users')->insert([
             'name' => 'student',

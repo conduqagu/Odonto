@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
                 <div class="card"  style="width: max-content">
-                    <div class="card-header">Estudio diente</div>
+                    <div class="card-header"><h5>Estudio diente</h5></div>
                     <div class="card-body">
                         <div class="title m-b-md">
                             <a href="https://www.ilerna.es/blog/aprende-con-ilerna-online/sanidad/codigo-internacional-dientes-fdi">
@@ -59,7 +59,7 @@
                                 </tr>
                             @endforeach
                         </table>
-                        @if(sizeof($asociacion_exam_dientes)==0)
+                        @if(sizeof($asociacion_exam_dientes)==0 && \Illuminate\Support\Facades\Auth::user()->userType!='admin')
                             {!! Form::open(['route' => ['create_asociacionEDPeriodoncia',$exam_id], 'method' => 'get']) !!}
                             {!!   Form::submit('Realizar examen dental', ['class'=> 'btn btn-primary'])!!}
                             {!! Form::close() !!}

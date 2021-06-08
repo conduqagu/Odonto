@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Diagnósticos</div>
+                    <div class="panel-heading"><h5>Diagnósticos</h5></div>
 
                     <div class="panel-body">
                         @include('flash::message')
@@ -13,10 +13,6 @@
                         {!!   Form::submit('Crear diagnostico', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
 
-                        <br>
-                        {!! Form::open(['route' => ['ajustes.index'], 'method' => 'get']) !!}
-                        {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark' ])!!}
-                        {!! Form::close() !!}
 
                         <br><br>
                         <table class="table table-striped table-bordered">

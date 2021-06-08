@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container2">
         <div class="row justify-content-center">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-10">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Exámenes</div>
+                    <div class="panel-heading"><h5>Exámenes</h5></div>
 
                     <div class="panel-body">
                         @include('flash::message')
@@ -13,9 +13,9 @@
                             {!! Form::open(['route' => ['exams.index',$patient], 'method' => 'get']) !!}
                             {!! Form::select('query',array('inicial'=>'Inicial','infantil'=>'Infantil','periodoncial'=>'Periodoncial',
                                 'ortodoncial'=>'Ortodoncial','evOrto'=>'Evaluación ortodoncia','otro'=>'Otro',null=>'Tipo de examen'), null,
-                                ['class'=>'col-md-4','autofocus']) !!}
-                            {!! Form::date('query2',null,['class'=>'col-md-4','autofocus','paceholder'=>'Fecha']) !!}
-                            {!! Form::submit('Buscar', ['class'=> 'btn btn-success col-md-2'])!!}
+                                ['class'=>'col-md-2','autofocus']) !!}
+                            {!! Form::date('query2',null,['class'=>'col-md-2','autofocus','paceholder'=>'Fecha']) !!}
+                            {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary'])!!}
                             {!! Form::close() !!}
                         </div>
 
@@ -65,12 +65,12 @@
 
                         @if(Auth::user()->userType =='teacher')
                             {!! Form::open(['route' => ['indexteacher'], 'method' => 'get']) !!}
-                            {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark'])!!}
+                            {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                             {!! Form::close() !!}
                         @endif
                         @if(Auth::user()->userType =='student')
                             {!! Form::open(['route' => ['patients.index'], 'method' => 'get']) !!}
-                            {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark'])!!}
+                            {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                             {!! Form::close() !!}
                         @endif
 

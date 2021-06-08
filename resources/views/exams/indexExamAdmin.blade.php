@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container2">
         <div class="row justify-content-center">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-10">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Exámenes</div>
+                    <div class="panel-heading"><h5>Exámenes</h5></div>
 
                     <div class="panel-body">
                         @include('flash::message')
@@ -13,9 +13,9 @@
                             {!! Form::open(['route' => ['indexExamsAdmin'], 'method' => 'get']) !!}
                             {!! Form::select('query',array('inicial'=>'Inicial','infantil'=>'Infantil','periodoncial'=>'Periodoncial',
                                 'ortodoncial'=>'Ortodoncial','evOrto'=>'Evaluación ortodoncia','otro'=>'Otro',null=>'Tipo de examen'), null,
-                                ['class'=>'col-md-4','autofocus']) !!}
-                            {!! Form::date('query2',null,['class'=>'col-md-4','autofocus','paceholder'=>'Fecha']) !!}
-                            {!! Form::submit('Buscar', ['class'=> 'btn btn-success col-md-2'])!!}
+                                ['class'=>'col-md-3','autofocus']) !!}
+                            {!! Form::date('query2',null,['class'=>'col-md-3','autofocus','paceholder'=>'Fecha']) !!}
+                            {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary'])!!}
                             {!! Form::close() !!}
                         </div>
                         <br>
@@ -33,7 +33,7 @@
                             @foreach ($exams as $exam)
                                 <tr>
 
-                                    <td>{{ \App\Patient::find($exam->patient_id)->name." ".\App\Patient::find($exam->patient_id)->surname }}</td>
+                                    <td>{{ $exam->patient->name." ".$exam->patient->surname }}</td>
                                     <td>{{ $exam->date}}</td>
                                     @if($exam->tipoExam=='evOrto')
                                         <td>{{ 'Evaluación ortodoncia' }}</td>
@@ -41,8 +41,11 @@
                                         <td>{{ $exam->tipoExam}}</td>
                                     @endif
 
-                                    <td>{{\App\User::find($exam->teacher_id)->dni}}</td>
-
+                                    <td>
+                                        @if($exam->teachers!=null)
+                                            {{$exam->teachers->dni}}
+                                        @endif
+                                    </td>
                                     <td>
                                         {!! Form::open(['route' => ['exams.show',$exam->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Ver detalle', ['class'=> 'btn btn-primary'])!!}

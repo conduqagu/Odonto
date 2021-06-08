@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Diagnostico;
 use App\Diente;
 use App\Exam;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DiagnosticoController extends Controller
 {
@@ -126,7 +128,17 @@ class DiagnosticoController extends Controller
             'diagnostico_id' => 'required|exists:diagnosticos,id',
             'comentario'=>['nullable', 'string', 'max:255'],
         ]);
+        if(Auth::user()->userType=='student'){
+            $this->validate($request,
+                ['pin' => ['required', 'string', 'max:255']]);
+            $profesores=User::find(Auth::user()->id)->teachers()
+                ->where('pin','=',MD5($request->pin))->get();
 
+            if(count($profesores)==0) {
+                flash('Pin incorrecto');
+                return redirect()->back();
+            }
+        }
         $exam=Exam::find($exam_id);
         $exam->diagnosticos()->attach($request->diagnostico_id, array('comentario'=>$request->comentario));
 

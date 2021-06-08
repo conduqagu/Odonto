@@ -47,15 +47,15 @@ class TipoTratamientoController extends Controller
     {
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-            'coste' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/   ', 'max:255'],
-
+            'coste' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/', 'max:255'],
+            'iva' =>  ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/', 'max:255'],
 
         ]);
 
         $tipo_tratamientos=new TipoTratamiento($request->all());
         $tipo_tratamientos->save();
 
-        flash('Tipo de tratamiento creado correctamente');
+        flash('Tratamiento creado correctamente');
 
         return redirect()->route('tipo_tratamientos.index');
     }
@@ -82,7 +82,8 @@ class TipoTratamientoController extends Controller
     {
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-            'coste' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/   ', 'max:255'],
+            'coste' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/', 'max:255'],
+            'iva' =>  ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/', 'max:255'],
 
         ]);
 
@@ -90,7 +91,7 @@ class TipoTratamientoController extends Controller
         $tipo_tratamiento->fill($request->all());
         $tipo_tratamiento->save();
 
-        flash('Tipo creado correctamente');
+        flash('Tratamiento creado correctamente');
 
         return redirect()->route('tipo_tratamientos.index');
     }

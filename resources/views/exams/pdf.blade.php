@@ -360,7 +360,9 @@
         <tr>
             <td bgcolor="#CCCCCC">Nombre</td>
             <td bgcolor="#CCCCCC">Coste</td>
+            <td bgcolor="#CCCCCC">IVA</td>
             <td bgcolor="#CCCCCC">Terapia</td>
+            <td bgcolor="#CCCCCC">Zona</td>
             <td bgcolor="#CCCCCC">Fecha inicio</td>
             <td bgcolor="#CCCCCC">Fecha fin</td>
             @if($exam->tipoExam=='ortodoncial')
@@ -372,7 +374,14 @@
             <tr>
                 <td>{{ $tratamiento->tipoTratamiento->name }}</td>
                 <td>{{ $tratamiento->coste }}</td>
+                <td>{{ $tratamiento->iva }}</td>
                 <td>{{ $tratamiento->terapia }}</td>
+                <td>@if($tratamiento->asociacion_exam_diente_id!=null)
+                        {{ 'Diente '.$tratamiento->asociacion_exam_diente->diente->number }}
+                    @else
+                        {{'Bucal'}}
+                    @endif
+                </td>
                 <td>{{ $tratamiento->fecha_inicio }}</td>
                 <td>{{ $tratamiento->fecha_fin }}</td>
                 @if($exam->tipoExam=='ortodoncial')
@@ -381,12 +390,8 @@
             </tr>
         @endforeach
             <tr>
-                <th>IVA (%):</th>
-                <th>{{$exam->iva}}</th>
-            </tr>
-            <tr>
                 <th>Coste total (€): </th>
-                <th>{{$coste_total}}</th>
+                <td>{{$coste_total}}</td>
             </tr>
             <tr>
                 <th>Cobrado:</th>

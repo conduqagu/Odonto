@@ -32,7 +32,11 @@ Route::group(['middleware'=> 'App\Http\Middleware\AdminMiddleware'], function()
     Route::put('/user/update/{id}','UserController@update')->name('user.update');
     Route::delete('/user/destroy/{id}','UserController@destroy')->name('user.destroy');
     Route::get('/exams/indexExamsAdmin', 'ExamController@indexExamsAdmin')->name('indexExamsAdmin');
-
+    Route::resource('tipo_tratamientos', 'TipoTratamientoController');
+    Route::resource('brakets', 'BraketController');
+    Route::resource('diagnosticos', 'DiagnosticoController');
+    Route::get('/asociacion_exam_diente_periodonciaA/index/{id}', 'AsociacionExamDienteController@indexPeriodoncia')->name('index_asociacionEDPeriodonciaA');
+    Route::get('/exams/index_asociacionEDA/{id}', 'AsociacionExamDienteController@indexasociacionEDTeacher')->name('indexasociacionEDA');
 
 });
 
@@ -65,11 +69,8 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
     Route::get('/exams/indexasociacionEDTeacher/{id}','AsociacionExamDienteController@indexasociacionEDTeacher')->name('indexasociacionEDTeacher');
     Route::get('/exams/editasociacionEDTeacher/{id}','AsociacionExamDienteController@editasociacionEDTeacher')->name('editasociacionEDTeacher');
     Route::put('/exams/updateasociacionEDTeacher/{id}','AsociacionExamDienteController@updateasociacionEDTeacher')->name('updateasociacionEDTeacher');
-    Route::get('/exams/evaluaciones/{id}','ExamController@evaluaciones')->name('exams.evaluaciones');
 
-    Route::resource('tipo_tratamientos', 'TipoTratamientoController');
-    Route::resource('brakets', 'BraketController');
-    Route::resource('diagnosticos', 'DiagnosticoController');
+
     Route::resource('storage', 'StorageController');
 });
 
@@ -104,9 +105,9 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::post('/asociacion_ExamDiags/store/{id}', 'DiagnosticoController@store_asociacion_diagnostico_exam')->name('asociacion_ExDiags.store');
     Route::get('/asociacion_ExamDiags/create/{id}', 'DiagnosticoController@create_asociacion_diagnostico_exam')->name('asociacion_ExDiags.create');
     Route::delete('/asociacion_ExamDiags/destroy/{id}', 'DiagnosticoController@destroy_asociacion_diagnostico_exam')->name('asociacion_ExDiags.destroy');
+    Route::get('/exams/evaluaciones/{id}','ExamController@evaluaciones')->name('exams.evaluaciones');
 
 
-    Route::resource('ajustes', 'AjusteController');
     Route::get('/prueba_complementaria/create/{id}', 'PruebaComplementariaController@create')->name('prueba_complementarias.createT');
     Route::resource('prueba_complementarias', 'PruebaComplementariaController');
     Route::get('/tratamientos/create/{id}', 'TratamientoController@createT')->name('tratamientos.createT');
@@ -146,7 +147,6 @@ Route::get('/paypal/pay/{id}', 'PaymentController@payWithPayPal')->name('paypal_
 Route::get('/paypal/status/{id}', 'PaymentController@payPalStatus')->name('paypal_status');
 Route::get('/pago/error', 'PaymentController@pago_error')->name('pago_error');
 Route::get('/pago/correcto', 'PaymentController@pago_correcto')->name('pago_correcto');
-
 
 
 

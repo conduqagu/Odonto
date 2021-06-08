@@ -1,13 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+    <div class="container2">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
             <div class="panel panel-default">
-                <div class="panel-heading">Mis alumnos</div>
+                <div class="panel-heading"><h5>Mis alumnos</h5></div>
+                <br>
                 <div class="panel-body">
                     @include('flash::message')
+
+                    {!! Form::open(['route' => ['listsmystudent'], 'method' => 'get']) !!}
+                    {!! Form::text('query',null,['class'=>'col-md-3', 'autofocus', 'placeholder'=>'Nombre del alumno']) !!}
+                    {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary'])!!}
+                    {!! Form::close() !!}
+                    <br>
                     <table class="table table-striped table-bordered">
                         <tr>
                             <th>Nombre</th>
@@ -35,7 +42,7 @@
                     </table>
                     <td>
                         {!! Form::open(['route' => 'indexstudents', 'method' => 'get']) !!}
-                        {!!   Form::submit('Todos los alumnos', ['class'=> 'btn btn-outline-dark'])!!}
+                        {!!   Form::submit('Todos los alumnos', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                         {!! Form::close() !!}
                     </td>
                 </div>
