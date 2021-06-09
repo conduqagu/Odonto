@@ -614,7 +614,7 @@ class ExamController extends Controller
         $patient_email=$exam->patient->email;
         //$correo=Patient::find($patient->patient_id)->pluck('email');
         Mail::to($patient_email)->send(new CorreoPago($exam));
-        return redirect()->route('home');
+        return redirect()->route('exams.show',$exam_id);
     }
     public function pagado($exam_id){
         $exam=Exam::find($exam_id);
