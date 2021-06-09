@@ -110,11 +110,10 @@ class DiagnosticoController extends Controller
     public function destroy($id)
     {
         $diagnostico = Diagnostico::find($id);
-        $exam_id=$diagnostico->exam_id;
         $diagnostico->delete();
         flash('Diagnostico borrado correctamente');
 
-        return redirect()->route('exams.show',$exam_id);
+        return redirect()->route('diagnosticos.index');
     }
 
     public function create_asociacion_diagnostico_exam($exam_id)
@@ -150,8 +149,8 @@ class DiagnosticoController extends Controller
     }
     public function destroy_asociacion_diagnostico_exam($diagnostico_id,Request $request)
     {
-        $exam=Exam::find($diagnostico_id);
-        $exam->diagnosticos()->detach($request->exam_id);
+        $exam=Exam::find($request->exam_id);
+        $exam->diagnosticos()->detach($diagnostico_id);
 
         flash('Diagnostico borrado correctamente');
 

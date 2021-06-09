@@ -69,15 +69,26 @@
                             <label for="userType" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de usuario') }}</label>
 
                             <div class="col-md-6">
-                                <input type="radio" id="student" name="userType" value="student" class="@error('userType') is-invalid @enderror" name="userType" value="{{ old('userType') }}" required autocomplete="userType" autofocus>
-                                <label for="student">Alumno</label><br>
-                                <input type="radio" id="teacher" name="userType" value="teacher" class="@error('userType') is-invalid @enderror" name="userType" value="{{ old('userType') }}" required autocomplete="userType" autofocus>
-                                <label for="teacher">Profesor</label><br>
+                                @if($user->userType=='student')
+                                    <input type="radio" id="student" name="userType" value="student" class="@error('userType') is-invalid @enderror" name="userType" value="{{ old('userType') }}" required autocomplete="userType" autofocus checked>
+                                    <label for="student">Alumno</label><br>
+                                @else
+                                    <input type="radio" id="student" name="userType" value="student" class="@error('userType') is-invalid @enderror" name="userType" value="{{ old('userType') }}" required autocomplete="userType" autofocus>
+                                    <label for="student">Alumno</label><br>
+                                @endif
+                                @if($user->userType=='student')
+                                    <input type="radio" id="teacher" name="userType" value="teacher" class="@error('userType') is-invalid @enderror" name="userType" value="{{ old('userType') }}" required autocomplete="userType" autofocus checked>
+                                    <label for="teacher">Profesor</label><br>
+                                @else
+                                    <input type="radio" id="teacher" name="userType" value="teacher" class="@error('userType') is-invalid @enderror" name="userType" value="{{ old('userType') }}" required autocomplete="userType" autofocus>
+                                    <label for="teacher">Profesor</label><br>
+                                @endif
                                 @if(Auth::user()->userType =='admin')
-                                    <input type="radio" id="admin" name="userType" value="admin" class="@error('userType') is-invalid @enderror" name="userType" value="{{ old('userType') }}" required autocomplete="userType" autofocus>
+                                    <input type="radio" id="admin" name="userType" value="admin" class="@error('userType') is-invalid @enderror" name="userType" value="{{ old('userType') }}" required autocomplete="userType" autofocus checked>
                                     <label for="admin">Administrador</label><br>
                                 @endif
-
+                                    <input type="radio" id="admin" name="userType" value="admin" class="@error('userType') is-invalid @enderror" name="userType" value="{{ old('userType') }}" required autocomplete="userType" autofocus>
+                                    <label for="admin">Administrador</label><br>
                                 @error('userType')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

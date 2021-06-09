@@ -317,7 +317,6 @@ class ExamController extends Controller
         ]);
         if($exam->tipoExam=='inicial') {
             $this->validate($request, [
-                'date' => ['required', 'date'],
                 'aspectoExtraoralNormal' => ['required', 'boolean'],
                 'cancerOral' => ['required', 'boolean'],
                 'anomaliasLabios' => ['required', 'boolean'],
@@ -333,7 +332,6 @@ class ExamController extends Controller
                 'claseAngle' => ['required', 'string', 'in:clase I,clase II,clase III'],
                 'lateralAngle' => ['required', 'string', 'in:Unilateral,Bilateral'],
                 'tipoDentición' => ['required', 'string', 'in:Temporal,Mixta'],
-                'apiñamientoIncisivoInferior' => ['required', 'boolean'],
                 'apiñamientoIncisivoInferior' => ['required', 'boolean'],
                 'apiñamientoIncisivoSuperior' => ['required', 'boolean'],
                 'perdidaEspacioAnterior' => ['required', 'boolean'],
@@ -374,7 +372,6 @@ class ExamController extends Controller
                 'maxilar'=>['nullable','string','max:255'],
                 'mandibular'=>['nullable','string','max:255'],
                 'logrado'=>['nullable','string','max:255'],
-                'orto_id'=>['required','exists:exams,id']
             ]);
         }
         $exam->fill($request->all());

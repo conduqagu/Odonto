@@ -20,12 +20,27 @@
                             {!! Form::text('surname',null,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('dni', 'DNI') !!}
-                            {!! Form::text('dni',null,['class'=>'form-control', 'required']) !!}
+                            <label for="email" >{{ __('Correo electrónico') }}</label>
+
+                            <input id="email" type="email" placeholder="miemail@dominio.com" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" required autocomplete="email">
+
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+
                         </div>
                         <div class="form-group">
-                            {!! Form::label('email', 'E-mail') !!}
-                            {!! Form::text('email',null,['class'=>'form-control']) !!}
+                            <label for="dni" >{{ __('DNI') }}</label>
+
+                            <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni">
+
+                            @error('dni')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
                         <div class="form-group">
                             {!! Form::label('telefono', 'Télefono') !!}

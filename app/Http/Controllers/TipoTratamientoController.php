@@ -106,7 +106,7 @@ class TipoTratamientoController extends Controller
     {
         $tipo_tratamiento = TipoTratamiento::find($id);
         $tipo_tratamiento->delete();
-        flash('Tipo borrado correctamente');
+        flash('Tratamiento borrado correctamente');
 
         return redirect()->route('tipo_tratamientos.index');
     }

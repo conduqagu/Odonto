@@ -44,6 +44,9 @@
                                     </tr>
                                 @endforeach
                             </table>
+                            {!! Form::open(['route' => ['indexteacher'], 'method' => 'get']) !!}
+                            {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
+                            {!! Form::close() !!}
                         </div>
                     </div>
 

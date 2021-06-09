@@ -67,7 +67,7 @@ class BraketController extends Controller
     public function edit($id)
     {
         $braket = Braket::find($id);
-        return view('brakets.edit',['braket'=> $braket]);
+        return view('brakets/edit',['braket'=> $braket]);
     }
 
     /**

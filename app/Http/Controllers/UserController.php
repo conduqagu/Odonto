@@ -149,14 +149,19 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function updateperfilstudent(Request $request, $id){
-        $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'surname'=>['required','string','max:255'],
-            'email'=>['required','string','max:255'],
-            'dni'=>['required','string','max:255']
-        ]);
-
         $user=\App\User::find($id);
+
+        if($request->email==$user->email){
+            $this->validate($request,[
+                'email' => ['required', 'string', 'email', 'max:255'],
+            ]);
+        }else{
+            $this->validate($request,[
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            ]);
+        }
+
+
         $user->name=$request->get('name');
         $user->surname=$request->get('surname');
         $user->email=$request->get('email');
@@ -183,13 +188,23 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function updateperfilteacher(Request $request, $id){
+        $user=\App\User::find($id);
+
+        if($request->email==$user->email){
+            $this->validate($request,[
+                'email' => ['required', 'string', 'email', 'max:255'],
+            ]);
+        }else{
+            $this->validate($request,[
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            ]);
+        }
+
         $this->validate($request, [
-            'email'=>['required','string','max:255'],
             'oldpin'=>['nullable','string'],
             'pin'=>['nullable','string', 'unique:users'],
             'confirmpin'=>['nullable','string'],
         ]);
-        $user=\App\User::find($id);
         $user->email=$request->get('email');
         if ($user->pin==MD5($request->oldpin)){
             if($request->pin==$request->confirmpin){
@@ -222,21 +237,34 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function updateperfiladmin(Request $request, $id){
+        $user=User::find($id);
+        if($request->email==$user->email){
+            $this->validate($request,[
+                'email' => ['required', 'string', 'email', 'max:255'],
+            ]);
+        }else{
+            $this->validate($request,[
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            ]);
+        }
+        if($request->dni==$user->dni){
+            $this->validate($request,[
+                'dni' => ['required','string','max:255'],
+            ]);
+        }else{
+            $this->validate($request,[
+                'dni' => ['required','unique:users','string','max:255'],
+            ]);
+        }
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-            'surname'=>['required','string','max:255'],
-            'email'=>['required','string','max:255'],
-            'dni'=>['required','string','max:255'],
+            'surname'=>['required', 'string','max:255'],
         ]);
 
-        $user=\App\User::find($id);
-        $user->name=$request->get('name');
-        $user->surname=$request->get('surname');
-        $user->email=$request->get('email');
-        $user->dni=$request->get('dni');
+        $user->fill($request->all());
         $user->save();
 
-        flash('Datos actializados correctamente');
+        flash('Datos actualizados correctamente');
 
         return redirect()->route('perfiladmin');
     }
@@ -276,15 +304,31 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user=User::find($id);
+        if($request->email==$user->email){
+            $this->validate($request,[
+                'email' => ['required', 'string', 'email', 'max:255'],
+            ]);
+        }else{
+            $this->validate($request,[
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            ]);
+        }
+        if($request->dni==$user->dni){
+            $this->validate($request,[
+                'dni' => ['required','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
+            ]);
+        }else{
+            $this->validate($request,[
+                'dni' => ['required','unique:users','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
+            ]);
+        }
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname'=>['required', 'string','max:255'],
-            'dni' => ['required','unique:users','string','max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'userType'=> ['required', 'string','in:student,teacher,admin'],
         ]);
 
-        $user=User::find($id);
         $user->fill($request->all());
         $user->save();
 

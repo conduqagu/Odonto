@@ -10,7 +10,7 @@
                     <div class="card-body">
                         @include('flash::message')
 
-                        {!! Form::model($braket, [ 'route' => ['tipo_diagnosticos.update',$braket->id], 'method'=>'PUT']) !!}
+                        {!! Form::model($braket, [ 'route' => ['brakets.update',$braket->id], 'method'=>'PUT']) !!}
 
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre') !!}

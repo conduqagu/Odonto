@@ -84,7 +84,7 @@ class PatientController extends Controller
         $this ->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'dni' => ['required', 'unique:patients','string','min:9'],
+            'dni' => ['required', 'unique:patients','string','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             'email' => ['nullable','string', 'email', 'max:255'],
             'telefono' => ['nullable','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
@@ -128,7 +128,7 @@ class PatientController extends Controller
         $this ->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'dni' => ['required','unique:patients', 'string','min:9'],
+            'dni' => ['required','unique:patients', 'string','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             'email' => ['nullable','string', 'email', 'max:255'],
             'telefono' => ['nullable','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
@@ -196,12 +196,30 @@ class PatientController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $patient = Patient::find($id);
+
+        if($request->email==$patient->email){
+            $this->validate($request,[
+                'email' => ['required', 'string', 'email', 'max:255'],
+            ]);
+        }else{
+            $this->validate($request,[
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:patients'],
+            ]);
+        }
+        if($request->dni==$patient->dni){
+            $this->validate($request,[
+                'dni' => ['required','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
+            ]);
+        }else{
+            $this->validate($request,[
+                'dni' => ['required','unique:patients','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
+            ]);
+        }
 
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'dni' => ['required','string','min:9'],
-            'email' => ['nullable','string', 'email', 'max:255'],
             'telefono' => ['nullable','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
@@ -217,7 +235,6 @@ class PatientController extends Controller
             flash('Pin incorrecto');
             return redirect()->route('patients.edit',$id);
         }
-        $patient = Patient::find($id);
         if($patient->child!=$request->child and $request->child==0){
             $patient->fill($request->all());
             $patient->save();
@@ -245,19 +262,36 @@ class PatientController extends Controller
      */
     public function updateteacher(Request $request, $id)
     {
+        $patient = Patient::find($id);
+
+        if($request->email==$patient->email){
+            $this->validate($request,[
+                'email' => ['required', 'string', 'email', 'max:255'],
+            ]);
+        }else{
+            $this->validate($request,[
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:patients'],
+            ]);
+        }
+        if($request->dni==$patient->dni){
+            $this->validate($request,[
+                'dni' => ['required','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
+            ]);
+        }else{
+            $this->validate($request,[
+                'dni' => ['required','unique:patients','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
+            ]);
+        }
+
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'dni' => ['required','string','min:9'],
-            'email' => ['nullable','string', 'email', 'max:255'],
             'telefono' => ['nullable','string', 'min:8'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
             'observaciones' => ['nullable','string', 'max:255'],
-            'child'=>['required','boolean']
-
+            'child'=>['required','boolean'],
         ]);
-        $patient = Patient::find($id);
         if($patient->child!=$request->child and $request->child==0){
             $patient->fill($request->all());
             $patient->save();
@@ -302,7 +336,7 @@ class PatientController extends Controller
         flash('Alumno asignado correctamente');
 
 
-        return redirect()->route('indexteacher');
+        return redirect()->route('añadirAlumno',$request->patient_id);
     }
     /**
      * Remove the specified resource from storage.
@@ -349,6 +383,6 @@ class PatientController extends Controller
 
         flash('Alumno borrado correctamente');
 
-        return redirect()->route('indexteacher');
+        return redirect()->route('destroyStudent',$request->patient_id);
     }
 }

@@ -288,7 +288,7 @@
                         <tr>
                             <th>Nombre</th>
                             <th>Comentario</th>
-                            @if(\Illuminate\Support\Facades\Auth::user()=='teacher')
+                            @if(\Illuminate\Support\Facades\Auth::user()->userType=='teacher')
                                 <th colspan="3">Acciones</th>
                             @endif
                         </tr>
@@ -481,13 +481,13 @@
                             @endif
 
 
-                            @if(Auth::user()->userType =='teacher')
+                            @if(Auth::user()->userType =='teacher'&& $exam->tipoExam!='otro')
                                 {!! Form::open(['route' => ['examsEditTeacher',$exam->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Editar', ['class'=> 'btn btn-warning button-align'])!!}
                                 {!! Form::close() !!}
 
                             @endif
-                            @if(Auth::user()->userType =='student')
+                            @if(Auth::user()->userType =='student' && $exam->tipoExam!='otro')
                                 {!! Form::open(['route' => ['exams.edit',$exam->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Editar', ['class'=> 'btn btn-warning button-align'])!!}
                                 {!! Form::close() !!}

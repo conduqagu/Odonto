@@ -44,6 +44,7 @@
                                 </span>
                                 @enderror
                             </div>
+                        </div>
 
                             {!! Form::submit('Continuar',['class'=>'btn-primary btn button-align']) !!}
                             {!! Form::close() !!}
@@ -51,7 +52,7 @@
                             <a class="btn btn-outline-dark button-align-right " style="margin-bottom: 15px" href="{{ url()->previous() }}">
                                 Cancelar
                             </a>
-                        </div>
+
                     </div>
                 </div>
             </div>
