@@ -51,4 +51,9 @@ class User extends Authenticatable
     public function asociacionExamDiente(){
         $this->belongsTo('App\AsociacionExamDiente');
     }
+
+    public function username()
+    {
+        return 'dni';
+    }
 }
