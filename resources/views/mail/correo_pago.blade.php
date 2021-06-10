@@ -19,12 +19,15 @@
         <tr>
             <td>{{ $tratamiento->tipoTratamiento->name }}</td>
             <td>{{ $tratamiento->coste }}</td>
+            <td>{{ $tratamiento->iva }}</td>
+            <td>@if($tratamiento->asociacion_exam_diente_id!=null)
+                    {{ 'Diente '.$tratamiento->asociacion_exam_diente->diente->number }}
+                @else
+                    {{'Bucal'}}
+                @endif
+            </td>
         </tr>
     @endforeach
-    <tr>
-        <th>IVA (%):</th>
-        <th>{{$exam->iva}}</th>
-    </tr>
     <tr>
         <th>Coste total (€): </th>
         <th>{{$coste_total}}</th>

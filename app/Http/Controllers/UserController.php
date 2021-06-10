@@ -32,7 +32,6 @@ class UserController extends Controller
      */
     public function indexstudents(Request $request) //Lista de estudiantes para profesores
     {
-
         $students= \App\User::whereNotIn('users.id',\App\User::find(Auth::user()->id)->students()->pluck('users.id')->values())
             ->where('users.name','LIKE','%'.$request->get("query")."%")
             ->where('userType','=','student')
