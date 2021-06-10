@@ -205,6 +205,7 @@ class UserController extends Controller
             'pin'=>['nullable','string', 'unique:users'],
             'confirmpin'=>['nullable','string'],
         ]);
+        $hola='hola';
         $user->email=$request->get('email');
         if ($user->pin==MD5($request->oldpin)){
             if($request->pin==$request->confirmpin){
