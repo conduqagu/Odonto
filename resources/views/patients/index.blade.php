@@ -37,16 +37,21 @@
                             </tr>
 
                             @foreach ($patients as $patient)
-                                <tr>
-                                    <td>{{ $patient->name }}</td>
-                                    <td>{{ $patient->surname }}</td>
+                                <tr style="word-break: break-word;">
+                                    <td  style="max-width: 78px;">{{ $patient->name }}</td>
+                                    <td  style="max-width: 78px;">{{ $patient->surname }}</td>
                                     <td>{{ $patient->dni }}</td>
-                                    <td>{{ $patient->email }}</td>
+                                    <td  style="max-width: 90px;">{{ $patient->email }}</td>
                                     <td>{{ $patient->telefono }}</td>
-                                    <td>{{ $patient->fechaNacimiento }}</td>
-                                    <td>{{ $patient->riesgoASA }}</td>
-                                    <td>{{ $patient->observaciones }}</td>
                                     @if($patient->child==1)
+                                        <td>{{ $patient->fechaNacimiento." (Infantil)" }}</td>
+                                    @else
+                                        <td>{{ $patient->fechaNacimiento}}</td>
+                                    @endif
+                                    <td>{{ $patient->riesgoASA }}</td>
+                                    <td style="max-width: 138px;">{{ $patient->observaciones }}</td>
+
+                                @if($patient->child==1)
                                         <td>Si</td>
                                     @else
                                         <td>No</td>

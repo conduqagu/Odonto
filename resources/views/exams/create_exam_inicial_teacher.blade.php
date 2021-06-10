@@ -113,7 +113,7 @@
                     </div>
                     <div>
                         {!!  Form::label('otros' , 'Otros') !!}
-                        {!! Form::text('otros', null, ['class'=>'form-control']) !!}
+                        {!! Form::text('otros', null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                         <br>
                     </div>
                     {!! Form::submit( 'Continuar examen dental', ['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}

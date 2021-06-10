@@ -24,7 +24,7 @@
                             </tr>
 
                             @foreach ($users as $user)
-                                <tr>
+                                <tr style="word-break: break-word;">
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->surname }}</td>
                                     <td>{{ $user->dni }}</td>

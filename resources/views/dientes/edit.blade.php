@@ -14,19 +14,19 @@
 
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre común del diente') !!}
-                            {!! Form::text('name',$diente->name,['class'=>'form-control', 'required', 'autofocus']) !!}
+                            {!! Form::text('name',$diente->name,['class'=>'form-control', 'required', 'autofocus','maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('number', 'Número del diente') !!}
-                            {!! Form::text('number',$diente->number,['class'=>'form-control', 'required']) !!}
+                            {!! Form::text('number',$diente->number,['class'=>'form-control', 'required','maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('cuadrante', 'Cuadrante') !!}
-                            {!! Form::text('cuadrante',$diente->cuadrante,['class'=>'form-control', 'required']) !!}
+                            {!! Form::number('cuadrante',$diente->cuadrante,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('sextante', 'Sextante') !!}
-                            {!! Form::text('sextante',$diente->sextante,['class'=>'form-control', 'required']) !!}
+                            {!! Form::number('sextante',$diente->sextante,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('ausente', 'Ausente') !!}

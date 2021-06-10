@@ -20,7 +20,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = \App\User::all();
+        $users = \App\User::all()->whereNotIn('id',Auth::user()->id);
 
         return view('perfiles/index',['users'=>$users]);
     }

@@ -118,7 +118,8 @@ class DiagnosticoController extends Controller
 
     public function create_asociacion_diagnostico_exam($exam_id)
     {
-        $diagnosticos=Diagnostico::all()->pluck('nombre','id');
+        $diagnosticos_examen=Exam::find($exam_id)->diagnosticos()->get()->pluck('id','id');
+        $diagnosticos=Diagnostico::all()->whereNotIn('id',$diagnosticos_examen)->pluck('nombre','id');
         return view('asociacion_ExDiags/create',['exam_id'=>$exam_id,'diagnosticos'=>$diagnosticos]);
     }
     public function store_asociacion_diagnostico_exam(Request $request,$exam_id)

@@ -22,7 +22,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus maxlength="255">
 
                                 @error('name')
                                 <span class="invalid-feedback" role="alert">
@@ -35,7 +35,7 @@
                             <label for="surname" class="col-md-4 col-form-label text-md-right">{{ __('Apellidos') }}</label>
 
                             <div class="col-md-6">
-                                <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname">
+                                <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="surname" maxlength="255">
 
                                 @error('surname')
                                 <span class="invalid-feedback" role="alert">
@@ -48,7 +48,7 @@
                             <label for="dni" class="col-md-4 col-form-label text-md-right">{{ __('DNI') }}</label>
 
                             <div class="col-md-6">
-                                <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni">
+                                <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni" pattern="[0-9]{8}[A-Za-z]{1}" title="Debe introducir 8 números y una letra">
 
                                 @error('dni')
                                 <span class="invalid-feedback" role="alert">

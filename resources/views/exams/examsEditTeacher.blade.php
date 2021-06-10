@@ -113,33 +113,33 @@
                         @elseif($exam->tipoExam=='infantil')
                             <div>
                                 {!!  Form::label('aspectoGeneral' , 'Aspecto General') !!}
-                                {!! Form::text('aspectoGeneral',$exam->aspectoGeneral, ['class'=>'form-control']) !!}
+                                {!! Form::text('aspectoGeneral',$exam->aspectoGeneral, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             </div>
                             <div>
                                 {!!  Form::label('talla' , 'Talla') !!}
-                                {!! Form::text('talla',$exam->talla, ['class'=>'form-control']) !!}
+                                {!! Form::text('talla',$exam->talla, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             </div>
                             <div>
                                 {!!  Form::label('peso' , 'Peso') !!}
-                                {!! Form::text('peso',$exam->peso, ['class'=>'form-control']) !!}
+                                {!! Form::text('peso',$exam->peso, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             </div>
                             <div>
                                 {!!  Form::label('piel' , 'Piel') !!}
-                                {!! Form::text('piel',$exam->piel, ['class'=>'form-control']) !!}
+                                {!! Form::text('piel',$exam->piel, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             </div>
                             <div>
                                 {!!  Form::label('anomaliaForma' , 'Anomalía en forma') !!}
-                                {!! Form::text('anomaliaForma',$exam->anomaliaForma, ['class'=>'form-control']) !!}
+                                {!! Form::text('anomaliaForma',$exam->anomaliaForma, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             </div>
                             <div>
                                 {!!  Form::label('anomaliaTamaño' , 'Anomalía en tamaño') !!}
-                                {!! Form::text('anomaliaTamaño',$exam->anomaliaTamaño, ['class'=>'form-control']) !!}
+                                {!! Form::text('anomaliaTamaño',$exam->anomaliaTamaño, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             </div>
 
                         @elseif($exam->tipoExam=='periodoncial')
                             <div>
                                 {!!  Form::label('indicePlaca' , 'Índice de placa') !!}
-                                {!! Form::text('indicePlaca', $exam->indicePlaca,['class' => 'form-control']) !!}
+                                {!! Form::text('indicePlaca', $exam->indicePlaca,['class' => 'form-control','maxlength'=>"255"]) !!}
                             </div>
                             <div>
                                 {!!  Form::label('color' , 'Color') !!}
@@ -184,24 +184,24 @@
                             </div>
                             <div>
                                 {!!  Form::label('previsto' , 'Previsto') !!}
-                                {!! Form::text('previsto',$exam->previsto, ['class'=>'form-control']) !!}
+                                {!! Form::text('previsto',$exam->previsto, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             </div>
                             <div>
                                 {!!  Form::label('maxilar' , 'Maxilar') !!}
-                                {!! Form::text('maxilar',$exam->maxilar, ['class'=>'form-control']) !!}
+                                {!! Form::text('maxilar',$exam->maxilar, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             </div>
                             <div>
                                 {!!  Form::label('mandibular' , 'Mandibular') !!}
-                                {!! Form::text('mandibular',$exam->mandibular, ['class'=>'form-control']) !!}
+                                {!! Form::text('mandibular',$exam->mandibular, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             </div>
                             <div>
                                 {!!  Form::label('logrado' , 'Logrado') !!}
-                                {!! Form::text('logrado',$exam->logrado, ['class'=>'form-control']) !!}
+                                {!! Form::text('logrado',$exam->logrado, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             </div>
                         @endif
                         <div>
                             {!!  Form::label('otros' , 'Otros') !!}
-                            {!! Form::text('otros', $exam->otros, ['class'=>'form-control']) !!}
+                            {!! Form::text('otros', $exam->otros, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             <br>
                         </div>
 

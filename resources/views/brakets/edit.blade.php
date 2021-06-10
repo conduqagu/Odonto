@@ -14,7 +14,7 @@
 
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre') !!}
-                            {!! Form::text('name',$braket->name,['class'=>'form-control', 'required', 'autofocus']) !!}
+                            {!! Form::text('name',$braket->name,['class'=>'form-control', 'required', 'autofocus','maxlength'=>"255"]) !!}
                         </div>
 
 

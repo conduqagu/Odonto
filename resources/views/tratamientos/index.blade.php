@@ -26,7 +26,7 @@
                             </tr>
 
                             @foreach ($tratamientos as $tratamiento)
-                                <tr>
+                                <tr style="word-break: break-word;">
                                     <td>{{ $tratamiento->tipoTratamiento->name }}</td>
                                     <td>{{$tratamiento->coste}}</td>
                                     <td>{{$tratamiento->iva}}</td>

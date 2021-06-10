@@ -13,11 +13,11 @@
                         {!! Form::open(['route' => 'patients.store']) !!}
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre') !!}
-                            {!! Form::text('name',null,['class'=>'form-control', 'required','autofocus']) !!}
+                            {!! Form::text('name',null,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('surname', 'Apellidos') !!}
-                            {!! Form::text('surname',null,['class'=>'form-control', 'required']) !!}
+                            {!! Form::text('surname',null,['class'=>'form-control', 'required', 'maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
                             <label for="email" >{{ __('Correo electrónico') }}</label>
@@ -34,7 +34,7 @@
                         <div class="form-group">
                             <label for="dni" >{{ __('DNI') }}</label>
 
-                            <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni">
+                            <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni" pattern="[0-9]{8}[A-Za-z]{1}" title="Debe introducir 8 números y una letra>
 
                             @error('dni')
                             <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('telefono', 'Télefono') !!}
-                            {!! Form::text('telefono',null,['class'=>'form-control','unique']) !!}
+                            {!! Form::text('telefono',null,['class'=>'form-control','unique', 'maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('fechaNacimiento', 'Fecha de nacimiento') !!}
@@ -56,7 +56,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('observaciones', 'Observaciones') !!}
-                            {!! Form::text('observaciones',null,['class'=>'form-control']) !!}
+                            {!! Form::text('observaciones',null,['class'=>'form-control', 'maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
                             {!!  Form::label('child' , 'Infantil') !!}

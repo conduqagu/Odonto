@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header"><h5>Editar diagnostico</h5></div>
+                    <div class="card-header"><h5>Editar diagnóstico</h5></div>
 
                     <div class="card-body">
                         @include('flash::message')
@@ -14,7 +14,7 @@
 
                         <div class="form-group">
                             {!! Form::label('nombre', 'Nombre') !!}
-                            {!! Form::text('nombre',$diagnostico->nombre,['class'=>'form-control', 'required','autofocus']) !!}
+                            {!! Form::text('nombre',$diagnostico->nombre,['class'=>'form-control', 'required','autofocus','maxlength'=>"255"]) !!}
                         </div>
 
                         {!! Form::submit('Actualizar',['class'=>'btn-primary btn button-align']) !!}

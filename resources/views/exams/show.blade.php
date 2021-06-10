@@ -295,8 +295,8 @@
 
                         @foreach ($diagnosticos as $diagnostico)
                             <tr>
-                                <td>{{ $diagnostico->nombre }}</td>
-                                <td>{{ $diagnostico->pivot->comentario }}</td>
+                                <td style=" min-width: 300px;">{{ $diagnostico->nombre }}</td>
+                                <td  style="word-wrap: break-word !important;max-width: 500px;min-width: 500px;">{{ $diagnostico->pivot->comentario }}</td>
                                 @if(\Illuminate\Support\Facades\Auth::user()->userType=='teacher')
 
                                 <td>
@@ -343,7 +343,7 @@
 
                             @foreach ($tratamientos as $tratamiento)
                                 <tr>
-                                    <td>{{ $tratamiento->tipoTratamiento->name }}</td>
+                                    <td style="word-wrap: break-word;max-width: 254px;">{{ $tratamiento->tipoTratamiento->name }}</td>
                                     <td>{{ $tratamiento->coste }}</td>
                                     <td>{{$tratamiento->iva}}</td>
                                     <td>{{ $tratamiento->terapia }}</td>
@@ -426,19 +426,19 @@
 
                             @foreach ($prueba_complementarias as $prueba_complementaria)
                                 <tr>
-                                    <td>{{ $prueba_complementaria->nombre }}</td>
+                                    <td style="word-break:break-word; width: 300px;">{{ $prueba_complementaria->nombre }}</td>
                                     <td width="120px">
                                     <div class="text-center"><a target="_blank" href="/{{$prueba_complementaria->fichero}}">
                                             <img src="/pdf.png" height="35px"/></a></div></td>
-                                    <td>{{ $prueba_complementaria->comentario }}</td>
+                                    <td style="word-wrap: break-word;max-width: 300px;">{{ $prueba_complementaria->comentario }}</td>
                                     @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
 
-                                    <td> {!! Form::open(['route' => ['prueba_complementarias.edit',$prueba_complementaria->id], 'method' => 'get']) !!}
+                                    <td style="width: 106px;"> {!! Form::open(['route' => ['prueba_complementarias.edit',$prueba_complementaria->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}</td>
                                     @endif
                                     @if(\Illuminate\Support\Facades\Auth::user()->userType=='teacher')
-                                        <td>
+                                        <td style="width: 106px;">
                                         {!! Form::open(['route' => ['prueba_complementarias.destroy',$prueba_complementaria->id], 'method' => 'delete']) !!}
                                         {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                         {!! Form::close() !!}

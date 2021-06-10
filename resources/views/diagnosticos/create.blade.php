@@ -13,7 +13,7 @@
                         {!! Form::open(['route' => 'diagnosticos.store']) !!}
                         <div class="form-group">
                             {!! Form::label('nombre', 'Nombre') !!}
-                            {!! Form::text('nombre',null,['class'=>'form-control', 'required','autofocus']) !!}
+                            {!! Form::text('nombre',null,['class'=>'form-control', 'required','autofocus','maxlength'=>"255"]) !!}
                         </div>
                         <br>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn button-align']) !!}

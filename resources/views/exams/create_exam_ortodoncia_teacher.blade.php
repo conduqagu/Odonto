@@ -31,7 +31,7 @@
                         </div>
                         <div>
                             {!!  Form::label('otros' , 'Otros') !!}
-                            {!! Form::text('otros', $exam->otros, ['class'=>'form-control']) !!}
+                            {!! Form::text('otros', $exam->otros, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             <br>
                         </div>
 

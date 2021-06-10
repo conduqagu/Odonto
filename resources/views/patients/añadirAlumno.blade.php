@@ -14,7 +14,7 @@
                             <div class="form-group" >
                                 <!--
                                 {!! Form::open(['route' => ['añadirAlumno',$patient->id], 'method' => 'get']) !!}
-                                {!! Form::text('query',null,['class'=>'col-md-4', 'autofocus', 'placeholder'=>'Nombre, apellido o DNI']) !!}
+                                {!! Form::text('query',null,['class'=>'col-md-4', 'autofocus', 'placeholder'=>'Nombre, apellido o DNI','maxlength'=>"255"]) !!}
                                 {!! Form::submit('Buscar', ['class'=> 'btn btn-success col-md-2'])!!}
                                 {!! Form::close() !!}
 

@@ -23,23 +23,23 @@
                         </div>
                         <div>
                             {!!  Form::label('previsto' , 'Previsto') !!}
-                            {!! Form::text('previsto',null, ['class'=>'form-control']) !!}
+                            {!! Form::text('previsto',null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                         </div>
                         <div>
                             {!!  Form::label('maxilar' , 'Maxilar') !!}
-                            {!! Form::text('maxilar',null, ['class'=>'form-control']) !!}
+                            {!! Form::text('maxilar',null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                         </div>
                         <div>
                             {!!  Form::label('mandibular' , 'Mandibular') !!}
-                            {!! Form::text('mandibular',null, ['class'=>'form-control']) !!}
+                            {!! Form::text('mandibular',null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                         </div>
                         <div>
                             {!!  Form::label('logrado' , 'Logrado') !!}
-                            {!! Form::text('logrado',null, ['class'=>'form-control']) !!}
+                            {!! Form::text('logrado',null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                         </div>
                         <div>
                             {!!  Form::label('otros' , 'Otros') !!}
-                            {!! Form::text('otros', $exam->otros, ['class'=>'form-control']) !!}
+                            {!! Form::text('otros', $exam->otros, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             <br>
                         </div>
 

@@ -16,7 +16,7 @@
                         </hidden>
                         <div class="form-group">
                             {!! Form::label('nombre', 'Nombre') !!}
-                            {!! Form::text('nombre',null,['class'=>'form-control', 'required','autofocus']) !!}
+                            {!! Form::text('nombre',null,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
                             <label>Nuevo Archivo</label>
@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('comentario', 'Comentario') !!}
-                            {!! Form::text('comentario',null,['class'=>'form-control', 'autofocus']) !!}
+                            {!! Form::text('comentario',null,['class'=>'form-control', 'autofocus', 'maxlength'=>"255"]) !!}
                         </div>
 
                         @if(\Illuminate\Support\Facades\Auth::user()->userType=='student')

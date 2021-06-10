@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h5>Tipos de  tratamientos</h5></div>
+                    <div class="panel-heading"><h5>Tratamientos</h5></div>
 
                     <div class="panel-body">
                         @include('flash::message')
@@ -14,7 +14,7 @@
                         {!!   Form::submit('Crear tratamiento', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
 
-                        <br><br>
+                        <br>
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>
@@ -26,7 +26,7 @@
                             </tr>
 
                             @foreach ($tipo_tratamientos as $tipo_tratamiento)
-                                <tr>
+                                <tr style="word-break: break-word;">
                                     <td>{{ $tipo_tratamiento->name }}</td>
                                     <td>{{ $tipo_tratamiento->coste }}</td>
                                     <td>{{ $tipo_tratamiento->iva }}</td>

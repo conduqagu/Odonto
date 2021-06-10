@@ -20,7 +20,7 @@
                         </div>
                         <div>
                             {!!  Form::label('indicePlaca' , 'Índice de placa') !!}
-                            {!! Form::text('indicePlaca', null,['class' => 'form-control']) !!}
+                            {!! Form::text('indicePlaca', null,['class' => 'form-control','maxlength'=>"255"]) !!}
                         </div>
                         <div>
                             {!!  Form::label('color' , 'Color') !!}
@@ -44,7 +44,7 @@
                         </div>
                         <div>
                             {!!  Form::label('otros' , 'Otros') !!}
-                            {!! Form::text('otros', null, ['class'=>'form-control']) !!}
+                            {!! Form::text('otros', null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             <br>
                         </div>
 

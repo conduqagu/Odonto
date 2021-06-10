@@ -19,31 +19,31 @@
                         </div>
                         <div>
                             {!!  Form::label('aspectoGeneral' , 'Aspecto General') !!}
-                            {!! Form::text('aspectoGeneral',null, ['class'=>'form-control']) !!}
+                            {!! Form::text('aspectoGeneral',null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                         </div>
                         <div>
                             {!!  Form::label('talla' , 'Talla') !!}
-                            {!! Form::text('talla',null, ['class'=>'form-control']) !!}
+                            {!! Form::text('talla',null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                         </div>
                         <div>
                             {!!  Form::label('peso' , 'Peso') !!}
-                            {!! Form::text('peso',null, ['class'=>'form-control']) !!}
+                            {!! Form::text('peso',null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                         </div>
                         <div>
                             {!!  Form::label('piel' , 'Piel') !!}
-                            {!! Form::text('piel',null, ['class'=>'form-control']) !!}
+                            {!! Form::text('piel',null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                         </div>
                         <div>
                             {!!  Form::label('anomaliaForma' , 'Anomalía en forma') !!}
-                            {!! Form::text('anomaliaForma',null, ['class'=>'form-control']) !!}
+                            {!! Form::text('anomaliaForma',null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                         </div>
                         <div>
                             {!!  Form::label('anomaliaTamaño' , 'Anomalía en tamaño') !!}
-                            {!! Form::text('anomaliaTamaño',null, ['class'=>'form-control']) !!}
+                            {!! Form::text('anomaliaTamaño',null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                         </div>
                         <div>
                             {!!  Form::label('otros' , 'Otros') !!}
-                            {!! Form::text('otros', $exam->otros, ['class'=>'form-control']) !!}
+                            {!! Form::text('otros', $exam->otros, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             <br>
                         </div>
 

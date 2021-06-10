@@ -12,7 +12,7 @@
                         {!! Form::model($tipo_tratamiento, ['route' => ['tipo_tratamientos.update',$tipo_tratamiento->id], 'method'=>'PUT']) !!}
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre') !!}
-                            {!! Form::text('name',$tipo_tratamiento->name,['class'=>'form-control', 'required','autofocus']) !!}
+                            {!! Form::text('name',$tipo_tratamiento->name,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('coste', 'Coste') !!}
@@ -20,7 +20,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('iva', 'IVA') !!}
-                            {!! Form::text('iva',$tipo_tratamiento->iva,['class'=>'form-control', 'required','autofocus']) !!}
+                            {!! Form::number('iva',$tipo_tratamiento->iva,['class'=>'form-control', 'required','autofocus']) !!}
                         </div>
 
                         <br>

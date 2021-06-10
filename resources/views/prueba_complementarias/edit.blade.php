@@ -14,15 +14,15 @@
 
                         <div class="form-group">
                             {!! Form::label('nombre', 'Nombre') !!}
-                            {!! Form::text('nombre',$prueba_complementaria->nombre,['class'=>'form-control', 'required','autofocus']) !!}
+                            {!! Form::text('nombre',$prueba_complementaria->nombre,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('fichero', 'Fichero') !!}
-                            {!! Form::text('fichero',$prueba_complementaria->fichero,['class'=>'form-control', 'required','autofocus']) !!}
+                            {!! Form::text('fichero',$prueba_complementaria->fichero,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('comentario', 'Comentario') !!}
-                            {!! Form::text('comentario',$prueba_complementaria->comentario,['class'=>'form-control', 'autofocus']) !!}
+                            {!! Form::text('comentario',$prueba_complementaria->comentario,['class'=>'form-control', 'autofocus', 'maxlength'=>"255"]) !!}
                         </div>
                         @if(\Illuminate\Support\Facades\Auth::user()->userType=='student')
                             <div class="form-group">

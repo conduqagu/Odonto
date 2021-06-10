@@ -12,7 +12,7 @@
                         {!! Form::open(['route' => 'brakets.create', 'method' => 'get']) !!}
                         {!!   Form::submit('Crear tipo de Braket', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
-                        <br><br>
+                        <br>
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>
@@ -20,7 +20,7 @@
                             </tr>
 
                             @foreach ($brakets as $braket)
-                                <tr>
+                                <tr style="word-break: break-word;">
                                     <td>{{ $braket->name }}</td>
 
                                 <td>

@@ -12,9 +12,7 @@
                         {!! Form::open(['route' => 'diagnosticos.create', 'method' => 'get']) !!}
                         {!!   Form::submit('Crear diagnostico', ['class'=> 'btn btn-primary'])!!}
                         {!! Form::close() !!}
-
-
-                        <br><br>
+                        <br>
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>
@@ -22,7 +20,7 @@
                             </tr>
 
                             @foreach ($diagnosticos as $diagnostico)
-                                <tr>
+                                <tr style="word-break: break-word;">
                                     <td>{{ $diagnostico->nombre }}</td>
 
                                     <td>

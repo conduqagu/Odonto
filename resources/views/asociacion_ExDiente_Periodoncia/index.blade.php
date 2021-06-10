@@ -25,7 +25,7 @@
                                 <th colspan="2">Acciones</th>
                             </tr>
                             @foreach ($asociacion_exam_dientes as $asociacion_exam_diente)
-                                <tr>
+                                <tr style="word-break: break-word;">
                                     <td>{{ $asociacion_exam_diente->diente->number}} -
                                         {{ $asociacion_exam_diente->diente->name}}</td>
                                     <td>{{ $asociacion_exam_diente->furca }}</td>
