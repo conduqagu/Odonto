@@ -32,11 +32,20 @@ class UserController extends Controller
      */
     public function indexstudents(Request $request) //Lista de estudiantes para profesores
     {
+        $mystudents = \App\User::find(Auth::user()->id)->students()->where('userType','=','student')
+            ->where('users.dni','LIKE','%'.$request->get("query")."%")
+            ->orWhere('users.name','LIKE','%'.$request->get("query")."%")
+            ->orWhere('users.surname','LIKE','%'.$request->get("query")."%")
+            ->get();
         $students= \App\User::whereNotIn('users.id',\App\User::find(Auth::user()->id)->students()->pluck('users.id')->values())
-            ->where('users.name','LIKE','%'.$request->get("query")."%")
+            ->where('users.name', 'LIKE', '%' . $request->get("query") . "%")
+            ->where('users.dni','LIKE','%'.$request->get("query")."%")
+            ->where('users.surname','LIKE','%'.$request->get("query")."%")
             ->where('userType','=','student')
             ->get();
-        return view('indexstudents',['students'=>$students]);
+        dd($students);
+
+        return view('indexstudents',['students'=>$students,'mystudents'=>$mystudents]);
     }
     /**
      * Lista de estudiantes asociada a un profesor (usuario)
@@ -83,7 +92,7 @@ class UserController extends Controller
 
         flash('Alumno quitado correctamente');
 
-        return redirect()->route('listsmystudent');
+        return redirect()->route('indexstudents');
     }
     /**
      * Show the form for creating a new resource.

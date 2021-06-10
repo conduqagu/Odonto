@@ -88,7 +88,7 @@
 
                 <div class="links">
                     <a href="https://github.com/conduqagu/Odonto" target="_blank">GitHub</a>
-                    <a href="http://odonto.test/información" >Información</a>
+                    <a href="/informacion" >Información</a>
                 </div>
 
 

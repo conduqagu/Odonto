@@ -148,7 +148,9 @@ Route::get('/paypal/status/{id}', 'PaymentController@payPalStatus')->name('paypa
 Route::get('/pago/error', 'PaymentController@pago_error')->name('pago_error');
 Route::get('/pago/correcto', 'PaymentController@pago_correcto')->name('pago_correcto');
 
-
+Route::get('/informacion', function () {
+    return view('objetivos');
+});
 
 Auth::routes();
 
