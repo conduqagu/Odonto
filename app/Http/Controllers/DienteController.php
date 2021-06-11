@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Diente;
 use App\Patient;
+use App\Rules\PinProfesor;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -59,15 +60,9 @@ class DienteController extends Controller
         ]);
         if(Auth::user()->userType=='student'){
             $this->validate($request,[
-                'pin'=>['required','string']
+                'pin'=>['required','string','max:255',new PinProfesor()]
             ]);
-            $profesores=User::find(Auth::user()->id)->teachers()
-                ->where('pin','=',MD5($request->pin))->get();
 
-            if(count($profesores)==0){
-                flash('Pin incorrecto');
-                return redirect()->route('diente.create',[$request->patient_id]);
-            }
         }
         $diente=new Diente($request->all());
         $diente->save();
@@ -124,15 +119,8 @@ class DienteController extends Controller
 
         if(Auth::user()->userType=='student') {
             $this->validate($request,[
-                'pin'=>['required','string']
+                'pin'=>['required','string','max:255',new PinProfesor()]
             ]);
-            $profesores=User::find(Auth::user()->id)->teachers()
-                ->where('pin','=',MD5($request->pin))->get();
-
-            if (count($profesores) == false) {
-                flash('Pin incorrecto');
-                return redirect()->route('dientes.edit', $id);
-            }
         }
         $diente = Diente::find($id);
         $diente->fill($request->all());

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\PruebaComplementaria;
+use App\Rules\PinProfesor;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -46,14 +47,8 @@ class PruebaComplementariaController extends Controller
         ]);
         if(Auth::user()->userType=='student'){
             $this->validate($request,
-                ['pin' => ['required', 'string', 'max:255']]);
-            $profesores=User::find(Auth::user()->id)->teachers()
-                ->where('pin','=',MD5($request->pin))->get();
+                ['pin'=>['required','string','max:255',new PinProfesor()]]);
 
-            if(count($profesores)==0) {
-                flash('Pin incorrecto');
-                return redirect()->back();
-            }
         }
         $prueba_complementaria=new PruebaComplementaria($request->all());
         $prueba_complementaria->save();
@@ -113,14 +108,8 @@ class PruebaComplementariaController extends Controller
         ]);
         if(Auth::user()->userType=='student'){
             $this->validate($request,
-                ['pin' => ['required', 'string', 'max:255']]);
-            $profesores=User::find(Auth::user()->id)->teachers()
-                ->where('pin','=',MD5($request->pin))->get();
+                ['pin'=>['required','string','max:255',new PinProfesor()]]);
 
-            if(count($profesores)==0) {
-                flash('Pin incorrecto');
-                return redirect()->back();
-            }
         }
 
         $prueba_complementaria = PruebaComplementaria::find($id);

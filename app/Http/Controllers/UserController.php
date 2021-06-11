@@ -37,30 +37,17 @@ class UserController extends Controller
             ->orWhere('users.name','LIKE','%'.$request->get("query")."%")
             ->orWhere('users.surname','LIKE','%'.$request->get("query")."%")
             ->get();
-        $students= \App\User::whereNotIn('users.id',\App\User::find(Auth::user()->id)->students()->pluck('users.id')->values())
-            ->where('users.name', 'LIKE', '%' . $request->get("query") . "%")
-            ->where('users.dni','LIKE','%'.$request->get("query")."%")
-            ->where('users.surname','LIKE','%'.$request->get("query")."%")
-            ->where('userType','=','student')
+        $users_filter=User::where('users.name','LIKE','%'.$request->get("query")."%")
+            ->orWhere('users.dni','LIKE','%'.$request->get("query")."%")
+            ->orWhere('users.surname','LIKE','%'.$request->get("query")."%")->pluck('id','id');
+    //todo: arrglar filtro
+        $students= User::where('userType','=','student')
+            ->whereNotIn('users.id',\App\User::find(Auth::user()->id)->students()->pluck('users.id')->values())
+            ->whereIn('users.id', $users_filter)
             ->get();
-        dd($students);
 
         return view('indexstudents',['students'=>$students,'mystudents'=>$mystudents]);
     }
-    /**
-     * Lista de estudiantes asociada a un profesor (usuario)
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function listsmystudent(Request $request) //Lista de estudiantes para profesores
-    {
-        $students = \App\User::find(Auth::user()->id)->students()
-            ->where('users.name','LIKE','%'.$request->get("query")."%")
-            ->where('userType','=','student')
-            ->get();
-        return view('listsmystudent',['students'=>$students]);
-    }
-
 
     /**
      * Asignar un alumno al profesor (usuario)

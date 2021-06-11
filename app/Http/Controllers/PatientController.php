@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AsociacionPatientStudent;
 use App\Diente;
 use App\Patient;
+use App\Rules\PinProfesor;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,10 @@ class PatientController extends Controller
      */
     public function index(Request $request)
     {
-        $patients=User::find(Auth::user()->id)->patients()->get();
+        $patients_filter=Patient::where('patients.name','LIKE','%'.$request->get("query")."%")
+            ->orWhere('patients.dni','LIKE','%'.$request->get("query")."%")
+            ->orWhere('patients.surname','LIKE','%'.$request->get("query")."%")->pluck('id','id');
+        $patients=User::find(Auth::user()->id)->patients()->whereIn('patients.id',$patients_filter)->get();
         return view('patients.index',['patients'=>$patients]);
     }
     /**
@@ -91,15 +95,8 @@ class PatientController extends Controller
             'riesgoASA' => ['required','in:I,II,III'],
             'observaciones' => ['nullable','string', 'max:255'],
             'child'=>['required','boolean'],
-            'pin'=>['required','string']
+            'pin'=>['required','string','max:255',new PinProfesor()]
         ]);
-        $profesores=User::find(Auth::user()->id)->teachers()
-            ->where('pin','=',MD5($request->pin))->get();
-
-        if(count($profesores)==0){
-            flash('Pin incorrecto');
-            return redirect()->route('patients.create');
-        }
 
         $patient = new Patient($request->all());
         $patient->save();
@@ -225,16 +222,9 @@ class PatientController extends Controller
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
             'observaciones' => ['nullable','string', 'max:255'],
             'child'=>['required','boolean'],
-            'pin'=>['required','string']
+            'pin'=>['required','string','max:255',new PinProfesor()]
         ]);
 
-        $profesores=User::find(Auth::user()->id)->teachers()
-            ->where('pin','=',MD5($request->pin))->get();
-
-        if(count($profesores)==0){
-            flash('Pin incorrecto');
-            return redirect()->route('patients.edit',$id);
-        }
         if($patient->child!=$request->child and $request->child==0){
             $patient->fill($request->all());
             $patient->save();

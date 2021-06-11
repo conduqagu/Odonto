@@ -6,6 +6,7 @@ use App\AsociacionExamDiente;
 use App\Diente;
 use App\Exam;
 use App\Patient;
+use App\Rules\PinProfesor;
 use App\TipoTratamiento;
 use App\Tratamiento;
 use App\User;
@@ -136,14 +137,7 @@ class AsociacionExamDienteController extends Controller
         }
         if (Auth::user()->userType=='student'){
             $this->validate($request,
-                ['pin' => ['required', 'string', 'max:255']]);
-            $profesores=User::find(Auth::user()->id)->teachers()
-                ->where('pin','=',MD5($request->pin))->get();
-
-            if(count($profesores)==0) {
-                flash('Pin incorrecto');
-                return redirect()->route('create_asociacionED',$exam_id);
-            }
+                ['pin' => ['required', 'string', 'max:255',new PinProfesor()]]);
             $user=User::where('pin','=',MD5($request->pin))->first();
         }
 
@@ -199,14 +193,7 @@ class AsociacionExamDienteController extends Controller
         }
         if(Auth::user()->userType=='student'){
             $this->validate($request,
-                ['pin' => ['required', 'string', 'max:255']]);
-            $profesores=User::find(Auth::user()->id)->teachers()
-                ->where('pin','=',MD5($request->pin))->get();
-
-            if(count($profesores)==0) {
-                flash('Pin incorrecto');
-                return redirect()->route('create_asociacionED',$exam_id);
-            }
+                ['pin' => ['required', 'string', 'max:255',new PinProfesor()]]);
             $user=User::where('pin','=',MD5($request->pin))->first();
         }
 
@@ -313,18 +300,10 @@ class AsociacionExamDienteController extends Controller
             'opacidad' => 'required|String|in:Ningún estado anormal,Opacidad delimitada,OpacidadDifusa,Hipoplasia,
                 Otros defectos,Opacidad elimitada y difusa,Opacidad delimitada e hipoplasia,Opacidad difusa e hipoplasia',
             'diente_id' => 'required|exists:dientes,id',
-            'pin' => ['required', 'string', 'max:255'],
+            'pin' => ['required', 'string', 'max:255',new PinProfesor()]
 
         ]);
 
-
-        $profesores=User::find(Auth::user()->id)->teachers()
-            ->where('pin','=',MD5($request->pin))->get();
-
-        if(count($profesores)==0) {
-            flash('Pin incorrecto');
-            return redirect()->route('edit_asociacionED',$id);
-        }
         $asociacion_exam_diente = AsociacionExamDiente::find($id);
 
         if($request->get('tipo_tratamiento_id')!=1 && $asociacion_exam_diente->tipo_tratamiento_id==null){
@@ -424,14 +403,7 @@ class AsociacionExamDienteController extends Controller
 
         if(Auth::user()->userType=='student'){
             $this->validate($request,
-                ['pin' => ['required', 'string', 'max:255']]);
-            $profesores=User::find(Auth::user()->id)->teachers()
-                ->where('pin','=',MD5($request->pin))->get();
-
-            if(count($profesores)==0) {
-                flash('Pin incorrecto');
-                return redirect()->route('edit_asociacionEDPeriodoncia',$asociacion_exam_diente->id);
-            }
+                ['pin' => ['required', 'string', 'max:255',new PinProfesor()]]);
             $user=User::where('pin','=',MD5($request->pin))->first();
             $asociacion_exam_diente->teacher_id=$user->id;
         }

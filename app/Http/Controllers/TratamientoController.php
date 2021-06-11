@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Braket;
 use App\Diagnostico;
+use App\Rules\PinProfesor;
 use App\TipoTratamiento;
 use App\Tratamiento;
 use App\User;
@@ -55,14 +56,8 @@ class TratamientoController extends Controller
         ]);
         if(Auth::user()->userType=='student'){
             $this->validate($request,
-                ['pin' => ['required', 'string', 'max:255']]);
-            $profesores=User::find(Auth::user()->id)->teachers()
-                ->where('pin','=',MD5($request->pin))->get();
+                ['pin'=>['required','string','max:255',new PinProfesor()]]);
 
-            if(count($profesores)==0) {
-                flash('Pin incorrecto');
-                return redirect()->back();
-            }
         }
         $tratamiento=new Tratamiento($request->all());
         $tratamiento->save();

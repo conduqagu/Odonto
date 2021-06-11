@@ -32,7 +32,7 @@
                                 <th>Fecha de nacimiento</th>
                                 <th>Riesgo ASA</th>
                                 <th>Observaciones</th>
-                                <th>Alumno</th>
+                                <th>Alumnos</th>
                                 <th colspan="4">Acciones</th>
                             </tr>
 
@@ -53,7 +53,7 @@
 
                                     <td>
                                     @foreach ($patient->students as $student)
-                                     {{$student->name.", " }}
+                                     {{$student->name." ".$student->surname.", " }}
                                     @endforeach
                                     </td>
                                     <td>

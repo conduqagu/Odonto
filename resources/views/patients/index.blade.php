@@ -11,7 +11,7 @@
                         @include('flash::message')
                         <div class="form-group" >
                             {!! Form::open(['route' => ['patients.index'], 'method' => 'get']) !!}
-                            {!! Form::text('query',null,['class'=>'col-md-2', 'autofocus', 'placeholder'=>'Nombre del paciente']) !!}
+                            {!! Form::text('query',null,['class'=>'col-md-2', 'autofocus', 'placeholder'=>'Nombre, apellido o DNI']) !!}
                             {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary'])!!}
                             {!! Form::close() !!}
 

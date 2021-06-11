@@ -42,7 +42,12 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('pin', 'Pin del profesor') !!}
-                            <input id="pin" type="password" class="form-control" name="pin" required>
+                            <input id="pin" type="password" class="form-control @error('pin') is-invalid @enderror" name="pin" value="{{ old('pin') }}"  name="pin" required>
+                            @error('pin')
+                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
                         </div>
 
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn button-align']) !!}

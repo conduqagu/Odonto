@@ -9,6 +9,7 @@ use App\Exam;
 use App\Mail\CorreoPago;
 use App\Patient;
 use App\PruebaComplementaria;
+use App\Rules\PinProfesor;
 use App\Tratamiento;
 use App\User;
 use Illuminate\Http\Request;
@@ -107,18 +108,10 @@ class ExamController extends Controller
         $this->validate($request, [
             'date'=>['required','date'],
             'tipoExam'=>['required','string','in:inicial,infantil,periodoncial,ortodoncial,evOrto,otro'],
-            'pin'=>['required','string'],
+            'pin'=>['required','string','max:255',new PinProfesor()],
             'patient_id' => ['required', 'exists:patients,id'],
         ]);
 
-        $profesores=User::find(Auth::user()->id)->teachers()
-            ->where('pin','=',MD5($request->pin))->get();
-
-        if(count($profesores)==0) {
-            dd(MD5('22222222A'));
-            flash('Pin incorrecto');
-            return redirect()->route('exams.create',$request->patient_id);
-        }
 
         $user=User::where('pin','=',MD5($request->pin))->first();
         $exam = new Exam($request->all());
@@ -225,7 +218,7 @@ class ExamController extends Controller
         $exam = Exam::find($id);
         $this->validate($request,[
             'otros' => ['nullable', 'string', 'max:1000'],
-            'pin' => ['required', 'string']
+            'pin'=>['required','string','max:255',new PinProfesor()]
         ]);
         if($exam->tipoExam=='inicial') {
             $this->validate($request, [
@@ -292,13 +285,6 @@ class ExamController extends Controller
         }
 
 
-        $profesores=User::find(Auth::user()->id)->teachers()
-            ->where('pin','=',MD5($request->pin))->get();
-
-        if(count($profesores)==0){
-        flash('Pin incorrecto');
-        return redirect()->route('exams.edit',$id);
-    }
         $user=User::where('pin','=',MD5($request->pin))->first();
         $exam->teacher_id=$user->id;
         $exam->fill($request->all());
@@ -556,16 +542,8 @@ class ExamController extends Controller
     public function examsdeleteStudent(Request $request,$id){
 
         $this->validate($request, [
-            'pin'=>['required','integer']
+            'pin'=>['required','string','max:255',new PinProfesor()]
         ]);
-
-        $profesores=User::find(Auth::user()->id)->teachers()
-            ->where('pin','=',MD5($request->pin))->get();
-
-        if(count($profesores)==0){
-            flash('Pin incorrecto');
-            return redirect()->route('examsdestroyStudent',['id'=>$id]);
-        }
 
         $exam = Exam::find($id);
         $exam->delete();
