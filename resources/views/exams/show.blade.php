@@ -296,7 +296,7 @@
                         @foreach ($diagnosticos as $diagnostico)
                             <tr>
                                 <td style=" min-width: 300px;">{{ $diagnostico->nombre }}</td>
-                                <td  style="word-wrap: break-word !important;max-width: 500px;min-width: 500px;">{{ $diagnostico->pivot->comentario }}</td>
+                                <td  style="word-wrap: break-word !important;max-width: 500px;">{{ $diagnostico->pivot->comentario }}</td>
                                 @if(\Illuminate\Support\Facades\Auth::user()->userType=='teacher')
 
                                 <td>
