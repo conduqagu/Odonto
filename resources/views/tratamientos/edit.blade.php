@@ -35,7 +35,7 @@
                         </div>
                         @if(\App\Exam::find($tratamiento->exam_id)->tipoExam=='ortodoncial')
                             <div class="form-group">
-                                {!!  Form::label('braket_id' , 'Brakets') !!}
+                                {!!  Form::label('braket_id' , 'Brackets') !!}
                                 {!! Form::select('braket_id', $brakets,null,['class' => 'form-control']) !!}
                             </div>
                         @endif

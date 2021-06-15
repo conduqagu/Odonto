@@ -5,7 +5,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header"><h5>Crear Tipo de Braket</h5></div>
+                    <div class="card-header"><h5>Crear Tipo de Bracket</h5></div>
 
                     <div class="card-body">
                         @include('flash::message')

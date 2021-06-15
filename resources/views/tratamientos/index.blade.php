@@ -21,7 +21,7 @@
                                 <th>Terapia</th>
                                 <th>Fecha inicio</th>
                                 <th>Fecha fin</th>
-                                <th>Brakets</th>
+                                <th>Brackets</th>
                                 <th colspan="2">Acciones</th>
                             </tr>
 
