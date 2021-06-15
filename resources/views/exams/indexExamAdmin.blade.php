@@ -42,8 +42,8 @@
                                     @endif
 
                                     <td>
-                                        @if($exam->teachers!=null)
-                                            {{$exam->teachers->dni}}
+                                        @if($exam->teacher_id!=null)
+                                            {{App\User::find($exam->teacher_id)->dni}}
                                         @endif
                                     </td>
                                     <td>
