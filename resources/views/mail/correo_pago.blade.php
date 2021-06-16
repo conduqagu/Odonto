@@ -12,7 +12,9 @@
 <table border="1" width="100%" align="center">
     <tr>
         <td bgcolor="#CCCCCC">Nombre</td>
-        <td bgcolor="#CCCCCC">Coste</td>
+        <td bgcolor="#CCCCCC">Coste (€)</td>
+        <td bgcolor="#CCCCCC">IVA (%)</td>
+        <td bgcolor="#CCCCCC">Zona</td>
     </tr>
 
     @foreach ($tratamientos as $tratamiento)

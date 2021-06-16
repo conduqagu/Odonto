@@ -42,12 +42,11 @@
                                     @endif
 
                                         <td>
-                                        {!! Form::open(['route' => ['user.edit',$user->id], 'method' => 'get']) !!}
+                                        {!! Form::open(['route' => ['user.edit',$user->id], 'method' => 'get','style'=>'display: inline']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}
-                                        </td>
-                                        <td>
-                                        {!! Form::open(['route' => ['user.destroy',$user->id], 'method' => 'delete']) !!}
+
+                                        {!! Form::open(['route' => ['user.destroy',$user->id], 'method' => 'delete','style'=>'display: inline']) !!}
                                         {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                         {!! Form::close() !!}
                                         </td>

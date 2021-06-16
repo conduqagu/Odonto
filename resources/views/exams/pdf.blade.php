@@ -336,7 +336,7 @@
     </table>
     <br>
     @endif
-
+    @if(count($diagnosticos)>0)
     <body>Diagnósticos:</body>
     <table border="1" width="100%">
         <tr>
@@ -352,8 +352,10 @@
             </tr>
         @endforeach
     </table>
+        <br>
+    @endif
+    @if(count($tratamientos)>0)
 
-    <br>
     <body>Tratamientos:</body>
 
     <table border="1" width="100%" align="center">
@@ -403,6 +405,8 @@
             </tr>
     </table>
     <br>
+    @endif
+    @if(count($prueba_complementarias)>0)
     <body>Pruebas complementarias:</body>
 
     <table border="1" width="100%">
@@ -419,7 +423,7 @@
             </tr>
         @endforeach
     </table>
-
+    @endif
 </div>
 </body>
 </html>
