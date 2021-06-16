@@ -46,9 +46,9 @@
                         {!! Form::submit('Actualizar',['class'=>'btn-primary btn button-align']) !!}
                         {!! Form::close() !!}
 
-                        <a class="btn btn-outline-dark button-align-right " style="margin-bottom: 15px" href="{{ url()->previous() }}">
-                            Cancelar
-                        </a>
+                        {!! Form::open(['route' => ['dientesPatient',$diente->patient_id], 'method' => 'get']) !!}
+                        {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

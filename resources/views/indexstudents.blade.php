@@ -10,11 +10,20 @@
                 <div class="panel-body">
                     @include('flash::message')
                     <div class="form-group" >
-                        {!! Form::open(['route' => ['indexstudents'], 'method' => 'get']) !!}
+                        <div class="row align-items-start">
+                            <div class="col-11">
+                        {!! Form::model(\Illuminate\Support\Facades\Request::all(),['route' => ['indexstudents'], 'method' => 'get']) !!}
                         {!! Form::text('query',null,['class'=>'col-md-3', 'autofocus', 'placeholder'=>'Nombre, apellido o DNI']) !!}
-                        {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary'])!!}
+                        {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary', 'name'=>'semibutton'])!!}
+                        {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary ','name'=>'semibutton'])!!}
                         {!! Form::close() !!}
-
+                            </div>
+                            <div class="col">
+                        {!! Form::open(['route' => ['home'], 'method' => 'get']) !!}
+                        {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
+                        {!! Form::close() !!}
+                            </div>
+                        </div>
                     </div>
 
                     <table class="table table-striped table-bordered">
@@ -54,6 +63,9 @@
                             </tr>
                         @endforeach
                     </table>
+                    {!! Form::open(['route' => ['home'], 'method' => 'get']) !!}
+                    {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

@@ -64,9 +64,9 @@
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn button-align']) !!}
                         {!! Form::close() !!}
 
-                        <a class="btn btn-outline-dark button-align-right " style="margin-bottom: 15px" href="{{ url()->previous() }}">
-                            Cancelar
-                        </a>
+                        {!! Form::open(['route' => ['index_asociacionEDPeriodoncia',$asociacion_exam_diente->exam_id], 'method' => 'get']) !!}
+                        {!!   Form::submit('Detalle examen', ['class'=> 'btn btn-outline-dark'])!!}
+                        {!! Form::close() !!}
 
                     </div>
                 </div>

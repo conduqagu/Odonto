@@ -117,9 +117,15 @@
                                 {!! Form::submit('Registrar',['class'=>'btn-primary btn button-align']) !!}
                                 {!! Form::close() !!}
 
-                                <a class="btn btn-outline-dark button-align-right " style="margin-bottom: 15px" href="{{ url()->previous() }}">
-                                    Cancelar
-                                </a>
+                                @if(\Illuminate\Support\Facades\Auth::user()->userType=='admin')
+                                    {!! Form::open(['route' => ['userIndex'], 'method' => 'get']) !!}
+                                    {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
+                                    {!! Form::close() !!}
+                                @else
+                                    {!! Form::open(['route' => ['home'], 'method' => 'get']) !!}
+                                    {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
+                                    {!! Form::close() !!}
+                                @endif
                         </div>
 
 

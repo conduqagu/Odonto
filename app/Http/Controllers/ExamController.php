@@ -30,29 +30,30 @@ class ExamController extends Controller
      */
     public function index($id, Request $request)
     {
+        $patient=Patient::find($id);
+        if($request->semibutton=='Borrar filtro') {
+            $request->replace(['query'=>null]);
+            $request->replace(['query2'=>null]);
+
+        }
         $exams=Exam::where('exams.patient_id','=',$id)
             ->where('exams.tipoExam','LIKE','%'.$request->get("query")."%")
             ->where('exams.date','LIKE','%'.$request->get("query2")."%")
             ->get();
-        $patient=Patient::find($id);
 
         return view('exams/index',['exams'=>$exams,'patient'=>$patient,'id'=>$id]);
     }
     public function indexExamsAdmin(Request $request)
     {
-        switch($request->semibutton) {
-            case 'Buscar':
-                $exams=Exam::where('exams.tipoExam','LIKE','%'.$request->get("query")."%")
-                    ->where('exams.date','LIKE','%'.$request->get("query2")."%")
-                    ->get();
-                return view('exams/indexExamAdmin',['exams'=>$exams, 'query'=>$request]);
-                break;
-            case 'Borrar filtro':
-                $exams=Exam::all();
-                return view('exams/indexExamAdmin',['exams'=>$exams]);
-                break;
+        if($request->semibutton=='Borrar filtro') {
+            $request->replace(['query'=>null]);
+            $request->replace(['query2'=>null]);
+
         }
-        $exams=Exam::all();
+        $exams=Exam::where('exams.tipoExam','LIKE','%'.$request->get("query")."%")
+            ->where('exams.date','LIKE','%'.$request->get("query2")."%")
+            ->get();
+
         return view('exams/indexExamAdmin',['exams'=>$exams, 'query'=>$request]);
     }
 

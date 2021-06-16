@@ -58,8 +58,11 @@
                             </table>
                         </div>
 
-                        {!! Form::submit('Actualizar',['class'=>'btn-primary btn']) !!}
+                        {!! Form::submit('Actualizar',['class'=>'btn-primary btn button-align']) !!}
 
+                        {!! Form::close() !!}
+                        {!! Form::open(['route' => ['home'], 'method' => 'get']) !!}
+                        {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                         {!! Form::close() !!}
                     </div>
                 </div>

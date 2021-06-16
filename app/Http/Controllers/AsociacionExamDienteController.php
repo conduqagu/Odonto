@@ -141,9 +141,6 @@ class AsociacionExamDienteController extends Controller
             $user=User::where('pin','=',MD5($request->pin))->first();
         }
 
-
-
-
         foreach ($lista as $a) {
             $this->validate($request, [
                 'denticionRaiz' . $a => 'required|String|in:Sano,Cariado,Obturado sin caries,Obturado con caries,Pérdida otro motivo,

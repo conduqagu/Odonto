@@ -56,10 +56,18 @@
                         @endif
 
                         <br>
-                        {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
+                        {!! Form::submit('Guardar',['class'=>'btn-primary btn button-align']) !!}
                         {!! Form::close() !!}
-                        <br>
 
+                        @if(\Illuminate\Support\Facades\Auth::user()->userType=='teacher')
+                            {!! Form::open(['route' => ['indexasociacionEDTeacher',$exam_id], 'method' => 'get']) !!}
+                            {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
+                            {!! Form::close() !!}
+                        @else
+                            {!! Form::open(['route' => ['index_asociacionED',$exam_id], 'method' => 'get']) !!}
+                            {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
+                            {!! Form::close() !!}
+                        @endif
                     </div>
                 </div>
             </div>

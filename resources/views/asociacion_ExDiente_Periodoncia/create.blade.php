@@ -59,6 +59,10 @@
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
                         {!! Form::close() !!}
                         <br>
+                        {!! Form::open(['route' => ['index_asociacionEDPeriodoncia',$exam_id], 'method' => 'get']) !!}
+                        {!!   Form::submit('Detalle examen', ['class'=> 'btn btn-outline-dark'])!!}
+                        {!! Form::close() !!}
+
 
                     </div>
                 </div>

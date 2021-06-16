@@ -34,10 +34,14 @@ class PatientController extends Controller
      */
     public function index(Request $request)
     {
+        if($request->semibutton=='Borrar filtro') {
+            $request->replace(['query'=>null]);
+        }
         $patients_filter=Patient::where('patients.name','LIKE','%'.$request->get("query")."%")
             ->orWhere('patients.dni','LIKE','%'.$request->get("query")."%")
             ->orWhere('patients.surname','LIKE','%'.$request->get("query")."%")->pluck('id','id');
         $patients=User::find(Auth::user()->id)->patients()->whereIn('patients.id',$patients_filter)->get();
+
         return view('patients.index',['patients'=>$patients]);
     }
     /**
@@ -47,8 +51,9 @@ class PatientController extends Controller
      */
     public function indexteacher(Request $request)
     {
-       // $patients=Patient::all();
-
+        if($request->semibutton=='Borrar filtro') {
+            $request->replace(['query'=>null]);
+        }
         $patients = Patient::where('patients.dni','LIKE','%'.$request->get("query")."%")
             ->orWhere('patients.name','LIKE','%'.$request->get("query")."%")
             ->orWhere('patients.surname','LIKE','%'.$request->get("query")."%")

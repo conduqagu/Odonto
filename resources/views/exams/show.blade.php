@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container2">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 @include('flash::message')
 
                 <div class="card">
@@ -22,7 +22,9 @@
                 @if($exam->tipoExam=='inicial')
 
                 <br>
-                        <div class="card ">
+                    <div class="row align-items-start">
+                        <div class="col">
+                        <div class="card" style="height: 451px;">
                             <div class="card-header"><h5>Mucosas</h5></div>
                             <div class="card-body">
                                 <div >
@@ -63,8 +65,9 @@
                                 </div>
                             </div>
                         </div>
-                        <br>
-                        <div class="card">
+                        </div>
+                        <div class="col">
+                        <div class="card"  style="height: 451px;">
                             <div class="card-header"><h5>Índice Periodontitis comunitario(IPC)</h5></div>
                             <div class="card-body">
                                 <div>
@@ -93,7 +96,10 @@
                                 </div>
                             </div>
                         </div>
+                        </div>
                             <br>
+                        <div class="col">
+
                         <div class="card">
                             <div class="card-header"><h5>Anomalías dentofaciales</h5></div>
                             <div class="card-body">
@@ -183,6 +189,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    </div>
                     @elseif($exam->tipoExam=='infantil')
                         <br>
                         <div class="card">
@@ -250,6 +258,7 @@
                             </div>
                         </div>
                     @elseif($exam->tipoExam=='evOrto')
+                    <br>
                         <div class="card">
                             <div class="card-header"><h5>Evaluación ortodoncia</h5></div>
                             <div class="card-body">
@@ -268,13 +277,7 @@
                             </div>
                         </div>
                     @endif
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="container2">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
+<br>
                     <div class="card" >
                         <div class="card-header"><h5>Diagnósticos</h5></div>
                         <div class="card-body">

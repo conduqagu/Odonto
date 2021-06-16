@@ -10,15 +10,21 @@
                     <div class="panel-body">
                         @include('flash::message')
                         <div class="form-group" >
-                            {!! Form::open(['route' => ['indexteacher'], 'method' => 'get']) !!}
-                            {!! Form::text('query',null,['class'=>'col-md-3', 'autofocus', 'placeholder'=>'Nombre, apellido o DNI']) !!}
-                            {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary'])!!}
-                            {!! Form::close() !!}
+
+                                {!! Form::model(\Illuminate\Support\Facades\Request::all(),['route' => ['indexteacher'], 'method' => 'get']) !!}
+                                {!! Form::text('query',null,['class'=>'col-md-3 form-control', 'autofocus', 'placeholder'=>'Nombre, apellido o DNI','style'=>'display:inline-block']) !!}
+                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary ', 'name'=>'semibutton'])!!}
+                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary ','name'=>'semibutton'])!!}
+                                {!! Form::close() !!}
+
 
                         </div>
 
                         {!! Form::open(['route' => 'createteacher', 'method' => 'get']) !!}
-                        {!!   Form::submit('Crear paciente', ['class'=> 'btn btn-primary'])!!}
+                        {!!   Form::submit('Crear paciente', ['class'=> 'btn btn-primary button-align'])!!}
+                        {!! Form::close() !!}
+                        {!! Form::open(['route' => ['home'], 'method' => 'get']) !!}
+                        {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                         {!! Form::close() !!}
 
                         <br><br>
@@ -87,6 +93,9 @@
                                 </tr>
                             @endforeach
                         </table>
+                        {!! Form::open(['route' => ['home'], 'method' => 'get']) !!}
+                        {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

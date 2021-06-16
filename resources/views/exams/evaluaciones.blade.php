@@ -35,9 +35,9 @@
                             <br>
                         @endforeach
 
-                        <a class="btn btn-outline-dark button-align-right " style="margin-bottom: 15px" href="{{ url()->previous() }}">
-                            Volver
-                        </a>
+                        {!! Form::open(['route' => ['exams.show',$evaluacion->exam_id], 'method' => 'get']) !!}
+                        {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

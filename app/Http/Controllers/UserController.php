@@ -32,6 +32,9 @@ class UserController extends Controller
      */
     public function indexstudents(Request $request) //Lista de estudiantes para profesores
     {
+        if($request->semibutton=='Borrar filtro') {
+            $request->replace(['query'=>null]);
+        }
         $mystudents = \App\User::find(Auth::user()->id)->students()->where('userType','=','student')
             ->where('users.dni','LIKE','%'.$request->get("query")."%")
             ->orWhere('users.name','LIKE','%'.$request->get("query")."%")
@@ -40,7 +43,6 @@ class UserController extends Controller
         $users_filter=User::where('users.name','LIKE','%'.$request->get("query")."%")
             ->orWhere('users.dni','LIKE','%'.$request->get("query")."%")
             ->orWhere('users.surname','LIKE','%'.$request->get("query")."%")->pluck('id','id');
-    //todo: arrglar filtro
         $students= User::where('userType','=','student')
             ->whereNotIn('users.id',\App\User::find(Auth::user()->id)->students()->pluck('users.id')->values())
             ->whereIn('users.id', $users_filter)
