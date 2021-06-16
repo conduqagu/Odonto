@@ -33,12 +33,6 @@
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
                                 <th>DNI</th>
-                                <th>Correo electrónico</th>
-                                <th>Teléfono</th>
-                                <th>Fecha de nacimiento</th>
-                                <th>Riesgo ASA</th>
-                                <th>Observaciones</th>
-                                <th>Alumnos</th>
                                 <th colspan="4">Acciones</th>
                             </tr>
 
@@ -47,46 +41,9 @@
                                     <td  style="max-width: 78px;">{{ $patient->name }}</td>
                                     <td  style="max-width: 78px;">{{ $patient->surname }}</td>
                                     <td>{{ $patient->dni }}</td>
-                                    <td  style="max-width: 90px;">{{ $patient->email }}</td>
-                                    <td>{{ $patient->telefono }}</td>
-                                    @if($patient->child==1)
-                                        <td>{{ $patient->fechaNacimiento." (Infantil)" }}</td>
-                                    @else
-                                        <td>{{ $patient->fechaNacimiento}}</td>
-                                    @endif
-                                    <td>{{ $patient->riesgoASA }}</td>
-                                    <td style="max-width: 138px;">{{ $patient->observaciones }}</td>
-
                                     <td>
-                                    @foreach ($patient->students as $student)
-                                     {{$student->name." ".$student->surname.", " }}
-                                    @endforeach
-                                    </td>
-                                    <td>
-                                        {!! Form::open(['route' => ['dientesPatient',$patient->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Dientes', ['class'=> 'btn btn-outline-dark'])!!}
-                                        {!! Form::close() !!}
-                                        <br>
-                                        {!! Form::open(['route' => ['exams.index',$patient->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Exámenes', ['class'=> 'btn btn-outline-dark'])!!}
-                                        {!! Form::close() !!}
-                                    </td>
-                                    <td>
-                                        {!! Form::open(['route' => ['añadirAlumno',$patient->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Añadir Alumno', ['class'=> 'btn btn-outline-primary'])!!}
-                                        {!! Form::close() !!}
-                                        <br>
-                                        {!! Form::open(['route' => ['destroyStudent',$patient->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Eliminar alumno', ['class'=> 'btn btn-outline-danger' ])!!}
-                                        {!! Form::close() !!}
-                                    </td>
-                                    <td>
-                                        {!! Form::open(['route' => ['editteacher',$patient->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
-                                        {!! Form::close() !!}
-                                    <br>
-                                        {!! Form::open(['route' => ['patientdestroy',$patient->id], 'method' => 'delete']) !!}
-                                        {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
+                                        {!! Form::open(['route' => ['patients.show',$patient->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Ver detalle', ['class'=> 'btn btn-primary'])!!}
                                         {!! Form::close() !!}
                                     </td>
 

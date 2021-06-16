@@ -11,7 +11,7 @@
                         <div class="card-body">
                             <div >
                                 {!! Form::label('date', 'Fecha:') !!}
-                                {!! Form::label($exam->date) !!}
+                                {!! Form::label(\Carbon\Carbon::parse($exam->date)->format('d-m-Y') ) !!}
                             </div>
                             <div class="form-group">
                                 {!!Form::label('patient_id', 'Paciente: ') !!}
@@ -53,7 +53,11 @@
                                 </div>
                                 <div>
                                     {!!  Form::label('otros' , 'Otros: ') !!}
-                                    {!! Form::label( $exam->otros) !!}
+                                    @if($exam->otros!=null)
+                                        {!! Form::label( $exam->otros) !!}
+                                    @else
+                                        {!! "N/D" !!}
+                                    @endif
                                 </div>
                                 <div>
                                     {!!  Form::label('patologiaMucosa' , 'Patologías en mucosas: ') !!}
@@ -209,7 +213,11 @@
                                     <br>
                                     {!!  Form::label('anomaliaTamaño' , 'Anomalía en tamaño: '.$exam->anomaliaTamaño) !!}
                                     <br>
-                                    {!!  Form::label('otros' , 'Otros: '.$exam->otros) !!}
+                                    @if($exam->otros!=null)
+                                        {!!  Form::label('otros' , 'Otros: '.$exam->otros) !!}
+                                    @else
+                                        {!! "N/D" !!}
+                                    @endif
                                 </div>
 
                             </div>
@@ -232,8 +240,11 @@
                                     <br>
                                     {!!  Form::label('biotipo' , 'Biotipo: '.$exam->biotipo) !!}
                                     <br>
-                                    {!!  Form::label('otros' , 'Otros: '.$exam->otros) !!}
-                                </div>
+                                    @if($exam->otros!=null)
+                                        {!!  Form::label('otros' , 'Otros: '.$exam->otros) !!}
+                                    @else
+                                        {!! "N/D" !!}
+                                    @endif                                </div>
 
                             </div>
                         </div>
@@ -252,8 +263,11 @@
                                     <br>
                                     {!!  Form::label('aspecto' , 'Aspecto: '.$exam->aspecto) !!}
                                     <br>
-                                    {!!  Form::label('otros' , 'Otros: '.$exam->otros) !!}
-                                </div>
+                                    @if($exam->otros!=null)
+                                        {!!  Form::label('otros' , 'Otros: '.$exam->otros) !!}
+                                    @else
+                                        {!! "N/D" !!}
+                                    @endif                                </div>
 
                             </div>
                         </div>
@@ -271,7 +285,11 @@
                                     <br>
                                     {!!  Form::label('logrado' , 'Logrado: '.$exam->logrado) !!}
                                     <br>
-                                    {!!  Form::label('otros' , 'Otros: '.$exam->otros) !!}
+                                    @if($exam->otros!=null)
+                                        {!!  Form::label('otros' , 'Otros: '.$exam->otros) !!}
+                                    @else
+                                        {!! "N/D" !!}
+                                    @endif
                                 </div>
 
                             </div>
@@ -299,7 +317,11 @@
                         @foreach ($diagnosticos as $diagnostico)
                             <tr>
                                 <td style=" min-width: 300px;">{{ $diagnostico->nombre }}</td>
-                                <td  style="word-wrap: break-word !important;max-width: 500px;">{{ $diagnostico->pivot->comentario }}</td>
+                                @if($diagnostico->pivot->comentario!=null)
+                                    <td  style="word-wrap: break-word !important;max-width: 500px;">{{ $diagnostico->pivot->comentario }}</td>
+                                @else
+                                    <td  style="word-wrap: break-word !important;max-width: 500px;">{!! "N/D" !!}</td>
+                                @endif
                                 @if(\Illuminate\Support\Facades\Auth::user()->userType=='teacher')
 
                                 <td>
@@ -356,27 +378,35 @@
                                             {{'Bucal'}}
                                         @endif
                                     </td>
-                                    <td>{{ $tratamiento->fecha_inicio }}</td>
-                                    <td>{{ $tratamiento->fecha_fin }}</td>
+                                    @if($tratamiento->fecha_inicio!=null)
+                                    <td>{{ \Carbon\Carbon::parse($tratamiento->fecha_inicio)->format('d-m-Y')  }}</td>
+                                    @else
+                                        <td>{{"N/D"}}</td>
+                                    @endif
+                                    @if($tratamiento->fecha_fin!=null)
+                                    <td>{{ \Carbon\Carbon::parse($tratamiento->fecha_fin)->format('d-m-Y') }}</td>
+                                    @else
+                                        <td>{{"N/D"}}</td>
+                                    @endif
                                     @if($exam->tipoExam=='ortodoncial')
                                     <td>{{ $tratamiento->braket->name}}</td>
                                     @endif
-
+                                    <td>
                                     @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
-                                        <td>
-                                        {!! Form::open(['route' => ['tratamientos.edit',$tratamiento->id], 'method' => 'get']) !!}
+
+                                        {!! Form::open(['route' => ['tratamientos.edit',$tratamiento->id], 'method' => 'get','style'=>'display:inline-block']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
-                                        {!! Form::close() !!}</td>
+                                        {!! Form::close() !!}
                                     @endif
 
                                     @if(\Illuminate\Support\Facades\Auth::user()->userType=='teacher')
-                                        <td>
-                                        {!! Form::open(['route' => ['tratamientos.destroy',$tratamiento->id], 'method' => 'delete']) !!}
+
+                                        {!! Form::open(['route' => ['tratamientos.destroy',$tratamiento->id], 'method' => 'delete','style'=>'display:inline-block']) !!}
                                         {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                         {!! Form::close() !!}
-                                        </td>
-                                    @endif
 
+                                    @endif
+                                    </td>
                                 </tr>
                             @endforeach
 
@@ -386,15 +416,18 @@
                             </tr>
                             <tr>
                                 <th>Cobrado:
-                                    @if($coste_total!='0' && $exam->cobrado==0)
+                                    @if($coste_total!='0' && $exam->cobrado==0 && \Illuminate\Support\Facades\Auth::user()->userType!='student')
                                             {!! Form::open(['route'=> ['correo_pago',$exam->id], 'method'=>'get']) !!}
                                             {!!   Form::submit('Pagar con PAYPAL', ['class'=> 'btn btn-outline-dark' ])!!}
                                             {!! Form::close() !!}
                                             <br>
-
                                             {!! Form::open(['route'=> ['pagado',$exam->id], 'method'=>'get']) !!}
                                             {!!   Form::submit('Pagado', ['class'=> 'btn btn-warning' ])!!}
                                             {!! Form::close() !!}
+                                    @elseif($coste_total!='0' && $exam->cobrado==1 && \Illuminate\Support\Facades\Auth::user()->userType!='student')
+                                        {!! Form::open(['route'=> ['no_pagado',$exam->id], 'method'=>'get']) !!}
+                                        {!!   Form::submit('No pagado', ['class'=> 'btn btn-warning' ])!!}
+                                        {!! Form::close() !!}
                                     @endif
                                 </th>
                                 @if( $exam->cobrado==1)
@@ -433,7 +466,11 @@
                                     <td width="120px">
                                     <div class="text-center"><a target="_blank" href="/{{$prueba_complementaria->fichero}}">
                                             <img src="/pdf.png" height="35px"/></a></div></td>
-                                    <td style="word-wrap: break-word;max-width: 300px;">{{ $prueba_complementaria->comentario }}</td>
+                                    @if($prueba_complementaria->comentario!=null)
+                                        <td style="word-wrap: break-word;max-width: 300px;">{{ $prueba_complementaria->comentario }}</td>
+                                    @else
+                                        <td>{{"N/D"}}</td>
+                                    @endif
                                     @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
 
                                     <td style="width: 106px;"> {!! Form::open(['route' => ['prueba_complementarias.edit',$prueba_complementaria->id], 'method' => 'get']) !!}
@@ -505,18 +542,12 @@
                                 {!! Form::open(['route' => ['imprimir_examen',$exam->id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Generar PDF', ['class'=> 'btn btn-primary button-align'])!!}
                                 {!! Form::close() !!}
-                            @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
 
 
-                                {!! Form::open(['route' => ['exams.index',$exam->patient->id], 'method' => 'get']) !!}
+                                {!! Form::open(['route' => ['patients.show',$exam->patient_id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                                 {!! Form::close() !!}
-                            @else
 
-                                {!! Form::open(['route' => ['indexExamsAdmin'], 'method' => 'get']) !!}
-                                {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
-                                {!! Form::close() !!}
-                            @endif
                     </div>
                 </div>
                 </div>

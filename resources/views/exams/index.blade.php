@@ -81,7 +81,6 @@
                                 </tr>
                             @endforeach
                         </table>
-
                         @if(Auth::user()->userType =='teacher')
                             {!! Form::open(['route' => ['indexteacher'], 'method' => 'get']) !!}
                             {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}

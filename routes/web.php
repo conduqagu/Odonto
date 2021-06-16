@@ -139,7 +139,10 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::get('/exams/createTeacherevOrto/{id}', 'ExamController@examsCreateTeacherevOrto')->name('examsCreateTeacherevOrto');
     Route::put('/exams/updateteacherevOrto/{id}', 'ExamController@examsUptadeTeacherevOrto')->name('examsUptadeTeacherevOrto');
     Route::get('/exams/pagado/{id}', 'ExamController@pagado')->name('pagado');
+    Route::get('/exams/no_pagado/{id}', 'ExamController@no_pagado')->name('no_pagado');
 
+
+    Route::get('/patients/show/{id}','PatientController@show')->name('patients.show');
 
 });
 

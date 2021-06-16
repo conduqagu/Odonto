@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AsociacionPatientStudent;
 use App\Diente;
+use App\Exam;
 use App\Patient;
 use App\Rules\PinProfesor;
 use App\User;
@@ -157,9 +158,52 @@ class PatientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id,Request $request)
     {
-        //
+        $patient=Patient::find($id);
+        if($request->semibutton=='Borrar filtro') {
+            $request->replace(['query'=>null]);
+            $request->replace(['query2'=>null]);
+        }
+        if($request->semibutton2=='Borrar filtro') {
+            $request->replace(['query3'=>null]);
+        }
+        if($request->semibutton3=='Borrar filtro') {
+            $request->replace(['query4'=>null]);
+        }
+        $exams=Exam::where('exams.patient_id','=',$id) ->where('exams.tipoExam','LIKE','%'.$request->get("query")."%")
+            ->where('exams.date','LIKE','%'.$request->get("query2")."%")->paginate(8);
+        $child=$patient->child;
+        if($child==1){
+            $filtro_dientes=Diente::where('dientes.number','LIKE','%'.$request->get("query3")."%")
+                ->orWhere('dientes.name','LIKE','%'.$request->get("query3")."%")->pluck('id','id');
+            $dientes=Diente::where('patient_id','=',$id)->where('number','>','50')
+                ->whereIn('id',$filtro_dientes)
+                ->paginate(8, ['*'], "page_a");
+        }elseif($child==0){
+            $filtro_dientes=Diente::where('dientes.number','LIKE','%'.$request->get("query3")."%")
+                ->orWhere('dientes.name','LIKE','%'.$request->get("query3")."%")->pluck('id','id');
+            $dientes=Diente::where('patient_id','=',$id)->where('number','<','50')
+                ->whereIn('id',$filtro_dientes)
+                ->paginate(8, ['*'],"page_b");
+        }
+
+        $students_si=Patient::find($id)->students()
+            ->where('users.dni','LIKE','%'.$request->get("query4")."%")
+            ->where('users.name','LIKE','%'.$request->get("query4")."%")
+            ->where('users.surname','LIKE','%'.$request->get("query4")."%")
+            ->get();
+
+        $students1=Patient::find($id)->students()->pluck('users.id');
+        $students_no=User::whereNotIn('id',$students1)->where('userType','=','student')
+            ->where('users.dni','LIKE','%'.$request->get("query4")."%")
+            ->where('users.name','LIKE','%'.$request->get("query4")."%")
+            ->where('users.surname','LIKE','%'.$request->get("query4")."%")->paginate(5, ['*'],"page_c");
+
+
+        return view('patients.show',['patient'=>$patient,'exams'=>$exams,'dientes'=>$dientes,
+            'students'=>$students_si,'students_no'=>$students_no]);
+
     }
 
     /**

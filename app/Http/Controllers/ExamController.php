@@ -41,6 +41,23 @@ class ExamController extends Controller
             ->where('exams.date','LIKE','%'.$request->get("query2")."%")
             ->get();
 
+
+        if($request->ajax())
+        {
+            if($request->from_date != '' && $request->to_date != '')
+            {
+                $data = DB::table('post')
+                    ->whereBetween('date', array($request->from_date, $request->to_date))
+                    ->get();
+            }
+            else
+            {
+                $data = DB::table('post')->orderBy('date', 'desc')->get();
+            }
+            echo json_encode($data);
+        }
+
+
         return view('exams/index',['exams'=>$exams,'patient'=>$patient,'id'=>$id]);
     }
     public function indexExamsAdmin(Request $request)
@@ -605,6 +622,13 @@ class ExamController extends Controller
     public function pagado($exam_id){
         $exam=Exam::find($exam_id);
         $exam->cobrado=true;
+        $exam->save();
+        return redirect()->route('exams.show',[$exam_id]);
+
+    }
+    public function no_pagado($exam_id){
+        $exam=Exam::find($exam_id);
+        $exam->cobrado=false;
         $exam->save();
         return redirect()->route('exams.show',[$exam_id]);
 

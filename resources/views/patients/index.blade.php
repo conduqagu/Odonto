@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container2">
+     <div class="container2">
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="panel panel-default">
@@ -32,12 +32,7 @@
                                 <th>Nombre</th>
                                 <th>Apellidos</th>
                                 <th>DNI</th>
-                                <th>Correo electrónico</th>
-                                <th>Teléfono</th>
-                                <th>Fecha de nacimiento</th>
-                                <th>Riesgo ASA</th>
-                                <th>Observaciones</th>
-                                <th>Infantil</th>
+
                                 <th colspan="2">Acciones</th>
                             </tr>
 
@@ -46,41 +41,16 @@
                                     <td  style="max-width: 78px;">{{ $patient->name }}</td>
                                     <td  style="max-width: 78px;">{{ $patient->surname }}</td>
                                     <td>{{ $patient->dni }}</td>
-                                    <td  style="max-width: 90px;">{{ $patient->email }}</td>
-                                    <td>{{ $patient->telefono }}</td>
-                                    @if($patient->child==1)
-                                        <td>{{ $patient->fechaNacimiento." (Infantil)" }}</td>
-                                    @else
-                                        <td>{{ $patient->fechaNacimiento}}</td>
-                                    @endif
-                                    <td>{{ $patient->riesgoASA }}</td>
-                                    <td style="max-width: 138px;">{{ $patient->observaciones }}</td>
-
-                                @if($patient->child==1)
-                                        <td>Si</td>
-                                    @else
-                                        <td>No</td>
-                                    @endif
-
                                     <td>
-                                        {!! Form::open(['route' => ['dientesPatient',$patient->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Dientes', ['class'=> 'btn btn-outline-dark'])!!}
-                                        {!! Form::close() !!}
-                                        <br>
-                                        {!! Form::open(['route' => ['exams.index',$patient->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Exámenes', ['class'=> 'btn btn-outline-dark'])!!}
-                                        {!! Form::close() !!}
-                                    </td>
-
-                                    <td>
-                                        {!! Form::open(['route' => ['patients.edit',$patient->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                        {!! Form::open(['route' => ['patients.show',$patient->id], 'method' => 'get']) !!}
+                                        {!!   Form::submit('Ver detalle', ['class'=> 'btn btn-primary'])!!}
                                         {!! Form::close() !!}
                                     </td>
 
                                 </tr>
                             @endforeach
                         </table>
+
                         {!! Form::open(['route' => ['home'], 'method' => 'get']) !!}
                         {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                         {!! Form::close() !!}
