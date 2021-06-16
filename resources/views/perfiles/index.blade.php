@@ -41,12 +41,12 @@
                                         {!! Form::open(['route' => ['user.edit',$user->id], 'method' => 'get']) !!}
                                         {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                         {!! Form::close() !!}
-                                        <br>
+                                        </td>
+                                        <td>
                                         {!! Form::open(['route' => ['user.destroy',$user->id], 'method' => 'delete']) !!}
                                         {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                         {!! Form::close() !!}
-
-                                    </td>
+                                        </td>
 
                                 </tr>
                             @endforeach
