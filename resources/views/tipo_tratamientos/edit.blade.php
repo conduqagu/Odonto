@@ -15,12 +15,12 @@
                             {!! Form::text('name',$tipo_tratamiento->name,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('coste', 'Coste') !!}
-                            {!! Form::number('coste',$tipo_tratamiento->coste,['class'=>'form-control', 'required','step'=>'0.01']) !!}
+                            {!! Form::label('coste', 'Coste (€)') !!}
+                            {!! Form::number('coste',$tipo_tratamiento->coste,['class'=>'form-control', 'required','step'=>'0.01','min'=>'0']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('iva', 'IVA') !!}
-                            {!! Form::number('iva',$tipo_tratamiento->iva,['class'=>'form-control', 'required','autofocus']) !!}
+                            {!! Form::label('iva', 'IVA (%)') !!}
+                            {!! Form::number('iva',$tipo_tratamiento->iva,['class'=>'form-control', 'required','autofocus','step'=>'0.01','min'=>'0']) !!}
                         </div>
 
                         <br>

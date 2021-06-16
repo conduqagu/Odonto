@@ -16,11 +16,11 @@
                             {!! Form::text('name',null,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('coste', 'Coste') !!}
+                            {!! Form::label('coste', 'Coste (€)') !!}
                             {!! Form::number('coste',0,['class'=>'form-control', 'required','step'=>'0.01']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('iva', 'IVA') !!}
+                            {!! Form::label('iva', 'IVA (%)') !!}
                             {!! Form::number('iva',0,['class'=>'form-control', 'required','autofocus','step'=>'0.01']) !!}
                         </div>
 

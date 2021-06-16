@@ -40,10 +40,20 @@ class ExamController extends Controller
     }
     public function indexExamsAdmin(Request $request)
     {
-        $exams=Exam::where('exams.tipoExam','LIKE','%'.$request->get("query")."%")
-            ->where('exams.date','LIKE','%'.$request->get("query2")."%")
-            ->get();
-        return view('exams/indexExamAdmin',['exams'=>$exams]);
+        switch($request->semibutton) {
+            case 'Buscar':
+                $exams=Exam::where('exams.tipoExam','LIKE','%'.$request->get("query")."%")
+                    ->where('exams.date','LIKE','%'.$request->get("query2")."%")
+                    ->get();
+                return view('exams/indexExamAdmin',['exams'=>$exams, 'query'=>$request]);
+                break;
+            case 'Borrar filtro':
+                $exams=Exam::all();
+                return view('exams/indexExamAdmin',['exams'=>$exams]);
+                break;
+        }
+        $exams=Exam::all();
+        return view('exams/indexExamAdmin',['exams'=>$exams, 'query'=>$request]);
     }
 
 

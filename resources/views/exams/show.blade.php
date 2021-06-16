@@ -327,8 +327,8 @@
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>
-                                <th>Coste</th>
-                                <th>IVA</th>
+                                <th>Coste (€)</th>
+                                <th>IVA (%)</th>
                                 <th>Terapia</th>
                                 <th>Zona</th>
                                 <th>Fecha inicio</th>

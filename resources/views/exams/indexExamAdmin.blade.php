@@ -10,13 +10,26 @@
                     <div class="panel-body">
                         @include('flash::message')
                         <div class="form-group" >
-                            {!! Form::open(['route' => ['indexExamsAdmin'], 'method' => 'get']) !!}
-                            {!! Form::select('query',array('inicial'=>'Inicial','infantil'=>'Infantil','periodoncial'=>'Periodoncial',
-                                'ortodoncial'=>'Ortodoncial','evOrto'=>'Evaluación ortodoncia','otro'=>'Otro',null=>'Tipo de examen'), null,
-                                ['class'=>'col-md-3','autofocus']) !!}
-                            {!! Form::date('query2',null,['class'=>'col-md-3','autofocus','paceholder'=>'Fecha']) !!}
-                            {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary'])!!}
-                            {!! Form::close() !!}
+                            @if($query?? ''!=null)
+                                {!! Form::open(['route' => ['indexExamsAdmin'], 'method' => 'get']) !!}
+                                {!! Form::select('query', array('inicial'=>'Inicial','infantil'=>'Infantil','periodoncial'=>'Periodoncial',
+                                    'ortodoncial'=>'Ortodoncial','evOrto'=>'Evaluación ortodoncia','otro'=>'Otro',null=>'Tipo de examen'), $query->get("query"),
+                                    ['class'=>'col-md-3  form-control','autofocus','style'=>'display:inline-block']) !!}
+                                {!! Form::date('query2', $query->get("query2"),['class'=>'col-md-3  form-control','autofocus','paceholder'=>'Fecha','style'=>'display:inline-block']) !!}
+                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary form-control float: left;', 'name'=>'semibutton'])!!}
+                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary ','name'=>'semibutton'])!!}
+                                {!! Form::close() !!}
+                            @else
+                                {!! Form::open(['route' => ['indexExamsAdmin'], 'method' => 'get']) !!}
+                                {!! Form::select('query', array('inicial'=>'Inicial','infantil'=>'Infantil','periodoncial'=>'Periodoncial',
+                                    'ortodoncial'=>'Ortodoncial','evOrto'=>'Evaluación ortodoncia','otro'=>'Otro',null=>'Tipo de examen'), null,
+                                    ['class'=>'col-md-3 form-control','autofocus' ,'style'=>'display:inline-block']) !!}
+                                {!! Form::date('query2', null,['class'=>'col-md-3 form-control ','autofocus','paceholder'=>'Fecha', 'style'=>'display:inline-block']) !!}
+                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary ', 'name'=>'semibutton'])!!}
+                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary ','name'=>'semibutton'])!!}
+                                {!! Form::close() !!}
+                            @endif
+
                         </div>
                         <br>
                         <table class="table table-striped table-bordered">
