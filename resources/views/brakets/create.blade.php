@@ -20,7 +20,7 @@
                         @endif
                         {!! Form::open(['route' => 'brakets.store']) !!}
                         <div class="form-group">
-                            {!! Form::label('name', 'Nombre') !!}
+                            {!! Form::label('name', 'Nombre: *') !!}
                             {!! Form::text('name',null,['class'=>'form-control', 'required','autofocus','maxlength'=>"255"]) !!}
                         </div>
                         <br>
@@ -31,6 +31,7 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
+                <p>(*): Campos obligatorios</p>
             </div>
         </div>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AsociacionDiagnosticoExam;
 use App\AsociacionExamDiente;
+use App\Braket;
 use App\Diagnostico;
 use App\Exam;
 use App\Mail\CorreoPago;
@@ -134,7 +135,7 @@ class ExamController extends Controller
     {
 
         $this->validate($request, [
-            'date'=>['required','date'],
+            'date'=>['required','date','date_format:Y-m-d','before_or_equal:now'],
             'tipoExam'=>['required','string','in:inicial,infantil,periodoncial,ortodoncial,evOrto,otro'],
             'pin'=>['required','string','max:255',new PinProfesor()],
             'patient_id' => ['required', 'exists:patients,id'],
@@ -171,7 +172,7 @@ class ExamController extends Controller
     public function examsStoreTeacher(Request $request)
     {
         $this->validate($request, [
-            'date' => ['required', 'date'],
+            'date'=>['required','date','date_format:Y-m-d','before_or_equal:now'],
             'tipoExam' => ['required', 'string', 'in:inicial,infantil,periodoncial,ortodoncial,evOrto,otro'],
             'patient_id' => ['required', 'exists:patients,id']
         ]);
@@ -228,9 +229,10 @@ class ExamController extends Controller
     public function edit($id)
     {
         $exam = Exam::find($id);
-        $patients = Patient::all()->pluck('name','id');
+        $ortodoncia=Exam::all()->where('patient_id','=',$exam->patient_id)->where('tipoExam',
+            '=','ortodoncial')->pluck('date','id');
 
-        return view('exams/student/edit',['exam'=> $exam, 'patients'=>$patients ]);
+        return view('exams/student/edit',['exam'=> $exam, 'ortodoncia'=>$ortodoncia]);
     }
     public function examsEditTeacher($id)
     {
@@ -272,7 +274,6 @@ class ExamController extends Controller
                 'lateralAngle' => ['required', 'string', 'in:Unilateral,Bilateral'],
                 'tipoDentición' => ['required', 'string', 'in:Temporal,Mixta'],
                 'apiñamientoIncisivoInferior' => ['required', 'boolean'],
-                'apiñamientoIncisivoInferior' => ['required', 'boolean'],
                 'apiñamientoIncisivoSuperior' => ['required', 'boolean'],
                 'perdidaEspacioAnterior' => ['required', 'boolean'],
                 'perdidaEspacioPosterior' => ['required', 'boolean'],
@@ -285,21 +286,21 @@ class ExamController extends Controller
         }elseif ($exam->tipoExam=='infantil'){
             $this->validate($request, [
                 'aspectoGeneral'=>['required','string', 'max:255'],
-                'talla'=>['required','string', 'max:255'],
-                'peso'=>['required','string', 'max:255'],
-                'piel'=>['required','string', 'max:255'],
+                'talla'=>['nullable','string', 'max:255'],
+                'peso'=>['nullable','string', 'max:255'],
+                'piel'=>['nullable','string', 'max:255'],
                 'anomaliaForma'=>['required','string', 'max:255'],
                 'anomaliaTamaño'=>['required','string', 'max:255'],
             ]);
         }elseif($exam->tipoExam=='periodoncial'){
 
             $this->validate($request, [
-                'indicePlaca'=>['nullable','string', 'max:255'],
+                'indicePlaca'=>['nullable','regex:/^[0-9]+(\.[0-9][0-9]?)?$/', 'max:100','min:0'],
                 'color'=>['required','string', 'in:rosa,rojo'],
                 'borde'=>['required','string', 'in:afilado,engrosado'],
                 'aspecto'=>['required','string', 'in:puntillado,liso'],
                 'consistencia'=>['required','string', 'in:firme,depresible'],
-                'biotipo'=>['required','integer'],
+                'biotipo'=>['required','string','in:normal,fino,grueso'],
             ]);
         }elseif($exam->tipoExam=='ortodoncial'){
             $this->validate($request, [
@@ -372,12 +373,12 @@ class ExamController extends Controller
             ]);
         }elseif($exam->tipoExam=='periodoncial'){
             $this->validate($request, [
-                'indicePlaca'=>['nullable','string', 'max:255'],
+                'indicePlaca'=>['nullable','regex:/^[0-9]+(\.[0-9][0-9]?)?$/', 'max:100','min:0'],
                 'color'=>['required','string', 'in:rosa,rojo'],
                 'borde'=>['required','string', 'in:afilado,engrosado'],
                 'aspecto'=>['required','string', 'in:puntillado,liso'],
                 'consistencia'=>['required','string', 'in:firme,depresible'],
-                'biotipo'=>['required','integer'],
+                'biotipo'=>['required','string','in:normal,fino,grueso'],
             ]);
         }elseif($exam->tipoExam=='ortodoncial'){
             $this->validate($request, [
@@ -461,9 +462,9 @@ class ExamController extends Controller
     {
         $this->validate($request, [
             'aspectoGeneral'=>['required','string', 'max:255'],
-            'talla'=>['required','string', 'max:255'],
-            'peso'=>['required','string', 'max:255'],
-            'piel'=>['required','string', 'max:255'],
+            'talla'=>['nullable','string', 'max:255'],
+            'peso'=>['nullable','string', 'max:255'],
+            'piel'=>['nullable','string', 'max:255'],
             'anomaliaForma'=>['required','string', 'max:255'],
             'anomaliaTamaño'=>['required','string', 'max:255'],
         ]);
@@ -486,12 +487,12 @@ class ExamController extends Controller
     public function examsUptadeTeacherPeriodontal(Request $request, $id)
     {
         $this->validate($request, [
-            'indicePlaca'=>['nullable','string', 'max:255'],
+            'indicePlaca'=>['nullable','regex:/^[0-9]+(\.[0-9][0-9]?)?$/', 'max:100','min:0'],
             'color'=>['required','string', 'in:rosa,rojo'],
             'borde'=>['required','string', 'in:afilado,engrosado'],
             'aspecto'=>['required','string', 'in:puntillado,liso'],
             'consistencia'=>['required','string', 'in:firme,depresible'],
-            'biotipo'=>['required','integer'],
+            'biotipo'=>['required','string','in:normal,fino,grueso'],
         ]);
 
         $exam = Exam::find($id);

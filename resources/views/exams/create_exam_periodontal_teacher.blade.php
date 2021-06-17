@@ -28,31 +28,31 @@
                             {!! Form::label('date', 'Fecha: '.$exam->date) !!}
                         </div>
                         <div>
-                            {!!  Form::label('indicePlaca' , 'Índice de placa') !!}
-                            {!! Form::text('indicePlaca', null,['class' => 'form-control','maxlength'=>"255"]) !!}
+                            {!!  Form::label('indicePlaca' , 'Índice de placa: ') !!}
+                            {!! Form::number('indicePlaca', null,['class' => 'form-control','max'=>"100",'min'=>'0','step'=>'0.01']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('color' , 'Color') !!}
+                            {!!  Form::label('color' , 'Color: *') !!}
                             {!! Form::select('color', array('rosa'=>'Rosa','rojo'=>'Rojo'),'rosa',['class' => 'form-control', 'required']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('borde' , 'Borde') !!}
+                            {!!  Form::label('borde' , 'Borde: *') !!}
                             {!! Form::select('borde', array('afilado'=>'Afilado','engrosado'=>'Engrosado'),'afilado',['class' => 'form-control', 'required']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('aspecto' , 'Aspecto') !!}
+                            {!!  Form::label('aspecto' , 'Aspecto: *') !!}
                             {!! Form::select('aspecto', array('puntillado'=>'Puntillado','liso'=>'Liso'),'liso',['class' => 'form-control', 'required']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('consistencia' , 'Consistencia') !!}
+                            {!!  Form::label('consistencia' , 'Consistencia: *') !!}
                             {!! Form::select('consistencia', array('firme'=>'Firme','depresible'=>'Depresible'),'firme',['class' => 'form-control', 'required']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('biotipo' , 'Biotipo') !!}
-                            {!! Form::number('biotipo', null,['class' => 'form-control']) !!}
+                            {!!  Form::label('biotipo' , 'Biotipo: *') !!}
+                            {!! Form::select('biotipo',array('normal'=>'Normal','fino'=>'Fino','grueso'=>'Grueso'), 'normal',['class' => 'form-control','required']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('otros' , 'Otros') !!}
+                            {!!  Form::label('otros' , 'Otros: ') !!}
                             {!! Form::text('otros', null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             <br>
                         </div>
@@ -64,6 +64,7 @@
 
                     </div>
                 </div>
+                <p>(*): Campos obligatorios</p>
             </div>
         </div>
     </div>

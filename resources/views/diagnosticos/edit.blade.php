@@ -21,8 +21,8 @@
                         {!! Form::model($diagnostico, [ 'route' => ['diagnosticos.update',$diagnostico->id], 'method'=>'PUT']) !!}
 
                         <div class="form-group">
-                            {!! Form::label('nombre', 'Nombre') !!}
-                            {!! Form::text('nombre',$diagnostico->nombre,['class'=>'form-control', 'required','autofocus','maxlength'=>"255"]) !!}
+                            {!! Form::label('nombre', 'Nombre: *') !!}
+                            {!! Form::text('nombre',$diagnostico->nombre,['class'=>'form-control', 'required','autofocus','maxlength'=>"100"]) !!}
                         </div>
 
                         {!! Form::submit('Actualizar',['class'=>'btn-primary btn button-align']) !!}
@@ -33,6 +33,7 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
+                <p>(*): Campos obligatorios</p>
             </div>
         </div>
     </div>

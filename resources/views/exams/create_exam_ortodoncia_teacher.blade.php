@@ -26,19 +26,19 @@
                             {!! Form::label('date', 'Fecha: '.$exam->date) !!}
                         </div>
                         <div class="form-group">
-                            {!!  Form::label('patronFacial' , 'Patrón Facial') !!}
+                            {!!  Form::label('patronFacial' , 'Patrón Facial: *') !!}
                             {!! Form::select('patronFacial', array('dolicofacial'=>'Dolicofacial','mesofacial'=>'Mesofacial','braquifacial'=>'Braquifacial'),null,['class' => 'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!!  Form::label('perfil' , 'Perfil') !!}
+                            {!!  Form::label('perfil' , 'Perfil: *') !!}
                             {!! Form::select('perfil', array('armonico'=>'Armónico','convexo'=>'Convexo','concavo'=>'Concavo','plano'=>'Plano'),null,['class' => 'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!!  Form::label('menton' , 'Mentón') !!}
+                            {!!  Form::label('menton' , 'Mentón: *') !!}
                             {!! Form::select('menton', array('marcado'=>'Marcado','normal'=>'Normal','retruido'=>'Retruido','plano'=>'Plano'),'normal',['class' => 'form-control', 'required']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('otros' , 'Otros') !!}
+                            {!!  Form::label('otros' , 'Otros:') !!}
                             {!! Form::text('otros', $exam->otros, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             <br>
                         </div>
@@ -49,6 +49,7 @@
 
                     </div>
                 </div>
+                <p>(*): Campos obligatorios</p>
             </div>
         </div>
     </div>

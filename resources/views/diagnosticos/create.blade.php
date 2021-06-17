@@ -20,10 +20,10 @@
                         @endif
                         {!! Form::open(['route' => 'diagnosticos.store']) !!}
                         <div class="form-group">
-                            {!! Form::label('nombre', 'Nombre') !!}
-                            {!! Form::text('nombre',null,['class'=>'form-control', 'required','autofocus','maxlength'=>"255"]) !!}
+                            {!! Form::label('nombre', 'Nombre: *') !!}
+                            {!! Form::text('nombre',null,['class'=>'form-control', 'required','autofocus','maxlength'=>"100"]) !!}
                         </div>
-                        <br>
+
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn button-align']) !!}
                         {!! Form::close() !!}
                         {!! Form::open(['route' => ['diagnosticos.index'], 'method' => 'get']) !!}
@@ -31,6 +31,7 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
+                <p>(*): Campos obligatorios</p>
             </div>
         </div>
 

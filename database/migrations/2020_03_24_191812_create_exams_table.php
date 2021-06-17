@@ -66,7 +66,7 @@ class CreateExamsTable extends Migration
             $table->enum('borde',['afilado','engrosado'])->nullable();
             $table->enum('aspecto',['puntillado','liso'])->nullable();
             $table->enum('consistencia',['firme','depresible'])->nullable();
-            $table->integer('biotipo')->nullable();
+            $table->enum('biotipo',['normal','fino','grueso'])->nullable();
 
             //Atributos Ortodoncia
             $table->enum('patronFacial',['dolicofacial','mesofacial','braquifacial'])->nullable();

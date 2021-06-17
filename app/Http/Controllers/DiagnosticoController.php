@@ -46,7 +46,7 @@ class DiagnosticoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nombre' => ['required', 'string', 'max:255'],
+            'nombre' => ['required', 'string', 'max:100'],
         ]);
 
         $diagnosticos=new Diagnostico($request->all());
@@ -90,7 +90,7 @@ class DiagnosticoController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'nombre' => ['required', 'string', 'max:255'],
+            'nombre' => ['required', 'string', 'max:100'],
 
         ]);
         $diagnostico = Diagnostico::find($id);

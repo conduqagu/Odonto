@@ -20,17 +20,17 @@
                         @endif
                         {!! Form::open(['route' => 'storeteacher']) !!}
                         <div class="form-group">
-                            {!! Form::label('name', 'Nombre') !!}
+                            {!! Form::label('name', 'Nombre: *') !!}
                             {!! Form::text('name',null,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('surname', 'Apellidos') !!}
+                            {!! Form::label('surname', 'Apellidos: *') !!}
                             {!! Form::text('surname',null,['class'=>'form-control', 'required', 'maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
-                            <label for="email" >{{ __('Correo electrónico') }}</label>
+                            <label for="email" >{{ __('Correo electrónico: *') }}</label>
 
-                            <input id="email" type="email" placeholder="miemail@dominio.com" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" required autocomplete="email" maxlength="255">
+                            <input id="email" type="email" placeholder="miemail@dominio.com" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" required autocomplete="email">
 
                             @error('email')
                             <span class="invalid-feedback" role="alert">
@@ -40,34 +40,29 @@
 
                         </div>
                         <div class="form-group">
-                            <label for="dni" >{{ __('DNI') }}</label>
+                            <label for="dni" >{{ __('DNI: *') }}</label>
 
-                            <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni') }}" required autocomplete="dni" pattern="[0-9]{8}[A-Za-z]{1}" title="Debe introducir 8 números y una letra>
+                            <input id="dni" type="text" name="dni"  class="form-control" value="{{ old('dni') }}" required autocomplete="dni" pattern="[0-9]{8}[A-Za-z]{1}" title="Debe introducir 8 números y una letra">
 
-                            @error('dni')
-                            <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                         <div class="form-group">
-                            {!! Form::label('telefono', 'Télefono') !!}
-                            {!! Form::text('telefono',null,['class'=>'form-control', 'maxlength'=>"255"]) !!}
+                            {!! Form::label('telefono', 'Télefono: ') !!}
+                            {!! Form::text('telefono',null,['class'=>'form-control','unique', 'maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('fechaNacimiento', 'Fecha de nacimiento') !!}
-                            {!! Form::date('fechaNacimiento',null,['class'=>'form-control', 'required', 'maxlength'=>"255"]) !!}
+                            {!! Form::label('fechaNacimiento', 'Fecha de nacimiento: *') !!}
+                            {!! Form::date('fechaNacimiento',null,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!!  Form::label('riesgoASA' , 'Riesgo ASA') !!}
+                            {!!  Form::label('riesgoASA' , 'Riesgo ASA: *') !!}
                             {!! Form::select('riesgoASA', array('I' => 'I', 'II' => 'II','III'=>'III'),'I',['class'=>'form-control']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('observaciones', 'Observaciones') !!}
+                            {!! Form::label('observaciones', 'Observaciones: ') !!}
                             {!! Form::text('observaciones',null,['class'=>'form-control', 'maxlength'=>"255"]) !!}
                         </div>
-                        <div>
-                            {!!  Form::label('child' , 'Infantil') !!}
+                        <div class="form-group">
+                            {!!  Form::label('child' , 'Infantil: *') !!}
                             {!! Form::select('child', array('1'=>'Si','0'=>'No'),'0',['class' => 'form-control', 'required']) !!}
                         </div>
                         <br>
@@ -80,6 +75,8 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
+                <p>(*): Campos obligatorios</p>
+
             </div>
         </div>
     </div>

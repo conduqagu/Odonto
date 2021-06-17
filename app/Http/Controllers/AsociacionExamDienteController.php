@@ -196,9 +196,9 @@ class AsociacionExamDienteController extends Controller
 
         foreach ($lista as $a) {
             $this->validate($request, [
-                'furca' . $a => 'required|Integer|max:255',
-                'retraccion' . $a => 'required|Integer|max:255',
-                'hipertrofia' . $a => 'required|Integer|max:255',
+                'furca' . $a => 'required|Integer|max:10|min:-10',
+                'retraccion' . $a => 'required|Integer|max:10|min:-10',
+                'hipertrofia' . $a => 'required|Integer|max:10|min:-10',
                 'sondaje' . $a => 'required|boolean',
                 'movilidad' . $a => 'required|boolean',
                 'sangrado' . $a => 'required|boolean',
@@ -345,9 +345,9 @@ class AsociacionExamDienteController extends Controller
 
         foreach ($lista as $a) {
             $this->validate($request, [
-                'furca' . $a => 'required|Integer|max:255',
-                'retraccion' . $a => 'required|Integer|max:255',
-                'hipertrofia' . $a => 'required|Integer|max:255',
+                'furca' . $a => 'required|Integer|max:10|min:-10',
+                'retraccion' . $a => 'required|Integer|max:10|min:-10',
+                'hipertrofia' . $a => 'required|Integer|max:10|min:-10',
                 'sondaje' . $a => 'required|boolean',
                 'movilidad' . $a => 'required|boolean',
                 'sangrado' . $a => 'required|boolean',

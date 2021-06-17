@@ -438,13 +438,8 @@ class DienteController extends Controller
         $diente48->patient_id=$patient_id;
         $diente48->save();
 
-        if(Auth::user()->userType =='student') {
-            return redirect()->route('patients.index');
-        }elseif(Auth::user()->userType =='teacher') {
-            return redirect()->route('indexteacher');
-        }else{
+        return redirect()->route('patients.show',$patient_id);
 
-        }
     }
 
     public function createDientesPacChild($patient_id){
@@ -628,12 +623,8 @@ class DienteController extends Controller
         $diente47->patient_id=$patient_id;
         $diente47->save();
 
-        if(Auth::user()->userType =='student') {
-            return redirect()->route('patients.index');
-        }
-        if(Auth::user()->userType =='teacher') {
-            return redirect()->route('indexteacher');
-        }
+        return redirect()->route('patients.show',$patient_id);
+
     }
 
 

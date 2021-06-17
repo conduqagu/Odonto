@@ -7,7 +7,7 @@
                 <a href="https://www.ilerna.es/blog/aprende-con-ilerna-online/sanidad/codigo-internacional-dientes-fdi">
                     <img src={{ asset('/asociacionED.png') }} height="450" title="Dentadura permanente-temporal" alt="Dentadura permanente-temporal"></a>
                 </a>
-            </div>
+
                 <div class="card">
                     <div class="card-header"><h5>Examen dental</h5></div>
 
@@ -39,9 +39,12 @@
                                 <tr>
                                     <td>{!! Form::label('diente_id'.$a_e_d->diente->number,$a_e_d->diente->number) !!}
                                         {!! Form::hidden('asociacion_exam_diente_id'.$a_e_d->diente->number,$a_e_d->id) !!}</td>
-                                    <td>{!! Form::number('furca'.$a_e_d->diente->number,$a_e_d->furca) !!}</td>
-                                    <td>{!! Form::number('retraccion'.$a_e_d->diente->number,$a_e_d->retraccion) !!}</td>
-                                    <td>{!! Form::number('hipertrofia'.$a_e_d->diente->number,$a_e_d->hipertrofia) !!}</td>
+                                    <td>{!! Form::number('furca'.$a_e_d->diente->number,$a_e_d->furca,
+                                     ['class' => 'form-control', 'required','max'=>'10','min'=>'-10']) !!}</td>
+                                    <td>{!! Form::number('retraccion'.$a_e_d->diente->number,$a_e_d->retraccion,
+                                     ['class' => 'form-control', 'required','max'=>'10','min'=>'-10']) !!}</td>
+                                    <td>{!! Form::number('hipertrofia'.$a_e_d->diente->number,$a_e_d->hipertrofia,
+                                    ['class' => 'form-control', 'required','max'=>'10','min'=>'-10']) !!}</td>
                                     <td>{!! Form::select('sondaje'.$a_e_d->diente->number, array('1'=>'Si','0'=>'No'),$a_e_d->sondaje,['class' => 'form-control', 'required']) !!}</td>
                                     <td>{!! Form::select('movilidad'.$a_e_d->diente->number, array('1'=>'Si','0'=>'No'),$a_e_d->movilidad,['class' => 'form-control', 'required']) !!}</td>
                                     <td>{!! Form::select('sangrado'.$a_e_d->diente->number, array('1'=>'Si','0'=>'No'),$a_e_d->sangrado,['class' => 'form-control', 'required']) !!}</td>
@@ -68,7 +71,7 @@
                         {!! Form::open(['route' => ['exams.show',$asociacion_exam_dientes->first()->exam_id], 'method' => 'get']) !!}
                         {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                         {!! Form::close() !!}
-
+                    </div>
                     </div>
                 </div>
             </div>

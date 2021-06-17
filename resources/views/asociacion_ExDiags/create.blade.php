@@ -20,21 +20,17 @@
                         @endif
                         {!! Form::open(['route' =>['asociacion_ExDiags.store',$exam_id],'method'=>'post']) !!}
                         <div class="form-group">
+                            {!! Form::label('diagnostico_id', 'Nombre: *') !!}
                             {!! Form::select('diagnostico_id', $diagnosticos, null,['class' => 'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('comentario', 'Comentario') !!}
+                            {!! Form::label('comentario', 'Comentario: *') !!}
                             {!! Form::text('comentario',null,['class'=>'form-control', 'autofocus','maxlength'=>"255"]) !!}
                         </div>
                         @if(\Illuminate\Support\Facades\Auth::user()->userType=='student')
                             <div class="form-group">
-                                {!! Form::label('pin', 'Pin del profesor') !!}
-                                <input id="pin" type="password" class="form-control @error('pin') is-invalid @enderror" name="pin" value="{{ old('pin') }}"  name="pin" required>
-                                @error('pin')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                {!! Form::label('pin', 'Pin del profesor: *') !!}
+                                <input id="pin" type="password" class="form-control " name="pin" value="{{ old('pin') }}"  name="pin" required>
                             </div>
                         @endif
                         <br>
@@ -46,6 +42,8 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
+                <p>(*): Campos obligatorios</p>
+
             </div>
         </div>
 

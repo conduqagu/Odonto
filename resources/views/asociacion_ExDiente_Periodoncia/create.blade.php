@@ -40,9 +40,9 @@
                                 <tr>
                                     <td>{!! Form::label('diente_id'.$diente->number,$diente->number) !!}
                                         {!! Form::hidden('diente_id'.$diente->number,$diente->id) !!}</td>
-                                    <td>{!! Form::number('furca'.$diente->number,0) !!}</td>
-                                    <td>{!! Form::number('retraccion'.$diente->number,0) !!}</td>
-                                    <td>{!! Form::number('hipertrofia'.$diente->number,0) !!}</td>
+                                    <td>{!! Form::number('furca'.$diente->number,0,['class' => 'form-control', 'required','max'=>'10','min'=>'-10']) !!}</td>
+                                    <td>{!! Form::number('retraccion'.$diente->number,0,['class' => 'form-control', 'required','max'=>'10','min'=>'-10']) !!}</td>
+                                    <td>{!! Form::number('hipertrofia'.$diente->number,0,['class' => 'form-control', 'required','max'=>'10','min'=>'-10']) !!}</td>
                                     <td>{!! Form::select('sondaje'.$diente->number, array('1'=>'Si','0'=>'No'),'0',['class' => 'form-control', 'required']) !!}</td>
                                     <td>{!! Form::select('movilidad'.$diente->number, array('1'=>'Si','0'=>'No'),'0',['class' => 'form-control', 'required']) !!}</td>
                                     <td>{!! Form::select('sangrado'.$diente->number, array('1'=>'Si','0'=>'No'),'0',['class' => 'form-control', 'required']) !!}</td>

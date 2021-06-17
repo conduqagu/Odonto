@@ -21,8 +21,8 @@
                         {!! Form::model($braket, [ 'route' => ['brakets.update',$braket->id], 'method'=>'PUT']) !!}
 
                         <div class="form-group">
-                            {!! Form::label('name', 'Nombre') !!}
-                            {!! Form::text('name',$braket->name,['class'=>'form-control', 'required', 'autofocus','maxlength'=>"255"]) !!}
+                            {!! Form::label('name', 'Nombre: *') !!}
+                            {!! Form::text('name',$braket->name,['class'=>'form-control', 'required', 'autofocus','maxlength'=>"100"]) !!}
                         </div>
 
 
@@ -35,6 +35,7 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
+                <p>(*): Campos obligatorios</p>
             </div>
         </div>
     </div>

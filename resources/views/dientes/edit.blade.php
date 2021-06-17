@@ -21,28 +21,28 @@
                         {!! Form::model($diente, [ 'route' => ['dientes.update',$diente->id], 'method'=>'PUT']) !!}
 
                         <div class="form-group">
-                            {!! Form::label('name', 'Nombre común del diente') !!}
+                            {!! Form::label('name', 'Nombre común del diente: *') !!}
                             {!! Form::text('name',$diente->name,['class'=>'form-control', 'required', 'autofocus','maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('number', 'Número del diente') !!}
+                            {!! Form::label('number', 'Número del diente: *') !!}
                             {!! Form::text('number',$diente->number,['class'=>'form-control', 'required','maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('cuadrante', 'Cuadrante') !!}
+                            {!! Form::label('cuadrante', 'Cuadrante: *') !!}
                             {!! Form::number('cuadrante',$diente->cuadrante,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('sextante', 'Sextante') !!}
+                            {!! Form::label('sextante', 'Sextante: *') !!}
                             {!! Form::number('sextante',$diente->sextante,['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('ausente', 'Ausente') !!}
+                            {!! Form::label('ausente', 'Ausente: *') !!}
                             {!! Form::select('ausente',array('1'=>'Si','0'=>'No'),$diente->ausente,['class' => 'form-control', 'required']) !!}
                         </div>
                         @if(\Illuminate\Support\Facades\Auth::user()->userType=='student')
                         <div class="form-group">
-                            {!! Form::label('pin', 'Pin del profesor') !!}
+                            {!! Form::label('pin', 'Pin del profesor: *') !!}
                             <input id="pin" type="password" class="form-control @error('pin') is-invalid @enderror" name="pin" value="{{ old('pin') }}"  name="pin" required>
                             @error('pin')
                             <span class="invalid-feedback" role="alert">
@@ -59,6 +59,7 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
+                <p>(*): Campos obligatorios</p>
             </div>
         </div>
     </div>

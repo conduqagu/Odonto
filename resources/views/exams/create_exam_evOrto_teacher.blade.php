@@ -26,28 +26,28 @@
                             {!! Form::label('date', 'Fecha: '.$exam->date) !!}
                         </div>
                         <div>
-                            {!!  Form::label('orto_id' , 'Ortodoncia principal') !!}
-                            {!! Form::select('orto_id',$ortodoncias, ['class'=>'form-control']) !!}
+                            {!!  Form::label('orto_id' , 'Ortodoncia principal: *') !!}
+                            {!!  Form::select('orto_id',$ortodoncias,null, ['class' => 'form-control']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('previsto' , 'Previsto') !!}
-                            {!! Form::text('previsto',null, ['class'=>'form-control','maxlength'=>"255"]) !!}
+                            {!!  Form::label('previsto' , 'Previsto: ') !!}
+                            {!! Form::text('previsto',null, ['class' => 'form-control']) !!}
                         </div>
                         <div>
-                            {!!  Form::label('maxilar' , 'Maxilar') !!}
+                            {!!  Form::label('maxilar' , 'Maxilar: ') !!}
                             {!! Form::text('maxilar',null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                         </div>
                         <div>
-                            {!!  Form::label('mandibular' , 'Mandibular') !!}
+                            {!!  Form::label('mandibular' , 'Mandibular: ') !!}
                             {!! Form::text('mandibular',null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                         </div>
                         <div>
-                            {!!  Form::label('logrado' , 'Logrado') !!}
-                            {!! Form::text('logrado',null, ['class'=>'form-control','maxlength'=>"255"]) !!}
+                            {!!  Form::label('logrado' , 'Logrado: ') !!}
+                            {!! Form::text('logrado',null, ['class'=>'form-control','maxlength'=>"255" ]) !!}
                         </div>
                         <div>
-                            {!!  Form::label('otros' , 'Otros') !!}
-                            {!! Form::text('otros', $exam->otros, ['class'=>'form-control','maxlength'=>"255"]) !!}
+                            {!!  Form::label('otros' , 'Otros:') !!}
+                            {!! Form::text('otros', null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                             <br>
                         </div>
 
@@ -59,6 +59,7 @@
 
                     </div>
                 </div>
+                <p>(*): Campos obligatorios</p>
             </div>
         </div>
     </div>

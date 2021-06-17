@@ -32,25 +32,16 @@
                             <label for="examType" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de examen') }}</label>
 
                             <div class="col-md-6">
-                                <input type="radio" id="inicial" name="tipoExam" value="inicial" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
+                                <input type="radio" id="inicial" name="tipoExam" value="inicial"  {{ (old('tipoExam')=='inicial')? "checked" : "" }}  class="@error('tipoExam') is-invalid @enderror" name="tipoExam" required autocomplete="tipoExam" autofocus>
                                 <label for="inicial">Inicial</label><br>
-                                @if($patient->child==1)
-                                    <input type="radio" id="infantil" name="tipoExam" value="infantil" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
-                                    <label for="infantil">Infantil</label><br>
-                                @endif
-                                <input type="radio" id="ortodoncial" name="tipoExam" value="ortodoncial" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
-                                <label for="ortodoncial">Ortodoncia</label><br>
-                                <input type="radio" id="periodoncial" name="tipoExam" value="periodoncial" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
-                                <label for="periodoncia">Periodoncial</label><br>
-                                <input type="radio" id="evOrto" name="tipoExam" value="evOrto" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
+                                <input type="radio" id="infantil" name="tipoExam" value="infantil" {{ (old('tipoExam')=='infantil')? "checked" : "" }} class="@error('tipoExam') is-invalid @enderror" name="tipoExam" required autocomplete="tipoExam" autofocus>
+                                <label for="infantil">Infantil</label><br>
+                                <input type="radio" id="ortodoncial" name="tipoExam" value="ortodoncial" {{ (old('tipoExam')=='ortodoncial')? "checked" : "" }} class="@error('tipoExam') is-invalid @enderror" name="tipoExam" required autocomplete="tipoExam" autofocus>
+                                <label for="ortodoncia">Ortodoncia</label><br>
+                                <input type="radio" id="periodoncial" name="tipoExam" value="periodoncial" {{ (old('tipoExam')=='periodoncial')? "checked" : "" }} class="@error('tipoExam') is-invalid @enderror" name="tipoExam" required autocomplete="tipoExam" autofocus>
+                                <label for="perioconcia">Perioconcial</label><br>
+                                <input type="radio" id="evOrto" name="tipoExam" value="evOrto" {{ (old('tipoExam')=='evOrto')? "checked" : "" }} class="@error('tipoExam') is-invalid @enderror" name="tipoExam" required autocomplete="tipoExam" autofocus>
                                 <label for="evOrto">Evaluacion Ortodoncia</label><br>
-                                <input type="radio" id="otro" name="tipoExam" value="otro" class="@error('tipoExam') is-invalid @enderror" name="tipoExam" value="{{ old('tipoExam') }}" required autocomplete="tipoExam" autofocus>
-                                <label for="otro">Otro</label><br>
-                                @error('examType')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
                             </div>
                         </div>
 
@@ -63,6 +54,8 @@
 
                     </div>
                 </div>
+                <p>(*): Campos obligatorios</p>
+
             </div>
         </div>
 @endsection
