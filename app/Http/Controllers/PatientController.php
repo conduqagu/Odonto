@@ -8,6 +8,7 @@ use App\Exam;
 use App\Patient;
 use App\Rules\PinProfesor;
 use App\User;
+use http\Cookie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -160,39 +161,75 @@ class PatientController extends Controller
      */
     public function show($id,Request $request)
     {
-        $patient=Patient::find($id);
         if($request->semibutton=='Borrar filtro') {
-            $request->replace(['query'=>null]);
-            $request->replace(['query2'=>null]);
+            \Cookie::queue('query', null, 60);
+            \Cookie::queue('query2', null, 60);
+            $query=null;
+            $query2=null;
+            $query3 = \Request::cookie('query3');
+            $query4 = \Request::cookie('query4');
+        }elseif($request->semibutton2=='Borrar filtro') {
+            \Cookie::queue('query3', null, 60);
+            $query3=null;
+            $query = \Request::cookie('query');
+            $query2 = \Request::cookie('query2');
+            $query4 = \Request::cookie('query4');
+        }elseif($request->semibutton3=='Borrar filtro') {
+            \Cookie::queue('query4', null, 60);
+            $query4=null;
+            $query = \Request::cookie('query');
+            $query2 = \Request::cookie('query2');
+            $query3 = \Request::cookie('query3');
+        }else {
+            if ($request->get("query") != null) {
+                \Cookie::queue('query', $request->get("query"), 60);
+                $query = $request->get("query");
+            } else {
+                $query = \Request::cookie('query');
+            }
+            if ($request->get("query2") != null) {
+                \Cookie::queue('query2', $request->get("query2"), 60);
+                $query2 = $request->get("query2");
+            } else {
+                $query2 = \Request::cookie('query2');
+            }
+            if ($request->get("query3") != null) {
+                \Cookie::queue('query3', $request->get("query3"), 60);
+                $query3 = $request->get("query3");
+            } else {
+                $query3 = \Request::cookie('query3');
+            }
+            if ($request->get("query4") != null) {
+                \Cookie::queue('query4', $request->get("query4"), 60);
+                $query4 = $request->get("query4");
+            } else {
+                $query4 = \Request::cookie('query4');
+            }
         }
-        if($request->semibutton2=='Borrar filtro') {
-            $request->replace(['query3'=>null]);
-        }
-        if($request->semibutton3=='Borrar filtro') {
-            $request->replace(['query4'=>null]);
-        }
-        $exams=Exam::where('exams.patient_id','=',$id) ->where('exams.tipoExam','LIKE','%'.$request->get("query")."%")
-            ->where('exams.date','LIKE','%'.$request->get("query2")."%")->paginate(8);
+        $patient=Patient::find($id);
+
+        $exams=Exam::where('exams.patient_id','=',$id) ->where('exams.tipoExam','LIKE','%'.$query."%")
+            ->where('exams.date','LIKE','%'.$query2."%")->paginate(8, ['*'], "page_a");
         $child=$patient->child;
         if($child==1){
-            $filtro_dientes=Diente::where('dientes.number','LIKE','%'.$request->get("query3")."%")
-                ->orWhere('dientes.name','LIKE','%'.$request->get("query3")."%")->pluck('id','id');
+            $filtro_dientes=Diente::where('dientes.number','LIKE','%'.$query3."%")
+                ->orWhere('dientes.name','LIKE','%'.$query3."%")->pluck('id','id');
             $dientes=Diente::where('patient_id','=',$id)->where('number','>','50')
                 ->whereIn('id',$filtro_dientes)
-                ->paginate(8, ['*'], "page_a");
+                ->paginate(8, ['*'], "page_b");
         }elseif($child==0){
-            $filtro_dientes=Diente::where('dientes.number','LIKE','%'.$request->get("query3")."%")
-                ->orWhere('dientes.name','LIKE','%'.$request->get("query3")."%")->pluck('id','id');
+            $filtro_dientes=Diente::where('dientes.number','LIKE','%'.$query3."%")
+                ->orWhere('dientes.name','LIKE','%'.$query3."%")->pluck('id','id');
             $dientes=Diente::where('patient_id','=',$id)->where('number','<','50')
                 ->whereIn('id',$filtro_dientes)
                 ->paginate(8, ['*'],"page_b");
         }
-        $filter_student=User::where('users.dni','LIKE','%'.$request->get("query4")."%")
-            ->orWhere('users.name','LIKE','%'.$request->get("query4")."%")
-            ->orWhere('users.surname','LIKE','%'.$request->get("query4")."%")->pluck('id','id');
+        $filter_student=User::where('users.dni','LIKE','%'.$query4."%")
+            ->orWhere('users.name','LIKE','%'.$query4."%")
+            ->orWhere('users.surname','LIKE','%'.$query4."%")->pluck('id','id');
         $students_all=User::where('userType','=','student')
             ->whereIn('users.id',$filter_student)
-            ->paginate(2, ['*'],"page_c");
+            ->paginate(8, ['*'],"page_c");
         $students_si=Patient::find($id)->students()
             ->whereIn('users.id',$filter_student)
             ->get();
@@ -202,7 +239,8 @@ class PatientController extends Controller
             ->whereIn('id',$filter_student)
             ->paginate(5, ['*'],"page_d");*/
         return view('patients.show',['patient'=>$patient,'exams'=>$exams,'dientes'=>$dientes,
-            'students_si'=>$students_si,'students_all'=>$students_all]);
+            'students_si'=>$students_si,'students_all'=>$students_all,'query'=>$query,'query2'=>$query2,
+            'query3'=>$query3,'query4'=>$query4]);
 
     }
 
