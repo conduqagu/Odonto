@@ -96,7 +96,7 @@ class PatientController extends Controller
             'surname' => ['required', 'string', 'max:255'],
             'dni' => ['required', 'unique:patients','string','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             'email' => ['nullable','string', 'email', 'max:255'],
-            'telefono' => ['nullable','string', 'min:8'],
+            'telefono' => ['nullable','string','regex:/[0-9]{9}/','size:9'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required','in:I,II,III'],
             'observaciones' => ['nullable','string', 'max:255'],
@@ -133,7 +133,7 @@ class PatientController extends Controller
             'surname' => ['required', 'string', 'max:255'],
             'dni' => ['required','unique:patients', 'string','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             'email' => ['nullable','string', 'email', 'max:255'],
-            'telefono' => ['nullable','string', 'min:8'],
+            'telefono' => ['nullable','string','regex:/[0-9]{9}/','size:9'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required','in:I,II,III,IV,V,VI'],
             'observaciones' => ['nullable','string', 'max:255'],
@@ -187,22 +187,22 @@ class PatientController extends Controller
                 ->whereIn('id',$filtro_dientes)
                 ->paginate(8, ['*'],"page_b");
         }
-
+        $filter_student=User::where('users.dni','LIKE','%'.$request->get("query4")."%")
+            ->orWhere('users.name','LIKE','%'.$request->get("query4")."%")
+            ->orWhere('users.surname','LIKE','%'.$request->get("query4")."%")->pluck('id','id');
+        $students_all=User::where('userType','=','student')
+            ->whereIn('users.id',$filter_student)
+            ->paginate(2, ['*'],"page_c");
         $students_si=Patient::find($id)->students()
-            ->where('users.dni','LIKE','%'.$request->get("query4")."%")
-            ->where('users.name','LIKE','%'.$request->get("query4")."%")
-            ->where('users.surname','LIKE','%'.$request->get("query4")."%")
+            ->whereIn('users.id',$filter_student)
             ->get();
-
+        /**
         $students1=Patient::find($id)->students()->pluck('users.id');
         $students_no=User::whereNotIn('id',$students1)->where('userType','=','student')
-            ->where('users.dni','LIKE','%'.$request->get("query4")."%")
-            ->where('users.name','LIKE','%'.$request->get("query4")."%")
-            ->where('users.surname','LIKE','%'.$request->get("query4")."%")->paginate(5, ['*'],"page_c");
-
-
+            ->whereIn('id',$filter_student)
+            ->paginate(5, ['*'],"page_d");*/
         return view('patients.show',['patient'=>$patient,'exams'=>$exams,'dientes'=>$dientes,
-            'students'=>$students_si,'students_no'=>$students_no]);
+            'students_si'=>$students_si,'students_all'=>$students_all]);
 
     }
 
@@ -266,7 +266,7 @@ class PatientController extends Controller
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'telefono' => ['nullable','string', 'min:8'],
+            'telefono' => ['nullable','string','regex:/[0-9]{9}/','size:9'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
             'observaciones' => ['nullable','string', 'max:255'],
@@ -325,7 +325,7 @@ class PatientController extends Controller
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'telefono' => ['nullable','string', 'min:8'],
+            'telefono' => ['nullable','string','regex:/[0-9]{9}/','size:9'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
             'observaciones' => ['nullable','string', 'max:255'],

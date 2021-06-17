@@ -30,20 +30,30 @@
                         </div>
                         <div class="form-group">
                             <label for="email" >{{ __('Correo electrónico: *') }}</label>
-
-                            <input id="email" type="email" placeholder="miemail@dominio.com" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$patient->email}}" required autocomplete="email">
+                            @if(old('email')==null)
+                                <input id="email" type="email" placeholder="miemail@dominio.com" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$patient->email}}" required autocomplete="email">
+                            @else
+                                <input id="email" type="email" placeholder="miemail@dominio.com" class="form-control @error('email') is-invalid @enderror" name="email" value="{{old('email')}}" required autocomplete="email">
+                            @endif
 
 
                         </div>
                         <div class="form-group">
                             <label for="dni" >{{ __('DNI: *') }}</label>
-
-                            <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ $patient->dni }}" required autocomplete="dni" pattern="[0-9]{8}[A-Za-z]{1}" title="Debe introducir 8 números y una letra">
+                            @if(old('dni')==null)
+                                <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ $patient->dni }}" required autocomplete="dni" pattern="[0-9]{8}[A-Za-z]{1}" title="Debe introducir 8 números y una letra">
+                            @else
+                                <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ old('dni')}}" required autocomplete="dni" pattern="[0-9]{8}[A-Za-z]{1}" title="Debe introducir 8 números y una letra">
+                            @endif
 
                         </div>
                         <div class="form-group">
                             {!! Form::label('telefono', 'Teléfono: ') !!}
-                            {!! Form::text('telefono',$patient->telefono,['class'=>'form-control', 'maxlength'=>"255"]) !!}
+                            @if(old('telefono')==null)
+                                <input id="telefono" type="text" name="telefono" class="form-control" value="{{ $patient->telefono}}" required autocomplete="telefono" pattern="[0-9]{9}" title="Debe introducir 9 números">
+                            @else
+                                <input id="telefono" type="text" name="telefono" class="form-control" value="{{ old('telefono')}}" required autocomplete="telefono" pattern="[0-9]{9}" title="Debe introducir 9 números">
+                            @endif
                         </div>
                         <div class="form-group">
                             {!! Form::label('fechaNacimiento', 'Fecha de nacimiento: *') !!}

@@ -127,7 +127,8 @@
                                 </tr>
                             @endforeach
                         </table>
-                        {{$exams->render()}}
+                        {{$exams->appends(['query' => $query ?? '','query2' => $query2 ?? '','query3' => $query3 ?? ''
+                        ,'query4' => $query4 ?? ''])->links()}}
                     </div>
                 </div>
                 <br>
@@ -180,7 +181,8 @@
                                 </tr>
                             @endforeach
                         </table>
-                        {{$dientes->render()}}
+                        {{$dientes->appends(['query' => $query ?? '','query2' => $query2 ?? '','query3' => $query3 ?? ''
+                        ,'query4' => $query4 ?? ''])->links()}}
 
                     </div>
                 </div>
@@ -192,7 +194,7 @@
                     <div class="card-body">
                         <div class="form-group" >
                             {!! Form::model(\Illuminate\Support\Facades\Request::all(),['route' => ['patients.show',$patient->id], 'method' => 'get']) !!}
-                            {!! Form::text('query4',null,['class'=>'col-md-4', 'autofocus', 'placeholder'=>'Nombre, apellido o DNI', 'maxlength'=>"255"]) !!}
+                            {!! Form::text('query4',null,['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block','placeholder'=>'Nombre, apellido o DNI', 'maxlength'=>"255"]) !!}
                             {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary ', 'name'=>'semibutton3'])!!}
                             {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary','name'=>'semibutton3'])!!}
                             {!! Form::close() !!}
@@ -205,35 +207,29 @@
                                 <th>DNI</th>
                                 <th colspan="4">Acciones</th>
                             </tr>
-
-                            @foreach ($students as $student)
+                            @foreach ($students_all as $student2)
                                 <tr>
-                                    <td>{{ $student->name }}</td>
-                                    <td>{{ $student->surname }}</td>
-                                    <td>{{ $student->dni }}</td>
+                                    <td>{{ $student2->name }}</td>
+                                    <td>{{ $student2->surname }}</td>
+                                    <td>{{ $student2->dni }}</td>
                                     <td>
-                                        {!! Form::open(['route' => ['deleteStudent',$student->id], 'method' => 'delete']) !!}
-                                        {{Form::hidden('patient_id',$patient->id)}}
-                                        {!!   Form::submit('Eliminar de este paciente', ['class'=> 'btn btn-danger button-align' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
-                                        {!! Form::close() !!}
-                                    </td>
-                                </tr>
-                            @endforeach
-                            @foreach ($students_no as $student_no)
-                                <tr>
-                                        <td>{{ $student_no->name }}</td>
-                                        <td>{{ $student_no->surname }}</td>
-                                        <td>{{ $student_no->dni }}</td>
-                                        <td>
-                                        {!! Form::open(['route' => ['storeAlumno',$student_no->id], 'method' => 'get']) !!}
-                                        {!! Form::hidden('patient_id',$patient->id) !!}
-                                        {!!   Form::submit('Añadir a este paciente', ['class'=> 'btn btn-primary' ])!!}
-                                        {!! Form::close() !!}
+                                        @if($students_si->contains($student2))
+                                            {!! Form::open(['route' => ['deleteStudent',$student2->id], 'method' => 'delete']) !!}
+                                            {{Form::hidden('patient_id',$patient->id)}}
+                                            {!!   Form::submit('Eliminar de este paciente', ['class'=> 'btn btn-danger button-align' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
+                                            {!! Form::close() !!}
+                                        @else
+                                            {!! Form::open(['route' => ['storeAlumno',$student2->id], 'method' => 'get']) !!}
+                                            {!! Form::hidden('patient_id',$patient->id) !!}
+                                            {!!   Form::submit('Añadir a este paciente', ['class'=> 'btn btn-primary' ])!!}
+                                            {!! Form::close() !!}
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach
                         </table>
-                        {{$students_no->render()}}
+                        {{$students_all->appends(['query' => $query ?? '','query2' => $query2 ?? '','query3' => $query3 ?? ''
+                        ,'query4' => $query4 ?? ''])->links()}}
 
 
                     </div>

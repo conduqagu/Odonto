@@ -23,17 +23,17 @@
                             {!! Form::hidden('exam_id', $exam_id) !!}
                         </hidden>
                         <div class="form-group">
-                            {!! Form::label('nombre', 'Nombre') !!}
+                            {!! Form::label('nombre', 'Nombre: *') !!}
                             {!! Form::text('nombre',null,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"255"]) !!}
                         </div>
                         <div class="form-group">
-                            <label>Nuevo Archivo</label>
+                            <label>Nuevo Archivo: *</label>
                             <br>
                             {!! Form::file('fichero',null,['class'=>'form-control', 'required','autofocus']) !!}
 
                         </div>
                         <div class="form-group">
-                            {!! Form::label('comentario', 'Comentario') !!}
+                            {!! Form::label('comentario', 'Comentario: ') !!}
                             {!! Form::text('comentario',null,['class'=>'form-control', 'autofocus', 'maxlength'=>"255"]) !!}
                         </div>
 
@@ -57,6 +57,8 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
+                <p>(*): Campos obligatorios</p>
+
             </div>
         </div>
 

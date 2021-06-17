@@ -2685,7 +2685,7 @@ textarea.form-control.is-invalid {
   line-height: 1.6;
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    box-shadow: 2px 2px 0px 0px grey;
+
 
 }
 

@@ -7,6 +7,7 @@ use App\Rules\PinProfesor;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PruebaComplementariaController extends Controller
 {
@@ -43,6 +44,7 @@ class PruebaComplementariaController extends Controller
         $this->validate($request, [
             'nombre' => ['required', 'string', 'max:255'],
             'comentario' => ['nullable', 'string', 'max:255'],
+            'fichero'=>['file'],
             'exam_id' => ['required', 'exists:exams,id'],
         ]);
         if(Auth::user()->userType=='student'){
@@ -89,7 +91,9 @@ class PruebaComplementariaController extends Controller
     public function edit($id)
     {
         $prueba_complementaria=PruebaComplementaria::find($id);
-        return view('prueba_complementarias.edit',['prueba_complementaria'=>$prueba_complementaria]);
+        $contents = Storage::get($prueba_complementaria->fichero);
+
+        return view('prueba_complementarias.edit',['prueba_complementaria'=>$prueba_complementaria,'contents'=>$contents]);
     }
 
     /**

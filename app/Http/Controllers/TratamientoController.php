@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Braket;
 use App\Diagnostico;
+use App\Exam;
 use App\Rules\PinProfesor;
 use App\TipoTratamiento;
 use App\Tratamiento;
@@ -46,14 +47,28 @@ class TratamientoController extends Controller
      */
     public function store(Request $request)
     {
+        if($request->fecha_fin!=null){
+            $this->validate($request, [
+                'fecha_inicio' => ['required', 'date'],
+                'fecha_fin' => ['nullable', 'date','after_or_equal:fecha_inicio']
+            ]);
+        }else{
+            $this->validate($request, [
+                'fecha_inicio' => ['nullable', 'date'],
+                'fecha_fin' => ['nullable', 'date','after_or_equal:fecha_inicio']
+            ]);
+        }
         $this->validate($request, [
             'terapia' => ['required', 'string', 'in:sin definir,convencional,fases'],
-            'fecha_inicio' => ['nullable', 'date'],
-            'fecha_fin' => ['nullable', 'date'],
-            'braket_id' => ['nullable', 'exists:brakets,id'],
             'tipo_tratamiento_id' => ['required', 'exists:tipo_tratamientos,id'],
             'exam_id' =>['required','exists:exams,id']
         ]);
+
+        if(Exam::find($request->exam_id)->tipoExam=='ortodoncial'){
+        $this->validate($request, [
+            'braket_id' => ['required', 'exists:brakets,id'],
+        ]);
+        }
         if(Auth::user()->userType=='student'){
             $this->validate($request,
                 ['pin'=>['required','string','max:255',new PinProfesor()]]);
@@ -112,13 +127,28 @@ class TratamientoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if($request->fecha_fin!=null){
+            $this->validate($request, [
+                'fecha_inicio' => ['required', 'date'],
+                'fecha_fin' => ['nullable', 'date','after_or_equal:fecha_inicio']
+            ]);
+        }else{
+            $this->validate($request, [
+                'fecha_inicio' => ['nullable', 'date'],
+                'fecha_fin' => ['nullable', 'date','after_or_equal:fecha_inicio']
+            ]);
+        }
         $this->validate($request, [
             'terapia' => ['required', 'string', 'in:sin definir,convencional,fases'],
-            'fecha_inicio' => ['nullable', 'date'],
-            'fecha_fin' => ['nullable', 'date'],
-            'braket_id' => ['nullable', 'exists:brakets,id'],
             'tipo_tratamiento_id' => ['required', 'exists:tipo_tratamientos,id'],
         ]);
+        $tratamiento = Tratamiento::find($id);
+
+        if(Exam::find($tratamiento->exam_id)->tipoExam=='ortodoncial'){
+            $this->validate($request, [
+                'braket_id' => ['required', 'exists:brakets,id'],
+            ]);
+        }
         if(Auth::user()->userType=='student'){
             $this->validate($request,
                 ['pin' => ['required', 'string', 'max:255']]);
@@ -131,7 +161,6 @@ class TratamientoController extends Controller
             }
         }
 
-        $tratamiento = Tratamiento::find($id);
         $tratamiento->fill($request->all());
         $tratamiento->save();
         $tratamiento->coste=$tratamiento->tipoTratamiento->coste;

@@ -62,12 +62,9 @@
                                     <a class="dropdown-item" href="{{ url('/patients/index') }}">
                                         Pacientes
                                     </a>
-                                    <div class="subnav">
-                                        <button class="subnavbtn dropdown-item">Ajustes <i class="fa fa-caret-down"></i></button>
-                                        <div class="subnav-content">
-                                            <a href="{{ url('/perfiles/perfilstudent') }}">Perfil</a>
-                                        </div>
-                                    </div>
+                                    <a class="dropdown-item" href="{{ url('/perfiles/perfilstudent') }}">
+                                        Perfil
+                                    </a>
                                 @endif
                             <!--
                                     <a class="dropdown-item" href="{{ url('/dientes') }}">
@@ -81,13 +78,12 @@
                                     <a class="dropdown-item" href="{{ url('/indexstudents') }}">
                                         Estudiantes
                                     </a>
-                                    <div class="subnav">
-                                        <button class="subnavbtn dropdown-item">Ajustes <i class="fa fa-caret-down"></i></button>
-                                        <div class="subnav-content">
-                                            <a href="{{ url('/perfiles/perfilteacher') }}">Perfil</a>
-                                            <a href="{{ url('/user/createT') }}">Nuevo ususario</a>
-                                        </div>
-                                    </div>
+                                    <a class="dropdown-item" href="{{ url('/perfiles/perfilteacher') }}">
+                                        Perfil
+                                    </a>
+                                    <a class="dropdown-item" href="{{ url('/user/createT') }}">
+                                        Nuevo alumno
+                                    </a>
 
                                 @endif
 

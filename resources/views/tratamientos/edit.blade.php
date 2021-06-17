@@ -26,31 +26,33 @@
                         </div>
                         @endif
                         <div class="form-group">
-                            {!!  Form::label('tipo_tratamiento_id' , 'Nombre') !!}
-                            {!! Form::select('tipo_tratamiento_id', $tipo_tratamientos,$tratamiento->tipo_tratamiento_id,['class' => 'form-control', 'required']) !!}
+                            {!!  Form::label('tipo_tratamiento_id' , 'Nombre: *') !!}
+                            {!! Form::select('tipo_tratamiento_id', $tipo_tratamientos,$tratamiento->tipo_tratamiento_id,
+                            ['class' => 'form-control', 'required']) !!}
                         </div>
 
                         <div class="form-group">
-                            {!!  Form::label('terapia' , 'Terapia') !!}
-                            {!! Form::select('terapia', array('sin definir'=>'Sin definir','convencional'=>'Convencional','fases'=>'Fases'),$tratamiento->terapia,['class'=>'form-control']) !!}
+                            {!!  Form::label('terapia' , 'Terapia: *') !!}
+                            {!! Form::select('terapia', array('sin definir'=>'Sin definir','convencional'=>'Convencional','fases'=>'Fases'),$tratamiento->terapia,
+                            ['class'=>'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('fecha_inicio', 'Fecha inicio') !!}
+                            {!! Form::label('fecha_inicio', 'Fecha inicio: ') !!}
                             {!! Form::date('fecha_inicio',$tratamiento->fecha_inicio,['class'=>'form-control']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('fecha_fin', 'Fecha fin') !!}
+                            {!! Form::label('fecha_fin', 'Fecha fin:') !!}
                             {!! Form::date('fecha_fin',$tratamiento->fecha_fin,['class'=>'form-control']) !!}
                         </div>
                         @if(\App\Exam::find($tratamiento->exam_id)->tipoExam=='ortodoncial')
                             <div class="form-group">
-                                {!!  Form::label('braket_id' , 'Brackets') !!}
-                                {!! Form::select('braket_id', $brakets,null,['class' => 'form-control']) !!}
+                                {!!  Form::label('braket_id' , 'Brackets: *') !!}
+                                {!! Form::select('braket_id', $brakets,null,['class' => 'form-control', 'required']) !!}
                             </div>
                         @endif
                         @if(\Illuminate\Support\Facades\Auth::user()->userType=='student')
                             <div class="form-group">
-                                {!! Form::label('pin', 'Pin del profesor') !!}
+                                {!! Form::label('pin', 'Pin del profesor: *') !!}
                                 <input id="pin" type="password" class="form-control @error('pin') is-invalid @enderror" name="pin" value="{{ old('pin') }}"  name="pin" required>
                                 @error('pin')
                                 <span class="invalid-feedback" role="alert">
@@ -68,6 +70,7 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
+                <p>(*): Campos obligatorios</p>
             </div>
         </div>
     </div>

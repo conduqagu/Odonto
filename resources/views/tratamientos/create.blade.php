@@ -23,12 +23,12 @@
                             {!!  Form::hidden('exam_id' , $exam_id) !!}
                         </div>
                         <div class="form-group">
-                            {!!  Form::label('tipo_tratamiento_id' , 'Nombre') !!}
+                            {!!  Form::label('tipo_tratamiento_id' , 'Nombre: *') !!}
                             {!! Form::select('tipo_tratamiento_id', $tipo_tratamientos,null,['class' => 'form-control', 'required']) !!}
                         </div>
 
                         <div class="form-group">
-                            {!!  Form::label('terapia' , 'Terapia') !!}
+                            {!!  Form::label('terapia' , 'Terapia: *') !!}
                             {!! Form::select('terapia', array('sin definir'=>'Sin definir','convencional'=>'Convencional','fases'=>'Fases'),'sin definir',['class'=>'form-control']) !!}
                         </div>
                         <div class="form-group">
@@ -41,13 +41,13 @@
                         </div>
                         @if(\App\Exam::find($exam_id)->tipoExam=='ortodoncial')
                         <div class="form-group">
-                            {!!  Form::label('braket_id' , 'Brackets') !!}
-                            {!! Form::select('braket_id', $brakets,null,['class' => 'form-control']) !!}
+                            {!!  Form::label('braket_id' , 'Brackets: *') !!}
+                            {!! Form::select('braket_id', $brakets,null,['class' => 'form-control','required']) !!}
                         </div>
                         @endif
                         @if(\Illuminate\Support\Facades\Auth::user()->userType=='student')
                             <div class="form-group">
-                                {!! Form::label('pin', 'Pin del profesor') !!}
+                                {!! Form::label('pin', 'Pin del profesor: *') !!}
                                 <input id="pin" type="password" class="form-control @error('pin') is-invalid @enderror" name="pin" value="{{ old('pin') }}"  name="pin" required>
                                 @error('pin')
                                 <span class="invalid-feedback" role="alert">
@@ -66,6 +66,7 @@
                         {!! Form::close() !!}
                     </div>
                 </div>
+                <p>(*): Campos obligatorios</p>
             </div>
         </div>
 

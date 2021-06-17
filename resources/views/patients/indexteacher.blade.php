@@ -30,16 +30,15 @@
                         <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
-                                <th>Nombre</th>
-                                <th>Apellidos</th>
+                                <th>Nombre y Apellidos</th>
                                 <th>DNI</th>
                                 <th colspan="4">Acciones</th>
                             </tr>
 
                             @foreach ($patients as $patient)
                                 <tr style="word-break: break-word;">
-                                    <td  style="max-width: 78px;">{{ $patient->name }}</td>
-                                    <td  style="max-width: 78px;">{{ $patient->surname }}</td>
+                                    <td  style="max-width: 78px;">{{ $patient->name.' '.$patient->surname }}</td>
+
                                     <td>{{ $patient->dni }}</td>
                                     <td>
                                         {!! Form::open(['route' => ['patients.show',$patient->id], 'method' => 'get']) !!}

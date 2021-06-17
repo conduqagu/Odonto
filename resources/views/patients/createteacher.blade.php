@@ -47,7 +47,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('telefono', 'Télefono: ') !!}
-                            {!! Form::text('telefono',null,['class'=>'form-control','unique', 'maxlength'=>"255"]) !!}
+                            <input id="telefono" type="text" name="telefono" class="form-control" value="{{ old('telefono') }}" required autocomplete="telefono" pattern="[0-9]{9}" title="Debe introducir 9 números">
                         </div>
                         <div class="form-group">
                             {!! Form::label('fechaNacimiento', 'Fecha de nacimiento: *') !!}
