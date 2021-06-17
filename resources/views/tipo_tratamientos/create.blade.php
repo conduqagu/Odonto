@@ -9,7 +9,15 @@
 
                     <div class="card-body">
                         @include('flash::message')
-
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         {!! Form::open(['route' => 'tipo_tratamientos.store']) !!}
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre') !!}
@@ -17,11 +25,11 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('coste', 'Coste (€)') !!}
-                            {!! Form::number('coste',0,['class'=>'form-control', 'required','step'=>'0.01']) !!}
+                            {!! Form::number('coste',0,['class'=>'form-control', 'required','step'=>'0.01','min'=>'0']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('iva', 'IVA (%)') !!}
-                            {!! Form::number('iva',0,['class'=>'form-control', 'required','autofocus','step'=>'0.01']) !!}
+                            {!! Form::number('iva',0,['class'=>'form-control', 'required','autofocus','step'=>'0.01', 'min'=>'0']) !!}
                         </div>
 
                         <br>

@@ -9,7 +9,15 @@
 
                     <div class="card-body">
                         @include('flash::message')
-
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         {!! Form::open(['route' =>['asociacion_ExDiags.store',$exam_id],'method'=>'post']) !!}
                         <div class="form-group">
                             {!! Form::select('diagnostico_id', $diagnosticos, null,['class' => 'form-control', 'required']) !!}

@@ -195,6 +195,59 @@
                         </div>
                     </div>
                     </div>
+
+                    <br>
+
+                    <div class="card" >
+                        <div class="card-header"><h5>Examen dental</h5></div>
+                        <div class="card-body">
+                            <div class="title m-b-md" style="text-align: center;">
+                                <a href="https://www.ilerna.es/blog/aprende-con-ilerna-online/sanidad/codigo-internacional-dientes-fdi">
+                                    <img src={{ asset('/asociacionED.png') }} height="450" title="Dentadura permanente-temporal" alt="Dentadura permanente-temporal"></a>
+                                </a>
+                            </div>
+                            <br>
+                            <table class="table table-striped table-bordered">
+                                <tr>
+                                    <th>Diente</th>
+                                    <th>Dentición raíz</th>
+                                    <th>Dentición corona</th>
+                                    <th>Tratamiento</th>
+                                    <th>Opacidad</th>
+                                    @if(\Illuminate\Support\Facades\Auth::user()->userType=='admin')
+                                        <th>DNI Profesor</th>
+                                    @endif
+                                </tr>
+                                @foreach ($asociacion_exam_dientes as $asociacion_exam_diente)
+                                    <tr>
+                                        <td>{{ $asociacion_exam_diente->diente->number}} -
+                                            {{ $asociacion_exam_diente->diente->name}}</td>
+                                        <td>{{ $asociacion_exam_diente->denticionRaiz }}</td>
+                                        <td>{{ $asociacion_exam_diente->denticionCorona }}</td>
+                                        <td>@foreach($asociacion_exam_diente->tratamiento as $tratamiento)
+                                                {{$tratamiento->tipoTratamiento->name}}<br>
+                                            @endforeach
+                                        </td>
+                                        <td>{{ $asociacion_exam_diente->opacidad }}</td>
+
+                                        @if($asociacion_exam_diente->teacher_id!=null && \Illuminate\Support\Facades\Auth::user()->userType=='admin')
+                                            <td>{{\App\User::find($asociacion_exam_diente->teacher_id)->dni}}</td>
+                                        @endif
+                                    </tr>
+                                @endforeach
+                            </table>
+                            {{$asociacion_exam_dientes->render()}}
+                            @if(sizeof($asociacion_exam_dientes)==0 && \Illuminate\Support\Facades\Auth::user()->userType!='admin')
+                                {!! Form::open(['route' => ['create_asociacionED',$exam->id], 'method' => 'get']) !!}
+                                {!!   Form::submit('Realizar examen dental', ['class'=> 'btn btn-primary'])!!}
+                                {!! Form::close() !!}
+                            @else
+                                {!! Form::open(['route' => ['edit_asociacionED',$exam->id], 'method' => 'get']) !!}
+                                {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                {!! Form::close() !!}
+                            @endif
+                        </div>
+                    </div>
                     @elseif($exam->tipoExam=='infantil')
                         <br>
                         <div class="card">
@@ -248,6 +301,70 @@
 
                             </div>
                         </div>
+                    <br>
+                    <div class="card">
+                        <div class="card-header"><h5>Estudio dental</h5></div>
+                        <div class="card-body">
+                            <div class="title m-b-md" style="text-align: center">
+                                <a href="https://www.ilerna.es/blog/aprende-con-ilerna-online/sanidad/codigo-internacional-dientes-fdi">
+                                    <img src={{ asset('/asociacionED.png') }} height="450" title="Dentadura permanente-temporal" alt="Dentadura permanente-temporal"></a>
+                                </a>
+                            </div>
+                            <br>
+                            <table class="table table-striped table-bordered">
+                                <tr>
+                                    <th>Diente</th>
+                                    <th>Furca</th>
+                                    <th>Retraccion</th>
+                                    <th>Hipertrofia</th>
+                                    <th>Sondaje</th>
+                                    <th>Movilidad</th>
+                                    <th>Sangrado</th>
+                                    <th>Encía insertada</th>
+                                </tr>
+                                @foreach ($asociacion_exam_dientes as $asociacion_exam_diente)
+                                    <tr style="word-break: break-word;">
+                                        <td>{{ $asociacion_exam_diente->diente->number}} -
+                                            {{ $asociacion_exam_diente->diente->name}}</td>
+                                        <td>{{ $asociacion_exam_diente->furca }}</td>
+                                        <td>{{ $asociacion_exam_diente->retraccion }}</td>
+                                        <td>{{ $asociacion_exam_diente->hipertrofia }}</td>
+                                        @if($asociacion_exam_diente->sondaje==1)
+                                            <td><FONT COLOR="blue">{{'Si'}}</FONT></td>
+                                        @else
+                                            <td>{{'No'}}</td>
+                                        @endif
+                                        @if($asociacion_exam_diente->movilidad==1)
+                                            <td><FONT COLOR="blue">{{'Si'}}</FONT></td>
+                                        @else
+                                            <td>{{'No'}}</td>
+                                        @endif
+                                        @if($asociacion_exam_diente->sangrado==1)
+                                            <td><FONT COLOR="blue">{{'Si'}}</FONT></td>
+                                        @else
+                                            <td>{{'No'}}</td>
+                                        @endif
+                                        @if($asociacion_exam_diente->encia_insertada==1)
+                                            <td><FONT COLOR="blue">{{'Si'}}</FONT></td>
+                                        @else
+                                            <td>{{'No'}}</td>
+                                        @endif
+
+                                    </tr>
+                                @endforeach
+                            </table>
+                            {{$asociacion_exam_dientes->render()}}
+                            @if(sizeof($asociacion_exam_dientes)==0 && \Illuminate\Support\Facades\Auth::user()->userType!='admin')
+                                {!! Form::open(['route' => ['create_asociacionEDPeriodoncia',$exam->id], 'method' => 'get']) !!}
+                                {!!   Form::submit('Realizar examen dental', ['class'=> 'btn btn-primary'])!!}
+                                {!! Form::close() !!}
+                            @else
+                                {!! Form::open(['route' => ['edit_asociacionEDPeriodoncia',$exam->id], 'method' => 'get']) !!}
+                                {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                {!! Form::close() !!}
+                            @endif
+                        </div>
+                    </div>
 
                     @elseif($exam->tipoExam=='ortodoncial')
                         <br>
@@ -296,6 +413,7 @@
                         </div>
                     @endif
 <br>
+
                     <div class="card" >
                         <div class="card-header"><h5>Diagnósticos</h5></div>
                         <div class="card-body">
@@ -335,7 +453,9 @@
                             </tr>
                         @endforeach
                     </table>
-                    </div>
+                                {{$diagnosticos->render()}}
+
+                        </div>
                     </div>
 
             <br>
@@ -436,6 +556,8 @@
                                     <td><b><FONT COLOR="red">{{'No'}}</FONT></b></td>
                                 @endif                            </tr>
                         </table>
+                            {{$tratamientos->render()}}
+
                     </div>
                 </div>
 
@@ -487,8 +609,11 @@
                                 </tr>
                             @endforeach
                         </table>
-                    </div>
+                               {{$prueba_complementarias->render()}}
+
+                       </div>
                 </div>
+
 
                         <div class="card-body">
                             @if($exam->tipoExam=='periodoncial')
@@ -548,8 +673,9 @@
                                 {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                                 {!! Form::close() !!}
 
+                        </div>
                     </div>
-                </div>
+
                 </div>
             </div>
         </div>

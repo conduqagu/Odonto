@@ -104,12 +104,20 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
-            'surname'=>['required', 'string','max:255'],
-            'dni' => ['required','unique:users','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
+            'surname' => ['required', 'string', 'max:255'],
+            'dni' => ['required', 'unique:users', 'string', 'max:255', 'regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'userType'=> ['required', 'string','in:student,teacher,admin'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+        if (Auth::user()->userType == 'admin') {
+            $this->validate($request, [
+                'userType' => ['required', 'string', 'in:student,teacher,admin'],
+            ]);
+        } elseif (Auth::user()->userType == 'teacher'){
+            $this->validate($request, [
+                'userType'=> ['required', 'string','in:student'],
+            ]);
+        }
 
         $user=new \App\User($request->all());
         if($request->userType=='teacher'){

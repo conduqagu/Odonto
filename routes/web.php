@@ -66,10 +66,6 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
     Route::post('/exams/storeteacher','ExamController@examsStoreTeacher')->name('examsStoreTeacher');
     Route::get('/exams/editteacher/{id}','ExamController@examsEditTeacher')->name('examsEditTeacher');
     Route::put('/exams/updateteacher/{id}','ExamController@examsUpdateTeacher')->name('examsUpdateTeacher');
-    Route::get('/exams/indexasociacionEDTeacher/{id}','AsociacionExamDienteController@indexasociacionEDTeacher')->name('indexasociacionEDTeacher');
-    Route::get('/exams/editasociacionEDTeacher/{id}','AsociacionExamDienteController@editasociacionEDTeacher')->name('editasociacionEDTeacher');
-    Route::put('/exams/updateasociacionEDTeacher/{id}','AsociacionExamDienteController@updateasociacionEDTeacher')->name('updateasociacionEDTeacher');
-
 
     Route::resource('storage', 'StorageController');
 });
@@ -89,8 +85,6 @@ Route::group(['middleware'=> 'App\Http\Middleware\StudentMiddleware'], function(
     Route::post('/exams/store','ExamController@store')->name('exams.store');
     Route::get('/exams/edit/{id}','ExamController@edit')->name('exams.edit');
     Route::put('/exams/update/{id}','ExamController@update')->name('exams.update');
-    Route::get('/exams/edit_asociacionED/{id}','AsociacionExamDienteController@edit')->name('edit_asociacionED');
-    Route::put('/exams/update_asociacionED/{id}','AsociacionExamDienteController@update')->name('update_asociacionED');
 
 });
 
@@ -120,6 +114,8 @@ Route::group(['middleware'=> 'auth'], function() {
     Route::get('/exams/create_asociacionED/{id}', 'AsociacionExamDienteController@create_asociacionED')->name('create_asociacionED');
     Route::post('/exams/store_asociacionED/{id}', 'AsociacionExamDienteController@store_asociacionED')->name('store_asociacionED');
     Route::get('/exams/index_asociacionED/{id}', 'AsociacionExamDienteController@index')->name('index_asociacionED');
+    Route::get('/exams/edit_asociacionED/{id}','AsociacionExamDienteController@edit')->name('edit_asociacionED');
+    Route::put('/exams/update_asociacionED/{id}','AsociacionExamDienteController@update')->name('update_asociacionED');
     Route::get('/asociacion_exam_diente_periodoncia/create/{id}', 'AsociacionExamDienteController@create_asociacionEDPeriodoncia')->name('create_asociacionEDPeriodoncia');
     Route::post('/asociacion_exam_diente_periodoncia/store/{id}', 'AsociacionExamDienteController@store_asociacionEDPeriodoncia')->name('store_asociacionEDPeriodoncia');
     Route::get('/asociacion_exam_diente_periodoncia/index/{id}', 'AsociacionExamDienteController@indexPeriodoncia')->name('index_asociacionEDPeriodoncia');

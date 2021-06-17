@@ -1,53 +1,54 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container2">
         <div class="row justify-content-center">
-            <div class="title m-b-md">
+            <div class="col-md-10" style="text-align: center">
                 <a href="https://www.ilerna.es/blog/aprende-con-ilerna-online/sanidad/codigo-internacional-dientes-fdi">
                     <img src={{ asset('/asociacionED.png') }} height="450" title="Dentadura permanente-temporal" alt="Dentadura permanente-temporal"></a>
                 </a>
             </div>
-            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header"><h5>Examen dental</h5></div>
 
                     <div class="card-body">
                         @include('flash::message')
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        {!! Form::open( [ 'route' => ['update_asociacionEDPeriodoncia',$asociacion_exam_dientes->first()->exam_id], 'method'=>'put']) !!}
 
-                        {!! Form::model($asociacion_exam_diente, ['route'=>['update_asociacionEDPeriodoncia',$asociacion_exam_diente],'method'=>'put']) !!}
-
-                        <div class="form-group">
-                            {!!Form::label('diente__id', 'Diente: '.$asociacion_exam_diente->diente->number) !!}
-                        </div>
-                        <div>
-                            {!!  Form::label('furca' , 'Furca') !!}
-                            {!! Form::number('furca',$asociacion_exam_diente->furca,['class' => 'form-control']) !!}
-                        </div>
-                        <div>
-                            {!!  Form::label('retraccion' , 'Retracción') !!}
-                            {!! Form::number('retraccion',$asociacion_exam_diente->retraccion,['class' => 'form-control']) !!}
-                        </div>
-                        <div>
-                            {!!  Form::label('hipertrofia' , 'Hipertrofia') !!}
-                            {!! Form::number('hipertrofia',$asociacion_exam_diente->hipertrofia,['class' => 'form-control']) !!}
-                        </div>
-                        <div>
-                            {!!  Form::label('sondaje' , 'Sondaje') !!}
-                            {!! Form::select('sondaje', array('1'=>'Si','0'=>'No'), $asociacion_exam_diente->sondaje,['class' => 'form-control']) !!}
-                        </div>
-                        <div>
-                            {!!  Form::label('movilidad' , 'Movilidad') !!}
-                            {!! Form::select('movilidad', array('1'=>'Si','0'=>'No'),$asociacion_exam_diente->movilidad,['class' => 'form-control']) !!}
-                        </div>
-                        <div>
-                            {!!  Form::label('sangrado' , 'Sangrado') !!}
-                            {!! Form::select('sangrado',array('1'=>'Si','0'=>'No'), $asociacion_exam_diente->sangrado,['class' => 'form-control']) !!}
-                        </div>
-                        <div>
-                            {!!  Form::label('encia_insertada' , 'Encia insertada') !!}
-                            {!! Form::select('encia_insertada',array('1'=>'Si','0'=>'No'), $asociacion_exam_diente->encia_insertada,['class' => 'form-control']) !!}
-                        </div>
+                        <table class="table table-striped table-bordered">
+                            <tr>
+                                <th>Diente</th>
+                                <th>Furca</th>
+                                <th>Retraccion</th>
+                                <th>Hipertrofia</th>
+                                <th>Sondaje</th>
+                                <th>Movilidad</th>
+                                <th>Sangrado</th>
+                                <th>Encía insertada</th>
+                            </tr>
+                            @foreach ($asociacion_exam_dientes as $a_e_d)
+                                <tr>
+                                    <td>{!! Form::label('diente_id'.$a_e_d->diente->number,$a_e_d->diente->number) !!}
+                                        {!! Form::hidden('asociacion_exam_diente_id'.$a_e_d->diente->number,$a_e_d->id) !!}</td>
+                                    <td>{!! Form::number('furca'.$a_e_d->diente->number,$a_e_d->furca) !!}</td>
+                                    <td>{!! Form::number('retraccion'.$a_e_d->diente->number,$a_e_d->retraccion) !!}</td>
+                                    <td>{!! Form::number('hipertrofia'.$a_e_d->diente->number,$a_e_d->hipertrofia) !!}</td>
+                                    <td>{!! Form::select('sondaje'.$a_e_d->diente->number, array('1'=>'Si','0'=>'No'),$a_e_d->sondaje,['class' => 'form-control', 'required']) !!}</td>
+                                    <td>{!! Form::select('movilidad'.$a_e_d->diente->number, array('1'=>'Si','0'=>'No'),$a_e_d->movilidad,['class' => 'form-control', 'required']) !!}</td>
+                                    <td>{!! Form::select('sangrado'.$a_e_d->diente->number, array('1'=>'Si','0'=>'No'),$a_e_d->sangrado,['class' => 'form-control', 'required']) !!}</td>
+                                    <td>{!! Form::select('encia_insertada'.$a_e_d->diente->number, array('1'=>'Si','0'=>'No'),$a_e_d->encia_insertada,['class' => 'form-control', 'required']) !!}</td>
+                                </tr>
+                            @endforeach
+                        </table>
 
                         @if (\Illuminate\Support\Facades\Auth::user()->userType=='student')
                             <div class="form-group">
@@ -64,8 +65,8 @@
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn button-align']) !!}
                         {!! Form::close() !!}
 
-                        {!! Form::open(['route' => ['index_asociacionEDPeriodoncia',$asociacion_exam_diente->exam_id], 'method' => 'get']) !!}
-                        {!!   Form::submit('Detalle examen', ['class'=> 'btn btn-outline-dark'])!!}
+                        {!! Form::open(['route' => ['exams.show',$asociacion_exam_dientes->first()->exam_id], 'method' => 'get']) !!}
+                        {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                         {!! Form::close() !!}
 
                     </div>

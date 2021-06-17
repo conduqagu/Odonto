@@ -258,7 +258,7 @@
                     {!!   Form::submit('Editar', ['class'=> 'btn btn-warning button-align'])!!}
                     {!! Form::close() !!}
 
-                    {!! Form::open(['route' => ['patients.show'], 'method' => 'get']) !!}
+                    {!! Form::open(['route' => ['patients.index'], 'method' => 'get']) !!}
                     {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                     {!! Form::close() !!}
                 @endif

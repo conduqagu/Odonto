@@ -9,7 +9,15 @@
 
                     <div class="card-body">
                         @include('flash::message')
-
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         {!! Form::model($exam, [ 'route' => ['examsUptadeTeacherInfantil',$exam->id],'method'=>'PUT']) !!}
                         <div>
                             {!!Form::label('patient_id', 'Paciente:  '.$exam->patient->name) !!}

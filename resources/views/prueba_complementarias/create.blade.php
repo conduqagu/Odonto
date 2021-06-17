@@ -9,7 +9,15 @@
 
                     <div class="card-body">
                         @include('flash::message')
-
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         {!! Form::open(['route' => 'prueba_complementarias.store','enctype'=>"multipart/form-data",'files'=>'true']) !!}
                         <hidden>
                             {!! Form::hidden('exam_id', $exam_id) !!}

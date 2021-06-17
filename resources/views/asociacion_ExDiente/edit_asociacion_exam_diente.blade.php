@@ -1,31 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-
+    <div class="container2">
         <div class="row justify-content-center">
-            <div class="title m-b-md">
+            <div class="col-md-10" style="text-align: center">
                 <a href="https://www.ilerna.es/blog/aprende-con-ilerna-online/sanidad/codigo-internacional-dientes-fdi">
                     <img src={{ asset('/asociacionED.png') }} height="450" title="Dentadura permanente-temporal" alt="Dentadura permanente-temporal"></a>
                 </a>
             </div>
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            <div>
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header"><h5>Examen dental</h5></div>
 
                     <div class="card-body">
                         @include('flash::message')
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        {!! Form::open( [ 'route' => ['update_asociacionED',$asociacion_exam_dientes->first()->exam_id], 'method'=>'put']) !!}
 
-                        {!! Form::open( [ 'route' => ['store_asociacionED',$exam_id], 'method'=>'post']) !!}
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Numero Diente</th>
@@ -34,20 +33,28 @@
                                 <th>Tratamiento</th>
                                 <th>Opacidad</th>
                             </tr>
-                            @foreach ($dientes as $diente)
-                                <tr>
-                                    <td>{!! Form::label('diente_id'.$diente->number,$diente->number) !!}{!! Form::hidden('diente_id'.$diente->number,$diente->id) !!}</td>
-                                    <td>{!! Form::select('denticionRaiz'.$diente->number, array('Sano'=>'Sano','Cariado'=>'Cariado','Obturado sin caries'=>'Obturado sin caries',
+                            @foreach ($asociacion_exam_dientes as $a_e_d)
+
+                                    <tr>
+                                    <td>{!! Form::label('diente_id'.$a_e_d->diente->number,$a_e_d->diente->number) !!}
+                                        {!! Form::hidden('asociacion_exam_diente_id'.$a_e_d->diente->number,$a_e_d->id) !!}</td>
+                                    <td>{!! Form::select('denticionRaiz'.$a_e_d->diente->number, array('Sano'=>'Sano','Cariado'=>'Cariado','Obturado sin caries'=>'Obturado sin caries',
                             'Pérdida otro motivo'=>'Pérdida otro motivo', 'Fisura Obturada'=>'Fisura Obturada','Pilar puente/corona'=>'Pilar puente/corona','Cariado'=>'Cariado',
-                            'Diente no erupcionado'=>'Diente no erupcionado','Fractura'=>'Fractura'),'Sano',['id'=>$diente."denticionRaiz",'class' => 'form-control', 'style'=>"width: max-content"]) !!}</td>
-                                    <td>{!! Form::select('denticionCorona'.$diente->number, array('Sano'=>'Sano','Cariado'=>'Cariado','Obturado sin caries'=>'Obturado sin caries',
+                            'Diente no erupcionado'=>'Diente no erupcionado','Fractura'=>'Fractura'),
+                            $a_e_d->denticionRaiz,['id'=>$a_e_d->diente->number."denticionRaiz",'class' => 'form-control',
+                             'style'=>"width: max-content"]) !!}</td>
+                                    <td>{!! Form::select('denticionCorona'.$a_e_d->diente->number, array('Sano'=>'Sano','Cariado'=>'Cariado','Obturado sin caries'=>'Obturado sin caries',
                             'Pérdida otro motivo'=>'Pérdida otro motivo', 'Fisura Obturada'=>'Fisura Obturada','Pilar puente/corona'=>'Pilar puente/corona','Cariado'=>'Cariado',
-                            'Diente no erupcionado'=>'Diente no erupcionado','Fractura'=>'Fractura'),'Sano',['id'=>$diente."denticionCorona",'class' => 'form-control', 'style'=>"width: max-content"]) !!}</td>
-                                    <td> {!! Form::select('tipo_tratamiento_id'.$diente->number, $tipo_tratamientos,null,['class' => 'form-control', 'required','style'=>"width: max-content"]) !!}</td>
-                                    <td>{!! Form::select('opacidad'.$diente->number, array('Ningún estado anormal'=>'Ningún estado anormal','Opacidad delimitada'=>'Opacidad delimitada',
+                            'Diente no erupcionado'=>'Diente no erupcionado','Fractura'=>'Fractura'),
+                            $a_e_d->denticionCorona,['id'=>$a_e_d->diente->number."denticionCorona",'class' => 'form-control', 'style'=>"width: max-content"]) !!}</td>
+                                        <!-- TODO: Arreglar mostrar tipo de tratamiento; $a_e_d->tratamiento->first()->tipoTratamiento->name-->
+                                    <td> {!! Form::select('tipo_tratamiento_id'.$a_e_d->diente->number, $tipo_tratamientos,
+                            $a_e_d->tratamiento,['class' => 'form-control', 'required','style'=>"width: max-content"]) !!}</td>
+                                    <td>{!! Form::select('opacidad'.$a_e_d->diente->number, array('Ningún estado anormal'=>'Ningún estado anormal','Opacidad delimitada'=>'Opacidad delimitada',
                             'OpacidadDifusa'=>'Opacidad Difusa','Hipoplasia'=>'Hipoplasia','Otros defectos'=>'Otros defectos',
                             'Opacidad elimitada y difusa'=>'Opacidad elimitada y difusa','Opacidad delimitada e hipoplasia'=>'Opacidad delimitada e hipoplasia',
-                            'Opacidad difusa e hipoplasia'=>'Opacidad difusa e hipoplasia'),'Temporal',['id'=>$diente."opacidad",'class' => 'form-control', 'style'=>"width: max-content"]) !!}</td>
+                            'Opacidad difusa e hipoplasia'=>'Opacidad difusa e hipoplasia'),
+                            $a_e_d->opacidad,['id'=>$a_e_d->diente->number."opacidad",'class' => 'form-control', 'style'=>"width: max-content"]) !!}</td>
 
                                 </tr>
                             @endforeach
@@ -68,15 +75,10 @@
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn button-align']) !!}
                         {!! Form::close() !!}
 
-                        @if(\Illuminate\Support\Facades\Auth::user()->userType=='teacher')
-                            {!! Form::open(['route' => ['indexasociacionEDTeacher',$exam_id], 'method' => 'get']) !!}
+                            {!! Form::open(['route' => ['exams.show',$asociacion_exam_dientes->first()->exam_id], 'method' => 'get']) !!}
                             {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                             {!! Form::close() !!}
-                        @else
-                            {!! Form::open(['route' => ['index_asociacionED',$exam_id], 'method' => 'get']) !!}
-                            {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
-                            {!! Form::close() !!}
-                        @endif
+
                     </div>
                 </div>
             </div>

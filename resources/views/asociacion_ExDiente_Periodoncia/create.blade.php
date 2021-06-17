@@ -9,7 +9,15 @@
                     <img src={{ asset('/asociacionED.png') }} height="450" title="Dentadura permanente-temporal" alt="Dentadura permanente-temporal"></a>
                 </a>
             </div>
-
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
                 <div class="card" style="width: max-content">
                     <div class="card-header"><h5>Examen dental</h5></div>
 
@@ -56,11 +64,11 @@
                         @endif
 
                         <br>
-                        {!! Form::submit('Guardar',['class'=>'btn-primary btn']) !!}
+                        {!! Form::submit('Guardar',['class'=>'btn-primary btn button-align']) !!}
                         {!! Form::close() !!}
                         <br>
-                        {!! Form::open(['route' => ['index_asociacionEDPeriodoncia',$exam_id], 'method' => 'get']) !!}
-                        {!!   Form::submit('Detalle examen', ['class'=> 'btn btn-outline-dark'])!!}
+                        {!! Form::open(['route' => ['exams.show',$exam_id], 'method' => 'get']) !!}
+                        {!!   Form::submit('Detalle examen', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                         {!! Form::close() !!}
 
 

@@ -9,7 +9,15 @@
 
                     <div class="card-body">
                         @include('flash::message')
-
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         {!! Form::model($prueba_complementaria, [ 'route' => ['prueba_complementarias.update',$prueba_complementaria->id], 'method'=>'PUT']) !!}
 
                         <div class="form-group">

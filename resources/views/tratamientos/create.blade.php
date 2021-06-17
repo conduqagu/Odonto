@@ -9,6 +9,15 @@
 
                     <div class="card-body">
                         @include('flash::message')
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         {!! Form::open(['route' => ['tratamientos.store']]) !!}
                         <div class="form-group">
                             {!!  Form::hidden('exam_id' , $exam_id) !!}

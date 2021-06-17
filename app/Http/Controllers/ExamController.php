@@ -204,14 +204,19 @@ class ExamController extends Controller
     public function show($id)
     {
         $exam = Exam::find($id);
-        $diagnosticos=$exam->diagnosticos()->get();
-        $tratamientos=$exam->tratamientos()->get();
-        $prueba_complementarias=$exam->PruebaComplementarias()->get();
+        $diagnosticos=$exam->diagnosticos()->paginate(8, ['*'], "page_a");
+        $tratamientos1=$exam->tratamientos()->get();
+        $prueba_complementarias=$exam->PruebaComplementarias()->paginate(8, ['*'], "page_c");
         $coste_total=0.0;
-        foreach ($tratamientos as $tratamiento) {
+        foreach ($tratamientos1 as $tratamiento) {
             $coste_total = $tratamiento->tipoTratamiento->coste + $coste_total;
         }
-        return view('exams/show',['exam'=> $exam,'diagnosticos'=>$diagnosticos,'tratamientos'=>$tratamientos,'prueba_complementarias'=>$prueba_complementarias,'coste_total'=>$coste_total]);
+        $tratamientos=$exam->tratamientos()->paginate(8, ['*'], "page_b");
+
+        $asociacion_exam_dientes = AsociacionExamDiente::where('exam_id', '=', $exam->id)->paginate(10, ['*'], "page_d");
+        return view('exams/show',['exam'=> $exam,'diagnosticos'=>$diagnosticos,'tratamientos'=>$tratamientos,
+            'prueba_complementarias'=>$prueba_complementarias,'coste_total'=>$coste_total,
+            'asociacion_exam_dientes'=>$asociacion_exam_dientes]);
     }
 
     /**
