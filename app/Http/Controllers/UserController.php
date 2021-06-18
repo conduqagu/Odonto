@@ -46,7 +46,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function indexstudents(Request $request) //Lista de estudiantes para profesores
+    public function indexstudents(Request $request, $id) //Lista de estudiantes para profesores
     {
         if($request->semibutton=='Borrar filtro') {
             \Cookie::queue('query_students', null, 60);
@@ -59,20 +59,17 @@ class UserController extends Controller
                 $query_students = \Request::cookie('query_students');
             }
         }
-        $mystudents = \App\User::find(Auth::user()->id)->students()->where('userType','=','student')
-            ->where('users.dni','LIKE','%'.$query_students."%")
-            ->orWhere('users.name','LIKE','%'.$query_students."%")
-            ->orWhere('users.surname','LIKE','%'.$query_students."%")
-            ->get();
         $users_filter=User::where('users.name','LIKE','%'.$query_students."%")
-            ->orWhere('users.dni','LIKE','%'.$query_students."%")
-            ->orWhere('users.surname','LIKE','%'.$query_students."%")->pluck('id','id');
-        $students= User::where('userType','=','student')
-            ->whereNotIn('users.id',\App\User::find(Auth::user()->id)->students()->pluck('users.id')->values())
-            ->whereIn('users.id', $users_filter)
+        ->orWhere('users.dni','LIKE','%'.$query_students."%")
+        ->orWhere('users.surname','LIKE','%'.$query_students."%")->pluck('id','id');
+        $mystudents = \App\User::find($id)->students()
+            ->whereIn('users.id',$users_filter)
             ->get();
-
-        return view('indexstudents',['students'=>$students,'mystudents'=>$mystudents,'query_students'=>$query_students]);
+        $students= User::where('userType','=','student')
+            ->whereNotIn('users.id',\App\User::find($id)->students()->pluck('users.id')->values())
+            ->whereIn('id',$users_filter)
+            ->get();
+        return view('indexstudents',['teacher_id'=>$id,'students'=>$students,'mystudents'=>$mystudents,'query_students'=>$query_students]);
     }
 
     /**
@@ -81,14 +78,14 @@ class UserController extends Controller
      * @param id_alumno
      * @return \Illuminate\Http\Response
      */
-    public function asignaralumno($id)
+    public function asignaralumno($id,Request $request)
     {
-        $teacher = User::find(Auth::user()->id);
+        $teacher = User::find($request->teacher_id);
         $teacher->students()->attach($id);
 
         flash('Alumno asignado correctamente');
 
-        return redirect()->route('indexstudents');
+        return redirect()->route('indexstudents',$teacher->id);
     }
 
     /**
@@ -97,15 +94,15 @@ class UserController extends Controller
      * @param id_alumno
      * @return \Illuminate\Http\Response
      */
-    public function destroyasociacion($id)
+    public function destroyasociacion($id, Request $request)
     {
-        $teacher = User::find(Auth::user()->id);
+        $teacher = User::find($request->teacher_id);
         $teacher->students()->detach($id);
 
 
         flash('Alumno quitado correctamente');
 
-        return redirect()->route('indexstudents');
+        return redirect()->route('indexstudents',$teacher->id);
     }
     /**
      * Show the form for creating a new resource.

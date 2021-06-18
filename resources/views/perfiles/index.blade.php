@@ -52,13 +52,18 @@
                                     @endif
 
                                         <td>
-                                        {!! Form::open(['route' => ['user.edit',$user->id], 'method' => 'get','style'=>'display: inline']) !!}
-                                        {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
-                                        {!! Form::close() !!}
+                                            @if($user->userType=='teacher')
+                                                {!! Form::open(['route' => ['indexstudents',$user->id], 'method' => 'get','style'=>'display: inline']) !!}
+                                                {!!   Form::submit('Alumnos', ['class'=> 'btn btn-primary'])!!}
+                                                {!! Form::close() !!}
+                                            @endif
+                                            {!! Form::open(['route' => ['user.edit',$user->id], 'method' => 'get','style'=>'display: inline']) !!}
+                                            {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                            {!! Form::close() !!}
 
-                                        {!! Form::open(['route' => ['user.destroy',$user->id], 'method' => 'delete','style'=>'display: inline']) !!}
-                                        {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
-                                        {!! Form::close() !!}
+                                            {!! Form::open(['route' => ['user.destroy',$user->id], 'method' => 'delete','style'=>'display: inline']) !!}
+                                            {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
+                                            {!! Form::close() !!}
                                         </td>
 
                                 </tr>

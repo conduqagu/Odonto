@@ -64,6 +64,7 @@
 
                     <div class="container" style="text-align: center">
                         <div class="row align-items-start">
+
                             <div class="col">
                                 <table class="table table-striped table-bordered">
                                     <tr>
@@ -79,22 +80,8 @@
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col">
-                                <table class="table table-striped table-bordered">
 
-                                    <tr>
-                                        <td>
-                                            <a href="{{url('/indexstudents')}}" class="btn" style="box-shadow: 0px 0px 0px 0px grey;"><strong>Estudiantes</strong>
-                                                <img src="/students.png"
-                                                     width="60" height="60"
-                                                     alt="Estudiantes"
 
-                                                />
-                                            </a>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
                         </div>
                         <div class="row align-items-center">
                             <div class="col">

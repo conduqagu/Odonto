@@ -10,7 +10,7 @@
                 <div class="panel-body">
                     @include('flash::message')
                     <div class="form-group" >
-                        {!! Form::model(\Illuminate\Support\Facades\Request::all(),['route' => ['indexstudents'], 'method' => 'get']) !!}
+                        {!! Form::open(['route' => ['indexstudents',$teacher_id], 'method' => 'get']) !!}
                         {!! Form::text('query_students',$query_students, ['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block; float:right;
                                 margin-left: 25px;','placeholder'=>'Nombre, apellido o DNI', 'maxlength'=>"255"]) !!}
                         {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary button-align-right', 'name'=>'semibutton'])!!}
@@ -35,6 +35,7 @@
                                 <td>{{ $mystudent->dni }}</td>
                                 <td>
                                     {!! Form::open(['route' => ['destroyasociacion',$mystudent->id], 'method' => 'GET']) !!}
+                                    {!! Form::hidden('teacher_id',$teacher_id) !!}
                                     {!!   Form::submit('Eliminar asignación', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                     {!! Form::close() !!}
                                 </td>
@@ -49,13 +50,14 @@
 
                                 <td>
                                     {!! Form::open(['route' => ['asignaralumno',$student->id], 'method' => 'get']) !!}
+                                    {!! Form::hidden('teacher_id',$teacher_id) !!}
                                     {!!   Form::submit('Asignar', ['class'=> 'btn btn-primary'])!!}
                                     {!! Form::close() !!}
                                 </td>
                             </tr>
                         @endforeach
                     </table>
-                    {!! Form::open(['route' => ['home'], 'method' => 'get']) !!}
+                    {!! Form::open(['route' => ['userIndex'], 'method' => 'get']) !!}
                     {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                     {!! Form::close() !!}
                 </div>

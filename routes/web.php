@@ -37,6 +37,9 @@ Route::group(['middleware'=> 'App\Http\Middleware\AdminMiddleware'], function()
     Route::resource('diagnosticos', 'DiagnosticoController');
     Route::get('/asociacion_exam_diente_periodonciaA/index/{id}', 'AsociacionExamDienteController@indexPeriodoncia')->name('index_asociacionEDPeriodonciaA');
     Route::get('/exams/index_asociacionEDA/{id}', 'AsociacionExamDienteController@indexasociacionEDTeacher')->name('indexasociacionEDA');
+    Route::get('/indexstudents/{id}','UserController@indexstudents')->name('indexstudents');
+    Route::get('/destroyasociación/{id}','UserController@destroyasociacion')->name('destroyasociacion');
+    Route::get('/asignaralumno/{id}','UserController@asignaralumno')->name('asignaralumno');
 
 });
 
@@ -44,10 +47,6 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
 {
     Route::get('/user/createT','UserController@create')->name('userCreateT');
     Route::post('/user/storeT','UserController@store')->name('userStoreT');
-    Route::get('/indexstudents','UserController@indexstudents')->name('indexstudents');
-    Route::get('/destroyasociación/{id}','UserController@destroyasociacion')->name('destroyasociacion');
-    Route::get('/listsmystudent','UserController@listsmystudent')->name('listsmystudent');
-    Route::get('/asignaralumno/{id}','UserController@asignaralumno')->name('asignaralumno');
     Route::get('/patients/indexteacher','PatientController@indexteacher')->name('indexteacher');
     Route::get('/patients/createteacher','PatientController@createteacher')->name('createteacher');
     Route::post('/patients/storeteacher','PatientController@storeteacher')->name('storeteacher');

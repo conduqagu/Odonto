@@ -75,9 +75,6 @@
                                     <a class="dropdown-item" href="{{ url('/patients/indexteacher') }}">
                                         Pacientes
                                     </a>
-                                    <a class="dropdown-item" href="{{ url('/indexstudents') }}">
-                                        Estudiantes
-                                    </a>
                                     <a class="dropdown-item" href="{{ url('/perfiles/perfilteacher') }}">
                                         Perfil
                                     </a>
@@ -101,6 +98,7 @@
                                             <a href="{{ url('/tipo_tratamientos') }}">Tratamientos</a>
                                             <a href="{{ url('/brakets') }}">Brakets</a>
                                             <a href="{{ url('/diagnosticos') }}">Diagnósticos</a>
+
                                         </div>
                                     </div>
                                 @endif
