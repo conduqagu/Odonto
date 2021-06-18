@@ -207,6 +207,16 @@
                                 </a>
                             </div>
                             <br>
+                            @if(sizeof($asociacion_exam_dientes)==0 && \Illuminate\Support\Facades\Auth::user()->userType!='admin')
+                                {!! Form::open(['route' => ['create_asociacionED',$exam->id], 'method' => 'get']) !!}
+                                {!!   Form::submit('Realizar examen dental', ['class'=> 'btn btn-primary'])!!}
+                                {!! Form::close() !!}
+                            @else
+                                {!! Form::open(['route' => ['edit_asociacionED',$exam->id], 'method' => 'get', 'style'=>'display: inline']) !!}
+                                {!!   Form::submit('Editar', ['class'=> 'btn btn-warning  button-align'])!!}
+                                {!! Form::close() !!}
+                            @endif
+                            <br><br>
                             <table class="table table-striped table-bordered">
                                 <tr>
                                     <th>Diente</th>
@@ -236,22 +246,10 @@
                                     </tr>
                                 @endforeach
                             </table>
-                            <div class="row align-items-start">
-                                <div class="col-10">
+
                                     {{$asociacion_exam_dientes->render()}}
-                                </div>
-                                <div class="col">
-                                    @if(sizeof($asociacion_exam_dientes)==0 && \Illuminate\Support\Facades\Auth::user()->userType!='admin')
-                                        {!! Form::open(['route' => ['create_asociacionED',$exam->id], 'method' => 'get']) !!}
-                                        {!!   Form::submit('Realizar examen dental', ['class'=> 'btn btn-primary'])!!}
-                                        {!! Form::close() !!}
-                                    @else
-                                        {!! Form::open(['route' => ['edit_asociacionED',$exam->id], 'method' => 'get', 'style'=>'display: inline']) !!}
-                                        {!!   Form::submit('Editar', ['class'=> 'btn btn-warning  button-align-right'])!!}
-                                        {!! Form::close() !!}
-                                    @endif
-                                </div>
-                            </div>
+
+
                         </div>
                     </div>
                     @elseif($exam->tipoExam=='infantil')
@@ -425,7 +423,7 @@
                         <div class="card-body">
                             @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
                             {!! Form::open(['route' => ['asociacion_ExDiags.create',$exam->id], 'method' => 'get']) !!}
-                            {!!   Form::submit('Añadir diagnóstico', ['class'=> 'btn btn-primary button-align-right'])!!}
+                            {!!   Form::submit('Añadir diagnóstico', ['class'=> 'btn btn-primary button-align'])!!}
                             {!! Form::close() !!}
                             <br><br>
                             @endif
@@ -471,7 +469,7 @@
                         @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
 
                         {!! Form::open(['route' => ['tratamientos.createT',$exam->id], 'method' => 'get']) !!}
-                        {!!   Form::submit('Añadir tratamiento', ['class'=> 'btn btn-primary  button-align-right'])!!}
+                        {!!   Form::submit('Añadir tratamiento', ['class'=> 'btn btn-primary  button-align'])!!}
                         {!! Form::close() !!}
                         @endif
                         <br><br>
@@ -574,7 +572,7 @@
                            @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
 
                            {!! Form::open(['route' => ['prueba_complementarias.createT',$exam->id], 'method' => 'get']) !!}
-                            {!!   Form::submit('Añadir prueba complementaria', ['class'=> 'btn btn-primary  button-align-right'])!!}
+                            {!!   Form::submit('Añadir prueba complementaria', ['class'=> 'btn btn-primary  button-align'])!!}
                             {!! Form::close() !!}
                            <br><br>
                            @endif

@@ -18,10 +18,23 @@ class TipoTratamientoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tipo_tratamientos=TipoTratamiento::all();
-        return view('tipo_tratamientos/index',['tipo_tratamientos'=>$tipo_tratamientos]);
+        if($request->semibutton=='Borrar filtro') {
+            \Cookie::queue('query_tipo_trat', null, 60);
+            $query_tipo_trat=null;
+        }else {
+            if ($request->get("query_tipo_trat") != null) {
+                \Cookie::queue('query_tipo_trat', $request->get("query_tipo_trat"), 60);
+                $query_tipo_trat = $request->get("query_tipo_trat");
+            } else {
+                $query_tipo_trat = \Request::cookie('query_tipo_trat');
+            }
+        }
+
+        $tipo_tratamientos=TipoTratamiento::where('tipo_tratamientos.name','LIKE','%'.$query_tipo_trat."%")
+                ->paginate(20);
+        return view('tipo_tratamientos/index',['tipo_tratamientos'=>$tipo_tratamientos,'query_tipo_trat'=>$query_tipo_trat]);
 
     }
 

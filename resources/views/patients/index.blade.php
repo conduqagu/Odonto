@@ -10,22 +10,22 @@
                     <div class="panel-body">
                         @include('flash::message')
                         <div class="form-group" >
-
-                                {!! Form::model(\Illuminate\Support\Facades\Request::all(),['route' => ['patients.index'], 'method' => 'get']) !!}
-                                {!! Form::text('query',null,['class'=>'col-md-3 form-control', 'autofocus', 'placeholder'=>'Nombre, apellido o DNI','style'=>'display:inline-block']) !!}
-                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary ', 'name'=>'semibutton'])!!}
-                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary ','name'=>'semibutton'])!!}
+                            <div class="row align-items-start">
+                                <div class="col-2">
+                                    {!! Form::open(['route' => 'patients.create', 'method' => 'get']) !!}
+                                    {!!   Form::submit('Crear paciente', ['class'=> 'btn btn-primary button-align'])!!}
+                                    {!! Form::close() !!}
+                                </div>
+                                <div class="col-10">
+                                {!! Form::open(['route' => ['patients.index'], 'method' => 'get']) !!}
+                                {!! Form::text('query_patient',$query_patient,['class'=>'col-md-3 form-control', 'autofocus', 'placeholder'=>'Nombre, apellido o DNI','style'=>'display:inline; float:right;  margin-left: 25px;']) !!}
+                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary button-align-right', 'name'=>'semibutton'])!!}
+                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary button-align-right','name'=>'semibutton'])!!}
                                 {!! Form::close() !!}
-
+                                </div>
+                            </div>
                         </div>
 
-                        {!! Form::open(['route' => 'patients.create', 'method' => 'get']) !!}
-                        {!!   Form::submit('Crear paciente', ['class'=> 'btn btn-primary button-align'])!!}
-                        {!! Form::close() !!}
-                        {!! Form::open(['route' => ['home'], 'method' => 'get']) !!}
-                        {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
-                        {!! Form::close() !!}
-                        <br><br>
 
                         <table class="table table-striped table-bordered">
                             <tr>
@@ -48,6 +48,7 @@
                                 </tr>
                             @endforeach
                         </table>
+                        {{$patients->render()}}
 
                         {!! Form::open(['route' => ['home'], 'method' => 'get']) !!}
                         {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}

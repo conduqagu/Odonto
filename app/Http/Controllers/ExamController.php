@@ -43,36 +43,34 @@ class ExamController extends Controller
             ->get();
 
 
-        if($request->ajax())
-        {
-            if($request->from_date != '' && $request->to_date != '')
-            {
-                $data = DB::table('post')
-                    ->whereBetween('date', array($request->from_date, $request->to_date))
-                    ->get();
-            }
-            else
-            {
-                $data = DB::table('post')->orderBy('date', 'desc')->get();
-            }
-            echo json_encode($data);
-        }
-
-
         return view('exams/index',['exams'=>$exams,'patient'=>$patient,'id'=>$id]);
     }
     public function indexExamsAdmin(Request $request)
     {
         if($request->semibutton=='Borrar filtro') {
-            $request->replace(['query'=>null]);
-            $request->replace(['query2'=>null]);
-
+            \Cookie::queue('query_exam_admin', null, 60);
+            \Cookie::queue('query_exam_admin2', null, 60);
+            $query_exam_admin=null;
+            $query_exam_admin2=null;
+        }else {
+            if ($request->get("query_exam_admin") != null) {
+                \Cookie::queue('query_exam_admin', $request->get("query_exam_admin"), 60);
+                $query_exam_admin = $request->get("query_exam_admin");
+            } else {
+                $query_exam_admin = \Request::cookie('query_exam_admin');
+            }
+            if ($request->get("query_exam_admin2") != null) {
+                \Cookie::queue('query_exam_admin2', $request->get("query_exam_admin2"), 60);
+                $query_exam_admin2 = $request->get("query_exam_admin2");
+            } else {
+                $query_exam_admin2 = \Request::cookie('query_exam_admin2');
+            }
         }
-        $exams=Exam::where('exams.tipoExam','LIKE','%'.$request->get("query")."%")
-            ->where('exams.date','LIKE','%'.$request->get("query2")."%")
-            ->get();
+        $exams=Exam::where('exams.tipoExam','LIKE','%'.$query_exam_admin."%")
+            ->where('exams.date','LIKE','%'.$query_exam_admin2."%")
+            ->paginate(20);
 
-        return view('exams/indexExamAdmin',['exams'=>$exams, 'query'=>$request]);
+        return view('exams/indexExamAdmin',['exams'=>$exams, 'query_exam_admin'=>$query_exam_admin, 'query_exam_admin2'=>$query_exam_admin2]);
     }
 
 

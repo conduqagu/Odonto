@@ -14,10 +14,22 @@ class BraketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $brakets=Braket::all();
-        return view('brakets/index',['brakets'=>$brakets]);
+        if($request->semibutton=='Borrar filtro') {
+            \Cookie::queue('query_brac', null, 60);
+            $query_brac=null;
+        }else {
+            if ($request->get("query_brac") != null) {
+                \Cookie::queue('query_brac', $request->get("query_brac"), 60);
+                $query_brac = $request->get("query_brac");
+            } else {
+                $query_brac = \Request::cookie('query_brac');
+            }
+        }
+
+        $brakets=Braket::where('brakets.name','LIKE','%'.$query_brac."%")->paginate(20);
+        return view('brakets/index',['brakets'=>$brakets,'query_brac'=>$query_brac]);
 
     }
 

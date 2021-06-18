@@ -18,10 +18,23 @@ class DiagnosticoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $diagnosticos=Diagnostico::all();
-        return view('diagnosticos.index',['diagnosticos'=>$diagnosticos]);
+        if($request->semibutton=='Borrar filtro') {
+            \Cookie::queue('query_diag', null, 60);
+            $query_diag=null;
+        }else {
+            if ($request->get("query_diag") != null) {
+                \Cookie::queue('query_diag', $request->get("query_diag"), 60);
+                $query_diag = $request->get("query_diag");
+            } else {
+                $query_diag = \Request::cookie('query_diag');
+            }
+        }
+
+        $diagnosticos=Diagnostico::where('diagnosticos.nombre','LIKE','%'.$query_diag."%")->paginate(20);
+
+        return view('diagnosticos.index',['diagnosticos'=>$diagnosticos,'query_diag'=>$query_diag]);
 
     }
 

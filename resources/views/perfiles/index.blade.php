@@ -9,18 +9,29 @@
 
                     <div class="panel-body">
                         @include('flash::message')
-                        {!! Form::open(['route' => ['userCreate'], 'method' => 'get']) !!}
-                        {!!   Form::submit('Crear nuevo usuario', ['class'=> 'btn btn-primary button-align'])!!}
-                        {!! Form::close() !!}
-                        {!! Form::open(['route' => ['home'], 'method' => 'get']) !!}
-                        {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
-                        {!! Form::close() !!}
+
+                        <div class="row align-items-start">
+                            <div class="col-2">
+                                {!! Form::open(['route' => ['userCreate'], 'method' => 'get']) !!}
+                                {!!   Form::submit('Crear nuevo usuario', ['class'=> 'btn btn-primary button-align'])!!}
+                                {!! Form::close() !!}
+                            </div>
+                            <div class="col-10">
+                                {!! Form::open(['route' => ['userIndex'], 'method' => 'get']) !!}
+                                {!! Form::text('query_user',$query_user,['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block; float:right;
+                                margin-left: 25px;','placeholder'=>'Nombre, apellido o DNI', 'maxlength'=>"255"]) !!}
+                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary button-align-right ', 'name'=>'semibutton'])!!}
+                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary button-align-right','name'=>'semibutton'])!!}
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
                         <br>
-                        <br>
+
+
+
                         <table class="table table-striped table-bordered">
                             <tr>
-                                <th>Nombre</th>
-                                <th>Apellidos</th>
+                                <th>Nombre y apellidos</th>
                                 <th>DNI</th>
                                 <th>Correo electrónico</th>
                                 <th>Tipo de Usuario</th>
@@ -29,8 +40,7 @@
 
                             @foreach ($users as $user)
                                 <tr style="word-break: break-word;">
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->surname }}</td>
+                                    <td>{{ $user->name.' '.$user->surname }}</td>
                                     <td>{{ $user->dni }}</td>
                                     <td>{{ $user->email }}</td>
                                     @if($user->userType=='student')
@@ -54,6 +64,8 @@
                                 </tr>
                             @endforeach
                         </table>
+                        {{$users->links()}}
+
                         {!! Form::open(['route' => ['home'], 'method' => 'get']) !!}
                         {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                         {!! Form::close() !!}

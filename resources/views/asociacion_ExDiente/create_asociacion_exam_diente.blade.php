@@ -68,15 +68,9 @@
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn button-align']) !!}
                         {!! Form::close() !!}
 
-                        @if(\Illuminate\Support\Facades\Auth::user()->userType=='teacher')
-                            {!! Form::open(['route' => ['indexasociacionEDTeacher',$exam_id], 'method' => 'get']) !!}
-                            {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
-                            {!! Form::close() !!}
-                        @else
-                            {!! Form::open(['route' => ['index_asociacionED',$exam_id], 'method' => 'get']) !!}
-                            {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
-                            {!! Form::close() !!}
-                        @endif
+                        {!! Form::open(['route' => ['exams.show',$exam_id], 'method' => 'get']) !!}
+                        {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>

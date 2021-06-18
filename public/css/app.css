@@ -590,12 +590,11 @@ pre code {
 
 .boton-primary {
     max-width: 120px;
-    margin-left: 20px;
+    margin-left: 25px;
 
 }
 
 .button-align {
-    margin-right: 25px;
     float: left;
 }
 .button-align-right {

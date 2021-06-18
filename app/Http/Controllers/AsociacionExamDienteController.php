@@ -88,7 +88,8 @@ class AsociacionExamDienteController extends Controller
                     })->pluck('dientes.id')->values())->get();
         }
 
-        return view('asociacion_ExDiente.create_asociacion_exam_diente', ['exam_id' => $exam_id, 'dientes' => $dientes,'tipo_tratamientos'=>$tipo_tratamientos]);
+        return view('asociacion_ExDiente.create_asociacion_exam_diente', ['exam_id' => $exam_id, 'dientes' => $dientes,
+            'tipo_tratamientos'=>$tipo_tratamientos]);
     }
 
     public function create_asociacionEDPeriodoncia($exam_id)

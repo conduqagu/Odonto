@@ -18,11 +18,27 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = \App\User::all()->whereNotIn('id',Auth::user()->id);
+        if($request->semibutton=='Borrar filtro') {
+            \Cookie::queue('query_user', null, 60);
+            $query_user=null;
+        }else {
+            if ($request->get("query_user") != null) {
+                \Cookie::queue('query_user', $request->get("query_user"), 60);
+                $query_user = $request->get("query_user");
+            } else {
+                $query_user = \Request::cookie('query_user');
+            }
+        }
+        $user_filter=User::where('users.surname','LIKE','%'.$query_user."%")
+            ->orWhere('users.name','LIKE','%'.$query_user."%")
+            ->orWhere('users.dni','LIKE','%'.$query_user."%")->pluck('id','id');
+        $users = User::whereNotIn('id',[Auth::user()->id])
+            ->whereIn('id',$user_filter)
+            ->paginate(20);
 
-        return view('perfiles/index',['users'=>$users]);
+        return view('perfiles/index',['users'=>$users,'query_user'=>$query_user]);
     }
 
     /**
@@ -33,22 +49,30 @@ class UserController extends Controller
     public function indexstudents(Request $request) //Lista de estudiantes para profesores
     {
         if($request->semibutton=='Borrar filtro') {
-            $request->replace(['query'=>null]);
+            \Cookie::queue('query_students', null, 60);
+            $query_students=null;
+        }else {
+            if ($request->get("query_students") != null) {
+                \Cookie::queue('query_students', $request->get("query_students"), 60);
+                $query_students = $request->get("query_students");
+            } else {
+                $query_students = \Request::cookie('query_students');
+            }
         }
         $mystudents = \App\User::find(Auth::user()->id)->students()->where('userType','=','student')
-            ->where('users.dni','LIKE','%'.$request->get("query")."%")
-            ->orWhere('users.name','LIKE','%'.$request->get("query")."%")
-            ->orWhere('users.surname','LIKE','%'.$request->get("query")."%")
+            ->where('users.dni','LIKE','%'.$query_students."%")
+            ->orWhere('users.name','LIKE','%'.$query_students."%")
+            ->orWhere('users.surname','LIKE','%'.$query_students."%")
             ->get();
-        $users_filter=User::where('users.name','LIKE','%'.$request->get("query")."%")
-            ->orWhere('users.dni','LIKE','%'.$request->get("query")."%")
-            ->orWhere('users.surname','LIKE','%'.$request->get("query")."%")->pluck('id','id');
+        $users_filter=User::where('users.name','LIKE','%'.$query_students."%")
+            ->orWhere('users.dni','LIKE','%'.$query_students."%")
+            ->orWhere('users.surname','LIKE','%'.$query_students."%")->pluck('id','id');
         $students= User::where('userType','=','student')
             ->whereNotIn('users.id',\App\User::find(Auth::user()->id)->students()->pluck('users.id')->values())
             ->whereIn('users.id', $users_filter)
             ->get();
 
-        return view('indexstudents',['students'=>$students,'mystudents'=>$mystudents]);
+        return view('indexstudents',['students'=>$students,'mystudents'=>$mystudents,'query_students'=>$query_students]);
     }
 
     /**

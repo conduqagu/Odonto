@@ -10,15 +10,23 @@
                     <div class="panel-body">
                         @include('flash::message')
 
-                        {!! Form::open(['route' => 'tipo_tratamientos.create', 'method' => 'get']) !!}
-                        {!!   Form::submit('Crear tratamiento', ['class'=> 'btn btn-primary button-align'])!!}
-                        {!! Form::close() !!}
+                        <div class="row align-items-start">
+                            <div class="col-2">
+                                {!! Form::open(['route' => 'tipo_tratamientos.create', 'method' => 'get']) !!}
+                                {!!   Form::submit('Crear tratamiento', ['class'=> 'btn btn-primary button-align'])!!}
+                                {!! Form::close() !!}
+                            </div>
+                            <div class="col-10">
+                                {!! Form::open(['route' => ['tipo_tratamientos.index'], 'method' => 'get']) !!}
+                                {!! Form::text('query_tipo_trat',$query_tipo_trat,['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block; float:right;
+                                margin-left: 25px;','placeholder'=>'Nombre, apellido o DNI', 'maxlength'=>"255"]) !!}
+                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary button-align-right ', 'name'=>'semibutton'])!!}
+                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary button-align-right','name'=>'semibutton'])!!}
+                                {!! Form::close() !!}
+                            </div>
+                        </div>
 
-                        {!! Form::open(['route' => ['home'], 'method' => 'get']) !!}
-                        {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
-                        {!! Form::close() !!}
-
-                        <br><br>
+                        <br>
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>
@@ -36,18 +44,17 @@
                                     <td>{{ $tipo_tratamiento->iva }}</td>
 
                                     <td>
-                                    {!! Form::open(['route' => ['tipo_tratamientos.edit',$tipo_tratamiento->id], 'method' => 'get']) !!}
+                                    {!! Form::open(['route' => ['tipo_tratamientos.edit',$tipo_tratamiento->id], 'method' => 'get','style'=>'display: inline']) !!}
                                     {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                     {!! Form::close() !!}
-                                </td>
-                                <td>
-                                    {!! Form::open(['route' => ['tipo_tratamientos.destroy',$tipo_tratamiento->id], 'method' => 'delete']) !!}
+                                    {!! Form::open(['route' => ['tipo_tratamientos.destroy',$tipo_tratamiento->id], 'method' => 'delete','style'=>'display: inline']) !!}
                                     {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                     {!! Form::close() !!}
                                 </td>
                                 </tr>
                             @endforeach
                         </table>
+                        {{$tipo_tratamientos->links()}}
                         {!! Form::open(['route' => ['home'], 'method' => 'get']) !!}
                         {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                         {!! Form::close() !!}

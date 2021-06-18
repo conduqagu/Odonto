@@ -37,14 +37,22 @@ class PatientController extends Controller
     public function index(Request $request)
     {
         if($request->semibutton=='Borrar filtro') {
-            $request->replace(['query'=>null]);
+            \Cookie::queue('query_patient', null, 60);
+            $query_patient=null;
+        }else {
+            if ($request->get("query_patient") != null) {
+                \Cookie::queue('query_patient', $request->get("query_patient"), 60);
+                $query_patient = $request->get("query_patient");
+            } else {
+                $query_patient = \Request::cookie('query_patient');
+            }
         }
-        $patients_filter=Patient::where('patients.name','LIKE','%'.$request->get("query")."%")
-            ->orWhere('patients.dni','LIKE','%'.$request->get("query")."%")
-            ->orWhere('patients.surname','LIKE','%'.$request->get("query")."%")->pluck('id','id');
-        $patients=User::find(Auth::user()->id)->patients()->whereIn('patients.id',$patients_filter)->get();
+        $patients_filter=Patient::where('patients.name','LIKE','%'.$query_patient."%")
+            ->orWhere('patients.dni','LIKE','%'.$query_patient."%")
+            ->orWhere('patients.surname','LIKE','%'.$query_patient."%")->pluck('id','id');
+        $patients=User::find(Auth::user()->id)->patients()->whereIn('patients.id',$patients_filter)->paginate(20);
 
-        return view('patients.index',['patients'=>$patients]);
+        return view('patients.index',['patients'=>$patients,'query_patient'=>$query_patient]);
     }
     /**
      * Lista de pacientes asignados a un profesor (usuario)
@@ -54,14 +62,22 @@ class PatientController extends Controller
     public function indexteacher(Request $request)
     {
         if($request->semibutton=='Borrar filtro') {
-            $request->replace(['query'=>null]);
+            \Cookie::queue('query_patient_t', null, 60);
+            $query_patient_t=null;
+        }else {
+            if ($request->get("query_patient_t") != null) {
+                \Cookie::queue('query_patient_t', $request->get("query_patient_t"), 60);
+                $query_patient_t = $request->get("query_patient_t");
+            } else {
+                $query_patient_t = \Request::cookie('query_patient_t');
+            }
         }
-        $patients = Patient::where('patients.dni','LIKE','%'.$request->get("query")."%")
-            ->orWhere('patients.name','LIKE','%'.$request->get("query")."%")
-            ->orWhere('patients.surname','LIKE','%'.$request->get("query")."%")
-            ->get();
+        $patients = Patient::where('patients.dni','LIKE','%'.$query_patient_t."%")
+            ->orWhere('patients.name','LIKE','%'.$query_patient_t."%")
+            ->orWhere('patients.surname','LIKE','%'.$query_patient_t."%")
+            ->paginate(20);
 
-        return view('/patients/indexteacher',['patients'=>$patients]);
+        return view('/patients/indexteacher',['patients'=>$patients,'query_patient_t'=>$query_patient_t]);
     }
 
     /**

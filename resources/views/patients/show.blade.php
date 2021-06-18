@@ -76,28 +76,31 @@
                     <div class="card-header"><h5>Exámenes</h5></div>
                     <div class="card-body">
                         <div class="row align-items-start">
+
+                            <div class="col">
+                                @if(\Illuminate\Support\Facades\Auth::user()->userType=='teacher')
+                                    {!! Form::open(['route' => ['examsCreateTeacher',$patient->id], 'method' => 'get']) !!}
+                                    {!!   Form::submit('Realizar examen', ['class'=> 'btn btn-primary button-align'])!!}
+                                    {!! Form::close() !!}
+                                @elseif(\Illuminate\Support\Facades\Auth::user()->userType=='student')
+                                    {!! Form::open(['route' => ['exams.create',$patient->id], 'method' => 'get']) !!}
+                                    {!!   Form::submit('Realizar examen', ['class'=> 'btn btn-primary button-align'])!!}
+                                    {!! Form::close() !!}
+                                @endif
+                            </div>
                             <div class="col-10">
                                 {!! Form::open(['route' => ['patients.show',$patient->id], 'method' => 'get']) !!}
                                 {!! Form::select('query', array('inicial'=>'Inicial','infantil'=>'Infantil','periodoncial'=>'Periodoncial',
                                     'ortodoncial'=>'Ortodoncial','evOrto'=>'Evaluación ortodoncia','otro'=>'Otro',null=>'Tipo de examen'),
-                                    $query,['class'=>'col-md-3 form-control','autofocus' ,'style'=>'display:inline-block']) !!}
-                                {!! Form::date('query2',$query2,['class'=>'col-md-3 form-control ','autofocus','paceholder'=>'Fecha', 'style'=>'display:inline-block']) !!}
-                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary ', 'name'=>'semibutton'])!!}
-                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary','name'=>'semibutton'])!!}
+                                    $query,['class'=>'col-md-3 form-control','autofocus' ,'style'=>'display:inline-block; float:right;
+                                margin-left: 25px;']) !!}
+                                {!! Form::date('query2',$query2,['class'=>'col-md-3 form-control ','autofocus','paceholder'=>'Fecha',
+                                'style'=>'display:inline-block; float:right;margin-left: 25px;']) !!}
+                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary button-align-right', 'name'=>'semibutton'])!!}
+                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary button-align-right','name'=>'semibutton'])!!}
                                 {!! Form::hidden('query3',old('query3')) !!}
                                 {!! Form::hidden('query4',old('query4')) !!}
                                 {!! Form::close() !!}
-                            </div>
-                            <div class="col">
-                                @if(\Illuminate\Support\Facades\Auth::user()->userType=='teacher')
-                                    {!! Form::open(['route' => ['examsCreateTeacher',$patient->id], 'method' => 'get']) !!}
-                                    {!!   Form::submit('Realizar examen', ['class'=> 'btn btn-primary button-align-right'])!!}
-                                    {!! Form::close() !!}
-                                @elseif(\Illuminate\Support\Facades\Auth::user()->userType=='student')
-                                    {!! Form::open(['route' => ['exams.create',$patient->id], 'method' => 'get']) !!}
-                                    {!!   Form::submit('Realizar examen', ['class'=> 'btn btn-primary button-align-right'])!!}
-                                    {!! Form::close() !!}
-                                @endif
                             </div>
                         </div>
                         <br>
@@ -138,24 +141,26 @@
                     <div class="card-header"><h5>Dientes</h5></div>
                     <div class="card-body">
                         <div class="row align-items-start">
+
+                            <div class="col">
+                                {!! Form::open(['route' => ['diente.create',$patient->id], 'method' => 'get']) !!}
+                                {!!   Form::submit('Crear diente', ['class'=> 'btn btn-primary button-align'])!!}
+                                {!! Form::close() !!}
+                            </div>
                             <div class="col-10">
                                 {!! Form::open(['route' => ['patients.show',$patient->id], 'method' => 'get']) !!}
-                                {!! Form::text('query3',$query3,['class'=>'col-md-3 form-control','autofocus' ,'style'=>'display:inline-block','placeholder'=>'Nombre o número']) !!}
-                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary ', 'name'=>'semibutton2'])!!}
-                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary','name'=>'semibutton2'])!!}
+                                {!! Form::text('query3',$query3,['class'=>'col-md-3 form-control','autofocus' ,'style'=>'display:inline-block; float:right;
+                                margin-left: 25px;','placeholder'=>'Nombre o número']) !!}
+                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary button-align-right', 'name'=>'semibutton2'])!!}
+                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary button-align-right','name'=>'semibutton2'])!!}
                                 {!! Form::hidden('query',old('query')) !!}
                                 {!! Form::hidden('query2',old('query2')) !!}
                                 {!! Form::hidden('query4',old('query4')) !!}
                                 {!! Form::close() !!}
                             </div>
-                            <div class="col">
-                                {!! Form::open(['route' => ['diente.create',$patient->id], 'method' => 'get']) !!}
-                                {!!   Form::submit('Crear diente', ['class'=> 'btn btn-primary button-align-right'])!!}
-                                {!! Form::close() !!}
-                            </div>
                         </div>
 
-                        <br><br>
+                        <br>
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre Común</th>
@@ -199,15 +204,17 @@
                     <div class="card-body">
                         <div class="form-group" >
                             {!! Form::open(['route' => ['patients.show',$patient->id], 'method' => 'get']) !!}
-                            {!! Form::text('query4',$query4,['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block','placeholder'=>'Nombre, apellido o DNI', 'maxlength'=>"255"]) !!}
-                            {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary ', 'name'=>'semibutton3'])!!}
-                            {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary','name'=>'semibutton3'])!!}
+                            {!! Form::text('query4',$query4,['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block; float:right;
+                                margin-left: 25px;','placeholder'=>'Nombre, apellido o DNI', 'maxlength'=>"255"]) !!}
+                            {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary button-align-right', 'name'=>'semibutton3'])!!}
+                            {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary button-align-right','name'=>'semibutton3'])!!}
                             {!! Form::hidden('query',old('query')) !!}
                             {!! Form::hidden('query2',old('query2')) !!}
                             {!! Form::hidden('query3',old('query3')) !!}
                             {!! Form::close() !!}
 
                         </div>
+                        <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>
