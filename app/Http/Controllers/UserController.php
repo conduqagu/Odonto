@@ -205,7 +205,9 @@ class UserController extends Controller
      */
     public function perfilteacher(){
         $user=Auth::user();
-        return view('perfiles/perfilteacher',['user'=>$user]);
+
+        $mystudents = \App\User::find($user->id)->students()->paginate(10);
+        return view('perfiles/perfilteacher',['user'=>$user,'students'=>$mystudents]);
     }
     /**
      * Editar datos del profesor (usuario)

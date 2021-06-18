@@ -58,6 +58,31 @@
                     </div>
                 </div>
                 <br>
+                <div class="card">
+                    <div class="card-body">
+                    <br>
+                        {!! Form::label('Mis alumnos') !!}
+                        <table class="table table-striped table-bordered">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Apellidos</th>
+                                <th>Email</th>
+
+                            </tr>
+
+                            @foreach ($students as $student)
+                                <tr>
+                                    <td>{{ $student->name }}</td>
+                                    <td>{{ $student->surname }}</td>
+                                    <td>{{ $student->email }}</td>
+                                </tr>
+                            @endforeach
+
+                        </table>
+                        {{$students->render()}}
+                    </div>
+                </div>
+<br>
 
                 {!! Form::submit('Actualizar',['class'=>'btn-primary btn button-align']) !!}
 
