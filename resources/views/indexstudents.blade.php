@@ -10,11 +10,11 @@
                 <div class="panel-body">
                     @include('flash::message')
                     <div class="form-group" >
-                        {!! Form::open(['route' => ['indexstudents',$teacher_id], 'method' => 'get']) !!}
-                        {!! Form::text('query_students',$query_students, ['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block; float:right;
+                        {!! Form::open(['route' => ['indexstudents',$teacher_id], 'method' => 'get','style'=>'text-align:right']) !!}
+                        {!! Form::text('query_students',$query_students, ['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block;
                                 margin-left: 25px;','placeholder'=>'Nombre, apellido o DNI', 'maxlength'=>"255"]) !!}
-                        {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary button-align-right', 'name'=>'semibutton'])!!}
-                        {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary button-align-right','name'=>'semibutton'])!!}
+                        {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary', 'name'=>'semibutton'])!!}
+                        {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary','name'=>'semibutton'])!!}
                         {!! Form::close() !!}
                     </div>
                     <br><br>

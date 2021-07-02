@@ -17,11 +17,11 @@
                                 {!! Form::close() !!}
                             </div>
                             <div class="col-10">
-                                {!! Form::open(['route' => ['tipo_tratamientos.index'], 'method' => 'get']) !!}
-                                {!! Form::text('query_tipo_trat',$query_tipo_trat,['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block; float:right;
-                                margin-left: 25px;','placeholder'=>'Nombre, apellido o DNI', 'maxlength'=>"255"]) !!}
-                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary button-align-right ', 'name'=>'semibutton'])!!}
-                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary button-align-right','name'=>'semibutton'])!!}
+                                {!! Form::open(['route' => ['tipo_tratamientos.index'], 'method' => 'get','style'=>'text-align:right']) !!}
+                                {!! Form::text('query_tipo_trat',$query_tipo_trat,['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block;
+                                margin-left: 25px;','placeholder'=>'Nombre, apellido o DNI', 'maxlength'=>"50"]) !!}
+                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary ', 'name'=>'semibutton'])!!}
+                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary','name'=>'semibutton'])!!}
                                 {!! Form::close() !!}
                             </div>
                         </div>

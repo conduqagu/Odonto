@@ -25,6 +25,9 @@ class DiagnosticoController extends Controller
             $query_diag=null;
         }else {
             if ($request->get("query_diag") != null) {
+                $this->validate($request, [
+                    'query_diag' => ['string', 'max:50'],
+                ]);
                 \Cookie::queue('query_diag', $request->get("query_diag"), 60);
                 $query_diag = $request->get("query_diag");
             } else {

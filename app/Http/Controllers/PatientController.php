@@ -41,6 +41,9 @@ class PatientController extends Controller
             $query_patient=null;
         }else {
             if ($request->get("query_patient") != null) {
+                $this->validate($request, [
+                    'query_patient' => ['string', 'max:50'],
+                ]);
                 \Cookie::queue('query_patient', $request->get("query_patient"), 60);
                 $query_patient = $request->get("query_patient");
             } else {
@@ -66,6 +69,9 @@ class PatientController extends Controller
             $query_patient_t=null;
         }else {
             if ($request->get("query_patient_t") != null) {
+                $this->validate($request, [
+                    'query_patient_t' => ['string', 'max:50'],
+                ]);
                 \Cookie::queue('query_patient_t', $request->get("query_patient_t"), 60);
                 $query_patient_t = $request->get("query_patient_t");
             } else {
@@ -198,24 +204,36 @@ class PatientController extends Controller
             $query3 = \Request::cookie('query3');
         }else {
             if ($request->get("query") != null) {
+                $this->validate($request, [
+                    'query' => ['string', 'in:inicial,infantil,periodoncial,ortodoncial,evOrto,otro']
+                ]);
                 \Cookie::queue('query', $request->get("query"), 60);
                 $query = $request->get("query");
             } else {
                 $query = \Request::cookie('query');
             }
             if ($request->get("query2") != null) {
+                $this->validate($request, [
+                    'query2' => ['date','date_format:Y-m-d']
+                ]);
                 \Cookie::queue('query2', $request->get("query2"), 60);
                 $query2 = $request->get("query2");
             } else {
                 $query2 = \Request::cookie('query2');
             }
             if ($request->get("query3") != null) {
+                $this->validate($request, [
+                    'query3' => ['string','max:50']
+                ]);
                 \Cookie::queue('query3', $request->get("query3"), 60);
                 $query3 = $request->get("query3");
             } else {
                 $query3 = \Request::cookie('query3');
             }
             if ($request->get("query4") != null) {
+                $this->validate($request, [
+                    'query4' => ['string','max:50']
+                ]);
                 \Cookie::queue('query4', $request->get("query4"), 60);
                 $query4 = $request->get("query4");
             } else {
@@ -409,7 +427,7 @@ class PatientController extends Controller
      * @param  array  $data
      * @return \App\Patient
      */
-    public function añadirAlumno(Request $request,$id)
+    /**public function añadirAlumno(Request $request,$id)
     {
         $students1=Patient::find($id)->students()->pluck('users.id');
         $students=User::all()->whereNotIn('id',$students1)->where('userType','=','student');
@@ -420,7 +438,7 @@ class PatientController extends Controller
         $patient=Patient::find($id);
 
         return view('patients.añadirAlumno',['patient'=>$patient,'students'=>$students]);
-    }
+    }*/
 
     public function storeAlumno(Request $request,$student_id){
         $student=User::find($student_id);

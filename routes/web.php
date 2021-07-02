@@ -53,7 +53,7 @@ Route::group(['middleware'=> 'App\Http\Middleware\TeacherMiddleware'], function(
     Route::get('/patients/editteacher/{id}','PatientController@editteacher')->name('editteacher');
     Route::put('/patients/updateteacher/{id}','PatientController@updateteacher')->name('updateteacher');
     Route::delete('/patients/{id}','PatientController@destroy')->name('patientdestroy');
-    Route::get('/patients/añadirAlumno/{id}','PatientController@añadirAlumno')->name('añadirAlumno');
+    //Route::get('/patients/añadirAlumno/{id}','PatientController@añadirAlumno')->name('añadirAlumno');
     Route::get('/patients/storeAlumno/{id}','PatientController@storeAlumno')->name('storeAlumno');
     Route::get('/patients/destroyStudent/{id}','PatientController@destroyStudent')->name('destroyStudent');
     Route::delete('/patients/deleteStudent/{id}','PatientController@deleteStudent')->name('deleteStudent');
@@ -108,7 +108,7 @@ Route::group(['middleware'=> 'auth'], function() {
 
     Route::get('/exams/edit_iva/{id}','ExamController@edit_iva')->name('edit_iva');
     Route::put('/exams/update_iva/{id}','ExamController@update_iva')->name('update_iva');
-    Route::get('/exams/index/{id}', 'ExamController@index')->name('exams.index');
+    //Route::get('/exams/index/{id}', 'ExamController@index')->name('exams.index');
     Route::get('/exams/show/{id}', 'ExamController@show')->name('exams.show');
     Route::get('/exams/create_asociacionED/{id}', 'AsociacionExamDienteController@create_asociacionED')->name('create_asociacionED');
     Route::post('/exams/store_asociacionED/{id}', 'AsociacionExamDienteController@store_asociacionED')->name('store_asociacionED');
@@ -151,29 +151,5 @@ Route::get('/informacion', function () {
 });
 
 Auth::routes();
-
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

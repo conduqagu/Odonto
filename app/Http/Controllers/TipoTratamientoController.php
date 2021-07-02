@@ -25,6 +25,9 @@ class TipoTratamientoController extends Controller
             $query_tipo_trat=null;
         }else {
             if ($request->get("query_tipo_trat") != null) {
+                $this->validate($request,[
+                    'query_tipo_trat' => ['string',  'max:50'],
+                ]);
                 \Cookie::queue('query_tipo_trat', $request->get("query_tipo_trat"), 60);
                 $query_tipo_trat = $request->get("query_tipo_trat");
             } else {

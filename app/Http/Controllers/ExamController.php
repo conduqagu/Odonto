@@ -29,13 +29,12 @@ class ExamController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id, Request $request)
+    /**public function index($id, Request $request)
     {
         $patient=Patient::find($id);
         if($request->semibutton=='Borrar filtro') {
             $request->replace(['query'=>null]);
             $request->replace(['query2'=>null]);
-
         }
         $exams=Exam::where('exams.patient_id','=',$id)
             ->where('exams.tipoExam','LIKE','%'.$request->get("query")."%")
@@ -44,7 +43,7 @@ class ExamController extends Controller
 
 
         return view('exams/index',['exams'=>$exams,'patient'=>$patient,'id'=>$id]);
-    }
+    }*/
     public function indexExamsAdmin(Request $request)
     {
         if($request->semibutton=='Borrar filtro') {
@@ -54,12 +53,18 @@ class ExamController extends Controller
             $query_exam_admin2=null;
         }else {
             if ($request->get("query_exam_admin") != null) {
+                $this->validate($request, [
+                    'query_exam_admin' => ['string', 'in:inicial,infantil,periodoncial,ortodoncial,evOrto,otro'],
+                ]);
                 \Cookie::queue('query_exam_admin', $request->get("query_exam_admin"), 60);
                 $query_exam_admin = $request->get("query_exam_admin");
             } else {
                 $query_exam_admin = \Request::cookie('query_exam_admin');
             }
             if ($request->get("query_exam_admin2") != null) {
+                $this->validate($request, [
+                    'query_exam_admin2' => ['date','date_format:Y-m-d'],
+                ]);
                 \Cookie::queue('query_exam_admin2', $request->get("query_exam_admin2"), 60);
                 $query_exam_admin2 = $request->get("query_exam_admin2");
             } else {

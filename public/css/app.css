@@ -590,13 +590,14 @@ pre code {
 
 .boton-primary {
     max-width: 120px;
-    margin-left: 25px;
-
+    margin-left: 20px;
 }
 
 .button-align {
-    float: left;
+    margin-right: 20px;
+    float:left;
 }
+
 .button-align-right {
     float: right;
 }
@@ -2684,8 +2685,6 @@ textarea.form-control.is-invalid {
   line-height: 1.6;
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-
-
 }
 
 @media (prefers-reduced-motion: reduce) {

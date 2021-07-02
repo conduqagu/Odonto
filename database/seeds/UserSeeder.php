@@ -11,6 +11,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+
         DB::table('users')->insert([
             'name' => 'admin',
             'surname' =>Str::random(10),
@@ -55,5 +56,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
         ]);
 
+        //factory(\App\User::class)->create();
     }
+
 }

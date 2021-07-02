@@ -9,10 +9,20 @@
 
                     <div class="panel-body">
                         @include('flash::message')
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="form-group" >
                             <div class="row align-items-start">
                                 <div class="col-11">
-                                    {!! Form::model(\Illuminate\Support\Facades\Request::all(),['route' => ['exams.index',$patient->id], 'method' => 'get']) !!}
+                                    {!! Form::model(\Illuminate\Support\Facades\Request::all(),['route' => ['exams.index',$patient->id], 'method' => 'get'
+                                    ,'style'=>'text-align:right']) !!}
                                     {!! Form::select('query', array('inicial'=>'Inicial','infantil'=>'Infantil','periodoncial'=>'Periodoncial',
                                         'ortodoncial'=>'Ortodoncial','evOrto'=>'Evaluación ortodoncia','otro'=>'Otro',null=>'Tipo de examen'), null,
                                         ['class'=>'col-md-3 form-control','autofocus' ,'style'=>'display:inline-block']) !!}

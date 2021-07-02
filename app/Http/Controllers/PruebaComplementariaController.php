@@ -91,9 +91,9 @@ class PruebaComplementariaController extends Controller
     public function edit($id)
     {
         $prueba_complementaria=PruebaComplementaria::find($id);
-        $contents = Storage::get($prueba_complementaria->fichero);
+        //$contents = Storage::get($prueba_complementaria->fichero);
 
-        return view('prueba_complementarias.edit',['prueba_complementaria'=>$prueba_complementaria,'contents'=>$contents]);
+        return view('prueba_complementarias.edit',['prueba_complementaria'=>$prueba_complementaria]);
     }
 
     /**

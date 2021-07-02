@@ -206,17 +206,19 @@
                                     <img src={{ asset('/asociacionED.png') }} height="450" title="Dentadura permanente-temporal" alt="Dentadura permanente-temporal"></a>
                                 </a>
                             </div>
-                            <br>
-                            @if(sizeof($asociacion_exam_dientes)==0 && \Illuminate\Support\Facades\Auth::user()->userType!='admin')
-                                {!! Form::open(['route' => ['create_asociacionED',$exam->id], 'method' => 'get']) !!}
-                                {!!   Form::submit('Realizar examen dental', ['class'=> 'btn btn-primary'])!!}
-                                {!! Form::close() !!}
-                            @else
-                                {!! Form::open(['route' => ['edit_asociacionED',$exam->id], 'method' => 'get', 'style'=>'display: inline']) !!}
-                                {!!   Form::submit('Editar', ['class'=> 'btn btn-warning  button-align'])!!}
-                                {!! Form::close() !!}
+                            @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
+                                <br>
+                                @if(sizeof($asociacion_exam_dientes)==0)
+                                    {!! Form::open(['route' => ['create_asociacionED',$exam->id], 'method' => 'get']) !!}
+                                    {!!   Form::submit('Realizar examen dental', ['class'=> 'btn btn-primary'])!!}
+                                    {!! Form::close() !!}
+                                @else
+                                    {!! Form::open(['route' => ['edit_asociacionED',$exam->id], 'method' => 'get', 'style'=>'display: inline']) !!}
+                                    {!!   Form::submit('Editar', ['class'=> 'btn btn-warning  button-align'])!!}
+                                    {!! Form::close() !!}
+                                @endif
+                                <br><br>
                             @endif
-                            <br><br>
                             <table class="table table-striped table-bordered">
                                 <tr>
                                     <th>Diente</th>
@@ -314,6 +316,18 @@
                                     <img src={{ asset('/asociacionED.png') }} height="450" title="Dentadura permanente-temporal" alt="Dentadura permanente-temporal"></a>
                                 </a>
                             </div>
+
+                            @if(\Illuminate\Support\Facades\Auth::user()->userType!='admin')
+                                @if(sizeof($asociacion_exam_dientes)==0)
+                                    {!! Form::open(['route' => ['create_asociacionEDPeriodoncia',$exam->id], 'method' => 'get']) !!}
+                                    {!!   Form::submit('Realizar examen dental', ['class'=> 'btn btn-primary'])!!}
+                                    {!! Form::close() !!}
+                                @else
+                                    {!! Form::open(['route' => ['edit_asociacionEDPeriodoncia',$exam->id], 'method' => 'get']) !!}
+                                    {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
+                                    {!! Form::close() !!}
+                                @endif
+                            @endif
                             <br>
                             <table class="table table-striped table-bordered">
                                 <tr>
@@ -358,15 +372,7 @@
                                 @endforeach
                             </table>
                             {{$asociacion_exam_dientes->render()}}
-                            @if(sizeof($asociacion_exam_dientes)==0 && \Illuminate\Support\Facades\Auth::user()->userType!='admin')
-                                {!! Form::open(['route' => ['create_asociacionEDPeriodoncia',$exam->id], 'method' => 'get']) !!}
-                                {!!   Form::submit('Realizar examen dental', ['class'=> 'btn btn-primary'])!!}
-                                {!! Form::close() !!}
-                            @else
-                                {!! Form::open(['route' => ['edit_asociacionEDPeriodoncia',$exam->id], 'method' => 'get']) !!}
-                                {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
-                                {!! Form::close() !!}
-                            @endif
+
                         </div>
                     </div>
 

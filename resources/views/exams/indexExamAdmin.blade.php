@@ -6,26 +6,30 @@
             <div class="col-md-10">
                 <div class="panel panel-default">
                     <div class="panel-heading"><h5>Exámenes</h5></div>
-
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="panel-body">
                         @include('flash::message')
                         <div class="form-group" >
 
-                                    {!! Form::open(['route' => ['indexExamsAdmin'], 'method' => 'get']) !!}
+                                    {!! Form::open(['route' => ['indexExamsAdmin'], 'method' => 'get','style'=>'text-align:right']) !!}
                                     {!! Form::select('query_exam_admin', array('inicial'=>'Inicial','infantil'=>'Infantil','periodoncial'=>'Periodoncial',
                                         'ortodoncial'=>'Ortodoncial','evOrto'=>'Evaluación ortodoncia','otro'=>'Otro',null=>'Tipo de examen'), $query_exam_admin,
-                                        ['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block; float:right;
-                                    margin-left: 25px;']) !!}
-                                    {!! Form::date('query_exam_admin2', $query_exam_admin2,['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block; float:right;
+                                        ['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block;margin-left: 25px;']) !!}
+                                    {!! Form::date('query_exam_admin2', $query_exam_admin2,['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block;
                                     margin-left: 25px;', 'paceholder'=>'Fecha']) !!}
-                                    {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary button-align-right ', 'name'=>'semibutton'])!!}
-                                    {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary button-align-right','name'=>'semibutton'])!!}
+                                    {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary  ', 'name'=>'semibutton'])!!}
+                                    {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary ','name'=>'semibutton'])!!}
                                     {!! Form::close() !!}
 
                         </div>
-                        <br>
-
-                        <br>
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Paciente</th>

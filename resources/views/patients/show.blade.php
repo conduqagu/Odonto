@@ -4,39 +4,37 @@
     <div class="container2">
         <div class="row justify-content-center">
             <div class="col-md-10">
-                @include('flash::message')
-                @if(Auth::user()->userType =='teacher')
-                    {!! Form::open(['route' => ['indexteacher'], 'method' => 'get']) !!}
-                    {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
-                    {!! Form::close() !!}
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
                 @endif
-                @if(Auth::user()->userType =='student')
-                    {!! Form::open(['route' => ['patients.index'], 'method' => 'get']) !!}
-                    {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
-                    {!! Form::close() !!}
-                @endif
-                <br><br>
+
                 <div class="card">
                     <div class="card-header"><h5>Información del paciente</h5></div>
                     <div class="card-body">
                         <div class="form-group">
-                            {!! Form::label('name', 'Nombre: ') !!}
+                            {!! Form::label('name', 'Nombre: ', [ 'style' => 'font-weight:bold', ]) !!}
                             {!! Form::label('name',$patient->name) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('surname', 'Apellidos: ') !!}
+                            {!! Form::label('surname', 'Apellidos: ', [ 'style' => 'font-weight:bold', ]) !!}
                             {!! Form::label('surname',$patient->surname) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('email', 'Correo electrónico: ') !!}
+                            {!! Form::label('email', 'Correo electrónico: ', [ 'style' => 'font-weight:bold', ]) !!}
                             {!! Form::label('email',$patient->email) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('dni', 'DNI: ') !!}
+                            {!! Form::label('dni', 'DNI: ', [ 'style' => 'font-weight:bold', ]) !!}
                             {!! Form::label('dni',$patient->dni) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('telefono', 'Télefono: ') !!}
+                            {!! Form::label('telefono', 'Télefono: ', [ 'style' => 'font-weight:bold', ]) !!}
                             @if($patient->telefono!=null)
                                 {!! Form::label('telefono',$patient->telefono) !!}
                             @else
@@ -44,11 +42,11 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            {!! Form::label('fechaNacimiento', 'Fecha de nacimiento: ') !!}
+                            {!! Form::label('fechaNacimiento', 'Fecha de nacimiento: ', [ 'style' => 'font-weight:bold', ]) !!}
                             {!! Form::label('fechaNacimiento',\Carbon\Carbon::parse($patient->fechaNacimiento)->format('d-m-Y')) !!}
                         </div>
                         <div>
-                            {!!  Form::label('child' , 'Infantil: ') !!}
+                            {!!  Form::label('child' , 'Infantil: ', [ 'style' => 'font-weight:bold', ]) !!}
                             @if($patient->child=0)
                                 {!! Form::label('child', "No") !!}
                             @else
@@ -57,11 +55,11 @@
                         </div>
                         <br>
                         <div class="form-group">
-                            {!!  Form::label('riesgoASA' , 'Riesgo ASA: ') !!}
+                            {!!  Form::label('riesgoASA' , 'Riesgo ASA: ', [ 'style' => 'font-weight:bold', ]) !!}
                             {!! Form::label('riesgoASA', $patient->riesgoASA) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('observaciones', 'Observaciones: ') !!}
+                            {!! Form::label('observaciones', 'Observaciones: ', [ 'style' => 'font-weight:bold', ]) !!}
                             @if($patient->observaciones!=null)
                                 {!! Form::label('observaciones',$patient->observaciones) !!}
                             @else
@@ -77,7 +75,7 @@
                     <div class="card-body">
                         <div class="row align-items-start">
 
-                            <div class="col">
+                            <div class="col-1">
                                 @if(\Illuminate\Support\Facades\Auth::user()->userType=='teacher')
                                     {!! Form::open(['route' => ['examsCreateTeacher',$patient->id], 'method' => 'get']) !!}
                                     {!!   Form::submit('Realizar examen', ['class'=> 'btn btn-primary button-align'])!!}
@@ -88,16 +86,16 @@
                                     {!! Form::close() !!}
                                 @endif
                             </div>
-                            <div class="col-10">
-                                {!! Form::open(['route' => ['patients.show',$patient->id], 'method' => 'get']) !!}
+                            <div class="col-11">
+                                {!! Form::open(['route' => ['patients.show',$patient->id], 'method' => 'get','style'=>'text-align:right']) !!}
                                 {!! Form::select('query', array('inicial'=>'Inicial','infantil'=>'Infantil','periodoncial'=>'Periodoncial',
                                     'ortodoncial'=>'Ortodoncial','evOrto'=>'Evaluación ortodoncia','otro'=>'Otro',null=>'Tipo de examen'),
-                                    $query,['class'=>'col-md-3 form-control','autofocus' ,'style'=>'display:inline-block; float:right;
+                                    $query,['class'=>'col-md-3 form-control','autofocus' ,'style'=>'display:inline-block;
                                 margin-left: 25px;']) !!}
                                 {!! Form::date('query2',$query2,['class'=>'col-md-3 form-control ','autofocus','paceholder'=>'Fecha',
-                                'style'=>'display:inline-block; float:right;margin-left: 25px;']) !!}
-                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary button-align-right', 'name'=>'semibutton'])!!}
-                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary button-align-right','name'=>'semibutton'])!!}
+                                'style'=>'display:inline-block; margin-left: 25px;']) !!}
+                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary ', 'name'=>'semibutton'])!!}
+                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary','name'=>'semibutton'])!!}
                                 {!! Form::hidden('query3',old('query3')) !!}
                                 {!! Form::hidden('query4',old('query4')) !!}
                                 {!! Form::close() !!}
@@ -148,11 +146,11 @@
                                 {!! Form::close() !!}
                             </div>
                             <div class="col-10">
-                                {!! Form::open(['route' => ['patients.show',$patient->id], 'method' => 'get']) !!}
-                                {!! Form::text('query3',$query3,['class'=>'col-md-3 form-control','autofocus' ,'style'=>'display:inline-block; float:right;
-                                margin-left: 25px;','placeholder'=>'Nombre o número']) !!}
-                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary button-align-right', 'name'=>'semibutton2'])!!}
-                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary button-align-right','name'=>'semibutton2'])!!}
+                                {!! Form::open(['route' => ['patients.show',$patient->id], 'method' => 'get','style'=>'text-align:right']) !!}
+                                {!! Form::text('query3',$query3,['class'=>'col-md-3 form-control','autofocus' ,'style'=>'display:inline-block;
+                                margin-left: 25px;','placeholder'=>'Nombre o número', 'maxlength'=>"50"]) !!}
+                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary ', 'name'=>'semibutton2'])!!}
+                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary ','name'=>'semibutton2'])!!}
                                 {!! Form::hidden('query',old('query')) !!}
                                 {!! Form::hidden('query2',old('query2')) !!}
                                 {!! Form::hidden('query4',old('query4')) !!}
@@ -203,18 +201,17 @@
                     <div class="card-header"><h5>Alumnos</h5></div>
                     <div class="card-body">
                         <div class="form-group" >
-                            {!! Form::open(['route' => ['patients.show',$patient->id], 'method' => 'get']) !!}
-                            {!! Form::text('query4',$query4,['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block; float:right;
-                                margin-left: 25px;','placeholder'=>'Nombre, apellido o DNI', 'maxlength'=>"255"]) !!}
-                            {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary button-align-right', 'name'=>'semibutton3'])!!}
-                            {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary button-align-right','name'=>'semibutton3'])!!}
+                            {!! Form::open(['route' => ['patients.show',$patient->id], 'method' => 'get','style'=>'text-align:right']) !!}
+                            {!! Form::text('query4',$query4,['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block;
+                                margin-left: 25px;','placeholder'=>'Nombre, apellido o DNI', 'maxlength'=>"50"]) !!}
+                            {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary ', 'name'=>'semibutton3'])!!}
+                            {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary','name'=>'semibutton3'])!!}
                             {!! Form::hidden('query',old('query')) !!}
                             {!! Form::hidden('query2',old('query2')) !!}
                             {!! Form::hidden('query3',old('query3')) !!}
                             {!! Form::close() !!}
 
                         </div>
-                        <br><br>
                         <table class="table table-striped table-bordered">
                             <tr>
                                 <th>Nombre</th>

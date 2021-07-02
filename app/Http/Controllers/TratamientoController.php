@@ -82,14 +82,8 @@ class TratamientoController extends Controller
 
         flash('Tratamiento creado correctamente');
 
-        switch($request->submitbutton) {
-            case 'Guardar':
-                return redirect()->route('exams.show',$request->exam_id);
-                break;
-            case 'Añadir tratamiento':
-                return redirect()->route('tratamientos.createT',$tratamientos->exam_id);
-                break;
-        }
+        return redirect()->route('exams.show',$request->exam_id);
+
     }
 
     /**

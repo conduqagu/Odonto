@@ -9,6 +9,15 @@
 
                     <div class="panel-body">
                         @include('flash::message')
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="form-group" >
                             <div class="row align-items-start">
                                 <div class="col-2">
@@ -17,10 +26,10 @@
                                     {!! Form::close() !!}
                                 </div>
                                 <div class="col-10">
-                                {!! Form::open(['route' => ['patients.index'], 'method' => 'get']) !!}
-                                {!! Form::text('query_patient',$query_patient,['class'=>'col-md-3 form-control', 'autofocus', 'placeholder'=>'Nombre, apellido o DNI','style'=>'display:inline; float:right;  margin-left: 25px;']) !!}
-                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary button-align-right', 'name'=>'semibutton'])!!}
-                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary button-align-right','name'=>'semibutton'])!!}
+                                {!! Form::open(['route' => ['patients.index'], 'method' => 'get','style'=>'text-align:right']) !!}
+                                {!! Form::text('query_patient',$query_patient,['class'=>'col-md-3 form-control', 'autofocus', 'placeholder'=>'Nombre, apellido o DNI','style'=>'display:inline;  margin-left: 25px;']) !!}
+                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary ', 'name'=>'semibutton'])!!}
+                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary ','name'=>'semibutton'])!!}
                                 {!! Form::close() !!}
                                 </div>
                             </div>

@@ -9,7 +9,15 @@
 
                     <div class="panel-body">
                         @include('flash::message')
-
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="row align-items-start">
                             <div class="col-2">
                                 {!! Form::open(['route' => ['userCreate'], 'method' => 'get']) !!}
@@ -17,11 +25,11 @@
                                 {!! Form::close() !!}
                             </div>
                             <div class="col-10">
-                                {!! Form::open(['route' => ['userIndex'], 'method' => 'get']) !!}
-                                {!! Form::text('query_user',$query_user,['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block; float:right;
-                                margin-left: 25px;','placeholder'=>'Nombre, apellido o DNI', 'maxlength'=>"255"]) !!}
-                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary button-align-right ', 'name'=>'semibutton'])!!}
-                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary button-align-right','name'=>'semibutton'])!!}
+                                {!! Form::open(['route' => ['userIndex'], 'method' => 'get','style'=>'text-align:right']) !!}
+                                {!! Form::text('query_user',$query_user,['class'=>'col-md-3 form-control', 'autofocus', 'style'=>'display:inline-block;
+                                margin-left: 25px;','placeholder'=>'Nombre, apellido o DNI', 'maxlength'=>"50"]) !!}
+                                {!! Form::submit('Buscar', ['class'=> 'btn btn-success boton-primary ', 'name'=>'semibutton'])!!}
+                                {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary ','name'=>'semibutton'])!!}
                                 {!! Form::close() !!}
                             </div>
                         </div>
@@ -35,7 +43,7 @@
                                 <th>DNI</th>
                                 <th>Correo electrónico</th>
                                 <th>Tipo de Usuario</th>
-                                <th colspan="2">Acciones</th>
+                                <th colspan="2" style="width: 260px">Acciones</th>
                             </tr>
 
                             @foreach ($users as $user)
@@ -51,12 +59,8 @@
                                         <td>{{ 'Administrador/a' }}</td>
                                     @endif
 
-                                        <td>
-                                            @if($user->userType=='teacher')
-                                                {!! Form::open(['route' => ['indexstudents',$user->id], 'method' => 'get','style'=>'display: inline']) !!}
-                                                {!!   Form::submit('Alumnos', ['class'=> 'btn btn-primary'])!!}
-                                                {!! Form::close() !!}
-                                            @endif
+                                        <td style="width: 260px">
+
                                             {!! Form::open(['route' => ['user.edit',$user->id], 'method' => 'get','style'=>'display: inline']) !!}
                                             {!!   Form::submit('Editar', ['class'=> 'btn btn-warning'])!!}
                                             {!! Form::close() !!}
@@ -64,6 +68,12 @@
                                             {!! Form::open(['route' => ['user.destroy',$user->id], 'method' => 'delete','style'=>'display: inline']) !!}
                                             {!!   Form::submit('Eliminar', ['class'=> 'btn btn-danger' ,'onclick' => 'if(!confirm("¿Está seguro?"))event.preventDefault();'])!!}
                                             {!! Form::close() !!}
+
+                                            @if($user->userType=='teacher')
+                                                {!! Form::open(['route' => ['indexstudents',$user->id], 'method' => 'get','style'=>'display: inline']) !!}
+                                                {!!   Form::submit('Alumnos', ['class'=> 'btn btn-primary'])!!}
+                                                {!! Form::close() !!}
+                                            @endif
                                         </td>
 
                                 </tr>

@@ -27,7 +27,7 @@
                         <div class="form-group">
                             <label>Archivo: *</label>
                             <br>
-                            {!! Form::file('fichero',$contents,['class'=>'form-control', 'required','autofocus']) !!}
+                            {!! Form::file('fichero',null,['class'=>'form-control', 'required','autofocus']) !!}
 
                         </div>
                         <div class="form-group">

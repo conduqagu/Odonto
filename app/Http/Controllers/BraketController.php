@@ -21,6 +21,9 @@ class BraketController extends Controller
             $query_brac=null;
         }else {
             if ($request->get("query_brac") != null) {
+                $this->validate($request, [
+                    'query_brac' => ['string', 'max:50'],
+                ]);
                 \Cookie::queue('query_brac', $request->get("query_brac"), 60);
                 $query_brac = $request->get("query_brac");
             } else {

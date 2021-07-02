@@ -25,6 +25,9 @@ class UserController extends Controller
             $query_user=null;
         }else {
             if ($request->get("query_user") != null) {
+                $this->validate($request,[
+                    'query_user' => ['string',  'max:50'],
+                ]);
                 \Cookie::queue('query_user', $request->get("query_user"), 60);
                 $query_user = $request->get("query_user");
             } else {
