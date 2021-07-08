@@ -17,7 +17,6 @@
                         {!! Form::submit('Borrar filtro', ['class'=> 'btn btn-primary boton-primary','name'=>'semibutton'])!!}
                         {!! Form::close() !!}
                     </div>
-                    <br><br>
                     <table class="table table-striped table-bordered">
                         <tr>
                             <th>Nombre</th>

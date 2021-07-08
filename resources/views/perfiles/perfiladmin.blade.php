@@ -35,7 +35,7 @@
                         <div class="form-group">
                             <label for="dni" >{{ __('DNI') }}</label>
 
-                            <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ $user->dni }}" required autocomplete="dni">
+                            <input id="dni" type="text" class="form-control @error('dni') is-invalid @enderror" name="dni" value="{{ $user->dni }}" pattern="[0-9]{8}[A-Za-z]{1}" title="Debe introducir 8 números y una letra" required autocomplete="dni">
 
                             @error('dni')
                             <span class="invalid-feedback" role="alert">

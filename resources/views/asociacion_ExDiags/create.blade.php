@@ -24,7 +24,7 @@
                             {!! Form::select('diagnostico_id', $diagnosticos, null,['class' => 'form-control', 'required']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('comentario', 'Comentario: *') !!}
+                            {!! Form::label('comentario', 'Comentario: ') !!}
                             {!! Form::text('comentario',null,['class'=>'form-control', 'autofocus','maxlength'=>"255"]) !!}
                         </div>
                         @if(\Illuminate\Support\Facades\Auth::user()->userType=='student')

@@ -24,14 +24,21 @@
                             {!! Form::label('nombre', 'Nombre: *') !!}
                             {!! Form::text('nombre',$prueba_complementaria->nombre,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"255"]) !!}
                         </div>
-                        <div class="form-group">
-                            <label>Archivo: *</label>
-                            <br>
-                            {!! Form::file('fichero',null,['class'=>'form-control', 'required','autofocus']) !!}
-
+                        <div class="row align-items-center">
+                            <div class="col-3">
+                                <label>Archivo actual:</label>
+                                <div class="text-center"><a target="_blank" href="/{{$prueba_complementaria->fichero}}">
+                                        <img src="/pdf.png" height="35px"/></a></div>
+                            </div>
+                            <div class="col">
+                                <label>Modificar archivo:</label>
+                                <br>
+                                {!! Form::file('fichero',null,['class'=>'form-control', 'required','autofocus']) !!}
+                            </div>
                         </div>
+
                         <div class="form-group">
-                            {!! Form::label('comentario', 'Comentario: *') !!}
+                            {!! Form::label('comentario', 'Comentario: ') !!}
                             {!! Form::text('comentario',$prueba_complementaria->comentario,['class'=>'form-control', 'autofocus', 'maxlength'=>"255"]) !!}
                         </div>
                         @if(\Illuminate\Support\Facades\Auth::user()->userType=='student')

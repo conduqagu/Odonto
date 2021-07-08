@@ -138,6 +138,7 @@ Route::group(['middleware'=> 'auth'], function() {
 
 
     Route::get('/patients/show/{id}','PatientController@show')->name('patients.show');
+    Route::get('/home', 'HomeController@index')->name('home');
 
 });
 
@@ -151,5 +152,4 @@ Route::get('/informacion', function () {
 });
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
 

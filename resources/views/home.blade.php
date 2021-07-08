@@ -46,9 +46,9 @@
                                 <table class="table table-striped table-bordered">
                                     <tr>
                                         <td>
-                                            <a href="{{url('/perfiles/perfilstudent')}}" class="btn" style="box-shadow: 0px 0px 0px 0px grey;"><strong>Perfil</strong>
+                                            <a href="{{url('/perfiles/perfilstudent')}}" class="btn" style="box-shadow: 0px 0px 0px 0px grey;"><strong>Perfil   </strong>
                                                 <img src="/perfil.png"
-                                                     width="40" height="60"
+                                                     width="60" height="60"
                                                      alt="Perfil"
                                                 />
                                             </a>
@@ -90,7 +90,7 @@
                                         <td>
                                             <a href="{{url('/perfiles/perfilteacher')}}" class="btn" style="box-shadow: 0px 0px 0px 0px grey;"><strong>Perfil</strong>
                                                 <img src="/perfil.png"
-                                                     width="40" height="60"
+                                                     width="60" height="60"
                                                      alt="Perfil"
                                                 />
                                             </a>
@@ -120,7 +120,7 @@
 
                         @if(Auth::user()->userType =='admin')
                     <div class="container" style="text-align: center">
-                        <div class="row align-items-start">
+                        <div class="row align-items-center">
                             <div class="col">
                                 <table class="table table-striped table-bordered">
                                     <tr>
@@ -158,7 +158,7 @@
                                         <td>
                                             <a href="{{url('/perfiladmin')}}" class="btn" style="box-shadow: 0px 0px 0px 0px grey;"><strong>Perfil</strong>
                                                 <img src="/perfil.png"
-                                                     width="40" height="60"
+                                                     width="60" height="60"
                                                      alt="Perfil"
                                                 />
                                             </a>
@@ -202,7 +202,7 @@
                                         <td >
                                             <a href="{{url('/brakets')}}" class="btn" style="box-shadow: 0px 0px 0px 0px grey;"><strong >Brackets</strong>
                                                 <img src="/brackets.png"
-                                                     width="100" height="60"
+                                                     width="60" height="60"
                                                      alt="Brackets"
                                                 />
                                             </a>

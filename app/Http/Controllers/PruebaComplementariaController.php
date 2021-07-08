@@ -91,6 +91,7 @@ class PruebaComplementariaController extends Controller
     public function edit($id)
     {
         $prueba_complementaria=PruebaComplementaria::find($id);
+
         //$contents = Storage::get($prueba_complementaria->fichero);
 
         return view('prueba_complementarias.edit',['prueba_complementaria'=>$prueba_complementaria]);
@@ -107,19 +108,34 @@ class PruebaComplementariaController extends Controller
     {
         $this->validate($request, [
             'nombre' => ['required', 'string', 'max:255'],
-            'fichero' => ['required', 'string', 'max:255'],
             'comentario' => ['nullable', 'string', 'max:255'],
         ]);
+
         if(Auth::user()->userType=='student'){
             $this->validate($request,
                 ['pin'=>['required','string','max:255',new PinProfesor()]]);
-
+        }
+        if($request->fichero!=null){
+            $this->validate($request,
+                ['fichero'=>'file']);
         }
 
         $prueba_complementaria = PruebaComplementaria::find($id);
-        $prueba_complementaria->fill($request->all());
+        $prueba_complementaria->nombre=$request->nombre;
+        $prueba_complementaria->comentario=$request->comentario;
+
         $prueba_complementaria->save();
 
+        if ($request->hasFile('fichero')) {
+            $file = $request->file('fichero');
+            $fileName = $file->getClientOriginalName();
+            $path = $request->file('fichero')->storeAs(
+                $prueba_complementaria->id, $fileName, 'pruebas'
+            );
+            $prueba_complementaria->fichero = 'pruebas/'.$prueba_complementaria->id.'/'.$fileName;
+        }
+
+        $prueba_complementaria->save();
         flash('Peueba creada correctamente');
 
         return redirect()->route('exams.show',$prueba_complementaria->exam_id);

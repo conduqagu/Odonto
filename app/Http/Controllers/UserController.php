@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Illuminate\Contracts\Hashing\Hasher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use App\AsociacionTeacherStudent;
 use Illuminate\Support\Facades\Hash;
 
@@ -280,11 +278,11 @@ class UserController extends Controller
         }
         if($request->dni==$user->dni){
             $this->validate($request,[
-                'dni' => ['required','string','max:255'],
+                'dni' => ['required','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             ]);
         }else{
             $this->validate($request,[
-                'dni' => ['required','unique:users','string','max:255'],
+                'dni' => ['required','unique:users','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             ]);
         }
         $this->validate($request, [
