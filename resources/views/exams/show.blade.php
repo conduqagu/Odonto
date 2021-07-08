@@ -658,10 +658,15 @@
                                 {!!   Form::submit('Generar PDF', ['class'=> 'btn btn-primary button-align'])!!}
                                 {!! Form::close() !!}
 
-
+                            @if(Auth::user()->userType!='admin')
                                 {!! Form::open(['route' => ['patients.show',$exam->patient_id], 'method' => 'get']) !!}
                                 {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                                 {!! Form::close() !!}
+                            @else
+                                {!! Form::open(['route' => ['indexExamsAdmin'], 'method' => 'get']) !!}
+                                {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
+                                {!! Form::close() !!}
+                            @endif
 
                         </div>
                     </div>
