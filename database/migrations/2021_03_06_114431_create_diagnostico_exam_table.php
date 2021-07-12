@@ -32,6 +32,6 @@ class CreateDiagnosticoExamTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('asociacion_diagnostico_exams');
+        Schema::dropIfExists('diagnostico_exam');
     }
 }
