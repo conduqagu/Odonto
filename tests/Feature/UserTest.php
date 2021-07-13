@@ -25,7 +25,6 @@ class UserTest extends TestCase
         $user = factory('App\User')->make();
         $this->post('/user/store',$user->toArray());
         $this->assertEquals(2,User::all()->count());
-        //TODO: A veces se guarda el user del post y otras no. ¿Error en la validadción?
     }
 
     /**
@@ -67,10 +66,9 @@ class UserTest extends TestCase
         $this->actingAs(factory(User::class)->create(['userType'=>'admin']));
         $user = factory('App\User')->create();
         $user->name = "Updated user";
-        //$user->save();
-        //TODO: Error en la validación
         $this->put('/user/update/'.$user->id, $user->toArray());
         $this->assertDatabaseHas('users',['id'=> $user->id , 'name' => 'Updated user']);
+
     }
 
     /**
@@ -96,18 +94,5 @@ class UserTest extends TestCase
         $this->delete('/user/destroy/'.$user->id);
         $this->assertDatabaseMissing('users',['id'=> $user->id]);
 
-    }
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-
-
-    public function testInformacion()
-    {
-        $response = $this->get('/informacion');
-
-        $response->assertStatus(200);
     }
 }

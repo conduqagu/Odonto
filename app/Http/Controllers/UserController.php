@@ -128,7 +128,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => ['required', 'string', 'max:255'],
             'surname' => ['required', 'string', 'max:255'],
-            'dni' => ['required', 'unique:users', 'string', 'max:255', 'regex:/^[0-9]{8}[qwertyuiopasdfghjlñzxcvbnmABCDEFGHIJKLMNÑOPQRSTUVWXYZ]$/i'],
+            'dni' => ['required', 'unique:users', 'string', 'max:255', 'regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             //TODO: Hacer que se pase password en array de UserTest,
             // test_authenticated_admin_can_create_a_new_user ln:22
@@ -362,7 +362,7 @@ class UserController extends Controller
         ]);
         $user->fill($request->all());
         $user->save();
-
+        dd($user);
 
         flash('Usuario modiifcado correctamente');
         return redirect()->route('userIndex');
