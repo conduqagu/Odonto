@@ -23,8 +23,8 @@
                             {!!Form::label('patient_id', 'Paciente:  '.$exam->patient->name.' '.$exam->patient->surname) !!}
                         </div>
                         <div>
-                            {!! Form::label('date', 'Fecha: '.$exam->date) !!}
-                        </div>
+                            {!! Form::label('date', 'Fecha: ') !!}
+                            {!! Form::label('date',\Carbon\Carbon::parse($exam->date)->format('d-m-Y')) !!}                        </div>
                         <div class="form-group">
                             {!!  Form::label('patronFacial' , 'Patrón Facial: *') !!}
                             {!! Form::select('patronFacial', array('dolicofacial'=>'Dolicofacial','mesofacial'=>'Mesofacial','braquifacial'=>'Braquifacial'),null,['class' => 'form-control', 'required']) !!}

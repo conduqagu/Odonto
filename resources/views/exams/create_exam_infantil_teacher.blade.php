@@ -20,10 +20,12 @@
                         @endif
                         {!! Form::model($exam, [ 'route' => ['examsUptadeTeacherInfantil',$exam->id],'method'=>'PUT']) !!}
                         <div>
-                            {!!Form::label('patient_id', 'Paciente:  '.$exam->patient->name) !!}
+                            {!!Form::label('patient_id', 'Paciente:  '.$exam->patient->name.' '.$exam->patient->surname) !!}
                         </div>
                         <div>
-                            {!! Form::label('date', 'Fecha: '.$exam->date) !!}
+                            {!! Form::label('date', 'Fecha: ') !!}
+                            {!! Form::label('date',\Carbon\Carbon::parse($exam->date)->format('d-m-Y')) !!}
+
                         </div>
                         <div>
                             {!!  Form::label('aspectoGeneral' , 'Aspecto General: *') !!}

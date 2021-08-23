@@ -21,12 +21,12 @@
 
                         {!! Form::model($exam, [ 'route' => ['examsUptadeTeacherPeriodontal',$exam->id],'method'=>'PUT']) !!}
                         <div class="form-group">
-                            {!!Form::label('patient_id', 'Paciente:  '.$exam->patient->name) !!}
+                            {!!Form::label('patient_id', 'Paciente:  '.$exam->patient->name.' '.$exam->patient->surname) !!}
                             <br>
                         </div>
                         <div>
-                            {!! Form::label('date', 'Fecha: '.$exam->date) !!}
-                        </div>
+                            {!! Form::label('date', 'Fecha: ') !!}
+                            {!! Form::label('date',\Carbon\Carbon::parse($exam->date)->format('d-m-Y')) !!}                        </div>
                         <div>
                             {!!  Form::label('indicePlaca' , 'Índice de placa: ') !!}
                             {!! Form::number('indicePlaca', null,['class' => 'form-control','max'=>"100",'min'=>'0','step'=>'0.01']) !!}

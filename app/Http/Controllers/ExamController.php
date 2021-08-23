@@ -445,15 +445,8 @@ class ExamController extends Controller
         $exam->save();
 
         flash('Examen creado correctamente');
+        return redirect()->route('exams.show',[$exam->id]);
 
-        switch($request->submitbutton) {
-            case 'Continuar examen dental':
-                return redirect()->route('create_asociacionED',[$exam->id]);
-                break;
-            case 'Guardar':
-                return redirect()->route('exams.show',[$exam->id]);
-                break;
-        }
     }
     /**
      * Update "Examen Infantil" for a Teacher

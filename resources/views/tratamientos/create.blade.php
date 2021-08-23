@@ -57,7 +57,7 @@
                             </div>
                         @endif
                         <br>
-                        {!! Form::submit( 'Guardar', ['class' => 'btn btn-primary button-align'a])!!}
+                        {!! Form::submit( 'Guardar', ['class' => 'btn btn-primary button-align'])!!}
                         {!! Form::close() !!}
 
                         {!! Form::open(['route' => ['exams.show',$exam_id], 'method' => 'get']) !!}

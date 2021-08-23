@@ -3,12 +3,12 @@
 @section('content')
     <div class="container2">
         <div class="row justify-content-center">
-            <div class="col-md-10" style="text-align: center">
+            <div class="title m-b-md">
                 <a href="https://www.ilerna.es/blog/aprende-con-ilerna-online/sanidad/codigo-internacional-dientes-fdi">
                     <img src={{ asset('/asociacionED.png') }} height="450" title="Dentadura permanente-temporal" alt="Dentadura permanente-temporal"></a>
                 </a>
             </div>
-            <div class="col-md-10">
+            <div>
                 <div class="card">
                     <div class="card-header"><h5>Examen dental</h5></div>
 
@@ -35,14 +35,13 @@
                             </tr>
                             @foreach ($asociacion_exam_dientes as $a_e_d)
 
-                                    <tr>
+                            <tr>
                                     <td>{!! Form::label('diente_id'.$a_e_d->diente->number,$a_e_d->diente->number) !!}
                                         {!! Form::hidden('asociacion_exam_diente_id'.$a_e_d->diente->number,$a_e_d->id) !!}</td>
                                     <td>{!! Form::select('denticionRaiz'.$a_e_d->diente->number, array('Sano'=>'Sano','Cariado'=>'Cariado','Obturado sin caries'=>'Obturado sin caries',
                             'Pérdida otro motivo'=>'Pérdida otro motivo', 'Fisura Obturada'=>'Fisura Obturada','Pilar puente/corona'=>'Pilar puente/corona','Cariado'=>'Cariado',
-                            'Diente no erupcionado'=>'Diente no erupcionado','Fractura'=>'Fractura'),
-                            $a_e_d->denticionRaiz,['id'=>$a_e_d->diente->number."denticionRaiz",'class' => 'form-control',
-                             'style'=>"width: max-content"]) !!}</td>
+                            'Diente no erupcionado'=>'Diente no erupcionado','Fractura'=>'Fractura'),$a_e_d->denticionRaiz,
+                            ['id'=>$a_e_d->diente->number."denticionRaiz",'class' => 'form-control', 'style'=>"width: max-content"]) !!}</td>
                                     <td>{!! Form::select('denticionCorona'.$a_e_d->diente->number, array('Sano'=>'Sano','Cariado'=>'Cariado','Obturado sin caries'=>'Obturado sin caries',
                             'Pérdida otro motivo'=>'Pérdida otro motivo', 'Fisura Obturada'=>'Fisura Obturada','Pilar puente/corona'=>'Pilar puente/corona','Cariado'=>'Cariado',
                             'Diente no erupcionado'=>'Diente no erupcionado','Fractura'=>'Fractura'),

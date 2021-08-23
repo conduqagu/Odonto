@@ -362,7 +362,6 @@ class UserController extends Controller
         ]);
         $user->fill($request->all());
         $user->save();
-        dd($user);
 
         flash('Usuario modiifcado correctamente');
         return redirect()->route('userIndex');

@@ -237,7 +237,11 @@
                                         <td>{{ $asociacion_exam_diente->denticionRaiz }}</td>
                                         <td>{{ $asociacion_exam_diente->denticionCorona }}</td>
                                         <td>@foreach($asociacion_exam_diente->tratamiento as $tratamiento)
-                                                {{$tratamiento->tipoTratamiento->name}}<br>
+                                                @if($tratamiento!=null)
+                                                    {{$tratamiento->tipoTratamiento->name}}<br>
+                                                @else
+                                                    {{"N/D"}}
+                                                @endif
                                             @endforeach
                                         </td>
                                         <td>{{ $asociacion_exam_diente->opacidad }}</td>
@@ -272,10 +276,11 @@
                                     <br>
                                     {!!  Form::label('anomaliaTamaño' , 'Anomalía en tamaño: '.$exam->anomaliaTamaño) !!}
                                     <br>
+
                                     @if($exam->otros!=null)
                                         {!!  Form::label('otros' , 'Otros: '.$exam->otros) !!}
                                     @else
-                                        {!! "N/D" !!}
+                                        {!!  Form::label('otros' , 'Otros: '. "N/D" )!!}
                                     @endif
                                 </div>
 

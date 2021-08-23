@@ -20,12 +20,12 @@
                     @endif
                     {!! Form::model($exam, [ 'route' => ['examsUptadeTeacherInicial',$exam->id],'method'=>'PUT']) !!}
                     <div class="form-group">
-                        {!!Form::label('patient_id', 'Paciente:  '.$exam->patient->name) !!}
+                        {!!Form::label('patient_id', 'Paciente:  '.$exam->patient->name.' '.$exam->patient->surname) !!}
                         <br>
                     </div>
                     <div>
-                        {!! Form::label('date', 'Fecha: '.$exam->date) !!}
-                    </div>
+                        {!! Form::label('date', 'Fecha: ') !!}
+                        {!! Form::label('date',\Carbon\Carbon::parse($exam->date)->format('d-m-Y')) !!}                    </div>
                     <div>
                         {!!  Form::label('aspectoExtraoralNormal' , 'Aspecto Extraoral Normal: *') !!}
                         {!! Form::select('aspectoExtraoralNormal', array('1'=>'Si','0'=>'No'),'1',['class' => 'form-control', 'required']) !!}
@@ -124,8 +124,7 @@
                         {!! Form::text('otros', null, ['class'=>'form-control','maxlength'=>"255"]) !!}
                         <br>
                     </div>
-                    {!! Form::submit( 'Continuar examen dental', ['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}
-                    {!! Form::submit( 'Guardar',['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'finish'])!!}
+                    {!! Form::submit( 'Guardar',['class' => 'btn btn-primary',  'value' => 'finish'])!!}
 
                     {!! Form::close() !!}
 

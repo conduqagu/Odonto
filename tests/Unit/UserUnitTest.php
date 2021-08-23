@@ -3,13 +3,17 @@
 namespace Tests\Unit;
 
 use App\User;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use PHPUnit\Framework\TestCase;
-
+use Tests\TestCase;
+use Faker\Factory as Faker;
 
 
 class UserUnitTest extends TestCase
 {
+    use DatabaseMigrations;
+
     /**
      * A basic unit test example.
      *
@@ -18,17 +22,16 @@ class UserUnitTest extends TestCase
     public function testCreateUser()
     {
         $userTypes=array('admin','teacher','student');
-        $data = [
-            'name' => 'Concha',
-            'surname' => 'Duque',
-            'email' => 'concha_98@gmail.com',
+        $letter=array('T','R','W','A','G','M','Y','F','P','D','X','B','N','J','Z','S','Q','V','H','L','C','K','E');
+        $faker=Faker::create();
+        $data=['name' => $faker->firstName,
+            'surname' => $faker->lastName,
+            'email' => $faker->unique()->safeEmail,
             'email_verified_at' => now(),
-            'dni' => '12345678R',
-            'password' =>'password',
+            'dni' => ($faker->unique()->randomNumber($nbDigits = 8).$letter[array_rand($letter)]),
+            'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
-            'userType' => $userTypes[array_rand($userTypes)],
-        ];
-
+            'userType' => $userTypes[array_rand($userTypes)]];
         $user = new User($data);
 
         $this->assertInstanceOf(User::class, $user);

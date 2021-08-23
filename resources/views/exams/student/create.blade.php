@@ -54,7 +54,7 @@
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn button-align']) !!}
                         {!! Form::close() !!}
 
-                        {!! Form::open(['route' => ['exams.index',$patient->id], 'method' => 'get']) !!}
+                        {!! Form::open(['route' => ['patients.show',$patient->id], 'method' => 'get']) !!}
                         {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                         {!! Form::close() !!}
 
