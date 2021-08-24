@@ -46,15 +46,19 @@
                             'Pérdida otro motivo'=>'Pérdida otro motivo', 'Fisura Obturada'=>'Fisura Obturada','Pilar puente/corona'=>'Pilar puente/corona','Cariado'=>'Cariado',
                             'Diente no erupcionado'=>'Diente no erupcionado','Fractura'=>'Fractura'),
                             $a_e_d->denticionCorona,['id'=>$a_e_d->diente->number."denticionCorona",'class' => 'form-control', 'style'=>"width: max-content"]) !!}</td>
-                                        <!-- TODO: Arreglar mostrar tipo de tratamiento; $a_e_d->tratamiento->first()->tipoTratamiento->name-->
-                                    <td> {!! Form::select('tipo_tratamiento_id'.$a_e_d->diente->number, $tipo_tratamientos,
-                            $a_e_d->tratamiento,['class' => 'form-control', 'required','style'=>"width: max-content"]) !!}</td>
+                                @if(\App\Tratamiento::where('asociacion_exam_diente_id','=',$a_e_d->id)->first()!=null)
+                                        <td> {!! Form::select('tipo_tratamiento_id'.$a_e_d->diente->number, $tipo_tratamientos,
+                                     \App\Tratamiento::where('asociacion_exam_diente_id','=',$a_e_d->id)->first()->tipoTratamiento->id
+                                    ,['class' => 'form-control', 'required','style'=>"width: max-content"]) !!}</td>
+                                @else
+                                    <td> {!! Form::select('tipo_tratamiento_id'.$a_e_d->diente->number, $tipo_tratamientos,null,
+                                    ['class' => 'form-control', 'required','style'=>"width: max-content"]) !!}</td>
+                                @endif
                                     <td>{!! Form::select('opacidad'.$a_e_d->diente->number, array('Ningún estado anormal'=>'Ningún estado anormal','Opacidad delimitada'=>'Opacidad delimitada',
                             'OpacidadDifusa'=>'Opacidad Difusa','Hipoplasia'=>'Hipoplasia','Otros defectos'=>'Otros defectos',
                             'Opacidad elimitada y difusa'=>'Opacidad elimitada y difusa','Opacidad delimitada e hipoplasia'=>'Opacidad delimitada e hipoplasia',
                             'Opacidad difusa e hipoplasia'=>'Opacidad difusa e hipoplasia'),
                             $a_e_d->opacidad,['id'=>$a_e_d->diente->number."opacidad",'class' => 'form-control', 'style'=>"width: max-content"]) !!}</td>
-
                                 </tr>
                             @endforeach
                         </table>

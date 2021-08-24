@@ -236,13 +236,13 @@
                                             {{ $asociacion_exam_diente->diente->name}}</td>
                                         <td>{{ $asociacion_exam_diente->denticionRaiz }}</td>
                                         <td>{{ $asociacion_exam_diente->denticionCorona }}</td>
-                                        <td>@foreach($asociacion_exam_diente->tratamiento as $tratamiento)
-                                                @if($tratamiento!=null)
+                                        <td>@if(count(\App\Tratamiento::where('asociacion_exam_diente_id','=',$asociacion_exam_diente->id)->get())!=0)
+                                                @foreach(\App\Tratamiento::where('asociacion_exam_diente_id','=',$asociacion_exam_diente->id)->get() as $tratamiento)
                                                     {{$tratamiento->tipoTratamiento->name}}<br>
-                                                @else
-                                                    {{"N/D"}}
-                                                @endif
-                                            @endforeach
+                                                @endforeach
+                                            @else
+                                                {{"N/D"}}<br>
+                                            @endif
                                         </td>
                                         <td>{{ $asociacion_exam_diente->opacidad }}</td>
 

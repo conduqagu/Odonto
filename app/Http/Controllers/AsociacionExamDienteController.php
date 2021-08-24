@@ -271,7 +271,7 @@ class AsociacionExamDienteController extends Controller
      */
     public function update(Request $request,$exam_id)
     {
-        $child = Patient::find(Exam::find($exam_id)->id)->child;
+        $child = Patient::find(Exam::find($exam_id)->patient_id)->child;
         if ($child == 1) {
             $lista = array(51, 52, 53, 54, 55, 61, 62, 63, 64, 65, 71, 72, 73, 74, 75, 81, 82, 83, 84, 85);
         } else {

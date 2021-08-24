@@ -218,6 +218,13 @@ class ExamController extends Controller
         $tratamientos=$exam->tratamientos()->paginate(8, ['*'], "page_b");
 
         $asociacion_exam_dientes = AsociacionExamDiente::where('exam_id', '=', $exam->id)->paginate(10, ['*'], "page_d");
+        foreach ($asociacion_exam_dientes as $asoc_ed){
+            //dd(Tratamiento::where('asociacion_exam_diente_id','=',$asoc_ed->id)->first());
+            //dd($asoc_ed->tratamiento);
+        }
+
+
+
         return view('exams/show',['exam'=> $exam,'diagnosticos'=>$diagnosticos,'tratamientos'=>$tratamientos,
             'prueba_complementarias'=>$prueba_complementarias,'coste_total'=>$coste_total,
             'asociacion_exam_dientes'=>$asociacion_exam_dientes]);
