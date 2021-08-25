@@ -50,9 +50,9 @@
                         <div class="form-group">
                             {!! Form::label('telefono', 'Teléfono: ') !!}
                             @if(old('telefono')==null)
-                                <input id="telefono" type="text" name="telefono" class="form-control" value="{{ $patient->telefono}}" required autocomplete="telefono" pattern="[0-9]{9}" title="Debe introducir 9 números">
+                                <input id="telefono" type="text" name="telefono" class="form-control" value="{{ $patient->telefono}}"  autocomplete="telefono" pattern="[0-9]{9}" title="Debe introducir 9 números">
                             @else
-                                <input id="telefono" type="text" name="telefono" class="form-control" value="{{ old('telefono')}}" required autocomplete="telefono" pattern="[0-9]{9}" title="Debe introducir 9 números">
+                                <input id="telefono" type="text" name="telefono" class="form-control" value="{{ old('telefono')}}"  autocomplete="telefono" pattern="[0-9]{9}" title="Debe introducir 9 números">
                             @endif
                         </div>
                         <div class="form-group">

@@ -119,13 +119,11 @@ class PruebaComplementariaController extends Controller
             $this->validate($request,
                 ['fichero'=>'file']);
         }
-
         $prueba_complementaria = PruebaComplementaria::find($id);
         $prueba_complementaria->nombre=$request->nombre;
         $prueba_complementaria->comentario=$request->comentario;
 
         $prueba_complementaria->save();
-
         if ($request->hasFile('fichero')) {
             $file = $request->file('fichero');
             $fileName = $file->getClientOriginalName();
@@ -136,7 +134,7 @@ class PruebaComplementariaController extends Controller
         }
 
         $prueba_complementaria->save();
-        flash('Peueba creada correctamente');
+        flash('Prueba creada correctamente');
 
         return redirect()->route('exams.show',$prueba_complementaria->exam_id);
     }

@@ -69,7 +69,7 @@ class DienteController extends Controller
 
         flash('Diente creado correctamente');
 
-        return redirect()->route('dientesPatient',[$diente->patient_id]);
+        return redirect()->route('patients.show',[$diente->patient_id]);
     }
 
 
@@ -128,7 +128,7 @@ class DienteController extends Controller
 
         flash('Diente modificado correctamente');
 
-        return redirect()->route('dientesPatient',[$diente->patient_id]);
+        return redirect()->route('patients.show',[$diente->patient_id]);
     }
 
     /**
@@ -140,10 +140,11 @@ class DienteController extends Controller
     public function destroy($id)
     {
         $diente = Diente::find($id);
+        $patient_id=$diente->patient_id;
         $diente->delete();
         flash('Diente borrado correctamente');
 
-        return redirect()->route('dientes.index');
+        return redirect()->route('patients.show',$patient_id);
     }
 
 

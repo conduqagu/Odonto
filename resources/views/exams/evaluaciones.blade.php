@@ -35,7 +35,7 @@
                             <br>
                         @endforeach
 
-                        {!! Form::open(['route' => ['exams.show',$evaluacion->exam_id], 'method' => 'get']) !!}
+                        {!! Form::open(['route' => ['exams.show',$exam_id], 'method' => 'get']) !!}
                         {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                         {!! Form::close() !!}
                     </div>

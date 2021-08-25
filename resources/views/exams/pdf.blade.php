@@ -47,7 +47,7 @@
         </tr>
         <tr>
             <td>{!! Form::label( $exam->patient->name)." ".Form::label( $exam->patient->surname) !!}</td>
-            <td>{!! Form::label($exam->date) !!}</td>
+            <td>{!! Form::label(\Carbon\Carbon::parse($exam->date)->format('d-m-Y')) !!}</td>
             <td>{!! Form::label($exam->tipoExam) !!}</td>
         </tr>
     </table>

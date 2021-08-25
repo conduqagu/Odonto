@@ -18,7 +18,7 @@
                                 </ul>
                             </div>
                         @endif
-                        {!! Form::model($prueba_complementaria, [ 'route' => ['prueba_complementarias.update',$prueba_complementaria->id], 'method'=>'PUT']) !!}
+                        {!! Form::model($prueba_complementaria, [ 'route' => ['prueba_complementarias.update',$prueba_complementaria->id],'enctype'=>"multipart/form-data",'files'=>'true', 'method'=>'PUT']) !!}
 
                         <div class="form-group">
                             {!! Form::label('nombre', 'Nombre: *') !!}
@@ -33,7 +33,7 @@
                             <div class="col">
                                 <label>Modificar archivo:</label>
                                 <br>
-                                {!! Form::file('fichero',null,['class'=>'form-control', 'required','autofocus']) !!}
+                                {!! Form::file('fichero',null,['class'=>'form-control', 'autofocus']) !!}
                             </div>
                         </div>
 

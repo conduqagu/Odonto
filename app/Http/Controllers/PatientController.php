@@ -413,12 +413,12 @@ class PatientController extends Controller
             $patient->child='0';
             $patient->save();
             flash('Un adulto no puede modificarse a infantil, el resto de los datos se han actualizado correctamente');
-            return redirect()->route('indexteacher');
+            return redirect()->route('patients.show',$patient->id);
         }else{
             $patient->fill($request->all());
             $patient->save();
             flash('Paciente modificado correctamente');
-            return redirect()->route('indexteacher');
+            return redirect()->route('patients.show',$patient->id);
         }
     }
     /**

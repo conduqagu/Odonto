@@ -126,7 +126,8 @@ class ExamController extends Controller
     {
         $evaluaciones=Exam::all()->where('orto_id','=',$id);
 
-        return view('exams/evaluaciones',['evaluaciones'=>$evaluaciones]);
+
+        return view('exams/evaluaciones',['evaluaciones'=>$evaluaciones,'exam_id'=>$id]);
     }
     /**
      * Store a newly created resource in storage.
@@ -596,7 +597,7 @@ class ExamController extends Controller
         $exam->delete();
         flash('Examen borrado correctamente');
 
-        return redirect()->route('exams.index',$patient_id);
+        return redirect()->route('patients.show',$patient_id);
     }
 
     public function destroy()
