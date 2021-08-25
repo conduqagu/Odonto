@@ -57,8 +57,7 @@
                             <br>
                         </div>
 
-                        {!! Form::submit( 'Continuar examen dental', ['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'save'])!!}
-                        {!! Form::submit( 'Guardar',['class' => 'btn btn-primary', 'name' => 'submitbutton', 'value' => 'finish'])!!}
+                        {!! Form::submit( 'Guardar',['class' => 'btn btn-primary', 'value' => 'finish'])!!}
 
                         {!! Form::close() !!}
 

@@ -54,7 +54,7 @@
                         </table>
 
                         @if (\Illuminate\Support\Facades\Auth::user()->userType=='student')
-                            <div class="form-group">
+                            <div class="form-group" style="text-align: left">
                                 {!! Form::label('pin', 'Pin del profesor') !!}
                                 <input id="pin" type="password" class="form-control @error('pin') is-invalid @enderror" name="pin" value="{{ old('pin') }}"  name="pin" required>
                                 @error('pin')
