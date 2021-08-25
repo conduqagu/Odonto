@@ -130,9 +130,7 @@ class UserController extends Controller
             'surname' => ['required', 'string', 'max:255'],
             'dni' => ['required', 'unique:users', 'string', 'max:255', 'regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            //TODO: Hacer que se pase password en array de UserTest,
-            // test_authenticated_admin_can_create_a_new_user ln:22
-            //'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
         ]);
 
         if (Auth::user()->userType == 'admin') {
@@ -146,6 +144,7 @@ class UserController extends Controller
         }
 
         $user=new \App\User($request->all());
+
         if($request->userType=='teacher'){
             $user->pin=MD5($request->dni);
         }

@@ -25,8 +25,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('date', 'Fecha: *') !!}
-                            {!! Form::date('date',\Carbon\Carbon::now(),['class'=>'form-control','required' ]) !!}
-                            <!--TODO: Validar fecha en cliente;  'before_or_equal:now'-->
+                            {!! Form::date('date',\Carbon\Carbon::now(),['class'=>'form-control','required','max'=>\Carbon\Carbon::now()->format("Y-m-d")]) !!}
                         </div>
                         <div class="form-group row">
                             <label for="examType" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de examen: *') }}</label>

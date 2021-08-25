@@ -24,19 +24,9 @@ class UserTest extends TestCase
     {
         $this->actingAs(factory(User::class)->create(['userType'=>'admin']));
         $user = factory('App\User')->make();
-        $this->post('/user/store',$user->toArray());
+        $this->post('/user/store',$user->getAttributes());
         $this->assertEquals(2,User::all()->count());
     }
-
-    /**
-     * TODO: Arreglar assertUnathorized()
-    public function test_unauthenticated_user_cannot_create_a_new_user()
-    {
-        $user = factory('App\User')->make();
-        $this->post('/user/store',$user->toArray())
-            ->assertUnauthorized();
-    }
-    */
 
     public function test_a_user_requires_a_dni(){
         $this->actingAs(factory(User::class)->create(['userType'=>'admin']));
@@ -72,22 +62,6 @@ class UserTest extends TestCase
 
     }
 
-    /**
-     * TODO: Arreglar assertUnathorized()
-
-    public function test_unauthorized_user_cannot_update_the_user(){
-        //Given we have a signed in user
-        $this->actingAs(factory(User::class)->create(['userType'=>'admin']));
-        //And a task which is not created by the user
-        $user = factory('App\User')->create();
-        $user->name = "Updated name";
-        //When the user hit's the endpoint to update the task
-        $response = $this->put('/user/update/'.$user->id, $user->toArray());
-        //We should expect a 403 error
-        $response->assertUnauthorized();
-        //$response->assertStatus(403);
-    }
-     * */
     public function test_admin_can_delete_a_user(){
 
         $this->actingAs(factory(User::class)->create(['userType'=>'admin']));

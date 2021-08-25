@@ -151,5 +151,5 @@ Route::get('/informacion', function () {
     return view('objetivos');
 });
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
