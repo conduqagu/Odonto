@@ -62,7 +62,7 @@ class TipoTratamientoController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:191'],
             'coste' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/', 'max:100','min:0'],
             'iva' =>  ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/', 'max:100','min:0'],
 
@@ -97,7 +97,7 @@ class TipoTratamientoController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:191'],
             'coste' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/', 'max:100','min:0'],
             'iva' =>  ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/', 'max:100','min:0'],
 

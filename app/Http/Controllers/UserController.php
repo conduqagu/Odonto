@@ -126,10 +126,10 @@ class UserController extends Controller
     {
 
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'],
-            'dni' => ['required', 'unique:users', 'string', 'max:255', 'regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:191'],
+            'surname' => ['required', 'string', 'max:191'],
+            'dni' => ['required', 'unique:users', 'string', 'max:191', 'regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
+            'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
         ]);
 
@@ -182,11 +182,11 @@ class UserController extends Controller
 
         if($request->email==$user->email){
             $this->validate($request,[
-                'email' => ['required', 'string', 'email', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:191'],
             ]);
         }else{
             $this->validate($request,[
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             ]);
         }
 
@@ -223,11 +223,11 @@ class UserController extends Controller
 
         if($request->email==$user->email){
             $this->validate($request,[
-                'email' => ['required', 'string', 'email', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:191'],
             ]);
         }else{
             $this->validate($request,[
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             ]);
         }
 
@@ -271,25 +271,25 @@ class UserController extends Controller
         $user=User::find($id);
         if($request->email==$user->email){
             $this->validate($request,[
-                'email' => ['required', 'string', 'email', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:191'],
             ]);
         }else{
             $this->validate($request,[
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             ]);
         }
         if($request->dni==$user->dni){
             $this->validate($request,[
-                'dni' => ['required','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
+                'dni' => ['required','string','max:191','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             ]);
         }else{
             $this->validate($request,[
-                'dni' => ['required','unique:users','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
+                'dni' => ['required','unique:users','string','max:191','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             ]);
         }
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'surname'=>['required', 'string','max:255'],
+            'name' => ['required', 'string', 'max:191'],
+            'surname'=>['required', 'string','max:191'],
         ]);
 
         $user->fill($request->all());
@@ -338,25 +338,25 @@ class UserController extends Controller
         $user=User::find($id);
         if($request->email==$user->email){
             $this->validate($request,[
-                'email' => ['required', 'string', 'email', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:191'],
             ]);
         }else{
             $this->validate($request,[
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'email' => ['required', 'string', 'email', 'max:191', 'unique:users'],
             ]);
         }
         if($request->dni==$user->dni){
             $this->validate($request,[
-                'dni' => ['required','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
+                'dni' => ['required','string','max:191','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             ]);
         }else{
             $this->validate($request,[
-                'dni' => ['required','unique:users','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
+                'dni' => ['required','unique:users','string','max:191','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             ]);
         }
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'surname'=>['required', 'string','max:255'],
+            'name' => ['required', 'string', 'max:191'],
+            'surname'=>['required', 'string','max:191'],
             'userType'=> ['required', 'string','in:student,teacher,admin'],
         ]);
         $user->fill($request->all());

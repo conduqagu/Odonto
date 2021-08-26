@@ -25,7 +25,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre común del diente: *') !!}
-                            {!! Form::text('name',null,['class'=>'form-control', 'required', 'autofocus','maxlength'=>"255"]) !!}
+                            {!! Form::text('name',null,['class'=>'form-control', 'required', 'autofocus','maxlength'=>"191"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('number', 'Número del diente: *') !!}

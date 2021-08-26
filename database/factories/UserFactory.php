@@ -26,7 +26,7 @@ $factory->define(User::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'dni' => ($faker->unique()->randomNumber($nbDigits = 8).$letter[array_rand($letter)]),
-        'password' => 'password',
+        'password' => '$2y$10$9wCqvYj1qTdvYvOnFfghTuT9SxmpNGvX1p6g7aDpzZ2A8AyVak7Cy',//password
         'remember_token' => Str::random(10),
         'userType' => $userTypes[array_rand($userTypes)],
     ];

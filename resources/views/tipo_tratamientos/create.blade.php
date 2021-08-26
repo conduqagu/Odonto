@@ -21,7 +21,7 @@
                         {!! Form::open(['route' => 'tipo_tratamientos.store']) !!}
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre: *') !!}
-                            {!! Form::text('name',null,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"255"]) !!}
+                            {!! Form::text('name',null,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"191"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('coste', 'Coste (€): *') !!}

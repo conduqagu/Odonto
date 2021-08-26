@@ -25,7 +25,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('comentario', 'Comentario: ') !!}
-                            {!! Form::text('comentario',null,['class'=>'form-control', 'autofocus','maxlength'=>"255"]) !!}
+                            {!! Form::text('comentario',null,['class'=>'form-control', 'autofocus','maxlength'=>"191"]) !!}
                         </div>
                         @if(\Illuminate\Support\Facades\Auth::user()->userType=='student')
                             <div class="form-group">

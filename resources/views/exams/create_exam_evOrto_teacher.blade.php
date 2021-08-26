@@ -35,19 +35,19 @@
                         </div>
                         <div>
                             {!!  Form::label('maxilar' , 'Maxilar: ') !!}
-                            {!! Form::text('maxilar',null, ['class'=>'form-control','maxlength'=>"255"]) !!}
+                            {!! Form::text('maxilar',null, ['class'=>'form-control','maxlength'=>"191"]) !!}
                         </div>
                         <div>
                             {!!  Form::label('mandibular' , 'Mandibular: ') !!}
-                            {!! Form::text('mandibular',null, ['class'=>'form-control','maxlength'=>"255"]) !!}
+                            {!! Form::text('mandibular',null, ['class'=>'form-control','maxlength'=>"191"]) !!}
                         </div>
                         <div>
                             {!!  Form::label('logrado' , 'Logrado: ') !!}
-                            {!! Form::text('logrado',null, ['class'=>'form-control','maxlength'=>"255" ]) !!}
+                            {!! Form::text('logrado',null, ['class'=>'form-control','maxlength'=>"191" ]) !!}
                         </div>
                         <div>
                             {!!  Form::label('otros' , 'Otros:') !!}
-                            {!! Form::text('otros', null, ['class'=>'form-control','maxlength'=>"255"]) !!}
+                            {!! Form::text('otros', null, ['class'=>'form-control','maxlength'=>"191"]) !!}
                             <br>
                         </div>
 

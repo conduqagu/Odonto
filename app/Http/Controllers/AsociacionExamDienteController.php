@@ -138,7 +138,7 @@ class AsociacionExamDienteController extends Controller
         }
         if (Auth::user()->userType=='student'){
             $this->validate($request,
-                ['pin' => ['required', 'string', 'max:255',new PinProfesor()]]);
+                ['pin' => ['required', 'string', 'max:191',new PinProfesor()]]);
             $user=User::where('pin','=',MD5($request->pin))->first();
         }
 
@@ -191,7 +191,7 @@ class AsociacionExamDienteController extends Controller
         }
         if(Auth::user()->userType=='student'){
             $this->validate($request,
-                ['pin' => ['required', 'string', 'max:255',new PinProfesor()]]);
+                ['pin' => ['required', 'string', 'max:191',new PinProfesor()]]);
             $user=User::where('pin','=',MD5($request->pin))->first();
         }
 
@@ -279,7 +279,7 @@ class AsociacionExamDienteController extends Controller
         }
         if (Auth::user()->userType=='student'){
             $this->validate($request,
-                ['pin' => ['required', 'string', 'max:255',new PinProfesor()]]);
+                ['pin' => ['required', 'string', 'max:191',new PinProfesor()]]);
             $user=User::where('pin','=',MD5($request->pin))->first();
         }
         foreach ($lista as $a) {
@@ -340,7 +340,7 @@ class AsociacionExamDienteController extends Controller
         }
         if(Auth::user()->userType=='student'){
             $this->validate($request,
-                ['pin' => ['required', 'string', 'max:255',new PinProfesor()]]);
+                ['pin' => ['required', 'string', 'max:191',new PinProfesor()]]);
             $user=User::where('pin','=',MD5($request->pin))->first();
         }
 

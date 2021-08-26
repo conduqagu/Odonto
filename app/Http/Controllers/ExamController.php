@@ -141,7 +141,7 @@ class ExamController extends Controller
         $this->validate($request, [
             'date'=>['required','date','date_format:Y-m-d','before_or_equal:now'],
             'tipoExam'=>['required','string','in:inicial,infantil,periodoncial,ortodoncial,evOrto,otro'],
-            'pin'=>['required','string','max:255',new PinProfesor()],
+            'pin'=>['required','string','max:191',new PinProfesor()],
             'patient_id' => ['required', 'exists:patients,id'],
         ]);
 
@@ -264,7 +264,7 @@ class ExamController extends Controller
         $exam = Exam::find($id);
         $this->validate($request,[
             'otros' => ['nullable', 'string', 'max:1000'],
-            'pin'=>['required','string','max:255',new PinProfesor()]
+            'pin'=>['required','string','max:191',new PinProfesor()]
         ]);
         if($exam->tipoExam=='inicial') {
             $this->validate($request, [
@@ -296,12 +296,12 @@ class ExamController extends Controller
             ]);
         }elseif ($exam->tipoExam=='infantil'){
             $this->validate($request, [
-                'aspectoGeneral'=>['required','string', 'max:255'],
-                'talla'=>['nullable','string', 'max:255'],
-                'peso'=>['nullable','string', 'max:255'],
-                'piel'=>['nullable','string', 'max:255'],
-                'anomaliaForma'=>['required','string', 'max:255'],
-                'anomaliaTamaño'=>['required','string', 'max:255'],
+                'aspectoGeneral'=>['required','string', 'max:191'],
+                'talla'=>['nullable','string', 'max:191'],
+                'peso'=>['nullable','string', 'max:191'],
+                'piel'=>['nullable','string', 'max:191'],
+                'anomaliaForma'=>['required','string', 'max:191'],
+                'anomaliaTamaño'=>['required','string', 'max:191'],
             ]);
         }elseif($exam->tipoExam=='periodoncial'){
 
@@ -321,10 +321,10 @@ class ExamController extends Controller
             ]);
         }elseif($exam->tipoExam=='evOrto'){
             $this->validate($request, [
-                'previsto'=>['nullable','string','max:255'],
-                'maxilar'=>['nullable','string','max:255'],
-                'mandibular'=>['nullable','string','max:255'],
-                'logrado'=>['nullable','string','max:255'],
+                'previsto'=>['nullable','string','max:191'],
+                'maxilar'=>['nullable','string','max:191'],
+                'mandibular'=>['nullable','string','max:191'],
+                'logrado'=>['nullable','string','max:191'],
                 'orto_id'=>['required','exists:exams,id']
             ]);
         }
@@ -375,12 +375,12 @@ class ExamController extends Controller
             ]);
         }elseif ($exam->tipoExam=='infantil'){
             $this->validate($request, [
-                'aspectoGeneral'=>['required','string', 'max:255'],
-                'talla'=>['required','string', 'max:255'],
-                'peso'=>['required','string', 'max:255'],
-                'piel'=>['required','string', 'max:255'],
-                'anomaliaForma'=>['required','string', 'max:255'],
-                'anomaliaTamaño'=>['required','string', 'max:255'],
+                'aspectoGeneral'=>['required','string', 'max:191'],
+                'talla'=>['required','string', 'max:191'],
+                'peso'=>['required','string', 'max:191'],
+                'piel'=>['required','string', 'max:191'],
+                'anomaliaForma'=>['required','string', 'max:191'],
+                'anomaliaTamaño'=>['required','string', 'max:191'],
             ]);
         }elseif($exam->tipoExam=='periodoncial'){
             $this->validate($request, [
@@ -399,10 +399,10 @@ class ExamController extends Controller
             ]);
         }elseif($exam->tipoExam=='evOrto'){
             $this->validate($request, [
-                'previsto'=>['nullable','string','max:255'],
-                'maxilar'=>['nullable','string','max:255'],
-                'mandibular'=>['nullable','string','max:255'],
-                'logrado'=>['nullable','string','max:255'],
+                'previsto'=>['nullable','string','max:191'],
+                'maxilar'=>['nullable','string','max:191'],
+                'mandibular'=>['nullable','string','max:191'],
+                'logrado'=>['nullable','string','max:191'],
             ]);
         }
         $exam->fill($request->all());
@@ -425,7 +425,7 @@ class ExamController extends Controller
             'aspectoExtraoralNormal' => ['required', 'boolean'],
             'cancerOral' => ['required', 'boolean'],
             'anomaliasLabios' => ['required', 'boolean'],
-            'otros' => ['nullable','string', 'max:255'],
+            'otros' => ['nullable','string', 'max:191'],
             'patologiaMucosa'=> ['string','in:Ninguna,Tumor maligno,leucoplasia,Liquen plano'],
             'fluorosis'=> ['required', 'string','in:Normal,Discutible,Muy ligera,Ligera,Moderada,Intensa,Excluida,No registrada'],
             'estadoS1'=> ['required', 'string','in:sano,hemorragia,tártaro,bolsa 4-5 mm,Bolsa de 6 mm o más,excluido'],
@@ -465,12 +465,12 @@ class ExamController extends Controller
     public function examsUptadeTeacherInfantil(Request $request, $id)
     {
         $this->validate($request, [
-            'aspectoGeneral'=>['required','string', 'max:255'],
-            'talla'=>['nullable','string', 'max:255'],
-            'peso'=>['nullable','string', 'max:255'],
-            'piel'=>['nullable','string', 'max:255'],
-            'anomaliaForma'=>['required','string', 'max:255'],
-            'anomaliaTamaño'=>['required','string', 'max:255'],
+            'aspectoGeneral'=>['required','string', 'max:191'],
+            'talla'=>['nullable','string', 'max:191'],
+            'peso'=>['nullable','string', 'max:191'],
+            'piel'=>['nullable','string', 'max:191'],
+            'anomaliaForma'=>['required','string', 'max:191'],
+            'anomaliaTamaño'=>['required','string', 'max:191'],
         ]);
 
         $exam = Exam::find($id);
@@ -520,7 +520,7 @@ class ExamController extends Controller
             'patronFacial'=>['required','string','in:dolicofacial,mesofacial,braquifacial'],
             'perfil'=>['required','string','in:armonico,convexo,concavo,plano'],
             'menton'=>['required','string','in:marcado,normal,retruido,plano'],
-            'otros'=>['nullable','string','max:255']
+            'otros'=>['nullable','string','max:191']
         ]);
 
         $exam = Exam::find($id);
@@ -540,11 +540,11 @@ class ExamController extends Controller
     public function examsUptadeTeacherevOrto(Request $request, $id)
     {
         $this->validate($request, [
-            'previsto'=>['nullable','string','max:255'],
-            'maxilar'=>['nullable','string','max:255'],
-            'mandibular'=>['nullable','string','max:255'],
-            'logrado'=>['nullable','string','max:255'],
-            'otros'=>['nullable','string','max:255'],
+            'previsto'=>['nullable','string','max:191'],
+            'maxilar'=>['nullable','string','max:191'],
+            'mandibular'=>['nullable','string','max:191'],
+            'logrado'=>['nullable','string','max:191'],
+            'otros'=>['nullable','string','max:191'],
             'orto_id'=>['required','exists:exams,id']
         ]);
 
@@ -573,7 +573,7 @@ class ExamController extends Controller
     public function examsdeleteStudent(Request $request,$id){
 
         $this->validate($request, [
-            'pin'=>['required','string','max:255',new PinProfesor()]
+            'pin'=>['required','string','max:191',new PinProfesor()]
         ]);
 
         $exam = Exam::find($id);

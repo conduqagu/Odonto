@@ -21,7 +21,7 @@
                         {!! Form::model($tipo_tratamiento, ['route' => ['tipo_tratamientos.update',$tipo_tratamiento->id], 'method'=>'PUT']) !!}
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre: *') !!}
-                            {!! Form::text('name',$tipo_tratamiento->name,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"255"]) !!}
+                            {!! Form::text('name',$tipo_tratamiento->name,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"191"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('coste', 'Coste (€): *') !!}

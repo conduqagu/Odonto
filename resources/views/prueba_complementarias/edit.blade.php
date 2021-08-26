@@ -22,7 +22,7 @@
 
                         <div class="form-group">
                             {!! Form::label('nombre', 'Nombre: *') !!}
-                            {!! Form::text('nombre',$prueba_complementaria->nombre,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"255"]) !!}
+                            {!! Form::text('nombre',$prueba_complementaria->nombre,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"191"]) !!}
                         </div>
                         <div class="row align-items-center">
                             <div class="col-3">
@@ -39,7 +39,7 @@
 
                         <div class="form-group">
                             {!! Form::label('comentario', 'Comentario: ') !!}
-                            {!! Form::text('comentario',$prueba_complementaria->comentario,['class'=>'form-control', 'autofocus', 'maxlength'=>"255"]) !!}
+                            {!! Form::text('comentario',$prueba_complementaria->comentario,['class'=>'form-control', 'autofocus', 'maxlength'=>"191"]) !!}
                         </div>
                         @if(\Illuminate\Support\Facades\Auth::user()->userType=='student')
                             <div class="form-group">

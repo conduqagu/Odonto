@@ -22,11 +22,11 @@
 
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre: *') !!}
-                            {!! Form::text('name',$patient->name,['class'=>'form-control', 'required','autofocus']) !!}
+                            {!! Form::text('name',$patient->name,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"191"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('surname', 'Apellidos: *') !!}
-                            {!! Form::text('surname',$patient->surname,['class'=>'form-control', 'required']) !!}
+                            {!! Form::text('surname',$patient->surname,['class'=>'form-control', 'required', 'maxlength'=>"191"]) !!}
                         </div>
                         <div class="form-group">
                             <label for="email" >{{ __('Correo electrónico: *') }}</label>
@@ -65,7 +65,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('observaciones', 'Observaciones: ') !!}
-                            {!! Form::text('observaciones',$patient->observaciones,['class'=>'form-control', 'maxlength'=>"255"]) !!}
+                            {!! Form::text('observaciones',$patient->observaciones,['class'=>'form-control', 'maxlength'=>"191"]) !!}
                         </div>
                         <div>
                             {!!  Form::label('child' , 'Infantil: *') !!}
@@ -76,7 +76,7 @@
                         {!! Form::submit('Actualizar',['class'=>'btn-primary btn button-align']) !!}
                         {!! Form::close() !!}
 
-                        {!! Form::open(['route' => ['indexteacher'], 'method' => 'get']) !!}
+                        {!! Form::open(['route' => ['patient.show',$patient->id], 'method' => 'get']) !!}
                         {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                         {!! Form::close() !!}
                     </div>

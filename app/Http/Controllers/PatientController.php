@@ -115,16 +115,16 @@ class PatientController extends Controller
     public function store(Request $request)
     {
         $this ->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:191'],
+            'surname' => ['required', 'string', 'max:191'],
             'dni' => ['required', 'unique:patients','string','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
-            'email' => ['nullable','string', 'email', 'max:255'],
+            'email' => ['nullable','string', 'email', 'max:191'],
             'telefono' => ['nullable','string','regex:/[0-9]{9}/','size:9'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required','in:I,II,III'],
-            'observaciones' => ['nullable','string', 'max:255'],
+            'observaciones' => ['nullable','string', 'max:191'],
             'child'=>['required','boolean'],
-            'pin'=>['required','string','max:255',new PinProfesor()]
+            'pin'=>['required','string','max:191',new PinProfesor()]
         ]);
 
         $patient = new Patient($request->all());
@@ -152,14 +152,14 @@ class PatientController extends Controller
     public function storeteacher(Request $request)
     {
         $this ->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:191'],
+            'surname' => ['required', 'string', 'max:191'],
             'dni' => ['required','unique:patients', 'string','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
-            'email' => ['nullable','string', 'email', 'max:255'],
+            'email' => ['nullable','string', 'email', 'max:191'],
             'telefono' => ['nullable','string','regex:/[0-9]{9}/','size:9'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required','in:I,II,III,IV,V,VI'],
-            'observaciones' => ['nullable','string', 'max:255'],
+            'observaciones' => ['nullable','string', 'max:191'],
             'child'=>['required','boolean'],
         ]);
 
@@ -318,32 +318,32 @@ class PatientController extends Controller
 
         if($request->email==$patient->email){
             $this->validate($request,[
-                'email' => ['required', 'string', 'email', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:191'],
             ]);
         }else{
             $this->validate($request,[
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:patients'],
+                'email' => ['required', 'string', 'email', 'max:191', 'unique:patients'],
             ]);
         }
         if($request->dni==$patient->dni){
             $this->validate($request,[
-                'dni' => ['required','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
+                'dni' => ['required','string','max:191','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             ]);
         }else{
             $this->validate($request,[
-                'dni' => ['required','unique:patients','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
+                'dni' => ['required','unique:patients','string','max:191','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             ]);
         }
 
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:191'],
+            'surname' => ['required', 'string', 'max:191'],
             'telefono' => ['nullable','string','regex:/[0-9]{9}/','size:9'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
-            'observaciones' => ['nullable','string', 'max:255'],
+            'observaciones' => ['nullable','string', 'max:191'],
             'child'=>['required','boolean'],
-            'pin'=>['required','string','max:255',new PinProfesor()]
+            'pin'=>['required','string','max:191',new PinProfesor()]
         ]);
 
         if($patient->child!=$request->child and $request->child==0){
@@ -377,30 +377,30 @@ class PatientController extends Controller
 
         if($request->email==$patient->email){
             $this->validate($request,[
-                'email' => ['required', 'string', 'email', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:191'],
             ]);
         }else{
             $this->validate($request,[
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:patients'],
+                'email' => ['required', 'string', 'email', 'max:191', 'unique:patients'],
             ]);
         }
         if($request->dni==$patient->dni){
             $this->validate($request,[
-                'dni' => ['required','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
+                'dni' => ['required','string','max:191','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             ]);
         }else{
             $this->validate($request,[
-                'dni' => ['required','unique:patients','string','max:255','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
+                'dni' => ['required','unique:patients','string','max:191','regex:/^[0-9]{8}[TRWAGMYFPDXBNJZSQVHLCKE]$/i'],
             ]);
         }
 
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:191'],
+            'surname' => ['required', 'string', 'max:191'],
             'telefono' => ['nullable','string','regex:/[0-9]{9}/','size:9'],
             'fechaNacimiento'=> ['required','date'],
             'riesgoASA' => ['required', 'in:I,II,III,IV,V,VI'],
-            'observaciones' => ['nullable','string', 'max:255'],
+            'observaciones' => ['nullable','string', 'max:191'],
             'child'=>['required','boolean'],
         ]);
         if($patient->child!=$request->child and $request->child==0){

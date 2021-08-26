@@ -21,11 +21,11 @@
                         {!! Form::open(['route' => 'storeteacher']) !!}
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre: *') !!}
-                            {!! Form::text('name',null,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"255"]) !!}
+                            {!! Form::text('name',null,['class'=>'form-control', 'required','autofocus', 'maxlength'=>"191"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('surname', 'Apellidos: *') !!}
-                            {!! Form::text('surname',null,['class'=>'form-control', 'required', 'maxlength'=>"255"]) !!}
+                            {!! Form::text('surname',null,['class'=>'form-control', 'required','maxlength'=>"191"]) !!}
                         </div>
                         <div class="form-group">
                             <label for="email" >{{ __('Correo electrónico: *') }}</label>
@@ -59,7 +59,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('observaciones', 'Observaciones: ') !!}
-                            {!! Form::text('observaciones',null,['class'=>'form-control', 'maxlength'=>"255"]) !!}
+                            {!! Form::text('observaciones',null,['class'=>'form-control', 'maxlength'=>"191"]) !!}
                         </div>
                         <div class="form-group">
                             {!!  Form::label('child' , 'Infantil: *') !!}

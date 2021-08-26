@@ -121,7 +121,7 @@
                     </div>
                     <div>
                         {!!  Form::label('otros' , 'Otros:') !!}
-                        {!! Form::text('otros', null, ['class'=>'form-control','maxlength'=>"255"]) !!}
+                        {!! Form::text('otros', null, ['class'=>'form-control','maxlength'=>"191"]) !!}
                         <br>
                     </div>
                     {!! Form::submit( 'Guardar',['class' => 'btn btn-primary',  'value' => 'finish'])!!}

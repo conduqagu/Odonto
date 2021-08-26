@@ -42,14 +42,14 @@ class PruebaComplementariaController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'nombre' => ['required', 'string', 'max:255'],
-            'comentario' => ['nullable', 'string', 'max:255'],
+            'nombre' => ['required', 'string', 'max:191'],
+            'comentario' => ['nullable', 'string', 'max:191'],
             'fichero'=>['file'],
             'exam_id' => ['required', 'exists:exams,id'],
         ]);
         if(Auth::user()->userType=='student'){
             $this->validate($request,
-                ['pin'=>['required','string','max:255',new PinProfesor()]]);
+                ['pin'=>['required','string','max:191',new PinProfesor()]]);
 
         }
         $prueba_complementaria=new PruebaComplementaria($request->all());
@@ -107,13 +107,13 @@ class PruebaComplementariaController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'nombre' => ['required', 'string', 'max:255'],
-            'comentario' => ['nullable', 'string', 'max:255'],
+            'nombre' => ['required', 'string', 'max:191'],
+            'comentario' => ['nullable', 'string', 'max:191'],
         ]);
 
         if(Auth::user()->userType=='student'){
             $this->validate($request,
-                ['pin'=>['required','string','max:255',new PinProfesor()]]);
+                ['pin'=>['required','string','max:191',new PinProfesor()]]);
         }
         if($request->fichero!=null){
             $this->validate($request,

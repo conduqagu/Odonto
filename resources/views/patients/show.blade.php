@@ -17,46 +17,52 @@
                 <div class="card">
                     <div class="card-header"><h5>Información del paciente</h5></div>
                     <div class="card-body">
-                        <div class="form-group">
-                            {!! Form::label('name', 'Nombre: ', [ 'style' => 'font-weight:bold', ]) !!}
-                            {!! Form::label('name',$patient->name) !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('surname', 'Apellidos: ', [ 'style' => 'font-weight:bold', ]) !!}
-                            {!! Form::label('surname',$patient->surname) !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('email', 'Correo electrónico: ', [ 'style' => 'font-weight:bold', ]) !!}
-                            {!! Form::label('email',$patient->email) !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('dni', 'DNI: ', [ 'style' => 'font-weight:bold', ]) !!}
-                            {!! Form::label('dni',$patient->dni) !!}
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('telefono', 'Télefono: ', [ 'style' => 'font-weight:bold', ]) !!}
-                            @if($patient->telefono!=null)
-                                {!! Form::label('telefono',$patient->telefono) !!}
-                            @else
-                                {!! "N/D" !!}
-                            @endif
-                        </div>
-                        <div class="form-group">
-                            {!! Form::label('fechaNacimiento', 'Fecha de nacimiento: ', [ 'style' => 'font-weight:bold', ]) !!}
-                            {!! Form::label('fechaNacimiento',\Carbon\Carbon::parse($patient->fechaNacimiento)->format('d-m-Y')) !!}
-                        </div>
-                        <div>
-                            {!!  Form::label('child' , 'Infantil: ', [ 'style' => 'font-weight:bold', ]) !!}
-                            @if($patient->child=0)
-                                {!! Form::label('child', "No") !!}
-                            @else
-                                {!! Form::label('child', "Si") !!}
-                            @endif
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            {!!  Form::label('riesgoASA' , 'Riesgo ASA: ', [ 'style' => 'font-weight:bold', ]) !!}
-                            {!! Form::label('riesgoASA', $patient->riesgoASA) !!}
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <div class="form-group">
+                                    {!! Form::label('name', 'Nombre: ', [ 'style' => 'font-weight:bold', ]) !!}
+                                    {!! Form::label('name',$patient->name) !!}
+                                </div>
+                                <div class="form-group">
+                                    {!! Form::label('telefono', 'Télefono: ', [ 'style' => 'font-weight:bold', ]) !!}
+                                    @if($patient->telefono!=null)
+                                        {!! Form::label('telefono',$patient->telefono) !!}
+                                    @else
+                                        {!! "N/D" !!}
+                                    @endif
+                                </div>
+                                <div class="form-group">
+                                    {!! Form::label('email', 'Correo electrónico: ', [ 'style' => 'font-weight:bold', ]) !!}
+                                    {!! Form::label('email',$patient->email) !!}
+                                </div>
+                                <div class="form-group">
+                                    {!! Form::label('dni', 'DNI: ', [ 'style' => 'font-weight:bold', ]) !!}
+                                    {!! Form::label('dni',$patient->dni) !!}
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    {!! Form::label('surname', 'Apellidos: ', [ 'style' => 'font-weight:bold', ]) !!}
+                                    {!! Form::label('surname',$patient->surname) !!}
+                                </div>
+                                <div class="form-group">
+                                    {!! Form::label('fechaNacimiento', 'Fecha de nacimiento: ', [ 'style' => 'font-weight:bold', ]) !!}
+                                    {!! Form::label('fechaNacimiento',\Carbon\Carbon::parse($patient->fechaNacimiento)->format('d-m-Y')) !!}
+                                </div>
+                                <div>
+                                    {!!  Form::label('child' , 'Infantil: ', [ 'style' => 'font-weight:bold', ]) !!}
+                                    @if($patient->child=0)
+                                        {!! Form::label('child', "No") !!}
+                                    @else
+                                        {!! Form::label('child', "Si") !!}
+                                    @endif
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    {!!  Form::label('riesgoASA' , 'Riesgo ASA: ', [ 'style' => 'font-weight:bold', ]) !!}
+                                    {!! Form::label('riesgoASA', $patient->riesgoASA) !!}
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
                             {!! Form::label('observaciones', 'Observaciones: ', [ 'style' => 'font-weight:bold', ]) !!}

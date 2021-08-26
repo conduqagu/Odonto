@@ -71,7 +71,7 @@ class TratamientoController extends Controller
         }
         if(Auth::user()->userType=='student'){
             $this->validate($request,
-                ['pin'=>['required','string','max:255',new PinProfesor()]]);
+                ['pin'=>['required','string','max:191',new PinProfesor()]]);
 
         }
         $tratamiento=new Tratamiento($request->all());
@@ -145,7 +145,7 @@ class TratamientoController extends Controller
         }
         if(Auth::user()->userType=='student'){
             $this->validate($request,
-                ['pin' => ['required', 'string', 'max:255']]);
+                ['pin' => ['required', 'string', 'max:191']]);
             $profesores=User::find(Auth::user()->id)->teachers()
                 ->where('pin','=',MD5($request->pin))->get();
 

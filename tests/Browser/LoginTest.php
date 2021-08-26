@@ -9,6 +9,7 @@ use Tests\DuskTestCase;
 
 class LoginTest extends DuskTestCase
 {
+    use DatabaseMigrations;
     /**
      * A Dusk test example.
      *
@@ -25,15 +26,13 @@ class LoginTest extends DuskTestCase
 
     public function test_login_usuario_registrado()
     {
-        factory(User::class)->create(['dni'=>'12345674R']);
-
+        factory(User::class)->create(['dni'=>'12345698R']);
         $this->browse(function (Browser $browser){
             $browser->visit('/login')
-                ->type('dni','12345674R')
+                ->type('dni','12345698R')
                 ->type('password','password')
                 ->press('#login-btn')
-                ->assertAuthenticated()
-            ;
+                ->assertPathIs('/home');
         });
 
 

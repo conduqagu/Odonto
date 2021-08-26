@@ -21,7 +21,7 @@
                         {!! Form::open(['route' => 'brakets.store']) !!}
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre: *') !!}
-                            {!! Form::text('name',null,['class'=>'form-control', 'required','autofocus','maxlength'=>"255"]) !!}
+                            {!! Form::text('name',null,['class'=>'form-control', 'required','autofocus','maxlength'=>"191"]) !!}
                         </div>
                         <br>
                         {!! Form::submit('Guardar',['class'=>'btn-primary btn button-align']) !!}

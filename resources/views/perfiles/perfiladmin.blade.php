@@ -14,11 +14,11 @@
 
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre') !!}
-                            {!! Form::text('name',$user->name,['class'=>'form-control', 'required', 'maxlength'=>"255"]) !!}
+                            {!! Form::text('name',$user->name,['class'=>'form-control', 'required', 'maxlength'=>"191"]) !!}
                         </div>
                         <div class="form-group">
                             {!!  Form::label('surname' , 'Apellidos') !!}
-                            {!! Form::text('surname', $user->surname,['class' => 'form-control', 'required', 'maxlength'=>"255"]) !!}
+                            {!! Form::text('surname', $user->surname,['class' => 'form-control', 'required', 'maxlength'=>"191"]) !!}
                         </div>
                         <div class="form-group">
                             <label for="email" >{{ __('Correo electrónico') }}</label>

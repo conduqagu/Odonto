@@ -22,11 +22,11 @@
 
                         <div class="form-group">
                             {!! Form::label('name', 'Nombre común del diente: *') !!}
-                            {!! Form::text('name',$diente->name,['class'=>'form-control', 'required', 'autofocus','maxlength'=>"255"]) !!}
+                            {!! Form::text('name',$diente->name,['class'=>'form-control', 'required', 'autofocus','maxlength'=>"191"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('number', 'Número del diente: *') !!}
-                            {!! Form::text('number',$diente->number,['class'=>'form-control', 'required','maxlength'=>"255"]) !!}
+                            {!! Form::text('number',$diente->number,['class'=>'form-control', 'required','maxlength'=>"191"]) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('cuadrante', 'Cuadrante: *') !!}

@@ -65,7 +65,7 @@
                         </div>
                         <div class="form-group">
                             {!! Form::label('observaciones', 'Observaciones: ') !!}
-                            {!! Form::text('observaciones',$patient->observaciones,['class'=>'form-control', 'maxlength'=>"255"]) !!}
+                            {!! Form::text('observaciones',$patient->observaciones,['class'=>'form-control', 'maxlength'=>"191"]) !!}
                         </div>
                         <div>
                             {!!  Form::label('child' , 'Infantil: *') !!}
@@ -80,7 +80,7 @@
                         {!! Form::submit('Actualizar',['class'=>'btn-primary btn button-align']) !!}
                         {!! Form::close() !!}
 
-                        {!! Form::open(['route' => ['patients.index'], 'method' => 'get']) !!}
+                        {!! Form::open(['route' => ['patient.show',$patient->id], 'method' => 'get']) !!}
                         {!!   Form::submit('Volver', ['class'=> 'btn btn-outline-dark button-align-right'])!!}
                         {!! Form::close() !!}
                     </div>

@@ -51,7 +51,7 @@ class DienteController extends Controller
     {
 
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:191'],
             'number' => ['required', 'integer', 'max:100'],
             'cuadrante' => ['required', 'integer','max:8' ],
             'sextante' => ['required', 'integer','max:6' ],
@@ -60,7 +60,7 @@ class DienteController extends Controller
         ]);
         if(Auth::user()->userType=='student'){
             $this->validate($request,[
-                'pin'=>['required','string','max:255',new PinProfesor()]
+                'pin'=>['required','string','max:191',new PinProfesor()]
             ]);
 
         }
@@ -110,7 +110,7 @@ class DienteController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:191'],
             'number' => ['required', 'integer', 'max:100'],
             'cuadrante' => ['required', 'integer','max:8' ],
             'sextante' => ['required', 'integer','max:6' ],
@@ -119,7 +119,7 @@ class DienteController extends Controller
 
         if(Auth::user()->userType=='student') {
             $this->validate($request,[
-                'pin'=>['required','string','max:255',new PinProfesor()]
+                'pin'=>['required','string','max:191',new PinProfesor()]
             ]);
         }
         $diente = Diente::find($id);

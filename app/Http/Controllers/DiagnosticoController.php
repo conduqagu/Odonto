@@ -143,11 +143,11 @@ class DiagnosticoController extends Controller
     {
         $this->validate($request, [
             'diagnostico_id' => 'required|exists:diagnosticos,id',
-            'comentario'=>['nullable', 'string', 'max:255'],
+            'comentario'=>['nullable', 'string', 'max:191'],
         ]);
         if(Auth::user()->userType=='student'){
             $this->validate($request,
-                ['pin' => ['required', 'string', 'max:255',new PinProfesor()]]);
+                ['pin' => ['required', 'string', 'max:191',new PinProfesor()]]);
         }
         $exam=Exam::find($exam_id);
         $exam->diagnosticos()->attach($request->diagnostico_id, array('comentario'=>$request->comentario));

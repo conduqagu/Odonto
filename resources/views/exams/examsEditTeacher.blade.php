@@ -122,27 +122,27 @@
                         @elseif($exam->tipoExam=='infantil')
                             <div>
                                 {!!  Form::label('aspectoGeneral' , 'Aspecto General: ') !!}
-                                {!! Form::text('aspectoGeneral',$exam->aspectoGeneral, ['class'=>'form-control','maxlength'=>"255"]) !!}
+                                {!! Form::text('aspectoGeneral',$exam->aspectoGeneral, ['class'=>'form-control','maxlength'=>"191"]) !!}
                             </div>
                             <div>
                                 {!!  Form::label('talla' , 'Talla:') !!}
-                                {!! Form::text('talla',$exam->talla, ['class'=>'form-control','maxlength'=>"255"]) !!}
+                                {!! Form::text('talla',$exam->talla, ['class'=>'form-control','maxlength'=>"191"]) !!}
                             </div>
                             <div>
                                 {!!  Form::label('peso' , 'Peso:') !!}
-                                {!! Form::text('peso',$exam->peso, ['class'=>'form-control','maxlength'=>"255"]) !!}
+                                {!! Form::text('peso',$exam->peso, ['class'=>'form-control','maxlength'=>"191"]) !!}
                             </div>
                             <div>
                                 {!!  Form::label('piel' , 'Piel:') !!}
-                                {!! Form::text('piel',$exam->piel, ['class'=>'form-control','maxlength'=>"255"]) !!}
+                                {!! Form::text('piel',$exam->piel, ['class'=>'form-control','maxlength'=>"191"]) !!}
                             </div>
                             <div>
                                 {!!  Form::label('anomaliaForma' , 'Anomalía en forma:') !!}
-                                {!! Form::text('anomaliaForma',$exam->anomaliaForma, ['class'=>'form-control','maxlength'=>"255"]) !!}
+                                {!! Form::text('anomaliaForma',$exam->anomaliaForma, ['class'=>'form-control','maxlength'=>"191"]) !!}
                             </div>
                             <div>
                                 {!!  Form::label('anomaliaTamaño' , 'Anomalía en tamaño:') !!}
-                                {!! Form::text('anomaliaTamaño',$exam->anomaliaTamaño, ['class'=>'form-control','maxlength'=>"255"]) !!}
+                                {!! Form::text('anomaliaTamaño',$exam->anomaliaTamaño, ['class'=>'form-control','maxlength'=>"191"]) !!}
                             </div>
 
                         @elseif($exam->tipoExam=='periodoncial')
@@ -197,20 +197,20 @@
                             </div>
                             <div>
                                 {!!  Form::label('maxilar' , 'Maxilar: ') !!}
-                                {!! Form::text('maxilar',$exam->maxilar, ['class'=>'form-control','maxlength'=>"255"]) !!}
+                                {!! Form::text('maxilar',$exam->maxilar, ['class'=>'form-control','maxlength'=>"191"]) !!}
                             </div>
                             <div>
                                 {!!  Form::label('mandibular' , 'Mandibular: ') !!}
-                                {!! Form::text('mandibular',$exam->mandibular, ['class'=>'form-control','maxlength'=>"255"]) !!}
+                                {!! Form::text('mandibular',$exam->mandibular, ['class'=>'form-control','maxlength'=>"191"]) !!}
                             </div>
                             <div>
                                 {!!  Form::label('logrado' , 'Logrado: ') !!}
-                                {!! Form::text('logrado',$exam->logrado, ['class'=>'form-control','maxlength'=>"255" ]) !!}
+                                {!! Form::text('logrado',$exam->logrado, ['class'=>'form-control','maxlength'=>"191" ]) !!}
                             </div>
                         @endif
                         <div>
                             {!!  Form::label('otros' , 'Otros:') !!}
-                            {!! Form::text('otros', $exam->otros, ['class'=>'form-control','maxlength'=>"255"]) !!}
+                            {!! Form::text('otros', $exam->otros, ['class'=>'form-control','maxlength'=>"191"]) !!}
                             <br>
                         </div>
 
